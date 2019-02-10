@@ -45,7 +45,7 @@ pub trait Allocator
 
     unsafe fn alloc_aligned(&mut self, layout: Layout) -> Option<*mut c_void>
     {
-        let actual_size = layout.size + layout.align + size_of::<usize>();
+        let actual_size = layout.size + layout.align - 1 + size_of::<usize>();
         let ptr = match self.alloc(Layout::new(actual_size))
         {
             Some(p) => p as usize,
