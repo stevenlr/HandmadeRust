@@ -3,7 +3,7 @@ mod win32_heap;
 pub use win32_heap::Win32HeapAllocator;
 use core::ffi::c_void;
 use core::mem::{size_of, align_of};
-use core::ptr::{write_unaligned, read_unaligned};
+use core::ptr::{write_unaligned, read_unaligned, NonNull};
 
 pub struct Layout
 {
@@ -40,15 +40,15 @@ impl Layout
 
 pub trait Allocator
 {
-    unsafe fn alloc(&mut self, layout: Layout) -> Option<*mut c_void>;
+    unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>;
     unsafe fn dealloc(&mut self, ptr: *mut c_void);
 
-    unsafe fn alloc_aligned(&mut self, layout: Layout) -> Option<*mut c_void>
+    unsafe fn alloc_aligned(&mut self, layout: Layout) -> Option<NonNull<c_void>>
     {
         let actual_size = layout.size + layout.align - 1 + size_of::<usize>();
         let ptr = match self.alloc(Layout::new(actual_size))
         {
-            Some(p) => p as usize,
+            Some(p) => p.as_ptr() as usize,
             None => return None,
         };
 
@@ -57,7 +57,7 @@ pub trait Allocator
 
         write_unaligned(actual_ptr_ptr as *mut usize, ptr);
 
-        Some(aligned_ptr as *mut c_void)
+        Some(NonNull::new_unchecked(aligned_ptr as *mut c_void))
     }
 
     unsafe fn dealloc_aligned(&mut self, ptr: *mut c_void)

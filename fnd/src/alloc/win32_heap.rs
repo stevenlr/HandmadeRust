@@ -1,4 +1,5 @@
 use core::ffi::c_void;
+use core::ptr::NonNull;
 use super::{Allocator, Layout};
 
 type HANDLE = *mut c_void;
@@ -30,7 +31,7 @@ impl Default for Win32HeapAllocator
 
 impl Allocator for &Win32HeapAllocator
 {
-    unsafe fn alloc(&mut self, layout: Layout) -> Option<*mut c_void>
+    unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>
     {
         let ptr = HeapAlloc(self.heap, 0, layout.size);
 
@@ -40,7 +41,7 @@ impl Allocator for &Win32HeapAllocator
         }
         else
         {
-            Some(ptr)
+            Some(NonNull::new_unchecked(ptr))
         }
     }
 
@@ -64,7 +65,7 @@ mod tests
             let mut alloc_ref = &alloc;
             let ptr = alloc_ref.alloc(Layout::new(128));
             assert!(ptr.is_some());
-            alloc_ref.dealloc(ptr.unwrap());
+            alloc_ref.dealloc(ptr.unwrap().as_ptr());
         }
     }
 
