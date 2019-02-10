@@ -1,10 +1,11 @@
 use core::ffi::c_void;
 use core::ptr::{NonNull, drop_in_place};
 use core::mem::{replace, forget};
-use core::ops::{Deref, DerefMut};
+use core::marker::{Unsize};
+use core::ops::{Deref, DerefMut, CoerceUnsized};
 use crate::alloc::{Layout, Allocator};
 
-pub struct Unq<T, A: Allocator>
+pub struct Unq<T: ?Sized, A: Allocator>
 {
     ptr: NonNull<T>,
     alloc: A,
@@ -32,7 +33,7 @@ impl<T, A: Allocator> Unq<T, A>
     }
 }
 
-impl<T, A: Allocator> Deref for Unq<T, A>
+impl<T: ?Sized, A: Allocator> Deref for Unq<T, A>
 {
     type Target = T;
 
@@ -45,7 +46,7 @@ impl<T, A: Allocator> Deref for Unq<T, A>
     }
 }
 
-impl<T, A: Allocator> DerefMut for Unq<T, A>
+impl<T: ?Sized, A: Allocator> DerefMut for Unq<T, A>
 {
     fn deref_mut(&mut self) -> &mut Self::Target
     {
@@ -56,7 +57,7 @@ impl<T, A: Allocator> DerefMut for Unq<T, A>
     }
 }
 
-impl<T, A: Allocator> Drop for Unq<T, A>
+impl<T: ?Sized, A: Allocator> Drop for Unq<T, A>
 {
     fn drop(&mut self)
     {
@@ -67,6 +68,8 @@ impl<T, A: Allocator> Drop for Unq<T, A>
         }
     }
 }
+
+impl<T: ?Sized + Unsize<U>, U: ?Sized, A: Allocator> CoerceUnsized<Unq<U, A>> for Unq<T, A> {}
 
 #[cfg(test)]
 mod tests
@@ -105,7 +108,7 @@ mod tests
     }
 
     #[test]
-    fn test()
+    fn simple()
     {
         let alloc = Win32HeapAllocator::default();
         let mut dropped = false;
@@ -133,5 +136,51 @@ mod tests
         }
 
         assert!(dropped == true);
+    }
+
+    struct MyObject2
+    {
+        x: i32,
+    }
+
+    trait MyTrait
+    {
+        fn do_something(&self) -> i32;
+    }
+
+    impl MyTrait for MyObject2
+    {
+        fn do_something(&self) -> i32
+        {
+            self.x
+        }
+    }
+
+    fn create_dst<A: Allocator>(x: i32, alloc: A) -> Unq<dyn MyTrait, A>
+    {
+        Unq::new(MyObject2{ x }, alloc)
+    }
+
+    #[test]
+    fn dst()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let my_dst = create_dst(42, &alloc);
+        assert!(my_dst.do_something() == 42);
+    }
+
+    fn create_closure<A: Allocator>(y: i32, alloc: A) -> Unq<Fn(i32) -> i32, A>
+    {
+        Unq::new(move |x| x + y, alloc)
+    }
+
+    #[test]
+    fn closure()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let closure = create_closure(5, &alloc);
+
+        assert!(closure(5) == 10);
+        assert!(closure(6) == 11);
     }
 }
