@@ -1,7 +1,7 @@
 use core::ffi::c_void;
 use core::ptr::{NonNull, drop_in_place};
 use core::mem::{replace, forget};
-use core::marker::{Unsize};
+use core::marker::{Unsize, PhantomData};
 use core::ops::{Deref, DerefMut, CoerceUnsized};
 use crate::alloc::{Layout, Allocator};
 
@@ -9,6 +9,7 @@ pub struct Unq<T: ?Sized, A: Allocator>
 {
     ptr: NonNull<T>,
     alloc: A,
+    _phantom: PhantomData<T>,
 }
 
 impl<T, A: Allocator> Unq<T, A>
@@ -29,6 +30,7 @@ impl<T, A: Allocator> Unq<T, A>
         {
             ptr,
             alloc,
+            _phantom: PhantomData{},
         }
     }
 }

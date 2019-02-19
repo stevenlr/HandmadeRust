@@ -1,5 +1,5 @@
 use core::ffi::c_void;
-use core::ptr::{write_unaligned, read_unaligned, NonNull};
+use core::ptr::NonNull;
 use core::mem::size_of;
 use super::Layout;
 
@@ -20,7 +20,7 @@ pub trait Allocator
         let aligned_ptr = layout.align_up(ptr + size_of::<usize>());
         let actual_ptr_ptr = aligned_ptr - size_of::<usize>();
 
-        write_unaligned(actual_ptr_ptr as *mut usize, ptr);
+        (actual_ptr_ptr as *mut usize).write_unaligned(ptr);
 
         Some(NonNull::new_unchecked(aligned_ptr as *mut c_void))
     }
@@ -29,7 +29,7 @@ pub trait Allocator
     {
         let aligned_ptr = ptr as usize;
         let actual_ptr_ptr = aligned_ptr - size_of::<usize>();
-        let actual_ptr = read_unaligned(actual_ptr_ptr as *const usize);
+        let actual_ptr = (actual_ptr_ptr as *const usize).read_unaligned();
         self.dealloc(actual_ptr as *mut c_void);
     }
 }

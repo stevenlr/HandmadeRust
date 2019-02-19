@@ -1,5 +1,6 @@
 use core::mem::{size_of, align_of};
 
+#[derive(Copy, Clone)]
 pub struct Layout
 {
     pub size: usize,
@@ -22,6 +23,15 @@ impl Layout
         Self
         {
             size: size_of::<T>(),
+            align: align_of::<T>(),
+        }
+    }
+
+    pub fn from_type_array<T>(length: usize) -> Self
+    {
+        Self
+        {
+            size: size_of::<T>() * length,
             align: align_of::<T>(),
         }
     }

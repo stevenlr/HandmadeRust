@@ -2,3 +2,4 @@
 
 pub mod alloc;
 pub mod unique;
+pub mod array;
