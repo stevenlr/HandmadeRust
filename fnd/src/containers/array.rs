@@ -1,6 +1,7 @@
 use core::ffi::c_void;
 use core::marker::PhantomData;
-use core::ops::{Index, IndexMut, Deref, DerefMut};
+use core::mem::needs_drop;
+use core::ops::{Index, IndexMut, Deref, DerefMut, Range, RangeInclusive};
 use core::ptr::{drop_in_place, null_mut};
 use core::slice;
 use crate::alloc::{Layout, Allocator};
@@ -31,7 +32,7 @@ impl<T, A: Allocator> Array<T, A>
     pub fn resize(&mut self, new_size: usize, value: T)
         where T: Clone
     {
-        if new_size <= self.size
+        if new_size <= self.size && needs_drop::<T>()
         {
             for i in new_size..self.size
             {
@@ -149,11 +150,14 @@ impl<T, A: Allocator> Array<T, A>
 
     pub fn clear(&mut self)
     {
-        unsafe
+        if needs_drop::<T>()
         {
-            for i in 0..self.size
+            unsafe
             {
-                drop_in_place(self.ptr.offset(i as isize));
+                for i in 0..self.size
+                {
+                    drop_in_place(self.ptr.offset(i as isize));
+                }
             }
         }
 
@@ -184,6 +188,54 @@ impl<T, A: Allocator> IndexMut<usize> for Array<T, A>
         {
             self.ptr.offset(index as isize).as_mut().unwrap()
         };
+    }
+}
+
+impl<T, A: Allocator> Index<Range<usize>> for Array<T, A>
+{
+    type Output = [T];
+
+    fn index(&self, index: Range<usize>) -> &[T]
+    {
+        assert!(index.start < index.end);
+        assert!(index.end <= self.size);
+        return unsafe
+        {
+            slice::from_raw_parts(self.ptr.offset(index.start as isize), index.end - index.start)
+        };
+    }
+}
+
+impl<T, A: Allocator> IndexMut<Range<usize>> for Array<T, A>
+{
+    fn index_mut(&mut self, index: Range<usize>) -> &mut [T]
+    {
+        assert!(index.start < index.end);
+        assert!(index.end <= self.size);
+        return unsafe
+        {
+            slice::from_raw_parts_mut(self.ptr.offset(index.start as isize), index.end - index.start)
+        };
+    }
+}
+
+impl<T, A: Allocator> Index<RangeInclusive<usize>> for Array<T, A>
+{
+    type Output = [T];
+
+    fn index(&self, index: RangeInclusive<usize>) -> &[T]
+    {
+        assert!(*index.start() <= *index.end());
+        return &self[*index.start()..(*index.end() + 1)];
+    }
+}
+
+impl<T, A: Allocator> IndexMut<RangeInclusive<usize>> for Array<T, A>
+{
+    fn index_mut(&mut self, index: RangeInclusive<usize>) -> &mut [T]
+    {
+        assert!(*index.start() <= *index.end());
+        return &mut self[*index.start()..(*index.end() + 1)];
     }
 }
 
@@ -334,6 +386,38 @@ mod tests
         assert!(a[2] == 6);
         assert!(a[3] == 8);
         assert!(a[4] == 10);
+    }
+
+    #[test]
+    fn subslice()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut a = Array::new(&alloc);
+
+        a.push(1);
+        a.push(2);
+        a.push(3);
+        a.push(4);
+        a.push(5);
+
+        assert!(sum_slice(&a[1..3]) == 5);
+        assert!(sum_slice(&a[1..=3]) == 9);
+
+        double_slice(&mut a[1..3]);
+
+        assert!(a[0] == 1);
+        assert!(a[1] == 4);
+        assert!(a[2] == 6);
+        assert!(a[3] == 4);
+        assert!(a[4] == 5);
+
+        double_slice(&mut a[1..=3]);
+
+        assert!(a[0] == 1);
+        assert!(a[1] == 8);
+        assert!(a[2] == 12);
+        assert!(a[3] == 8);
+        assert!(a[4] == 5);
     }
 
     #[test]
