@@ -169,6 +169,7 @@ impl<T, A: Allocator> Index<usize> for Array<T, A>
 {
     type Output = T;
 
+    #[inline]
     fn index(&self, index: usize) -> &T
     {
         assert!(index < self.size);
@@ -181,6 +182,7 @@ impl<T, A: Allocator> Index<usize> for Array<T, A>
 
 impl<T, A: Allocator> IndexMut<usize> for Array<T, A>
 {
+    #[inline]
     fn index_mut(&mut self, index: usize) -> &mut T
     {
         assert!(index < self.size);
@@ -195,6 +197,7 @@ impl<T, A: Allocator> Index<Range<usize>> for Array<T, A>
 {
     type Output = [T];
 
+    #[inline]
     fn index(&self, index: Range<usize>) -> &[T]
     {
         assert!(index.start < index.end);
@@ -208,6 +211,7 @@ impl<T, A: Allocator> Index<Range<usize>> for Array<T, A>
 
 impl<T, A: Allocator> IndexMut<Range<usize>> for Array<T, A>
 {
+    #[inline]
     fn index_mut(&mut self, index: Range<usize>) -> &mut [T]
     {
         assert!(index.start < index.end);
@@ -223,6 +227,7 @@ impl<T, A: Allocator> Index<RangeInclusive<usize>> for Array<T, A>
 {
     type Output = [T];
 
+    #[inline]
     fn index(&self, index: RangeInclusive<usize>) -> &[T]
     {
         assert!(*index.start() <= *index.end());
@@ -232,6 +237,7 @@ impl<T, A: Allocator> Index<RangeInclusive<usize>> for Array<T, A>
 
 impl<T, A: Allocator> IndexMut<RangeInclusive<usize>> for Array<T, A>
 {
+    #[inline]
     fn index_mut(&mut self, index: RangeInclusive<usize>) -> &mut [T]
     {
         assert!(*index.start() <= *index.end());
@@ -259,6 +265,7 @@ impl<T, A: Allocator> Deref for Array<T, A>
 {
     type Target = [T];
 
+    #[inline]
     fn deref(&self) -> &Self::Target
     {
         unsafe
@@ -270,6 +277,7 @@ impl<T, A: Allocator> Deref for Array<T, A>
 
 impl<T, A: Allocator> DerefMut for Array<T, A>
 {
+    #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target
     {
         unsafe
