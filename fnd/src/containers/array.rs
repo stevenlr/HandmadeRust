@@ -133,6 +133,12 @@ impl<T, A: Allocator> Array<T, A>
 
         self.size = 0;
     }
+
+    #[inline]
+    pub fn is_empty(&self) -> bool
+    {
+        self.size == 0
+    }
 }
 
 impl<T, A: Allocator> Index<usize> for Array<T, A>
