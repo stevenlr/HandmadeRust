@@ -1,18 +1,15 @@
-use core::ffi::c_void;
-use core::marker::PhantomData;
 use core::mem::needs_drop;
 use core::ops::{Index, IndexMut, Deref, DerefMut, Range, RangeInclusive};
-use core::ptr::{drop_in_place, null_mut};
+use core::ptr::drop_in_place;
 use core::slice;
+
 use crate::alloc::{Layout, Allocator};
+use crate::containers::RawArray;
 
 pub struct Array<T, A: Allocator>
 {
-    ptr: *mut T,
-    capacity: usize,
     size: usize,
-    alloc: A,
-    _phantom: PhantomData<T>,
+    buffer: RawArray<T, A>,
 }
 
 impl<T, A: Allocator> Array<T, A>
@@ -21,11 +18,8 @@ impl<T, A: Allocator> Array<T, A>
     {
         Self
         {
-            ptr: null_mut(),
-            capacity: 0,
+            buffer: RawArray::new(alloc),
             size: 0,
-            alloc: alloc,
-            _phantom: PhantomData{},
         }
     }
 
@@ -38,13 +32,13 @@ impl<T, A: Allocator> Array<T, A>
             {
                 unsafe
                 {
-                    drop_in_place(self.ptr.offset(i as isize));
+                    drop_in_place(self.buffer.ptr.offset(i as isize));
                 }
             }
         }
         else
         {
-            if new_size > self.capacity
+            if new_size > self.buffer.capacity
             {
                 self.reserve(new_size);
             }
@@ -53,7 +47,7 @@ impl<T, A: Allocator> Array<T, A>
             {
                 unsafe
                 {
-                    self.ptr.offset(i as isize).write(value.clone());
+                    self.buffer.ptr.offset(i as isize).write(value.clone());
                 }
             }
         }
@@ -63,47 +57,23 @@ impl<T, A: Allocator> Array<T, A>
 
     pub fn reserve(&mut self, new_capacity: usize)
     {
-        if new_capacity <= self.capacity
-        {
-            return;
-        }
-
-        let new_layout = Layout::from_type_array::<T>(new_capacity);
-
-        let ptr = unsafe
-        {
-            self.alloc.alloc_aligned(new_layout)
-                .expect("Allocation error")
-                .as_ptr() as *mut T
-        };
-
-        if self.capacity > 0
-        {
-            unsafe
-            {
-                ptr.copy_from(self.ptr, self.size);
-                self.alloc.dealloc_aligned(self.ptr as *mut c_void);
-            }
-        }
-
-        self.ptr = ptr;
-        self.capacity = new_capacity;
+        self.buffer.reserve(new_capacity);
     }
 
     fn grow_auto(&mut self)
     {
         let single_layout = Layout::from_type::<T>();
 
-        let old_capacity_bytes = self.capacity * single_layout.size;
+        let old_capacity_bytes = self.buffer.capacity * single_layout.size;
         assert!(old_capacity_bytes <= (core::usize::MAX / 4));
 
-        let new_capacity = if self.capacity == 0
+        let new_capacity = if self.buffer.capacity == 0
         {
             1
         }
         else
         {
-            self.capacity * 2
+            self.buffer.capacity * 2
         };
 
         self.reserve(new_capacity);
@@ -117,14 +87,14 @@ impl<T, A: Allocator> Array<T, A>
 
     pub fn push(&mut self, value: T)
     {
-        if self.size == self.capacity
+        if self.size == self.buffer.capacity
         {
             self.grow_auto();
         }
 
         unsafe
         {
-            self.ptr.offset(self.size as isize).write(value);
+            self.buffer.ptr.offset(self.size as isize).write(value);
         }
 
         self.size += 1;
@@ -140,7 +110,7 @@ impl<T, A: Allocator> Array<T, A>
         {
             let value = unsafe
             {
-                self.ptr.offset((self.size - 1) as isize).read()
+                self.buffer.ptr.offset((self.size - 1) as isize).read()
             };
 
             self.size -= 1;
@@ -156,7 +126,7 @@ impl<T, A: Allocator> Array<T, A>
             {
                 for i in 0..self.size
                 {
-                    drop_in_place(self.ptr.offset(i as isize));
+                    drop_in_place(self.buffer.ptr.offset(i as isize));
                 }
             }
         }
@@ -175,7 +145,7 @@ impl<T, A: Allocator> Index<usize> for Array<T, A>
         assert!(index < self.size);
         return unsafe
         {
-            self.ptr.offset(index as isize).as_ref().unwrap()
+            self.buffer.ptr.offset(index as isize).as_ref().unwrap()
         };
     }
 }
@@ -188,7 +158,7 @@ impl<T, A: Allocator> IndexMut<usize> for Array<T, A>
         assert!(index < self.size);
         return unsafe
         {
-            self.ptr.offset(index as isize).as_mut().unwrap()
+            self.buffer.ptr.offset(index as isize).as_mut().unwrap()
         };
     }
 }
@@ -204,7 +174,7 @@ impl<T, A: Allocator> Index<Range<usize>> for Array<T, A>
         assert!(index.end <= self.size);
         return unsafe
         {
-            slice::from_raw_parts(self.ptr.offset(index.start as isize), index.end - index.start)
+            slice::from_raw_parts(self.buffer.ptr.offset(index.start as isize), index.end - index.start)
         };
     }
 }
@@ -218,7 +188,7 @@ impl<T, A: Allocator> IndexMut<Range<usize>> for Array<T, A>
         assert!(index.end <= self.size);
         return unsafe
         {
-            slice::from_raw_parts_mut(self.ptr.offset(index.start as isize), index.end - index.start)
+            slice::from_raw_parts_mut(self.buffer.ptr.offset(index.start as isize), index.end - index.start)
         };
     }
 }
@@ -249,14 +219,9 @@ impl<T, A: Allocator> Drop for Array<T, A>
 {
     fn drop(&mut self)
     {
-        if !self.ptr.is_null()
+        if !self.buffer.ptr.is_null()
         {
             self.clear();
-
-            unsafe
-            {
-                self.alloc.dealloc_aligned(self.ptr as *mut c_void);
-            }
         }
     }
 }
@@ -270,7 +235,7 @@ impl<T, A: Allocator> Deref for Array<T, A>
     {
         unsafe
         {
-            slice::from_raw_parts(self.ptr, self.size)
+            slice::from_raw_parts(self.buffer.ptr, self.size)
         }
     }
 }
@@ -282,7 +247,7 @@ impl<T, A: Allocator> DerefMut for Array<T, A>
     {
         unsafe
         {
-            slice::from_raw_parts_mut(self.ptr, self.size)
+            slice::from_raw_parts_mut(self.buffer.ptr, self.size)
         }
     }
 }
