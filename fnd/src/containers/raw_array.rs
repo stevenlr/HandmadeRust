@@ -1,5 +1,6 @@
 use core::ffi::c_void;
 use core::marker::PhantomData;
+use core::mem::size_of;
 use core::ptr::null_mut;
 
 use crate::alloc::{Layout, Allocator};
@@ -16,11 +17,13 @@ impl<T, A: Allocator> RawArray<T, A>
 {
     pub fn new(alloc: A) -> Self
     {
+        let capacity = if size_of::<T>() == 0 { !0 } else { 0 };
+
         Self
         {
             ptr: null_mut(),
-            capacity: 0,
-            alloc: alloc,
+            capacity,
+            alloc,
             _phantom: PhantomData{},
         }
     }

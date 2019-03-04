@@ -1,5 +1,5 @@
 use core::mem::needs_drop;
-use core::ops::{Index, IndexMut, Deref, DerefMut, Range, RangeInclusive};
+use core::ops::{Deref, DerefMut};
 use core::ptr::drop_in_place;
 use core::slice;
 
@@ -138,86 +138,6 @@ impl<T, A: Allocator> Array<T, A>
     pub fn is_empty(&self) -> bool
     {
         self.size == 0
-    }
-}
-
-impl<T, A: Allocator> Index<usize> for Array<T, A>
-{
-    type Output = T;
-
-    #[inline]
-    fn index(&self, index: usize) -> &T
-    {
-        assert!(index < self.size);
-        return unsafe
-        {
-            self.buffer.ptr.offset(index as isize).as_ref().unwrap()
-        };
-    }
-}
-
-impl<T, A: Allocator> IndexMut<usize> for Array<T, A>
-{
-    #[inline]
-    fn index_mut(&mut self, index: usize) -> &mut T
-    {
-        assert!(index < self.size);
-        return unsafe
-        {
-            self.buffer.ptr.offset(index as isize).as_mut().unwrap()
-        };
-    }
-}
-
-impl<T, A: Allocator> Index<Range<usize>> for Array<T, A>
-{
-    type Output = [T];
-
-    #[inline]
-    fn index(&self, index: Range<usize>) -> &[T]
-    {
-        assert!(index.start < index.end);
-        assert!(index.end <= self.size);
-        return unsafe
-        {
-            slice::from_raw_parts(self.buffer.ptr.offset(index.start as isize), index.end - index.start)
-        };
-    }
-}
-
-impl<T, A: Allocator> IndexMut<Range<usize>> for Array<T, A>
-{
-    #[inline]
-    fn index_mut(&mut self, index: Range<usize>) -> &mut [T]
-    {
-        assert!(index.start < index.end);
-        assert!(index.end <= self.size);
-        return unsafe
-        {
-            slice::from_raw_parts_mut(self.buffer.ptr.offset(index.start as isize), index.end - index.start)
-        };
-    }
-}
-
-impl<T, A: Allocator> Index<RangeInclusive<usize>> for Array<T, A>
-{
-    type Output = [T];
-
-    #[inline]
-    fn index(&self, index: RangeInclusive<usize>) -> &[T]
-    {
-        assert!(*index.start() <= *index.end());
-        return &self[*index.start()..(*index.end() + 1)];
-    }
-}
-
-impl<T, A: Allocator> IndexMut<RangeInclusive<usize>> for Array<T, A>
-{
-    #[inline]
-    fn index_mut(&mut self, index: RangeInclusive<usize>) -> &mut [T]
-    {
-        assert!(*index.start() <= *index.end());
-        return &mut self[*index.start()..(*index.end() + 1)];
     }
 }
 
@@ -438,5 +358,22 @@ mod tests
         assert!(a[2] == 7);
         assert!(a[3] == 2);
         assert!(a[4] == 3);
+    }
+
+    #[test]
+    fn zst()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut a = Array::new(&alloc);
+
+        a.push(());
+        a.push(());
+        a.push(());
+        assert!(a.len() == 3);
+
+        assert!(a[1] == ());
+
+        a.clear();
+        assert!(a.len() == 0);
     }
 }
