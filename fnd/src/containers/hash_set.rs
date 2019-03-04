@@ -347,4 +347,23 @@ mod tests
         assert!(!set.contains(&2));
         assert!(!set.contains(&3));
     }
+
+    #[test]
+    fn zst()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut set = HashSet::new(&alloc);
+
+        assert!(!set.contains(&()));
+        assert!(!set.remove(&()));
+        assert!(set.len() == 0);
+        assert!(set.insert(()));
+        assert!(!set.insert(()));
+        assert!(set.contains(&()));
+        assert!(set.len() == 1);
+        assert!(set.remove(&()));
+        assert!(!set.contains(&()));
+        assert!(!set.remove(&()));
+        assert!(set.len() == 0);
+    }
 }
