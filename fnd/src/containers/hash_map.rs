@@ -6,6 +6,12 @@ use crate::alloc::Allocator;
 use crate::containers::Array;
 use crate::hash::SipHash;
 
+// @Todo Base resize on load factor.
+
+// @Todo Implements Google's awesome array node hash set stuff thingy.
+
+// @Todo Don't clone payloads. Instead use a raw array and read/write/drop manually.
+
 #[derive(Clone)]
 enum Bucket<K, V>
 where
@@ -194,7 +200,6 @@ where
                     {
                         FindResult::Free(index) =>
                         {
-                            // @Todo We shouldn't have to clone this...
                             self.a.buckets[index] = element.clone();
                         },
                         FindResult::None | FindResult::Present(_) =>
