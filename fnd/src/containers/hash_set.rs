@@ -6,7 +6,7 @@ use crate::containers::HashMap;
 
 pub struct HashSet<T, A>
 where
-    T: Sized + Eq + Hash + Clone,
+    T: Sized + Eq + Hash ,
     A: Allocator + Clone,
 {
     map: HashMap<T, (), A>,
@@ -14,7 +14,7 @@ where
 
 impl<T, A> HashSet<T, A>
 where
-    T: Sized + Eq + Hash + Clone,
+    T: Sized + Eq + Hash,
     A: Allocator + Clone,
 {
     pub fn new(alloc: A) -> Self
