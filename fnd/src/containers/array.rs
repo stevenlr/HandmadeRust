@@ -23,8 +23,8 @@ impl<T, A: Allocator> Array<T, A>
         }
     }
 
-    pub fn resize(&mut self, new_size: usize, value: T)
-        where T: Clone
+    pub fn resize_with<F>(&mut self, new_size: usize, f: F)
+        where F: Fn() -> T
     {
         if new_size <= self.size && needs_drop::<T>()
         {
@@ -47,12 +47,18 @@ impl<T, A: Allocator> Array<T, A>
             {
                 unsafe
                 {
-                    self.buffer.ptr.offset(i as isize).write(value.clone());
+                    self.buffer.ptr.offset(i as isize).write(f());
                 }
             }
         }
 
         self.size = new_size;
+    }
+
+    pub fn resize(&mut self, new_size: usize, value: T)
+        where T: Clone
+    {
+        self.resize_with(new_size, || value.clone());
     }
 
     pub fn reserve(&mut self, new_capacity: usize)

@@ -1,6 +1,6 @@
 use core::borrow::Borrow;
 use core::hash::*;
-use core::mem::replace;
+use core::mem::{replace, swap};
 
 use crate::alloc::Allocator;
 use crate::containers::Array;
@@ -12,11 +12,10 @@ use crate::hash::SipHash;
 
 // @Todo Don't clone payloads. Instead use a raw array and read/write/drop manually.
 
-#[derive(Clone)]
 enum Bucket<K, V>
 where
-    K: Sized + Eq + Hash + Clone,
-    V: Sized + Clone,
+    K: Sized + Eq + Hash,
+    V: Sized,
 {
     Free,
     Deleted,
@@ -37,24 +36,24 @@ enum FindResult
 
 struct HashMapArray<K, V, A>
 where
-    K: Sized + Eq + Hash + Clone,
-    V: Sized + Clone,
+    K: Sized + Eq + Hash,
+    V: Sized,
     A: Allocator + Clone,
 {
+    shortb: Array<ShortBucket, A>,
     buckets: Array<Bucket<K, V>, A>,
 }
 
 impl<K, V, A> HashMapArray<K, V, A>
 where
-    K: Sized + Eq + Hash + Clone,
-    V: Sized + Clone,
+    K: Sized + Eq + Hash,
+    V: Sized,
     A: Allocator + Clone,
 {
     fn new(alloc: A) -> Self
     {
         Self
         {
-            buckets: Array::new(alloc),
         }
     }
 
@@ -111,8 +110,8 @@ where
 
 pub struct HashMap<K, V, A>
 where
-    K: Sized + Eq + Hash + Clone,
-    V: Sized + Clone,
+    K: Sized + Eq + Hash,
+    V: Sized,
     A: Allocator + Clone,
 {
     alloc: A,
@@ -122,8 +121,8 @@ where
 
 impl<K, V, A> HashMap<K, V, A>
 where
-    K: Sized + Eq + Hash + Clone,
-    V: Sized + Clone,
+    K: Sized + Eq + Hash,
+    V: Sized,
     A: Allocator + Clone,
 {
     pub fn new(alloc: A) -> Self
@@ -186,10 +185,10 @@ where
             self.a.buckets.len() * 2
         };
 
-        let old_array = replace(&mut self.a, HashMapArray::new(self.alloc.clone()));
-        self.a.buckets.resize(new_size, Bucket::Free);
+        let mut old_array = replace(&mut self.a, HashMapArray::new(self.alloc.clone()));
+        self.a.buckets.resize_with(new_size, || Bucket::Free);
 
-        for element in old_array.buckets.iter()
+        for mut element in old_array.buckets.iter_mut()
         {
             match element
             {
@@ -200,7 +199,7 @@ where
                     {
                         FindResult::Free(index) =>
                         {
-                            self.a.buckets[index] = element.clone();
+                            swap(&mut self.a.buckets[index], &mut element);
                         },
                         FindResult::None | FindResult::Present(_) =>
                         {
