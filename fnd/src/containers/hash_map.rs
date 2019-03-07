@@ -27,6 +27,60 @@ where
     },
 }
 
+#[derive(PartialEq)]
+struct ShortBucket(u8);
+
+impl Default for ShortBucket
+{
+    #[inline]
+    fn default() -> Self
+    {
+        Self(Self::FREE)
+    }
+}
+
+impl ShortBucket
+{
+    const FREE : u8 = 1;
+    const DELETED : u8 = 2;
+
+    #[inline]
+    pub fn occupied(hash: u64) -> Self
+    {
+        Self(0x80 | (hash & 0x7f) as u8)
+    }
+
+    #[inline]
+    pub fn free() -> Self
+    {
+        Self(Self::FREE)
+    }
+
+    #[inline]
+    pub fn deleted() -> Self
+    {
+        Self(Self::DELETED)
+    }
+
+    #[inline]
+    pub fn is_occupied(&self) -> bool
+    {
+        self.0 & 0x80 != 0
+    }
+
+    #[inline]
+    pub fn is_free(&self) -> bool
+    {
+        self.0 == Self::FREE
+    }
+
+    #[inline]
+    pub fn is_deleted(&self) -> bool
+    {
+        self.0 == Self::DELETED
+    }
+}
+
 enum FindResult
 {
     None,
@@ -54,6 +108,8 @@ where
     {
         Self
         {
+            shortb: Array::new(alloc.clone()),
+            buckets: Array::new(alloc.clone()),
         }
     }
 
