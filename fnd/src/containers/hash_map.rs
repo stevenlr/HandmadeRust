@@ -8,26 +8,17 @@ use crate::hash::SipHash;
 
 // @Todo Base resize on load factor.
 
-// @Todo Implements Google's awesome array node hash set stuff thingy.
-
-// @Todo Don't clone payloads. Instead use a raw array and read/write/drop manually.
-
-enum Bucket<K, V>
+struct Bucket<K, V>
 where
     K: Sized + Eq + Hash,
     V: Sized,
 {
-    Free,
-    Deleted,
-    Occupied
-    {
-        hash: u64,
-        key: K,
-        value: V,
-    },
+    hash: u64,
+    key: K,
+    value: V,
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 struct ShortBucket(u8);
 
 impl Default for ShortBucket
@@ -95,7 +86,7 @@ where
     A: Allocator + Clone,
 {
     shortb: Array<ShortBucket, A>,
-    buckets: Array<Bucket<K, V>, A>,
+    buckets: Array<Option<Bucket<K, V>>, A>,
 }
 
 impl<K, V, A> HashMapArray<K, V, A>
@@ -124,31 +115,32 @@ where
 
         let start_index = (hash % self.buckets.len() as u64) as usize;
         let mut index = start_index;
-
         let mut acceptable_for_insert = FindResult::None;
+
+        let shortb_reference = ShortBucket::occupied(hash);
 
         loop
         {
-            match self.buckets[index]
+            let shortb = &self.shortb[index];
+
+            if *shortb == shortb_reference
             {
-                Bucket::Free => return FindResult::Free(index),
-                Bucket::Occupied{ hash: h, key: ref v, .. } =>
+                let bucket = self.buckets[index].as_ref().unwrap();
+                if bucket.hash == hash && bucket.key == *key.borrow()
                 {
-                    if h == hash
-                    {
-                        if v == key.borrow()
-                        {
-                            return FindResult::Present(index);
-                        }
-                    }
-                },
-                Bucket::Deleted =>
+                    return FindResult::Present(index);
+                }
+            }
+            else if shortb.is_free()
+            {
+                return FindResult::Free(index);
+            }
+            else if shortb.is_deleted()
+            {
+                if let FindResult::None = acceptable_for_insert
                 {
-                    if let FindResult::None = acceptable_for_insert
-                    {
-                        acceptable_for_insert = FindResult::Free(index);
-                    }
-                },
+                    acceptable_for_insert = FindResult::Free(index);
+                }
             }
 
             let new_index = (index + 1) % self.buckets.len();
@@ -223,7 +215,8 @@ where
         {
             FindResult::Present(index) =>
             {
-                self.a.buckets[index] = Bucket::Deleted;
+                self.a.shortb[index] = ShortBucket::deleted();
+                self.a.buckets[index] = None;
                 return true;
             },
             _ => false,
@@ -234,7 +227,7 @@ where
     {
         let new_size = if self.a.buckets.len() == 0
         {
-            1
+            16
         }
         else
         {
@@ -242,24 +235,27 @@ where
         };
 
         let mut old_array = replace(&mut self.a, HashMapArray::new(self.alloc.clone()));
-        self.a.buckets.resize_with(new_size, || Bucket::Free);
 
-        for mut element in old_array.buckets.iter_mut()
+        self.a.buckets.resize_with(new_size, || None);
+        self.a.shortb.resize(new_size, ShortBucket::free());
+
+        for (index, mut element) in old_array.buckets.iter_mut().enumerate()
         {
             match element
             {
-                Bucket::Occupied{ hash: h, key: ref v, .. } =>
+                Some(Bucket{ hash: h, key: ref k, .. }) =>
                 {
-                    let find = self.a.find_bucket(v, *h);
+                    let find = self.a.find_bucket(k, *h);
                     match find
                     {
-                        FindResult::Free(index) =>
+                        FindResult::Free(new_index) =>
                         {
-                            swap(&mut self.a.buckets[index], &mut element);
+                            swap(&mut self.a.buckets[new_index], &mut element);
+                            swap(&mut self.a.shortb[new_index], &mut old_array.shortb[index]);
                         },
                         FindResult::None | FindResult::Present(_) =>
                         {
-                            panic!("New hash set not large enough");
+                            panic!("New hash map not large enough");
                         },
                     }
                 },
@@ -277,22 +273,23 @@ where
         {
             FindResult::Present(index) =>
             {
-                self.a.buckets[index] = Bucket::Occupied
+                self.a.buckets[index] = Some(Bucket
                 {
                     hash,
                     key,
                     value,
-                };
+                });
                 return false;
             },
             FindResult::Free(index) =>
             {
-                self.a.buckets[index] = Bucket::Occupied
+                self.a.buckets[index] = Some(Bucket
                 {
                     hash,
                     key,
                     value,
-                };
+                });
+                self.a.shortb[index] = ShortBucket::occupied(hash);
                 return true;
             },
             FindResult::None => {},
@@ -305,12 +302,13 @@ where
         {
             FindResult::Free(index) =>
             {
-                self.a.buckets[index] = Bucket::Occupied
+                self.a.buckets[index] = Some(Bucket
                 {
                     hash,
                     key,
                     value,
-                };
+                });
+                self.a.shortb[index] = ShortBucket::occupied(hash);
                 return true;
             },
             _ =>
@@ -322,14 +320,10 @@ where
 
     pub fn len(&self) -> usize
     {
-        self.a.buckets.iter()
+        self.a.shortb.iter()
             .filter(|x|
             {
-                match x
-                {
-                    Bucket::Occupied{..} => true,
-                    _ => false,
-                }
+                x.is_occupied()
             })
             .count()
     }
@@ -346,7 +340,7 @@ where
             {
                 match self.a.buckets[index]
                 {
-                    Bucket::Occupied{ value: ref v, .. } =>
+                    Some(Bucket{ value: ref v, .. }) =>
                     {
                         Some(v)
                     },
