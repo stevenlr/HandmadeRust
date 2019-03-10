@@ -79,7 +79,7 @@ enum FindResult
     Free(usize),
 }
 
-struct HashMapArray<K, V, A>
+struct HashMapInner<K, V, A>
 where
     K: Sized + Eq + Hash,
     V: Sized,
@@ -89,7 +89,7 @@ where
     buckets: Array<Option<Bucket<K, V>>, A>,
 }
 
-impl<K, V, A> HashMapArray<K, V, A>
+impl<K, V, A> HashMapInner<K, V, A>
 where
     K: Sized + Eq + Hash,
     V: Sized,
@@ -102,6 +102,106 @@ where
             shortb: Array::new(alloc.clone()),
             buckets: Array::new(alloc.clone()),
         }
+    }
+
+    pub fn grow_and_insert(&mut self, old: &mut HashMapInner<K, V, A>)
+    {
+        let new_size = if old.buckets.len() == 0
+        {
+            16
+        }
+        else
+        {
+            old.buckets.len() * 2
+        };
+
+        self.buckets.resize_with(new_size, || None);
+        self.shortb.resize(new_size, ShortBucket::free());
+
+        for mut element in old.buckets.iter_mut()
+        {
+            match element
+            {
+                Some(Bucket{ hash: h, key: ref k, .. }) =>
+                {
+                    let find = self.find_bucket(k, *h);
+                    match find
+                    {
+                        FindResult::Free(new_index) =>
+                        {
+                            self.shortb[new_index] = ShortBucket::occupied(*h);
+                            swap(&mut self.buckets[new_index], &mut element);
+                        },
+                        FindResult::None | FindResult::Present(_) =>
+                        {
+                            panic!("New hash map not large enough");
+                        },
+                    }
+                },
+                _ => {},
+            }
+        }
+    }
+
+    pub fn contains<Q>(&self, hash: u64, key: &Q) -> bool
+    where
+        Q: Borrow<K>,
+    {
+        let find = self.find_bucket(key, hash);
+        match find
+        {
+            FindResult::Present(_) => true,
+            _ => false,
+        }
+    }
+
+    pub fn remove<Q>(&mut self, hash: u64, key: &Q) -> bool
+    where
+        Q: Borrow<K>,
+    {
+        let find = self.find_bucket(key, hash);
+        match find
+        {
+            FindResult::Present(index) =>
+            {
+                self.shortb[index] = ShortBucket::deleted();
+                self.buckets[index] = None;
+                return true;
+            },
+            _ => false,
+        }
+    }
+
+    pub fn find<Q>(&self, hash: u64, key: &Q) -> Option<&V>
+    where
+        Q: Borrow<K>,
+    {
+        let find = self.find_bucket(key, hash);
+        match find
+        {
+            FindResult::Present(index) =>
+            {
+                match self.buckets[index]
+                {
+                    Some(Bucket{ value: ref v, .. }) =>
+                    {
+                        Some(v)
+                    },
+                    _ => None,
+                }
+            }
+            _ => None,
+        }
+    }
+
+    pub fn len(&self) -> usize
+    {
+        self.shortb.iter()
+            .filter(|x|
+            {
+                x.is_occupied()
+            })
+            .count()
     }
 
     fn find_bucket<Q>(&self, key: &Q, hash: u64) -> FindResult
@@ -164,7 +264,7 @@ where
 {
     alloc: A,
     hash: BuildHasherDefault<SipHash>,
-    a: HashMapArray<K, V, A>,
+    inner: HashMapInner<K, V, A>,
 }
 
 impl<K, V, A> HashMap<K, V, A>
@@ -179,7 +279,7 @@ where
         {
             alloc: alloc.clone(),
             hash: BuildHasherDefault::default(),
-            a: HashMapArray::new(alloc.clone()),
+            inner: HashMapInner::new(alloc.clone()),
         }
     }
 
@@ -192,88 +292,40 @@ where
         return hasher.finish();
     }
 
+    #[inline]
     pub fn contains<Q>(&self, key: &Q) -> bool
     where
         Q: Borrow<K>,
     {
         let hash = self.compute_hash(key);
-        let find = self.a.find_bucket(key, hash);
-        match find
-        {
-            FindResult::Present(_) => true,
-            _ => false,
-        }
+        return self.inner.contains(hash, key);
     }
 
+    #[inline]
     pub fn remove<Q>(&mut self, key: &Q) -> bool
     where
         Q: Borrow<K>,
     {
         let hash = self.compute_hash(key);
-        let find = self.a.find_bucket(key, hash);
-        match find
-        {
-            FindResult::Present(index) =>
-            {
-                self.a.shortb[index] = ShortBucket::deleted();
-                self.a.buckets[index] = None;
-                return true;
-            },
-            _ => false,
-        }
+        return self.inner.remove(hash, key);
     }
 
     fn grow(&mut self)
     {
-        let new_size = if self.a.buckets.len() == 0
-        {
-            16
-        }
-        else
-        {
-            self.a.buckets.len() * 2
-        };
-
-        let mut old_array = replace(&mut self.a, HashMapArray::new(self.alloc.clone()));
-
-        self.a.buckets.resize_with(new_size, || None);
-        self.a.shortb.resize(new_size, ShortBucket::free());
-
-        for (index, mut element) in old_array.buckets.iter_mut().enumerate()
-        {
-            match element
-            {
-                Some(Bucket{ hash: h, key: ref k, .. }) =>
-                {
-                    let find = self.a.find_bucket(k, *h);
-                    match find
-                    {
-                        FindResult::Free(new_index) =>
-                        {
-                            swap(&mut self.a.buckets[new_index], &mut element);
-                            swap(&mut self.a.shortb[new_index], &mut old_array.shortb[index]);
-                        },
-                        FindResult::None | FindResult::Present(_) =>
-                        {
-                            panic!("New hash map not large enough");
-                        },
-                    }
-                },
-                _ => {},
-            }
-        }
+        let mut old = replace(&mut self.inner, HashMapInner::new(self.alloc.clone()));
+        self.inner.grow_and_insert(&mut old);
     }
 
     pub fn insert(&mut self, key: K, value: V) -> bool
     {
         let hash = self.compute_hash(&key);
-        let find = self.a.find_bucket(&key, hash);
+        let find = self.inner.find_bucket(&key, hash);
 
         match find
         {
             FindResult::Present(index) =>
             {
-                self.a.buckets[index] = Some(Bucket
+                self.inner.buckets[index] = Some(Bucket
                 {
                     hash,
                     key,
@@ -283,13 +335,13 @@ where
             },
             FindResult::Free(index) =>
             {
-                self.a.buckets[index] = Some(Bucket
+                self.inner.buckets[index] = Some(Bucket
                 {
                     hash,
                     key,
                     value,
                 });
-                self.a.shortb[index] = ShortBucket::occupied(hash);
+                self.inner.shortb[index] = ShortBucket::occupied(hash);
                 return true;
             },
             FindResult::None => {},
@@ -297,18 +349,18 @@ where
 
         self.grow();
 
-        let find = self.a.find_bucket(&key, hash);
+        let find = self.inner.find_bucket(&key, hash);
         match find
         {
             FindResult::Free(index) =>
             {
-                self.a.buckets[index] = Some(Bucket
+                self.inner.buckets[index] = Some(Bucket
                 {
                     hash,
                     key,
                     value,
                 });
-                self.a.shortb[index] = ShortBucket::occupied(hash);
+                self.inner.shortb[index] = ShortBucket::occupied(hash);
                 return true;
             },
             _ =>
@@ -318,14 +370,10 @@ where
         }
     }
 
+    #[inline]
     pub fn len(&self) -> usize
     {
-        self.a.shortb.iter()
-            .filter(|x|
-            {
-                x.is_occupied()
-            })
-            .count()
+        self.inner.len()
     }
 
     pub fn find<Q>(&self, key: &Q) -> Option<&V>
@@ -333,22 +381,7 @@ where
         Q: Borrow<K>,
     {
         let hash = self.compute_hash(key);
-        let find = self.a.find_bucket(key, hash);
-        match find
-        {
-            FindResult::Present(index) =>
-            {
-                match self.a.buckets[index]
-                {
-                    Some(Bucket{ value: ref v, .. }) =>
-                    {
-                        Some(v)
-                    },
-                    _ => None,
-                }
-            }
-            _ => None,
-        }
+        return self.inner.find(hash, key);
     }
 }
 
