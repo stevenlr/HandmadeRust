@@ -233,7 +233,14 @@ where
             }
             else if shortb.is_free()
             {
-                return FindResult::Free(index);
+                if let FindResult::None = acceptable_for_insert
+                {
+                    return FindResult::Free(index);
+                }
+                else
+                {
+                    return acceptable_for_insert;
+                }
             }
             else if shortb.is_deleted()
             {

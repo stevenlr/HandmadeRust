@@ -26,7 +26,7 @@ impl<T, A: Allocator> Array<T, A>
     pub fn resize_with<F>(&mut self, new_size: usize, f: F)
         where F: Fn() -> T
     {
-        if new_size <= self.size && needs_drop::<T>()
+        if new_size < self.size && needs_drop::<T>()
         {
             for i in new_size..self.size
             {
@@ -36,7 +36,7 @@ impl<T, A: Allocator> Array<T, A>
                 }
             }
         }
-        else
+        else if new_size > self.size
         {
             if new_size > self.buffer.capacity
             {
