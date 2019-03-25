@@ -1,5 +1,5 @@
 use core::ffi::c_void;
-use core::ptr::{NonNull, drop_in_place};
+use core::ptr::{NonNull, drop_in_place, write};
 use core::mem::{replace, forget};
 use core::marker::{Unsize, PhantomData};
 use core::ops::{Deref, DerefMut, CoerceUnsized};
@@ -24,7 +24,10 @@ impl<T, A: Allocator> Unq<T, A>
                 .cast::<T>()
         };
 
-        forget(replace(unsafe{ ptr.as_mut() }, value));
+        unsafe
+        {
+            write(ptr.as_mut(), value);
+        }
 
         Self
         {
