@@ -1,8 +1,9 @@
 [package]
-name = "fnd"
+name = "main"
 version = "0.1.0"
 authors = ["Steven Le Rouzic <steven.lerouzic@gmail.com>"]
 edition = "2018"
 
-[lib]
-path = "lib.rs"
+[[bin]]
+name = "main"
+path = "main.rs"

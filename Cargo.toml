@@ -1,7 +1,6 @@
-[package]
-name = "HandmadeRust"
-version = "0.1.0"
-authors = ["Steven Le Rouzic <steven.lerouzic@gmail.com>"]
-edition = "2018"
-
-[dependencies]
+[workspace]
+members = [
+    "fnd",
+    "vk",
+    "main",
+]
