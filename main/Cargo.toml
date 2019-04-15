@@ -7,3 +7,7 @@ edition = "2018"
 [[bin]]
 name = "main"
 path = "main.rs"
+
+[dependencies]
+vk = { path = "../vk" }
+fnd = { path = "../fnd" }
