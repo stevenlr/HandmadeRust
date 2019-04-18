@@ -14,6 +14,10 @@ impl<'a> VkAllocationCallbacksBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkAllocationCallbacks {
+        self.s.clone()
+    }
+
     pub fn p_user_data(mut self, value: Option<&'a mut core::ffi::c_void>) -> VkAllocationCallbacksBuilder<'a> {
         self.s.p_user_data = match value {
             Some(r) => r,
@@ -75,6 +79,10 @@ impl<'a> VkWin32SurfaceCreateInfoKHRBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkWin32SurfaceCreateInfoKHR {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkWin32SurfaceCreateInfoKHRBuilder<'a> {
         self.s.s_type = value;
         self
@@ -132,6 +140,10 @@ impl<'a> VkSurfaceFormatKHRBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkSurfaceFormatKHR {
+        self.s.clone()
+    }
+
     pub fn format(mut self, value: VkFormat) -> VkSurfaceFormatKHRBuilder<'a> {
         self.s.format = value;
         self
@@ -168,6 +180,10 @@ impl<'a> VkSurfaceCapabilitiesKHRBuilder<'a> {
             s: VkSurfaceCapabilitiesKHR::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSurfaceCapabilitiesKHR {
+        self.s.clone()
     }
 
     pub fn min_image_count(mut self, value: u32) -> VkSurfaceCapabilitiesKHRBuilder<'a> {
@@ -248,6 +264,10 @@ impl<'a> VkExtent2DBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkExtent2D {
+        self.s.clone()
+    }
+
     pub fn width(mut self, value: u32) -> VkExtent2DBuilder<'a> {
         self.s.width = value;
         self
@@ -284,6 +304,10 @@ impl<'a> VkPresentInfoKHRBuilder<'a> {
             s: VkPresentInfoKHR::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPresentInfoKHR {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPresentInfoKHRBuilder<'a> {
@@ -360,6 +384,10 @@ impl<'a> VkSwapchainCreateInfoKHRBuilder<'a> {
             s: VkSwapchainCreateInfoKHR::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSwapchainCreateInfoKHR {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkSwapchainCreateInfoKHRBuilder<'a> {
@@ -485,6 +513,10 @@ impl<'a> VkDebugUtilsMessengerCallbackDataEXTBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDebugUtilsMessengerCallbackDataEXT {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkDebugUtilsMessengerCallbackDataEXTBuilder<'a> {
         self.s.s_type = value;
         self
@@ -582,6 +614,10 @@ impl<'a> VkDebugUtilsObjectNameInfoEXTBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDebugUtilsObjectNameInfoEXT {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkDebugUtilsObjectNameInfoEXTBuilder<'a> {
         self.s.s_type = value;
         self
@@ -640,6 +676,10 @@ impl<'a> VkDebugUtilsLabelEXTBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDebugUtilsLabelEXT {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkDebugUtilsLabelEXTBuilder<'a> {
         self.s.s_type = value;
         self
@@ -691,6 +731,10 @@ impl<'a> VkDebugUtilsMessengerCreateInfoEXTBuilder<'a> {
             s: VkDebugUtilsMessengerCreateInfoEXT::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkDebugUtilsMessengerCreateInfoEXT {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkDebugUtilsMessengerCreateInfoEXTBuilder<'a> {
@@ -763,6 +807,10 @@ impl<'a> VkDebugUtilsObjectTagInfoEXTBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDebugUtilsObjectTagInfoEXT {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkDebugUtilsObjectTagInfoEXTBuilder<'a> {
         self.s.s_type = value;
         self
@@ -831,6 +879,10 @@ impl<'a> VkBaseInStructureBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkBaseInStructure {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkBaseInStructureBuilder<'a> {
         self.s.s_type = value;
         self
@@ -873,6 +925,10 @@ impl<'a> VkBaseOutStructureBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkBaseOutStructure {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkBaseOutStructureBuilder<'a> {
         self.s.s_type = value;
         self
@@ -913,6 +969,10 @@ impl<'a> VkMemoryBarrierBuilder<'a> {
             s: VkMemoryBarrier::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkMemoryBarrier {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkMemoryBarrierBuilder<'a> {
@@ -965,6 +1025,10 @@ impl<'a> VkImageMemoryBarrierBuilder<'a> {
             s: VkImageMemoryBarrier::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkImageMemoryBarrier {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkImageMemoryBarrierBuilder<'a> {
@@ -1049,6 +1113,10 @@ impl<'a> VkImageSubresourceRangeBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkImageSubresourceRange {
+        self.s.clone()
+    }
+
     pub fn aspect_mask(mut self, value: VkImageAspectFlags) -> VkImageSubresourceRangeBuilder<'a> {
         self.s.aspect_mask = value;
         self
@@ -1102,6 +1170,10 @@ impl<'a> VkDrawIndirectCommandBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDrawIndirectCommand {
+        self.s.clone()
+    }
+
     pub fn vertex_count(mut self, value: u32) -> VkDrawIndirectCommandBuilder<'a> {
         self.s.vertex_count = value;
         self
@@ -1148,6 +1220,10 @@ impl<'a> VkDrawIndexedIndirectCommandBuilder<'a> {
             s: VkDrawIndexedIndirectCommand::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkDrawIndexedIndirectCommand {
+        self.s.clone()
     }
 
     pub fn index_count(mut self, value: u32) -> VkDrawIndexedIndirectCommandBuilder<'a> {
@@ -1203,6 +1279,10 @@ impl<'a> VkDispatchIndirectCommandBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDispatchIndirectCommand {
+        self.s.clone()
+    }
+
     pub fn x(mut self, value: u32) -> VkDispatchIndirectCommandBuilder<'a> {
         self.s.x = value;
         self
@@ -1244,6 +1324,10 @@ impl<'a> VkBufferMemoryBarrierBuilder<'a> {
             s: VkBufferMemoryBarrier::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkBufferMemoryBarrier {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkBufferMemoryBarrierBuilder<'a> {
@@ -1323,6 +1407,10 @@ impl<'a> VkRenderPassBeginInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkRenderPassBeginInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkRenderPassBeginInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -1391,6 +1479,10 @@ impl<'a> VkClearDepthStencilValueBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkClearDepthStencilValue {
+        self.s.clone()
+    }
+
     pub fn depth(mut self, value: f32) -> VkClearDepthStencilValueBuilder<'a> {
         self.s.depth = value;
         self
@@ -1427,6 +1519,10 @@ impl<'a> VkRect2DBuilder<'a> {
             s: VkRect2D::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkRect2D {
+        self.s.clone()
     }
 
     pub fn offset(mut self, value: VkOffset2D) -> VkRect2DBuilder<'a> {
@@ -1467,6 +1563,10 @@ impl<'a> VkOffset2DBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkOffset2D {
+        self.s.clone()
+    }
+
     pub fn x(mut self, value: i32) -> VkOffset2DBuilder<'a> {
         self.s.x = value;
         self
@@ -1503,6 +1603,10 @@ impl<'a> VkImageResolveBuilder<'a> {
             s: VkImageResolve::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkImageResolve {
+        self.s.clone()
     }
 
     pub fn src_subresource(mut self, value: VkImageSubresourceLayers) -> VkImageResolveBuilder<'a> {
@@ -1558,6 +1662,10 @@ impl<'a> VkExtent3DBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkExtent3D {
+        self.s.clone()
+    }
+
     pub fn width(mut self, value: u32) -> VkExtent3DBuilder<'a> {
         self.s.width = value;
         self
@@ -1601,6 +1709,10 @@ impl<'a> VkOffset3DBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkOffset3D {
+        self.s.clone()
+    }
+
     pub fn x(mut self, value: i32) -> VkOffset3DBuilder<'a> {
         self.s.x = value;
         self
@@ -1642,6 +1754,10 @@ impl<'a> VkImageSubresourceLayersBuilder<'a> {
             s: VkImageSubresourceLayers::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkImageSubresourceLayers {
+        self.s.clone()
     }
 
     pub fn aspect_mask(mut self, value: VkImageAspectFlags) -> VkImageSubresourceLayersBuilder<'a> {
@@ -1692,6 +1808,10 @@ impl<'a> VkClearRectBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkClearRect {
+        self.s.clone()
+    }
+
     pub fn rect(mut self, value: VkRect2D) -> VkClearRectBuilder<'a> {
         self.s.rect = value;
         self
@@ -1735,6 +1855,10 @@ impl<'a> VkClearAttachmentBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkClearAttachment {
+        self.s.clone()
+    }
+
     pub fn aspect_mask(mut self, value: VkImageAspectFlags) -> VkClearAttachmentBuilder<'a> {
         self.s.aspect_mask = value;
         self
@@ -1776,6 +1900,10 @@ impl<'a> VkBufferImageCopyBuilder<'a> {
             s: VkBufferImageCopy::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkBufferImageCopy {
+        self.s.clone()
     }
 
     pub fn buffer_offset(mut self, value: VkDeviceSize) -> VkBufferImageCopyBuilder<'a> {
@@ -1836,6 +1964,10 @@ impl<'a> VkImageBlitBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkImageBlit {
+        self.s.clone()
+    }
+
     pub fn src_subresource(mut self, value: VkImageSubresourceLayers) -> VkImageBlitBuilder<'a> {
         self.s.src_subresource = value;
         self
@@ -1882,6 +2014,10 @@ impl<'a> VkImageCopyBuilder<'a> {
             s: VkImageCopy::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkImageCopy {
+        self.s.clone()
     }
 
     pub fn src_subresource(mut self, value: VkImageSubresourceLayers) -> VkImageCopyBuilder<'a> {
@@ -1937,6 +2073,10 @@ impl<'a> VkBufferCopyBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkBufferCopy {
+        self.s.clone()
+    }
+
     pub fn src_offset(mut self, value: VkDeviceSize) -> VkBufferCopyBuilder<'a> {
         self.s.src_offset = value;
         self
@@ -1978,6 +2118,10 @@ impl<'a> VkViewportBuilder<'a> {
             s: VkViewport::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkViewport {
+        self.s.clone()
     }
 
     pub fn x(mut self, value: f32) -> VkViewportBuilder<'a> {
@@ -2038,6 +2182,10 @@ impl<'a> VkCommandBufferBeginInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkCommandBufferBeginInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkCommandBufferBeginInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -2091,6 +2239,10 @@ impl<'a> VkCommandBufferInheritanceInfoBuilder<'a> {
             s: VkCommandBufferInheritanceInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkCommandBufferInheritanceInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkCommandBufferInheritanceInfoBuilder<'a> {
@@ -2165,6 +2317,10 @@ impl<'a> VkCommandBufferAllocateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkCommandBufferAllocateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkCommandBufferAllocateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -2222,6 +2378,10 @@ impl<'a> VkCommandPoolCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkCommandPoolCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkCommandPoolCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -2272,6 +2432,10 @@ impl<'a> VkRenderPassCreateInfoBuilder<'a> {
             s: VkRenderPassCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkRenderPassCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkRenderPassCreateInfoBuilder<'a> {
@@ -2354,6 +2518,10 @@ impl<'a> VkSubpassDependencyBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkSubpassDependency {
+        self.s.clone()
+    }
+
     pub fn src_subpass(mut self, value: u32) -> VkSubpassDependencyBuilder<'a> {
         self.s.src_subpass = value;
         self
@@ -2415,6 +2583,10 @@ impl<'a> VkSubpassDescriptionBuilder<'a> {
             s: VkSubpassDescription::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSubpassDescription {
+        self.s.clone()
     }
 
     pub fn flags(mut self, value: VkSubpassDescriptionFlags) -> VkSubpassDescriptionBuilder<'a> {
@@ -2502,6 +2674,10 @@ impl<'a> VkAttachmentReferenceBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkAttachmentReference {
+        self.s.clone()
+    }
+
     pub fn attachment(mut self, value: u32) -> VkAttachmentReferenceBuilder<'a> {
         self.s.attachment = value;
         self
@@ -2538,6 +2714,10 @@ impl<'a> VkAttachmentDescriptionBuilder<'a> {
             s: VkAttachmentDescription::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkAttachmentDescription {
+        self.s.clone()
     }
 
     pub fn flags(mut self, value: VkAttachmentDescriptionFlags) -> VkAttachmentDescriptionBuilder<'a> {
@@ -2611,6 +2791,10 @@ impl<'a> VkFramebufferCreateInfoBuilder<'a> {
             s: VkFramebufferCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkFramebufferCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkFramebufferCreateInfoBuilder<'a> {
@@ -2691,6 +2875,10 @@ impl<'a> VkCopyDescriptorSetBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkCopyDescriptorSet {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkCopyDescriptorSetBuilder<'a> {
         self.s.s_type = value;
         self
@@ -2766,6 +2954,10 @@ impl<'a> VkWriteDescriptorSetBuilder<'a> {
             s: VkWriteDescriptorSet::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkWriteDescriptorSet {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkWriteDescriptorSetBuilder<'a> {
@@ -2853,6 +3045,10 @@ impl<'a> VkDescriptorBufferInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDescriptorBufferInfo {
+        self.s.clone()
+    }
+
     pub fn buffer(mut self, value: VkBuffer) -> VkDescriptorBufferInfoBuilder<'a> {
         self.s.buffer = value;
         self
@@ -2896,6 +3092,10 @@ impl<'a> VkDescriptorImageInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDescriptorImageInfo {
+        self.s.clone()
+    }
+
     pub fn sampler(mut self, value: VkSampler) -> VkDescriptorImageInfoBuilder<'a> {
         self.s.sampler = value;
         self
@@ -2937,6 +3137,10 @@ impl<'a> VkDescriptorSetAllocateInfoBuilder<'a> {
             s: VkDescriptorSetAllocateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkDescriptorSetAllocateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkDescriptorSetAllocateInfoBuilder<'a> {
@@ -2995,6 +3199,10 @@ impl<'a> VkDescriptorPoolCreateInfoBuilder<'a> {
             s: VkDescriptorPoolCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkDescriptorPoolCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkDescriptorPoolCreateInfoBuilder<'a> {
@@ -3060,6 +3268,10 @@ impl<'a> VkDescriptorPoolSizeBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDescriptorPoolSize {
+        self.s.clone()
+    }
+
     pub fn kind(mut self, value: VkDescriptorType) -> VkDescriptorPoolSizeBuilder<'a> {
         self.s.kind = value;
         self
@@ -3096,6 +3308,10 @@ impl<'a> VkDescriptorSetLayoutCreateInfoBuilder<'a> {
             s: VkDescriptorSetLayoutCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkDescriptorSetLayoutCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkDescriptorSetLayoutCreateInfoBuilder<'a> {
@@ -3156,6 +3372,10 @@ impl<'a> VkDescriptorSetLayoutBindingBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDescriptorSetLayoutBinding {
+        self.s.clone()
+    }
+
     pub fn binding(mut self, value: u32) -> VkDescriptorSetLayoutBindingBuilder<'a> {
         self.s.binding = value;
         self
@@ -3208,6 +3428,10 @@ impl<'a> VkSamplerCreateInfoBuilder<'a> {
             s: VkSamplerCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSamplerCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkSamplerCreateInfoBuilder<'a> {
@@ -3332,6 +3556,10 @@ impl<'a> VkPipelineLayoutCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkPipelineLayoutCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineLayoutCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -3401,6 +3629,10 @@ impl<'a> VkPushConstantRangeBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkPushConstantRange {
+        self.s.clone()
+    }
+
     pub fn stage_flags(mut self, value: VkShaderStageFlags) -> VkPushConstantRangeBuilder<'a> {
         self.s.stage_flags = value;
         self
@@ -3442,6 +3674,10 @@ impl<'a> VkComputePipelineCreateInfoBuilder<'a> {
             s: VkComputePipelineCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkComputePipelineCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkComputePipelineCreateInfoBuilder<'a> {
@@ -3509,6 +3745,10 @@ impl<'a> VkPipelineShaderStageCreateInfoBuilder<'a> {
             s: VkPipelineShaderStageCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPipelineShaderStageCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineShaderStageCreateInfoBuilder<'a> {
@@ -3582,6 +3822,10 @@ impl<'a> VkSpecializationInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkSpecializationInfo {
+        self.s.clone()
+    }
+
     pub fn map_entry_count(mut self, value: u32) -> VkSpecializationInfoBuilder<'a> {
         self.s.map_entry_count = value;
         self
@@ -3632,6 +3876,10 @@ impl<'a> VkSpecializationMapEntryBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkSpecializationMapEntry {
+        self.s.clone()
+    }
+
     pub fn ant_id(mut self, value: u32) -> VkSpecializationMapEntryBuilder<'a> {
         self.s.ant_id = value;
         self
@@ -3673,6 +3921,10 @@ impl<'a> VkGraphicsPipelineCreateInfoBuilder<'a> {
             s: VkGraphicsPipelineCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkGraphicsPipelineCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkGraphicsPipelineCreateInfoBuilder<'a> {
@@ -3827,6 +4079,10 @@ impl<'a> VkPipelineDynamicStateCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkPipelineDynamicStateCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineDynamicStateCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -3883,6 +4139,10 @@ impl<'a> VkPipelineColorBlendStateCreateInfoBuilder<'a> {
             s: VkPipelineColorBlendStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPipelineColorBlendStateCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineColorBlendStateCreateInfoBuilder<'a> {
@@ -3958,6 +4218,10 @@ impl<'a> VkPipelineColorBlendAttachmentStateBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkPipelineColorBlendAttachmentState {
+        self.s.clone()
+    }
+
     pub fn blend_enable(mut self, value: bool) -> VkPipelineColorBlendAttachmentStateBuilder<'a> {
         self.s.blend_enable = if value { VK_TRUE } else { VK_FALSE };
         self
@@ -4024,6 +4288,10 @@ impl<'a> VkPipelineDepthStencilStateCreateInfoBuilder<'a> {
             s: VkPipelineDepthStencilStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPipelineDepthStencilStateCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineDepthStencilStateCreateInfoBuilder<'a> {
@@ -4118,6 +4386,10 @@ impl<'a> VkStencilOpStateBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkStencilOpState {
+        self.s.clone()
+    }
+
     pub fn fail_op(mut self, value: VkStencilOp) -> VkStencilOpStateBuilder<'a> {
         self.s.fail_op = value;
         self
@@ -4179,6 +4451,10 @@ impl<'a> VkPipelineMultisampleStateCreateInfoBuilder<'a> {
             s: VkPipelineMultisampleStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPipelineMultisampleStateCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineMultisampleStateCreateInfoBuilder<'a> {
@@ -4257,6 +4533,10 @@ impl<'a> VkPipelineRasterizationStateCreateInfoBuilder<'a> {
             s: VkPipelineRasterizationStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPipelineRasterizationStateCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineRasterizationStateCreateInfoBuilder<'a> {
@@ -4356,6 +4636,10 @@ impl<'a> VkPipelineViewportStateCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkPipelineViewportStateCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineViewportStateCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -4425,6 +4709,10 @@ impl<'a> VkPipelineTessellationStateCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkPipelineTessellationStateCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineTessellationStateCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -4475,6 +4763,10 @@ impl<'a> VkPipelineInputAssemblyStateCreateInfoBuilder<'a> {
             s: VkPipelineInputAssemblyStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPipelineInputAssemblyStateCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineInputAssemblyStateCreateInfoBuilder<'a> {
@@ -4532,6 +4824,10 @@ impl<'a> VkPipelineVertexInputStateCreateInfoBuilder<'a> {
             s: VkPipelineVertexInputStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPipelineVertexInputStateCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineVertexInputStateCreateInfoBuilder<'a> {
@@ -4603,6 +4899,10 @@ impl<'a> VkVertexInputAttributeDescriptionBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkVertexInputAttributeDescription {
+        self.s.clone()
+    }
+
     pub fn location(mut self, value: u32) -> VkVertexInputAttributeDescriptionBuilder<'a> {
         self.s.location = value;
         self
@@ -4651,6 +4951,10 @@ impl<'a> VkVertexInputBindingDescriptionBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkVertexInputBindingDescription {
+        self.s.clone()
+    }
+
     pub fn binding(mut self, value: u32) -> VkVertexInputBindingDescriptionBuilder<'a> {
         self.s.binding = value;
         self
@@ -4692,6 +4996,10 @@ impl<'a> VkPipelineCacheCreateInfoBuilder<'a> {
             s: VkPipelineCacheCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPipelineCacheCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkPipelineCacheCreateInfoBuilder<'a> {
@@ -4752,6 +5060,10 @@ impl<'a> VkShaderModuleCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkShaderModuleCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkShaderModuleCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -4808,6 +5120,10 @@ impl<'a> VkImageViewCreateInfoBuilder<'a> {
             s: VkImageViewCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkImageViewCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkImageViewCreateInfoBuilder<'a> {
@@ -4882,6 +5198,10 @@ impl<'a> VkComponentMappingBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkComponentMapping {
+        self.s.clone()
+    }
+
     pub fn r(mut self, value: VkComponentSwizzle) -> VkComponentMappingBuilder<'a> {
         self.s.r = value;
         self
@@ -4928,6 +5248,10 @@ impl<'a> VkSubresourceLayoutBuilder<'a> {
             s: VkSubresourceLayout::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSubresourceLayout {
+        self.s.clone()
     }
 
     pub fn offset(mut self, value: VkDeviceSize) -> VkSubresourceLayoutBuilder<'a> {
@@ -4983,6 +5307,10 @@ impl<'a> VkImageSubresourceBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkImageSubresource {
+        self.s.clone()
+    }
+
     pub fn aspect_mask(mut self, value: VkImageAspectFlags) -> VkImageSubresourceBuilder<'a> {
         self.s.aspect_mask = value;
         self
@@ -5024,6 +5352,10 @@ impl<'a> VkImageCreateInfoBuilder<'a> {
             s: VkImageCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkImageCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkImageCreateInfoBuilder<'a> {
@@ -5134,6 +5466,10 @@ impl<'a> VkBufferViewCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkBufferViewCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkBufferViewCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -5199,6 +5535,10 @@ impl<'a> VkBufferCreateInfoBuilder<'a> {
             s: VkBufferCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkBufferCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkBufferCreateInfoBuilder<'a> {
@@ -5274,6 +5614,10 @@ impl<'a> VkQueryPoolCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkQueryPoolCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkQueryPoolCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -5336,6 +5680,10 @@ impl<'a> VkEventCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkEventCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkEventCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -5381,6 +5729,10 @@ impl<'a> VkSemaphoreCreateInfoBuilder<'a> {
             s: VkSemaphoreCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSemaphoreCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkSemaphoreCreateInfoBuilder<'a> {
@@ -5430,6 +5782,10 @@ impl<'a> VkFenceCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkFenceCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkFenceCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -5475,6 +5831,10 @@ impl<'a> VkBindSparseInfoBuilder<'a> {
             s: VkBindSparseInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkBindSparseInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkBindSparseInfoBuilder<'a> {
@@ -5574,6 +5934,10 @@ impl<'a> VkSparseImageMemoryBindInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkSparseImageMemoryBindInfo {
+        self.s.clone()
+    }
+
     pub fn image(mut self, value: VkImage) -> VkSparseImageMemoryBindInfoBuilder<'a> {
         self.s.image = value;
         self
@@ -5616,6 +5980,10 @@ impl<'a> VkSparseImageMemoryBindBuilder<'a> {
             s: VkSparseImageMemoryBind::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSparseImageMemoryBind {
+        self.s.clone()
     }
 
     pub fn subresource(mut self, value: VkImageSubresource) -> VkSparseImageMemoryBindBuilder<'a> {
@@ -5676,6 +6044,10 @@ impl<'a> VkSparseImageOpaqueMemoryBindInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkSparseImageOpaqueMemoryBindInfo {
+        self.s.clone()
+    }
+
     pub fn image(mut self, value: VkImage) -> VkSparseImageOpaqueMemoryBindInfoBuilder<'a> {
         self.s.image = value;
         self
@@ -5718,6 +6090,10 @@ impl<'a> VkSparseMemoryBindBuilder<'a> {
             s: VkSparseMemoryBind::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSparseMemoryBind {
+        self.s.clone()
     }
 
     pub fn resource_offset(mut self, value: VkDeviceSize) -> VkSparseMemoryBindBuilder<'a> {
@@ -5773,6 +6149,10 @@ impl<'a> VkSparseBufferMemoryBindInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkSparseBufferMemoryBindInfo {
+        self.s.clone()
+    }
+
     pub fn buffer(mut self, value: VkBuffer) -> VkSparseBufferMemoryBindInfoBuilder<'a> {
         self.s.buffer = value;
         self
@@ -5817,6 +6197,10 @@ impl<'a> VkSparseImageFormatPropertiesBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkSparseImageFormatProperties {
+        self.s.clone()
+    }
+
     pub fn aspect_mask(mut self, value: VkImageAspectFlags) -> VkSparseImageFormatPropertiesBuilder<'a> {
         self.s.aspect_mask = value;
         self
@@ -5858,6 +6242,10 @@ impl<'a> VkSparseImageMemoryRequirementsBuilder<'a> {
             s: VkSparseImageMemoryRequirements::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSparseImageMemoryRequirements {
+        self.s.clone()
     }
 
     pub fn format_properties(mut self, value: VkSparseImageFormatProperties) -> VkSparseImageMemoryRequirementsBuilder<'a> {
@@ -5913,6 +6301,10 @@ impl<'a> VkMemoryRequirementsBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkMemoryRequirements {
+        self.s.clone()
+    }
+
     pub fn size(mut self, value: VkDeviceSize) -> VkMemoryRequirementsBuilder<'a> {
         self.s.size = value;
         self
@@ -5954,6 +6346,10 @@ impl<'a> VkMappedMemoryRangeBuilder<'a> {
             s: VkMappedMemoryRange::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkMappedMemoryRange {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkMappedMemoryRangeBuilder<'a> {
@@ -6013,6 +6409,10 @@ impl<'a> VkMemoryAllocateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkMemoryAllocateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkMemoryAllocateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -6063,6 +6463,10 @@ impl<'a> VkSubmitInfoBuilder<'a> {
             s: VkSubmitInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkSubmitInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkSubmitInfoBuilder<'a> {
@@ -6146,6 +6550,10 @@ impl<'a> VkLayerPropertiesBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkLayerProperties {
+        self.s.clone()
+    }
+
     pub fn layer_name(mut self, value: [u8; 256]) -> VkLayerPropertiesBuilder<'a> {
         self.s.layer_name = value;
         self
@@ -6194,6 +6602,10 @@ impl<'a> VkExtensionPropertiesBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkExtensionProperties {
+        self.s.clone()
+    }
+
     pub fn extension_name(mut self, value: [u8; 256]) -> VkExtensionPropertiesBuilder<'a> {
         self.s.extension_name = value;
         self
@@ -6230,6 +6642,10 @@ impl<'a> VkDeviceCreateInfoBuilder<'a> {
             s: VkDeviceCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkDeviceCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkDeviceCreateInfoBuilder<'a> {
@@ -6318,6 +6734,10 @@ impl<'a> VkPhysicalDeviceFeaturesBuilder<'a> {
             s: VkPhysicalDeviceFeatures::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPhysicalDeviceFeatures {
+        self.s.clone()
     }
 
     pub fn robust_buffer_access(mut self, value: bool) -> VkPhysicalDeviceFeaturesBuilder<'a> {
@@ -6623,6 +7043,10 @@ impl<'a> VkDeviceQueueCreateInfoBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkDeviceQueueCreateInfo {
+        self.s.clone()
+    }
+
     pub fn s_type(mut self, value: VkStructureType) -> VkDeviceQueueCreateInfoBuilder<'a> {
         self.s.s_type = value;
         self
@@ -6686,6 +7110,10 @@ impl<'a> VkPhysicalDeviceMemoryPropertiesBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkPhysicalDeviceMemoryProperties {
+        self.s.clone()
+    }
+
     pub fn memory_type_count(mut self, value: u32) -> VkPhysicalDeviceMemoryPropertiesBuilder<'a> {
         self.s.memory_type_count = value;
         self
@@ -6734,6 +7162,10 @@ impl<'a> VkMemoryHeapBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkMemoryHeap {
+        self.s.clone()
+    }
+
     pub fn size(mut self, value: VkDeviceSize) -> VkMemoryHeapBuilder<'a> {
         self.s.size = value;
         self
@@ -6772,6 +7204,10 @@ impl<'a> VkMemoryTypeBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkMemoryType {
+        self.s.clone()
+    }
+
     pub fn property_flags(mut self, value: VkMemoryPropertyFlags) -> VkMemoryTypeBuilder<'a> {
         self.s.property_flags = value;
         self
@@ -6808,6 +7244,10 @@ impl<'a> VkQueueFamilyPropertiesBuilder<'a> {
             s: VkQueueFamilyProperties::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkQueueFamilyProperties {
+        self.s.clone()
     }
 
     pub fn queue_flags(mut self, value: VkQueueFlags) -> VkQueueFamilyPropertiesBuilder<'a> {
@@ -6856,6 +7296,10 @@ impl<'a> VkPhysicalDevicePropertiesBuilder<'a> {
             s: VkPhysicalDeviceProperties::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPhysicalDeviceProperties {
+        self.s.clone()
     }
 
     pub fn api_version(mut self, value: u32) -> VkPhysicalDevicePropertiesBuilder<'a> {
@@ -6931,6 +7375,10 @@ impl<'a> VkPhysicalDeviceSparsePropertiesBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkPhysicalDeviceSparseProperties {
+        self.s.clone()
+    }
+
     pub fn residency_standard_2_d_block_shape(mut self, value: bool) -> VkPhysicalDeviceSparsePropertiesBuilder<'a> {
         self.s.residency_standard_2_d_block_shape = if value { VK_TRUE } else { VK_FALSE };
         self
@@ -6982,6 +7430,10 @@ impl<'a> VkPhysicalDeviceLimitsBuilder<'a> {
             s: VkPhysicalDeviceLimits::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkPhysicalDeviceLimits {
+        self.s.clone()
     }
 
     pub fn max_image_dimension_1_d(mut self, value: u32) -> VkPhysicalDeviceLimitsBuilder<'a> {
@@ -7542,6 +7994,10 @@ impl<'a> VkImageFormatPropertiesBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkImageFormatProperties {
+        self.s.clone()
+    }
+
     pub fn max_extent(mut self, value: VkExtent3D) -> VkImageFormatPropertiesBuilder<'a> {
         self.s.max_extent = value;
         self
@@ -7595,6 +8051,10 @@ impl<'a> VkFormatPropertiesBuilder<'a> {
         }
     }
 
+    pub fn build(&self) -> VkFormatProperties {
+        self.s.clone()
+    }
+
     pub fn linear_tiling_features(mut self, value: VkFormatFeatureFlags) -> VkFormatPropertiesBuilder<'a> {
         self.s.linear_tiling_features = value;
         self
@@ -7636,6 +8096,10 @@ impl<'a> VkInstanceCreateInfoBuilder<'a> {
             s: VkInstanceCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkInstanceCreateInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkInstanceCreateInfoBuilder<'a> {
@@ -7713,6 +8177,10 @@ impl<'a> VkApplicationInfoBuilder<'a> {
             s: VkApplicationInfo::default(),
             _p: core::marker::PhantomData,
         }
+    }
+
+    pub fn build(&self) -> VkApplicationInfo {
+        self.s.clone()
     }
 
     pub fn s_type(mut self, value: VkStructureType) -> VkApplicationInfoBuilder<'a> {

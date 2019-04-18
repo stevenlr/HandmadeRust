@@ -2156,7 +2156,7 @@ impl VkImageUsageFlagBits {
     pub const INPUT_ATTACHMENT_BIT: VkImageUsageFlagBits = VkImageUsageFlagBits(128);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkImageUsageFlagBits {
@@ -2202,7 +2202,7 @@ impl VkCompositeAlphaFlagBitsKHR {
     pub const INHERIT_BIT_KHR: VkCompositeAlphaFlagBitsKHR = VkCompositeAlphaFlagBitsKHR(8);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkCompositeAlphaFlagBitsKHR {
@@ -2253,7 +2253,7 @@ impl VkSurfaceTransformFlagBitsKHR {
     pub const INHERIT_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(256);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkSurfaceTransformFlagBitsKHR {
@@ -2295,7 +2295,7 @@ pub struct VkSwapchainCreateFlagBitsKHR(VkFlags);
 impl VkSwapchainCreateFlagBitsKHR {
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkSwapchainCreateFlagBitsKHR {
@@ -2340,7 +2340,7 @@ impl VkDebugUtilsMessageTypeFlagBitsEXT {
     pub const PERFORMANCE_BIT_EXT: VkDebugUtilsMessageTypeFlagBitsEXT = VkDebugUtilsMessageTypeFlagBitsEXT(4);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkDebugUtilsMessageTypeFlagBitsEXT {
@@ -2386,7 +2386,7 @@ impl VkDebugUtilsMessageSeverityFlagBitsEXT {
     pub const ERROR_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT = VkDebugUtilsMessageSeverityFlagBitsEXT(4096);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkDebugUtilsMessageSeverityFlagBitsEXT {
@@ -2445,7 +2445,7 @@ impl VkAccessFlagBits {
     pub const MEMORY_WRITE_BIT: VkAccessFlagBits = VkAccessFlagBits(65536);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkAccessFlagBits {
@@ -2491,7 +2491,7 @@ impl VkImageAspectFlagBits {
     pub const METADATA_BIT: VkImageAspectFlagBits = VkImageAspectFlagBits(8);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkImageAspectFlagBits {
@@ -2541,7 +2541,7 @@ impl VkShaderStageFlagBits {
     pub const ALL: VkShaderStageFlagBits = VkShaderStageFlagBits(2147483647);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkShaderStageFlagBits {
@@ -2587,7 +2587,7 @@ impl VkQueryResultFlagBits {
     pub const PARTIAL_BIT: VkQueryResultFlagBits = VkQueryResultFlagBits(8);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkQueryResultFlagBits {
@@ -2646,7 +2646,7 @@ impl VkPipelineStageFlagBits {
     pub const ALL_COMMANDS_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(65536);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkPipelineStageFlagBits {
@@ -2689,7 +2689,7 @@ impl VkQueryControlFlagBits {
     pub const PRECISE_BIT: VkQueryControlFlagBits = VkQueryControlFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkQueryControlFlagBits {
@@ -2732,7 +2732,7 @@ impl VkDependencyFlagBits {
     pub const BY_REGION_BIT: VkDependencyFlagBits = VkDependencyFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkDependencyFlagBits {
@@ -2777,7 +2777,7 @@ impl VkStencilFaceFlagBits {
     pub const FRONT_AND_BACK: VkStencilFaceFlagBits = VkStencilFaceFlagBits(3);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkStencilFaceFlagBits {
@@ -2820,7 +2820,7 @@ impl VkCommandBufferResetFlagBits {
     pub const RELEASE_RESOURCES_BIT: VkCommandBufferResetFlagBits = VkCommandBufferResetFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkCommandBufferResetFlagBits {
@@ -2873,7 +2873,7 @@ impl VkQueryPipelineStatisticFlagBits {
     pub const COMPUTE_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(1024);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkQueryPipelineStatisticFlagBits {
@@ -2918,7 +2918,7 @@ impl VkCommandBufferUsageFlagBits {
     pub const SIMULTANEOUS_USE_BIT: VkCommandBufferUsageFlagBits = VkCommandBufferUsageFlagBits(4);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkCommandBufferUsageFlagBits {
@@ -2961,7 +2961,7 @@ impl VkCommandPoolResetFlagBits {
     pub const RELEASE_RESOURCES_BIT: VkCommandPoolResetFlagBits = VkCommandPoolResetFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkCommandPoolResetFlagBits {
@@ -3005,7 +3005,7 @@ impl VkCommandPoolCreateFlagBits {
     pub const RESET_COMMAND_BUFFER_BIT: VkCommandPoolCreateFlagBits = VkCommandPoolCreateFlagBits(2);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkCommandPoolCreateFlagBits {
@@ -3047,7 +3047,7 @@ pub struct VkSubpassDescriptionFlagBits(VkFlags);
 impl VkSubpassDescriptionFlagBits {
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkSubpassDescriptionFlagBits {
@@ -3096,7 +3096,7 @@ impl VkSampleCountFlagBits {
     pub const K_64_BIT: VkSampleCountFlagBits = VkSampleCountFlagBits(64);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkSampleCountFlagBits {
@@ -3139,7 +3139,7 @@ impl VkAttachmentDescriptionFlagBits {
     pub const MAY_ALIAS_BIT: VkAttachmentDescriptionFlagBits = VkAttachmentDescriptionFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkAttachmentDescriptionFlagBits {
@@ -3182,7 +3182,7 @@ impl VkDescriptorPoolCreateFlagBits {
     pub const FREE_DESCRIPTOR_SET_BIT: VkDescriptorPoolCreateFlagBits = VkDescriptorPoolCreateFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkDescriptorPoolCreateFlagBits {
@@ -3224,7 +3224,7 @@ pub struct VkDescriptorSetLayoutCreateFlagBits(VkFlags);
 impl VkDescriptorSetLayoutCreateFlagBits {
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkDescriptorSetLayoutCreateFlagBits {
@@ -3266,7 +3266,7 @@ pub struct VkSamplerCreateFlagBits(VkFlags);
 impl VkSamplerCreateFlagBits {
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkSamplerCreateFlagBits {
@@ -3311,7 +3311,7 @@ impl VkPipelineCreateFlagBits {
     pub const DERIVATIVE_BIT: VkPipelineCreateFlagBits = VkPipelineCreateFlagBits(4);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkPipelineCreateFlagBits {
@@ -3357,7 +3357,7 @@ impl VkColorComponentFlagBits {
     pub const A_BIT: VkColorComponentFlagBits = VkColorComponentFlagBits(8);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkColorComponentFlagBits {
@@ -3403,7 +3403,7 @@ impl VkCullModeFlagBits {
     pub const FRONT_AND_BACK: VkCullModeFlagBits = VkCullModeFlagBits(3);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkCullModeFlagBits {
@@ -3445,7 +3445,7 @@ pub struct VkImageViewCreateFlagBits(VkFlags);
 impl VkImageViewCreateFlagBits {
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkImageViewCreateFlagBits {
@@ -3492,7 +3492,7 @@ impl VkImageCreateFlagBits {
     pub const CUBE_COMPATIBLE_BIT: VkImageCreateFlagBits = VkImageCreateFlagBits(16);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkImageCreateFlagBits {
@@ -3543,7 +3543,7 @@ impl VkBufferUsageFlagBits {
     pub const INDIRECT_BUFFER_BIT: VkBufferUsageFlagBits = VkBufferUsageFlagBits(256);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkBufferUsageFlagBits {
@@ -3588,7 +3588,7 @@ impl VkBufferCreateFlagBits {
     pub const SPARSE_ALIASED_BIT: VkBufferCreateFlagBits = VkBufferCreateFlagBits(4);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkBufferCreateFlagBits {
@@ -3631,7 +3631,7 @@ impl VkFenceCreateFlagBits {
     pub const SIGNALED_BIT: VkFenceCreateFlagBits = VkFenceCreateFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkFenceCreateFlagBits {
@@ -3674,7 +3674,7 @@ impl VkSparseMemoryBindFlagBits {
     pub const METADATA_BIT: VkSparseMemoryBindFlagBits = VkSparseMemoryBindFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkSparseMemoryBindFlagBits {
@@ -3719,7 +3719,7 @@ impl VkSparseImageFormatFlagBits {
     pub const NONSTANDARD_BLOCK_SIZE_BIT: VkSparseImageFormatFlagBits = VkSparseImageFormatFlagBits(4);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkSparseImageFormatFlagBits {
@@ -3761,7 +3761,7 @@ pub struct VkDeviceQueueCreateFlagBits(VkFlags);
 impl VkDeviceQueueCreateFlagBits {
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkDeviceQueueCreateFlagBits {
@@ -3804,7 +3804,7 @@ impl VkMemoryHeapFlagBits {
     pub const DEVICE_LOCAL_BIT: VkMemoryHeapFlagBits = VkMemoryHeapFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkMemoryHeapFlagBits {
@@ -3851,7 +3851,7 @@ impl VkMemoryPropertyFlagBits {
     pub const LAZILY_ALLOCATED_BIT: VkMemoryPropertyFlagBits = VkMemoryPropertyFlagBits(16);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkMemoryPropertyFlagBits {
@@ -3897,7 +3897,7 @@ impl VkQueueFlagBits {
     pub const SPARSE_BINDING_BIT: VkQueueFlagBits = VkQueueFlagBits(8);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkQueueFlagBits {
@@ -3952,7 +3952,7 @@ impl VkFormatFeatureFlagBits {
     pub const SAMPLED_IMAGE_FILTER_LINEAR_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(4096);
 
     #[inline]
-    pub fn contains(&self, other: &Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
 }
 
 impl core::ops::BitOr for VkFormatFeatureFlagBits {

@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "fnd",
-    "vk",
     "main",
+    "vk",
+    "win32",
 ]

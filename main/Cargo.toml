@@ -11,3 +11,4 @@ path = "main.rs"
 [dependencies]
 vk = { path = "../vk" }
 fnd = { path = "../fnd" }
+win32 = { path = "../win32" }
