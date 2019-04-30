@@ -145,7 +145,8 @@ where
 
     pub fn contains<Q>(&self, hash: u64, key: &Q) -> bool
     where
-        Q: Borrow<K>,
+        K: Borrow<Q>,
+        Q: Eq + ?Sized,
     {
         let find = self.find_bucket(key, hash);
         match find
@@ -157,7 +158,8 @@ where
 
     pub fn remove<Q>(&mut self, hash: u64, key: &Q) -> bool
     where
-        Q: Borrow<K>,
+        K: Borrow<Q>,
+        Q: Eq + ?Sized,
     {
         let find = self.find_bucket(key, hash);
         match find
@@ -174,7 +176,8 @@ where
 
     pub fn find<Q>(&self, hash: u64, key: &Q) -> Option<&V>
     where
-        Q: Borrow<K>,
+        K: Borrow<Q>,
+        Q: Eq + ?Sized,
     {
         let find = self.find_bucket(key, hash);
         match find
@@ -206,7 +209,8 @@ where
 
     fn find_bucket<Q>(&self, key: &Q, hash: u64) -> FindResult
     where
-        Q: Borrow<K>,
+        K: Borrow<Q>,
+        Q: Eq + ?Sized,
     {
         if self.buckets.is_empty()
         {
@@ -226,7 +230,7 @@ where
             if *shortb == shortb_reference
             {
                 let bucket = self.buckets[index].as_ref().unwrap();
-                if bucket.hash == hash && bucket.key == *key.borrow()
+                if bucket.hash == hash && bucket.key.borrow() == key
                 {
                     return FindResult::Present(index);
                 }
@@ -292,17 +296,19 @@ where
 
     fn compute_hash<Q>(&self, key: &Q) -> u64
     where
-        Q: Borrow<K>,
+        K: Borrow<Q>,
+        Q: Hash + ?Sized,
     {
         let mut hasher = self.hash.build_hasher();
-        key.borrow().hash(&mut hasher);
+        key.hash(&mut hasher);
         return hasher.finish();
     }
 
     #[inline]
     pub fn contains<Q>(&self, key: &Q) -> bool
     where
-        Q: Borrow<K>,
+        K: Borrow<Q>,
+        Q: Hash + Eq + ?Sized,
     {
         let hash = self.compute_hash(key);
         return self.inner.contains(hash, key);
@@ -311,7 +317,8 @@ where
     #[inline]
     pub fn remove<Q>(&mut self, key: &Q) -> bool
     where
-        Q: Borrow<K>,
+        K: Borrow<Q>,
+        Q: Hash + Eq + ?Sized,
     {
         let hash = self.compute_hash(key);
         return self.inner.remove(hash, key);
@@ -385,7 +392,8 @@ where
 
     pub fn find<Q>(&self, key: &Q) -> Option<&V>
     where
-        Q: Borrow<K>,
+        K: Borrow<Q>,
+        Q: Hash + Eq + ?Sized,
     {
         let hash = self.compute_hash(key);
         return self.inner.find(hash, key);

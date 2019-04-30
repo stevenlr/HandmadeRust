@@ -1,6 +1,7 @@
 use crate::alloc::Allocator;
 use crate::containers::Array;
 
+use core::borrow::Borrow;
 use core::cmp::{Eq, PartialEq};
 use core::fmt;
 use core::hash;
@@ -44,6 +45,24 @@ impl<A: Allocator> String<A>
     }
 }
 
+impl<A: Allocator> AsRef<str> for String<A>
+{
+    #[inline]
+    fn as_ref(&self) -> &str
+    {
+        self
+    }
+}
+
+impl<A: Allocator> Borrow<str> for String<A>
+{
+    #[inline]
+    fn borrow(&self) -> &str
+    {
+        self
+    }
+}
+
 impl<A: Allocator> Deref for String<A>
 {
     type Target = str;
@@ -78,15 +97,15 @@ impl<A: Allocator> fmt::Display for String<A>
     }
 }
 
-impl<A1, A2> PartialEq<String<A2>> for String<A1>
+impl<A, T> PartialEq<T> for String<A>
 where
-    A1: Allocator,
-    A2: Allocator,
+    A: Allocator,
+    T: AsRef<str>,
 {
     #[inline]
-    fn eq(&self, other: &String<A2>) -> bool
+    fn eq(&self, other: &T) -> bool
     {
-        PartialEq::eq(self.as_str(), other.as_str())
+        PartialEq::eq(self.as_str(), other.as_ref())
     }
 }
 
@@ -106,7 +125,7 @@ mod tests
 {
     use super::*;
     use crate::alloc::Win32HeapAllocator;
-    use crate::containers::HashSet;
+    use crate::containers::{HashSet, HashMap};
 
     #[test]
     fn str()
@@ -118,6 +137,8 @@ mod tests
 
         assert!(hello.as_str() == "hello");
         assert!(world.as_str() == "WORLD");
+        assert!(hello == "hello");
+        assert!(world == "WORLD");
     }
 
     #[test]
@@ -130,5 +151,19 @@ mod tests
         assert!(set.insert(String::from_str("HELLO", &alloc)));
         assert!(!set.insert(String::from_str("hello", &alloc)));
         assert!(set.len() == 2);
+        assert!(set.contains("hello"));
+        assert!(!set.contains("world"));
+    }
+
+    #[test]
+    fn map()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut map = HashMap::new(&alloc);
+
+        map.insert(String::from_str("Hello", &alloc), 42);
+
+        assert!(map.find("Hello") == Some(&42));
+        assert!(map.find("world") == None);
     }
 }

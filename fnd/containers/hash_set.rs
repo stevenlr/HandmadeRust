@@ -27,14 +27,16 @@ where
 
     pub fn contains<Q>(&self, value: &Q) -> bool
     where
-        Q: Borrow<T>,
+        T: Borrow<Q>,
+        Q: Hash + Eq + ?Sized,
     {
         self.map.contains(value)
     }
 
     pub fn remove<Q>(&mut self, value: &Q) -> bool
     where
-        Q: Borrow<T>,
+        T: Borrow<Q>,
+        Q: Hash + Eq + ?Sized,
     {
         self.map.remove(value)
     }
