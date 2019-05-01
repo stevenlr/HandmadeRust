@@ -4,7 +4,7 @@ use core::hash::*;
 use crate::alloc::{Allocator, GlobalAllocator};
 use crate::containers::HashMap;
 
-pub struct HashSet<T, A>
+pub struct HashSet<T, A = GlobalAllocator>
 where
     T: Sized + Eq + Hash ,
     A: Allocator + Clone,

@@ -6,7 +6,7 @@ use core::slice;
 use crate::alloc::{Layout, Allocator, GlobalAllocator};
 use crate::containers::RawArray;
 
-pub struct Array<T, A: Allocator>
+pub struct Array<T, A: Allocator = GlobalAllocator>
 {
     size: usize,
     buffer: RawArray<T, A>,

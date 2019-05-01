@@ -267,7 +267,7 @@ where
     }
 }
 
-pub struct HashMap<K, V, A>
+pub struct HashMap<K, V, A = GlobalAllocator>
 where
     K: Sized + Eq + Hash,
     V: Sized,

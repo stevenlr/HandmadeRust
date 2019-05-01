@@ -1,11 +1,7 @@
-extern crate fnd;
-extern crate vk;
-extern crate win32;
-
 use core::mem::transmute;
 
-use fnd::alloc::Win32HeapAllocator;
-use fnd::alloc::Allocator;
+use fnd::unique::Unq;
+use fnd::alloc::{Win32HeapAllocator, set_global_allocator};
 use fnd::containers::Array;
 use fnd::str::CStr;
 
@@ -14,12 +10,23 @@ use vk::types::*;
 
 use win32::kernel32::*;
 
-fn get_gpu_queue_family_properties<A: Allocator>(
-    vk_instance: &vk::Instance,
-    gpu: VkPhysicalDevice,
-    alloc: A) -> Array<VkQueueFamilyProperties, A>
+static mut ALLOCATOR : Option<&Win32HeapAllocator> = None;
+
+fn init_global_allocator()
 {
-    let mut prps = Array::new(alloc);
+    let allocator = Win32HeapAllocator::default();
+    unsafe
+    {
+        ALLOCATOR = Some(core::mem::transmute(Unq::new_with(Win32HeapAllocator::default(), &allocator).leak()));
+        set_global_allocator(ALLOCATOR.as_mut().unwrap());
+    }
+}
+
+fn get_gpu_queue_family_properties(
+    vk_instance: &vk::Instance,
+    gpu: VkPhysicalDevice) -> Array<VkQueueFamilyProperties>
+{
+    let mut prps = Array::new();
 
     prps.resize(
         vk_instance.get_physical_device_queue_family_properties_count(gpu),
@@ -29,10 +36,11 @@ fn get_gpu_queue_family_properties<A: Allocator>(
     return prps;
 }
 
-
 fn main()
 {
-    let allocator = Win32HeapAllocator::default();
+    init_global_allocator();
+
+    let hinstance = unsafe { GetModuleHandleA(0 as _) as HINSTANCE };
 
     let vk_module = unsafe { LoadLibraryA(b"vulkan-1.dll\0".as_ptr()) };
     let vk_entry = vk::EntryPoint::new(|fn_name| unsafe
@@ -62,7 +70,7 @@ fn main()
 
     let gpus =
     {
-        let mut gpus = Array::new(&allocator);
+        let mut gpus = Array::new();
         gpus.resize(gpu_count, VkPhysicalDevice::null());
         vk_instance.enumerate_physical_devices(&mut gpus).unwrap();
         gpus
@@ -86,7 +94,7 @@ fn main()
         .unwrap();
     println!("Using GPU 0");
 
-    let queue_family_properties = get_gpu_queue_family_properties(&vk_instance, gpu, &allocator);
+    let queue_family_properties = get_gpu_queue_family_properties(&vk_instance, gpu);
     let queue_family_index = queue_family_properties.iter()
         .enumerate()
         .filter(|(_, prps)|

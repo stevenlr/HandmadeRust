@@ -9,7 +9,7 @@ use core::ops::{Deref, DerefMut};
 use core::ptr::copy_nonoverlapping;
 use core::str;
 
-pub struct String<A: Allocator>
+pub struct String<A: Allocator = GlobalAllocator>
 {
     buf: Array<u8, A>,
 }

@@ -7,6 +7,11 @@ static mut GLOBAL_ALLOCATOR : Option<&'static mut Allocator> = None;
 
 pub unsafe fn set_global_allocator(alloc: &'static mut Allocator)
 {
+    if GLOBAL_ALLOCATOR.is_some()
+    {
+        panic!("Cannot set the global allocator twice");
+    }
+
     GLOBAL_ALLOCATOR = Some(alloc);
 }
 
