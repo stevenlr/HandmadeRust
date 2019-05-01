@@ -1,4 +1,4 @@
-use crate::alloc::Allocator;
+use crate::alloc::{Allocator, GlobalAllocator};
 use crate::containers::Array;
 
 use core::borrow::Borrow;
@@ -16,18 +16,18 @@ pub struct String<A: Allocator>
 
 impl<A: Allocator> String<A>
 {
-    pub fn new(alloc: A) -> Self
+    pub fn new_with(alloc: A) -> Self
     {
         Self
         {
-            buf: Array::new(alloc),
+            buf: Array::new_with(alloc),
         }
     }
 
-    pub fn from_str(s: &str, alloc: A) -> Self
+    pub fn from_str_with(s: &str, alloc: A) -> Self
     {
         let slice = s.as_bytes();
-        let mut buf = Array::new(alloc);
+        let mut buf = Array::new_with(alloc);
         buf.resize(slice.len(), 0);
 
         unsafe
@@ -42,6 +42,19 @@ impl<A: Allocator> String<A>
     pub fn as_str(&self) -> &str
     {
         self
+    }
+}
+
+impl String<GlobalAllocator>
+{
+    pub fn new() -> Self
+    {
+        Self::new_with(GlobalAllocator)
+    }
+
+    pub fn from_str(s: &str) -> Self
+    {
+        Self::from_str_with(s, GlobalAllocator)
     }
 }
 
@@ -131,8 +144,8 @@ mod tests
     fn str()
     {
         let alloc = Win32HeapAllocator::default();
-        let hello = String::from_str("hello", &alloc);
-        let mut world = String::from_str("world", &alloc);
+        let hello = String::from_str_with("hello", &alloc);
+        let mut world = String::from_str_with("world", &alloc);
         world.make_ascii_uppercase();
 
         assert!(hello.as_str() == "hello");
@@ -145,11 +158,11 @@ mod tests
     fn set()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashSet::new(&alloc);
+        let mut set = HashSet::new_with(&alloc);
 
-        assert!(set.insert(String::from_str("hello", &alloc)));
-        assert!(set.insert(String::from_str("HELLO", &alloc)));
-        assert!(!set.insert(String::from_str("hello", &alloc)));
+        assert!(set.insert(String::from_str_with("hello", &alloc)));
+        assert!(set.insert(String::from_str_with("HELLO", &alloc)));
+        assert!(!set.insert(String::from_str_with("hello", &alloc)));
         assert!(set.len() == 2);
         assert!(set.contains("hello"));
         assert!(!set.contains("world"));
@@ -159,9 +172,9 @@ mod tests
     fn map()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut map = HashMap::new(&alloc);
+        let mut map = HashMap::new_with(&alloc);
 
-        map.insert(String::from_str("Hello", &alloc), 42);
+        map.insert(String::from_str_with("Hello", &alloc), 42);
 
         assert!(map.find("Hello") == Some(&42));
         assert!(map.find("world") == None);

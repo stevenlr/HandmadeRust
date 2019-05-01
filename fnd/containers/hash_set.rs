@@ -1,7 +1,7 @@
 use core::borrow::Borrow;
 use core::hash::*;
 
-use crate::alloc::Allocator;
+use crate::alloc::{Allocator, GlobalAllocator};
 use crate::containers::HashMap;
 
 pub struct HashSet<T, A>
@@ -17,11 +17,11 @@ where
     T: Sized + Eq + Hash,
     A: Allocator + Clone,
 {
-    pub fn new(alloc: A) -> Self
+    pub fn new_with(alloc: A) -> Self
     {
         Self
         {
-            map: HashMap::new(alloc),
+            map: HashMap::new_with(alloc),
         }
     }
 
@@ -52,6 +52,16 @@ where
     }
 }
 
+impl<T> HashSet<T, GlobalAllocator>
+where
+    T: Sized + Eq + Hash,
+{
+    pub fn new() -> Self
+    {
+        Self::new_with(GlobalAllocator)
+    }
+}
+
 #[cfg(test)]
 mod tests
 {
@@ -62,7 +72,7 @@ mod tests
     fn contains()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashSet::new(&alloc);
+        let mut set = HashSet::new_with(&alloc);
         assert!(!set.contains(&5));
         assert!(set.insert(5));
         assert!(set.insert(4));
@@ -79,7 +89,7 @@ mod tests
     fn insert()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashSet::new(&alloc);
+        let mut set = HashSet::new_with(&alloc);
 
         assert!(set.insert(5));
         assert!(set.insert(4));
@@ -93,7 +103,7 @@ mod tests
     fn len()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashSet::new(&alloc);
+        let mut set = HashSet::new_with(&alloc);
 
         assert!(set.len() == 0);
         set.insert(3);
@@ -108,7 +118,7 @@ mod tests
     fn remove()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashSet::new(&alloc);
+        let mut set = HashSet::new_with(&alloc);
 
         set.insert(1);
         set.insert(2);
@@ -143,7 +153,7 @@ mod tests
     fn zst()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashSet::new(&alloc);
+        let mut set = HashSet::new_with(&alloc);
 
         assert!(!set.contains(&()));
         assert!(!set.remove(&()));

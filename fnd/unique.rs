@@ -2,7 +2,7 @@ use core::ffi::c_void;
 use core::ptr::{NonNull, drop_in_place, write};
 use core::marker::{Unsize, PhantomData};
 use core::ops::{Deref, DerefMut, CoerceUnsized};
-use crate::alloc::{Layout, Allocator};
+use crate::alloc::{Layout, Allocator, GlobalAllocator};
 
 pub struct Unq<T: ?Sized, A: Allocator>
 {
@@ -13,7 +13,7 @@ pub struct Unq<T: ?Sized, A: Allocator>
 
 impl<T, A: Allocator> Unq<T, A>
 {
-    pub fn new(value: T, mut alloc: A) -> Self
+    pub fn new_with(value: T, mut alloc: A) -> Self
     {
         let layout = Layout::from_type::<T>();
         let mut ptr = unsafe
@@ -34,6 +34,23 @@ impl<T, A: Allocator> Unq<T, A>
             alloc,
             _phantom: PhantomData{},
         }
+    }
+
+    pub fn leak<'a>(self) -> &'a mut T
+    where
+        A: 'a
+    {
+        let reference = unsafe { &mut *self.ptr.as_ptr() };
+        core::mem::forget(self);
+        return reference;
+    }
+}
+
+impl<T> Unq<T, GlobalAllocator>
+{
+    pub fn new(value: T) -> Self
+    {
+        Self::new_with(value, GlobalAllocator)
     }
 }
 
@@ -79,7 +96,7 @@ impl<T: ?Sized + Unsize<U>, U: ?Sized, A: Allocator> CoerceUnsized<Unq<U, A>> fo
 mod tests
 {
     use super::*;
-    use crate::alloc::Win32HeapAllocator;
+    use crate::alloc::{Win32HeapAllocator, set_global_allocator};
 
     struct MyObject<'a>
     {
@@ -118,7 +135,7 @@ mod tests
         let mut dropped = false;
 
         {
-            let mut p = Unq::new(MyObject{ x: 1, y: 2, s: "hello", dropped: &mut dropped }, &alloc);
+            let mut p = Unq::new_with(MyObject{ x: 1, y: 2, s: "hello", dropped: &mut dropped }, &alloc);
 
             assert!(p.x == 1);
             assert!(p.y == 2);
@@ -162,7 +179,7 @@ mod tests
 
     fn create_dst<A: Allocator>(x: i32, alloc: A) -> Unq<dyn MyTrait, A>
     {
-        Unq::new(MyObject2{ x }, alloc)
+        Unq::new_with(MyObject2{ x }, alloc)
     }
 
     #[test]
@@ -175,7 +192,7 @@ mod tests
 
     fn create_closure<A: Allocator>(y: i32, alloc: A) -> Unq<Fn(i32) -> i32, A>
     {
-        Unq::new(move |x| x + y, alloc)
+        Unq::new_with(move |x| x + y, alloc)
     }
 
     #[test]
@@ -186,5 +203,34 @@ mod tests
 
         assert!(closure(5) == 10);
         assert!(closure(6) == 11);
+    }
+
+    #[test]
+    fn leak()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let int = Unq::new_with(45, &alloc);
+        let int = int.leak();
+        assert_eq!(45, *int);
+    }
+
+    fn is_static<T>(_: &'static T) {}
+
+    #[test]
+    fn with_global()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut alloc_ref = &alloc;
+
+        unsafe
+        {
+            set_global_allocator(core::mem::transmute(&mut alloc_ref as &mut Allocator));
+        }
+
+        let b = Unq::new(32);
+        assert_eq!(32, *b);
+        let b = b.leak();
+        assert_eq!(32, *b);
+        is_static(b);
     }
 }

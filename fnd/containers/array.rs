@@ -3,7 +3,7 @@ use core::ops::{Deref, DerefMut};
 use core::ptr::drop_in_place;
 use core::slice;
 
-use crate::alloc::{Layout, Allocator};
+use crate::alloc::{Layout, Allocator, GlobalAllocator};
 use crate::containers::RawArray;
 
 pub struct Array<T, A: Allocator>
@@ -14,7 +14,7 @@ pub struct Array<T, A: Allocator>
 
 impl<T, A: Allocator> Array<T, A>
 {
-    pub fn new(alloc: A) -> Self
+    pub fn new_with(alloc: A) -> Self
     {
         Self
         {
@@ -147,6 +147,14 @@ impl<T, A: Allocator> Array<T, A>
     }
 }
 
+impl<T> Array<T, GlobalAllocator>
+{
+    pub fn new() -> Self
+    {
+        Self::new_with(GlobalAllocator)
+    }
+}
+
 impl<T, A: Allocator> Drop for Array<T, A>
 {
     fn drop(&mut self)
@@ -215,7 +223,7 @@ mod tests
     fn push_pop()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut a = Array::new(&alloc);
+        let mut a = Array::new_with(&alloc);
 
         a.push(1);
         a.push(2);
@@ -253,7 +261,7 @@ mod tests
         let mut dropped = false;
 
         {
-            let mut a = Array::new(&alloc);
+            let mut a = Array::new_with(&alloc);
             a.push(DropCheck::new(&mut dropped));
         }
 
@@ -275,7 +283,7 @@ mod tests
     fn slice()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut a = Array::new(&alloc);
+        let mut a = Array::new_with(&alloc);
 
         a.push(1);
         a.push(2);
@@ -297,7 +305,7 @@ mod tests
     fn subslice()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut a = Array::new(&alloc);
+        let mut a = Array::new_with(&alloc);
 
         a.push(1);
         a.push(2);
@@ -329,7 +337,7 @@ mod tests
     fn iter()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut a = Array::new(&alloc);
+        let mut a = Array::new_with(&alloc);
 
         a.push(1);
         a.push(2);
@@ -352,7 +360,7 @@ mod tests
     fn resize()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut a = Array::new(&alloc);
+        let mut a = Array::new_with(&alloc);
 
         a.push(1);
         a.resize(3, 7);
@@ -370,7 +378,7 @@ mod tests
     fn zst()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut a = Array::new(&alloc);
+        let mut a = Array::new_with(&alloc);
 
         a.push(());
         a.push(());

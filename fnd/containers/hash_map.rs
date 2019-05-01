@@ -2,7 +2,7 @@ use core::borrow::Borrow;
 use core::hash::*;
 use core::mem::{replace, swap};
 
-use crate::alloc::Allocator;
+use crate::alloc::{Allocator, GlobalAllocator};
 use crate::containers::Array;
 use crate::hash::SipHash;
 
@@ -95,12 +95,12 @@ where
     V: Sized,
     A: Allocator + Clone,
 {
-    fn new(alloc: A) -> Self
+    fn new_with(alloc: A) -> Self
     {
         Self
         {
-            shortb: Array::new(alloc.clone()),
-            buckets: Array::new(alloc.clone()),
+            shortb: Array::new_with(alloc.clone()),
+            buckets: Array::new_with(alloc.clone()),
         }
     }
 
@@ -284,13 +284,13 @@ where
     V: Sized,
     A: Allocator + Clone,
 {
-    pub fn new(alloc: A) -> Self
+    pub fn new_with(alloc: A) -> Self
     {
         Self
         {
             alloc: alloc.clone(),
             hash: BuildHasherDefault::default(),
-            inner: HashMapInner::new(alloc.clone()),
+            inner: HashMapInner::new_with(alloc.clone()),
         }
     }
 
@@ -326,7 +326,7 @@ where
 
     fn grow(&mut self)
     {
-        let mut old = replace(&mut self.inner, HashMapInner::new(self.alloc.clone()));
+        let mut old = replace(&mut self.inner, HashMapInner::new_with(self.alloc.clone()));
         self.inner.grow_and_insert(&mut old);
     }
 
@@ -400,6 +400,17 @@ where
     }
 }
 
+impl<K, V> HashMap<K, V, GlobalAllocator>
+where
+    K: Sized + Eq + Hash,
+    V: Sized,
+{
+    pub fn new() -> Self
+    {
+        Self::new_with(GlobalAllocator)
+    }
+}
+
 #[cfg(test)]
 mod tests
 {
@@ -410,7 +421,7 @@ mod tests
     fn contains()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashMap::new(&alloc);
+        let mut set = HashMap::new_with(&alloc);
         assert!(!set.contains(&5));
         assert!(set.insert(5, 4));
         assert!(set.insert(4, 4));
@@ -427,7 +438,7 @@ mod tests
     fn insert()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashMap::new(&alloc);
+        let mut set = HashMap::new_with(&alloc);
 
         assert!(set.insert(5, 1));
         assert!(set.insert(4, 2));
@@ -441,7 +452,7 @@ mod tests
     fn len()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashMap::new(&alloc);
+        let mut set = HashMap::new_with(&alloc);
 
         assert!(set.len() == 0);
         set.insert(3, 0);
@@ -456,7 +467,7 @@ mod tests
     fn remove()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashMap::new(&alloc);
+        let mut set = HashMap::new_with(&alloc);
 
         set.insert(1, 0);
         set.insert(2, 0);
@@ -491,7 +502,7 @@ mod tests
     fn zst()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashMap::new(&alloc);
+        let mut set = HashMap::new_with(&alloc);
 
         assert!(!set.contains(&()));
         assert!(!set.remove(&()));
@@ -510,7 +521,7 @@ mod tests
     fn find()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut set = HashMap::new(&alloc);
+        let mut set = HashMap::new_with(&alloc);
 
         set.insert(0, 0);
         set.insert(1, 1);

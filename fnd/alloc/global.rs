@@ -1,0 +1,41 @@
+use super::{Allocator, Layout};
+
+use core::ffi::c_void;
+use core::ptr::NonNull;
+
+static mut GLOBAL_ALLOCATOR : Option<&'static mut Allocator> = None;
+
+pub unsafe fn set_global_allocator(alloc: &'static mut Allocator)
+{
+    GLOBAL_ALLOCATOR = Some(alloc);
+}
+
+pub struct GlobalAllocator;
+
+impl Clone for GlobalAllocator
+{
+    #[inline]
+    fn clone(&self) -> Self
+    {
+        GlobalAllocator
+    }
+}
+
+impl Allocator for GlobalAllocator
+{
+    unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>
+    {
+        GLOBAL_ALLOCATOR
+            .as_mut()
+            .expect("No global allocator defined")
+            .alloc(layout)
+    }
+
+    unsafe fn dealloc(&mut self, ptr: *mut c_void)
+    {
+        GLOBAL_ALLOCATOR
+            .as_mut()
+            .expect("No global allocator defined")
+            .dealloc(ptr)
+    }
+}
