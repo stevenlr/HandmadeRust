@@ -17,7 +17,7 @@ fn init_global_allocator()
     let allocator = Win32HeapAllocator::default();
     unsafe
     {
-        ALLOCATOR = Some(core::mem::transmute(Unq::new_with(Win32HeapAllocator::default(), &allocator).leak()));
+        ALLOCATOR = Some(transmute(Unq::leak(Unq::new_with(Win32HeapAllocator::default(), &allocator))));
         set_global_allocator(ALLOCATOR.as_mut().unwrap());
     }
 }

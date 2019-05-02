@@ -2,7 +2,7 @@ use core::ffi::c_void;
 use core::ptr::{NonNull, drop_in_place, write};
 use core::marker::{Unsize, PhantomData};
 use core::ops::{Deref, DerefMut, CoerceUnsized};
-use crate::alloc::{Layout, Allocator, GlobalAllocator};
+use crate::alloc::{alloc_one, Allocator, GlobalAllocator};
 
 pub struct Unq<T: ?Sized, A: Allocator>
 {
@@ -15,12 +15,9 @@ impl<T, A: Allocator> Unq<T, A>
 {
     pub fn new_with(value: T, mut alloc: A) -> Self
     {
-        let layout = Layout::from_type::<T>();
         let mut ptr = unsafe
         {
-            alloc.alloc_aligned(layout)
-                .expect("Allocation error")
-                .cast::<T>()
+            alloc_one::<T>(&mut alloc).expect("Allocation error")
         };
 
         unsafe
@@ -36,12 +33,12 @@ impl<T, A: Allocator> Unq<T, A>
         }
     }
 
-    pub fn leak<'a>(self) -> &'a mut T
+    pub fn leak<'a>(unq: Unq<T, A>) -> &'a mut T
     where
         A: 'a
     {
-        let reference = unsafe { &mut *self.ptr.as_ptr() };
-        core::mem::forget(self);
+        let reference = unsafe { &mut *unq.ptr.as_ptr() };
+        core::mem::forget(unq);
         return reference;
     }
 }
@@ -210,7 +207,7 @@ mod tests
     {
         let alloc = Win32HeapAllocator::default();
         let int = Unq::new_with(45, &alloc);
-        let int = int.leak();
+        let int = Unq::leak(int);
         assert_eq!(45, *int);
     }
 
@@ -229,7 +226,7 @@ mod tests
 
         let b = Unq::new(32);
         assert_eq!(32, *b);
-        let b = b.leak();
+        let b = Unq::leak(b);
         assert_eq!(32, *b);
         is_static(b);
     }

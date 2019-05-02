@@ -3,7 +3,7 @@ use core::marker::PhantomData;
 use core::mem::size_of;
 use core::ptr::null_mut;
 
-use crate::alloc::{Layout, Allocator};
+use crate::alloc::{Allocator, alloc_array};
 
 pub struct RawArray<T, A: Allocator>
 {
@@ -35,13 +35,11 @@ impl<T, A: Allocator> RawArray<T, A>
             return;
         }
 
-        let new_layout = Layout::from_type_array::<T>(new_capacity);
-
         let ptr = unsafe
         {
-            self.alloc.alloc_aligned(new_layout)
+            alloc_array::<T>(&mut self.alloc, new_capacity)
                 .expect("Allocation error")
-                .as_ptr() as *mut T
+                .as_ptr()
         };
 
         if self.capacity > 0

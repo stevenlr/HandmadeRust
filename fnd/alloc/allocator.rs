@@ -33,3 +33,15 @@ pub trait Allocator
         self.dealloc(actual_ptr as *mut c_void);
     }
 }
+
+pub unsafe fn alloc_one<T>(alloc: &mut Allocator) -> Option<NonNull<T>>
+{
+    alloc.alloc_aligned(Layout::from_type::<T>())
+        .map(|ptr| ptr.cast::<T>())
+}
+
+pub unsafe fn alloc_array<T>(alloc: &mut Allocator, size: usize) -> Option<NonNull<T>>
+{
+    alloc.alloc_aligned(Layout::from_type_array::<T>(size))
+        .map(|ptr| ptr.cast::<T>())
+}
