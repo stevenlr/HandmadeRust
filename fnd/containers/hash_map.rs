@@ -32,8 +32,8 @@ impl Default for ShortBucket
 
 impl ShortBucket
 {
-    const FREE : u8 = 1;
-    const DELETED : u8 = 2;
+    const FREE: u8 = 1;
+    const DELETED: u8 = 2;
 
     #[inline]
     pub fn occupied(hash: u64) -> Self
@@ -97,8 +97,7 @@ where
 {
     fn new_with(alloc: A) -> Self
     {
-        Self
-        {
+        Self {
             shortb: Array::new_with(alloc.clone()),
             buckets: Array::new_with(alloc.clone()),
         }
@@ -122,7 +121,11 @@ where
         {
             match element
             {
-                Some(Bucket{ hash: h, key: ref k, .. }) =>
+                Some(Bucket {
+                    hash: h,
+                    key: ref k,
+                    ..
+                }) =>
                 {
                     let find = self.find_bucket(k, *h);
                     match find
@@ -131,14 +134,15 @@ where
                         {
                             self.shortb[new_index] = ShortBucket::occupied(*h);
                             swap(&mut self.buckets[new_index], &mut element);
-                        },
+                        }
                         FindResult::None | FindResult::Present(_) =>
                         {
                             panic!("New hash map not large enough");
-                        },
+                        }
                     }
-                },
-                _ => {},
+                }
+                _ =>
+                {}
             }
         }
     }
@@ -169,7 +173,7 @@ where
                 self.shortb[index] = ShortBucket::deleted();
                 self.buckets[index] = None;
                 return true;
-            },
+            }
             _ => false,
         }
     }
@@ -182,29 +186,18 @@ where
         let find = self.find_bucket(key, hash);
         match find
         {
-            FindResult::Present(index) =>
+            FindResult::Present(index) => match self.buckets[index]
             {
-                match self.buckets[index]
-                {
-                    Some(Bucket{ value: ref v, .. }) =>
-                    {
-                        Some(v)
-                    },
-                    _ => None,
-                }
-            }
+                Some(Bucket { value: ref v, .. }) => Some(v),
+                _ => None,
+            },
             _ => None,
         }
     }
 
     pub fn len(&self) -> usize
     {
-        self.shortb.iter()
-            .filter(|x|
-            {
-                x.is_occupied()
-            })
-            .count()
+        self.shortb.iter().filter(|x| x.is_occupied()).count()
     }
 
     fn find_bucket<Q>(&self, key: &Q, hash: u64) -> FindResult
@@ -286,8 +279,7 @@ where
 {
     pub fn new_with(alloc: A) -> Self
     {
-        Self
-        {
+        Self {
             alloc: alloc.clone(),
             hash: BuildHasherDefault::default(),
             inner: HashMapInner::new_with(alloc.clone()),
@@ -339,26 +331,17 @@ where
         {
             FindResult::Present(index) =>
             {
-                self.inner.buckets[index] = Some(Bucket
-                {
-                    hash,
-                    key,
-                    value,
-                });
+                self.inner.buckets[index] = Some(Bucket { hash, key, value });
                 return false;
-            },
+            }
             FindResult::Free(index) =>
             {
-                self.inner.buckets[index] = Some(Bucket
-                {
-                    hash,
-                    key,
-                    value,
-                });
+                self.inner.buckets[index] = Some(Bucket { hash, key, value });
                 self.inner.shortb[index] = ShortBucket::occupied(hash);
                 return true;
-            },
-            FindResult::None => {},
+            }
+            FindResult::None =>
+            {}
         }
 
         self.grow();
@@ -368,19 +351,14 @@ where
         {
             FindResult::Free(index) =>
             {
-                self.inner.buckets[index] = Some(Bucket
-                {
-                    hash,
-                    key,
-                    value,
-                });
+                self.inner.buckets[index] = Some(Bucket { hash, key, value });
                 self.inner.shortb[index] = ShortBucket::occupied(hash);
                 return true;
-            },
+            }
             _ =>
             {
                 panic!("Error inserting element");
-            },
+            }
         }
     }
 

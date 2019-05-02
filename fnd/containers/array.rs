@@ -3,7 +3,7 @@ use core::ops::{Deref, DerefMut};
 use core::ptr::drop_in_place;
 use core::slice;
 
-use crate::alloc::{Layout, Allocator, GlobalAllocator};
+use crate::alloc::{Allocator, GlobalAllocator, Layout};
 use crate::containers::RawArray;
 
 pub struct Array<T, A: Allocator = GlobalAllocator>
@@ -16,22 +16,21 @@ impl<T, A: Allocator> Array<T, A>
 {
     pub fn new_with(alloc: A) -> Self
     {
-        Self
-        {
+        Self {
             buffer: RawArray::new(alloc),
             size: 0,
         }
     }
 
     pub fn resize_with<F>(&mut self, new_size: usize, f: F)
-        where F: Fn() -> T
+    where
+        F: Fn() -> T,
     {
         if new_size < self.size && needs_drop::<T>()
         {
             for i in new_size..self.size
             {
-                unsafe
-                {
+                unsafe {
                     drop_in_place(self.buffer.ptr.offset(i as isize));
                 }
             }
@@ -45,8 +44,7 @@ impl<T, A: Allocator> Array<T, A>
 
             for i in self.size..new_size
             {
-                unsafe
-                {
+                unsafe {
                     self.buffer.ptr.offset(i as isize).write(f());
                 }
             }
@@ -56,7 +54,8 @@ impl<T, A: Allocator> Array<T, A>
     }
 
     pub fn resize(&mut self, new_size: usize, value: T)
-        where T: Clone
+    where
+        T: Clone,
     {
         self.resize_with(new_size, || value.clone());
     }
@@ -98,8 +97,7 @@ impl<T, A: Allocator> Array<T, A>
             self.grow_auto();
         }
 
-        unsafe
-        {
+        unsafe {
             self.buffer.ptr.offset(self.size as isize).write(value);
         }
 
@@ -114,10 +112,7 @@ impl<T, A: Allocator> Array<T, A>
         }
         else
         {
-            let value = unsafe
-            {
-                self.buffer.ptr.offset((self.size - 1) as isize).read()
-            };
+            let value = unsafe { self.buffer.ptr.offset((self.size - 1) as isize).read() };
 
             self.size -= 1;
             Some(value)
@@ -128,8 +123,7 @@ impl<T, A: Allocator> Array<T, A>
     {
         if needs_drop::<T>()
         {
-            unsafe
-            {
+            unsafe {
                 for i in 0..self.size
                 {
                     drop_in_place(self.buffer.ptr.offset(i as isize));
@@ -173,10 +167,7 @@ impl<T, A: Allocator> Deref for Array<T, A>
     #[inline]
     fn deref(&self) -> &Self::Target
     {
-        unsafe
-        {
-            slice::from_raw_parts(self.buffer.ptr, self.size)
-        }
+        unsafe { slice::from_raw_parts(self.buffer.ptr, self.size) }
     }
 }
 
@@ -185,10 +176,7 @@ impl<T, A: Allocator> DerefMut for Array<T, A>
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target
     {
-        unsafe
-        {
-            slice::from_raw_parts_mut(self.buffer.ptr, self.size)
-        }
+        unsafe { slice::from_raw_parts_mut(self.buffer.ptr, self.size) }
     }
 }
 
@@ -207,7 +195,7 @@ mod tests
     {
         fn new(b: &'a mut bool) -> Self
         {
-            Self{ dropped: b}
+            Self { dropped: b }
         }
     }
 
@@ -273,10 +261,9 @@ mod tests
         slice.iter().sum()
     }
 
-    fn double_slice(slice: &mut[i32])
+    fn double_slice(slice: &mut [i32])
     {
-        slice.iter_mut()
-            .for_each(|x| *x = *x * 2);
+        slice.iter_mut().for_each(|x| *x = *x * 2);
     }
 
     #[test]

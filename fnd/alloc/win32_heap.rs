@@ -1,6 +1,6 @@
+use super::{Allocator, Layout};
 use core::ffi::c_void;
 use core::ptr::NonNull;
-use super::{Allocator, Layout};
 
 type HANDLE = *mut c_void;
 type BOOL = i32;
@@ -11,8 +11,7 @@ pub struct Win32HeapAllocator
 }
 
 #[link(name = "kernel32")]
-extern "system"
-{
+extern "system" {
     fn GetProcessHeap() -> HANDLE;
     fn HeapAlloc(heap: HANDLE, flags: u32, byte: usize) -> *mut c_void;
     fn HeapFree(heap: HANDLE, flags: u32, mem: *mut c_void) -> BOOL;
@@ -22,8 +21,7 @@ impl Default for Win32HeapAllocator
 {
     fn default() -> Self
     {
-        Self
-        {
+        Self {
             heap: unsafe { GetProcessHeap() },
         }
     }
@@ -59,8 +57,7 @@ mod tests
     #[test]
     fn allocator()
     {
-        unsafe
-        {
+        unsafe {
             let alloc = Win32HeapAllocator::default();
             let mut alloc_ref = &alloc;
             let ptr = alloc_ref.alloc(Layout::new(128));
@@ -78,13 +75,12 @@ mod tests
     {
         fn new(alloc: A) -> Self
         {
-            Self{ alloc }
+            Self { alloc }
         }
 
         fn do_alloc(&mut self, size: usize)
         {
-            unsafe
-            {
+            unsafe {
                 self.alloc.alloc(Layout::new(size));
             }
         }

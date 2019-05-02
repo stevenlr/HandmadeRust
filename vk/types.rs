@@ -74,19 +74,23 @@ pub type VkFormatFeatureFlags = VkFormatFeatureFlagBits;
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkPhysicalDevice(usize);
-impl VkPhysicalDevice {
+impl VkPhysicalDevice
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: usize) -> Self {
+    pub fn from_raw(r: usize) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> usize {
+    pub fn as_raw(&self) -> usize
+    {
         self.0
     }
 }
@@ -94,19 +98,23 @@ impl VkPhysicalDevice {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkSurfaceKHR(u64);
-impl VkSurfaceKHR {
+impl VkSurfaceKHR
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -114,19 +122,23 @@ impl VkSurfaceKHR {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkInstance(usize);
-impl VkInstance {
+impl VkInstance
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: usize) -> Self {
+    pub fn from_raw(r: usize) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> usize {
+    pub fn as_raw(&self) -> usize
+    {
         self.0
     }
 }
@@ -134,19 +146,23 @@ impl VkInstance {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkSwapchainKHR(u64);
-impl VkSwapchainKHR {
+impl VkSwapchainKHR
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -154,19 +170,23 @@ impl VkSwapchainKHR {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkSemaphore(u64);
-impl VkSemaphore {
+impl VkSemaphore
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -174,19 +194,23 @@ impl VkSemaphore {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkQueue(usize);
-impl VkQueue {
+impl VkQueue
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: usize) -> Self {
+    pub fn from_raw(r: usize) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> usize {
+    pub fn as_raw(&self) -> usize
+    {
         self.0
     }
 }
@@ -194,19 +218,23 @@ impl VkQueue {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkFence(u64);
-impl VkFence {
+impl VkFence
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -214,19 +242,23 @@ impl VkFence {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkDevice(usize);
-impl VkDevice {
+impl VkDevice
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: usize) -> Self {
+    pub fn from_raw(r: usize) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> usize {
+    pub fn as_raw(&self) -> usize
+    {
         self.0
     }
 }
@@ -234,19 +266,23 @@ impl VkDevice {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkImage(u64);
-impl VkImage {
+impl VkImage
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -254,19 +290,23 @@ impl VkImage {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkDebugUtilsMessengerEXT(u64);
-impl VkDebugUtilsMessengerEXT {
+impl VkDebugUtilsMessengerEXT
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -274,19 +314,23 @@ impl VkDebugUtilsMessengerEXT {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkCommandBuffer(usize);
-impl VkCommandBuffer {
+impl VkCommandBuffer
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: usize) -> Self {
+    pub fn from_raw(r: usize) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> usize {
+    pub fn as_raw(&self) -> usize
+    {
         self.0
     }
 }
@@ -294,19 +338,23 @@ impl VkCommandBuffer {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkBuffer(u64);
-impl VkBuffer {
+impl VkBuffer
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -314,19 +362,23 @@ impl VkBuffer {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkFramebuffer(u64);
-impl VkFramebuffer {
+impl VkFramebuffer
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -334,19 +386,23 @@ impl VkFramebuffer {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkRenderPass(u64);
-impl VkRenderPass {
+impl VkRenderPass
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -354,19 +410,23 @@ impl VkRenderPass {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkPipelineLayout(u64);
-impl VkPipelineLayout {
+impl VkPipelineLayout
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -374,19 +434,23 @@ impl VkPipelineLayout {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkQueryPool(u64);
-impl VkQueryPool {
+impl VkQueryPool
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -394,19 +458,23 @@ impl VkQueryPool {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkEvent(u64);
-impl VkEvent {
+impl VkEvent
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -414,19 +482,23 @@ impl VkEvent {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkDescriptorSet(u64);
-impl VkDescriptorSet {
+impl VkDescriptorSet
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -434,19 +506,23 @@ impl VkDescriptorSet {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkPipeline(u64);
-impl VkPipeline {
+impl VkPipeline
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -454,19 +530,23 @@ impl VkPipeline {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkCommandPool(u64);
-impl VkCommandPool {
+impl VkCommandPool
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -474,19 +554,23 @@ impl VkCommandPool {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkImageView(u64);
-impl VkImageView {
+impl VkImageView
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -494,19 +578,23 @@ impl VkImageView {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkBufferView(u64);
-impl VkBufferView {
+impl VkBufferView
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -514,19 +602,23 @@ impl VkBufferView {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkSampler(u64);
-impl VkSampler {
+impl VkSampler
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -534,19 +626,23 @@ impl VkSampler {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkDescriptorPool(u64);
-impl VkDescriptorPool {
+impl VkDescriptorPool
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -554,19 +650,23 @@ impl VkDescriptorPool {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkDescriptorSetLayout(u64);
-impl VkDescriptorSetLayout {
+impl VkDescriptorSetLayout
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -574,19 +674,23 @@ impl VkDescriptorSetLayout {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkShaderModule(u64);
-impl VkShaderModule {
+impl VkShaderModule
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -594,19 +698,23 @@ impl VkShaderModule {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkPipelineCache(u64);
-impl VkPipelineCache {
+impl VkPipelineCache
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -614,19 +722,23 @@ impl VkPipelineCache {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialEq, Eq)]
 pub struct VkDeviceMemory(u64);
-impl VkDeviceMemory {
+impl VkDeviceMemory
+{
     #[inline]
-    pub fn null() -> Self {
+    pub fn null() -> Self
+    {
         Self(0)
     }
 
     #[inline]
-    pub fn from_raw(r: u64) -> Self {
+    pub fn from_raw(r: u64) -> Self
+    {
         Self(r)
     }
 
     #[inline]
-    pub fn as_raw(&self) -> u64 {
+    pub fn as_raw(&self) -> u64
+    {
         self.0
     }
 }
@@ -661,7 +773,8 @@ pub type VkInstanceCreateFlags = VkFlags;
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkSystemAllocationScope(u32);
-impl VkSystemAllocationScope {
+impl VkSystemAllocationScope
+{
     pub const COMMAND: VkSystemAllocationScope = VkSystemAllocationScope(0);
     pub const OBJECT: VkSystemAllocationScope = VkSystemAllocationScope(1);
     pub const CACHE: VkSystemAllocationScope = VkSystemAllocationScope(2);
@@ -669,9 +782,12 @@ impl VkSystemAllocationScope {
     pub const INSTANCE: VkSystemAllocationScope = VkSystemAllocationScope(4);
 }
 
-impl core::fmt::Debug for VkSystemAllocationScope {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkSystemAllocationScope
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkSystemAllocationScope::COMMAND => write!(f, "VkSystemAllocationScope(COMMAND)"),
             VkSystemAllocationScope::OBJECT => write!(f, "VkSystemAllocationScope(OBJECT)"),
             VkSystemAllocationScope::CACHE => write!(f, "VkSystemAllocationScope(CACHE)"),
@@ -685,14 +801,21 @@ impl core::fmt::Debug for VkSystemAllocationScope {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkInternalAllocationType(u32);
-impl VkInternalAllocationType {
+impl VkInternalAllocationType
+{
     pub const EXECUTABLE: VkInternalAllocationType = VkInternalAllocationType(0);
 }
 
-impl core::fmt::Debug for VkInternalAllocationType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
-            VkInternalAllocationType::EXECUTABLE => write!(f, "VkInternalAllocationType(EXECUTABLE)"),
+impl core::fmt::Debug for VkInternalAllocationType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
+            VkInternalAllocationType::EXECUTABLE =>
+            {
+                write!(f, "VkInternalAllocationType(EXECUTABLE)")
+            }
             _ => write!(f, "VkInternalAllocationType({})", self.0),
         }
     }
@@ -701,7 +824,8 @@ impl core::fmt::Debug for VkInternalAllocationType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkStructureType(u32);
-impl VkStructureType {
+impl VkStructureType
+{
     pub const APPLICATION_INFO: VkStructureType = VkStructureType(0);
     pub const INSTANCE_CREATE_INFO: VkStructureType = VkStructureType(1);
     pub const DEVICE_QUEUE_CREATE_INFO: VkStructureType = VkStructureType(2);
@@ -757,70 +881,215 @@ impl VkStructureType {
     pub const DEBUG_UTILS_OBJECT_NAME_INFO_EXT: VkStructureType = VkStructureType(1000128000);
     pub const DEBUG_UTILS_OBJECT_TAG_INFO_EXT: VkStructureType = VkStructureType(1000128001);
     pub const DEBUG_UTILS_LABEL_EXT: VkStructureType = VkStructureType(1000128002);
-    pub const DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT: VkStructureType = VkStructureType(1000128003);
+    pub const DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT: VkStructureType =
+        VkStructureType(1000128003);
     pub const DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT: VkStructureType = VkStructureType(1000128004);
 }
 
-impl core::fmt::Debug for VkStructureType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkStructureType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkStructureType::APPLICATION_INFO => write!(f, "VkStructureType(APPLICATION_INFO)"),
-            VkStructureType::INSTANCE_CREATE_INFO => write!(f, "VkStructureType(INSTANCE_CREATE_INFO)"),
-            VkStructureType::DEVICE_QUEUE_CREATE_INFO => write!(f, "VkStructureType(DEVICE_QUEUE_CREATE_INFO)"),
+            VkStructureType::INSTANCE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(INSTANCE_CREATE_INFO)")
+            }
+            VkStructureType::DEVICE_QUEUE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(DEVICE_QUEUE_CREATE_INFO)")
+            }
             VkStructureType::DEVICE_CREATE_INFO => write!(f, "VkStructureType(DEVICE_CREATE_INFO)"),
             VkStructureType::SUBMIT_INFO => write!(f, "VkStructureType(SUBMIT_INFO)"),
-            VkStructureType::MEMORY_ALLOCATE_INFO => write!(f, "VkStructureType(MEMORY_ALLOCATE_INFO)"),
-            VkStructureType::MAPPED_MEMORY_RANGE => write!(f, "VkStructureType(MAPPED_MEMORY_RANGE)"),
+            VkStructureType::MEMORY_ALLOCATE_INFO =>
+            {
+                write!(f, "VkStructureType(MEMORY_ALLOCATE_INFO)")
+            }
+            VkStructureType::MAPPED_MEMORY_RANGE =>
+            {
+                write!(f, "VkStructureType(MAPPED_MEMORY_RANGE)")
+            }
             VkStructureType::BIND_SPARSE_INFO => write!(f, "VkStructureType(BIND_SPARSE_INFO)"),
             VkStructureType::FENCE_CREATE_INFO => write!(f, "VkStructureType(FENCE_CREATE_INFO)"),
-            VkStructureType::SEMAPHORE_CREATE_INFO => write!(f, "VkStructureType(SEMAPHORE_CREATE_INFO)"),
+            VkStructureType::SEMAPHORE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(SEMAPHORE_CREATE_INFO)")
+            }
             VkStructureType::EVENT_CREATE_INFO => write!(f, "VkStructureType(EVENT_CREATE_INFO)"),
-            VkStructureType::QUERY_POOL_CREATE_INFO => write!(f, "VkStructureType(QUERY_POOL_CREATE_INFO)"),
+            VkStructureType::QUERY_POOL_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(QUERY_POOL_CREATE_INFO)")
+            }
             VkStructureType::BUFFER_CREATE_INFO => write!(f, "VkStructureType(BUFFER_CREATE_INFO)"),
-            VkStructureType::BUFFER_VIEW_CREATE_INFO => write!(f, "VkStructureType(BUFFER_VIEW_CREATE_INFO)"),
+            VkStructureType::BUFFER_VIEW_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(BUFFER_VIEW_CREATE_INFO)")
+            }
             VkStructureType::IMAGE_CREATE_INFO => write!(f, "VkStructureType(IMAGE_CREATE_INFO)"),
-            VkStructureType::IMAGE_VIEW_CREATE_INFO => write!(f, "VkStructureType(IMAGE_VIEW_CREATE_INFO)"),
-            VkStructureType::SHADER_MODULE_CREATE_INFO => write!(f, "VkStructureType(SHADER_MODULE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_CACHE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_CACHE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_SHADER_STAGE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_SHADER_STAGE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_TESSELLATION_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_TESSELLATION_STATE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_VIEWPORT_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_VIEWPORT_STATE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_RASTERIZATION_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_RASTERIZATION_STATE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_MULTISAMPLE_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_MULTISAMPLE_STATE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_COLOR_BLEND_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_COLOR_BLEND_STATE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_DYNAMIC_STATE_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_DYNAMIC_STATE_CREATE_INFO)"),
-            VkStructureType::GRAPHICS_PIPELINE_CREATE_INFO => write!(f, "VkStructureType(GRAPHICS_PIPELINE_CREATE_INFO)"),
-            VkStructureType::COMPUTE_PIPELINE_CREATE_INFO => write!(f, "VkStructureType(COMPUTE_PIPELINE_CREATE_INFO)"),
-            VkStructureType::PIPELINE_LAYOUT_CREATE_INFO => write!(f, "VkStructureType(PIPELINE_LAYOUT_CREATE_INFO)"),
-            VkStructureType::SAMPLER_CREATE_INFO => write!(f, "VkStructureType(SAMPLER_CREATE_INFO)"),
-            VkStructureType::DESCRIPTOR_SET_LAYOUT_CREATE_INFO => write!(f, "VkStructureType(DESCRIPTOR_SET_LAYOUT_CREATE_INFO)"),
-            VkStructureType::DESCRIPTOR_POOL_CREATE_INFO => write!(f, "VkStructureType(DESCRIPTOR_POOL_CREATE_INFO)"),
-            VkStructureType::DESCRIPTOR_SET_ALLOCATE_INFO => write!(f, "VkStructureType(DESCRIPTOR_SET_ALLOCATE_INFO)"),
-            VkStructureType::WRITE_DESCRIPTOR_SET => write!(f, "VkStructureType(WRITE_DESCRIPTOR_SET)"),
-            VkStructureType::COPY_DESCRIPTOR_SET => write!(f, "VkStructureType(COPY_DESCRIPTOR_SET)"),
-            VkStructureType::FRAMEBUFFER_CREATE_INFO => write!(f, "VkStructureType(FRAMEBUFFER_CREATE_INFO)"),
-            VkStructureType::RENDER_PASS_CREATE_INFO => write!(f, "VkStructureType(RENDER_PASS_CREATE_INFO)"),
-            VkStructureType::COMMAND_POOL_CREATE_INFO => write!(f, "VkStructureType(COMMAND_POOL_CREATE_INFO)"),
-            VkStructureType::COMMAND_BUFFER_ALLOCATE_INFO => write!(f, "VkStructureType(COMMAND_BUFFER_ALLOCATE_INFO)"),
-            VkStructureType::COMMAND_BUFFER_INHERITANCE_INFO => write!(f, "VkStructureType(COMMAND_BUFFER_INHERITANCE_INFO)"),
-            VkStructureType::COMMAND_BUFFER_BEGIN_INFO => write!(f, "VkStructureType(COMMAND_BUFFER_BEGIN_INFO)"),
-            VkStructureType::RENDER_PASS_BEGIN_INFO => write!(f, "VkStructureType(RENDER_PASS_BEGIN_INFO)"),
-            VkStructureType::BUFFER_MEMORY_BARRIER => write!(f, "VkStructureType(BUFFER_MEMORY_BARRIER)"),
-            VkStructureType::IMAGE_MEMORY_BARRIER => write!(f, "VkStructureType(IMAGE_MEMORY_BARRIER)"),
+            VkStructureType::IMAGE_VIEW_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(IMAGE_VIEW_CREATE_INFO)")
+            }
+            VkStructureType::SHADER_MODULE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(SHADER_MODULE_CREATE_INFO)")
+            }
+            VkStructureType::PIPELINE_CACHE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(PIPELINE_CACHE_CREATE_INFO)")
+            }
+            VkStructureType::PIPELINE_SHADER_STAGE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(PIPELINE_SHADER_STAGE_CREATE_INFO)")
+            }
+            VkStructureType::PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO => write!(
+                f,
+                "VkStructureType(PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO)"
+            ),
+            VkStructureType::PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO => write!(
+                f,
+                "VkStructureType(PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO)"
+            ),
+            VkStructureType::PIPELINE_TESSELLATION_STATE_CREATE_INFO => write!(
+                f,
+                "VkStructureType(PIPELINE_TESSELLATION_STATE_CREATE_INFO)"
+            ),
+            VkStructureType::PIPELINE_VIEWPORT_STATE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(PIPELINE_VIEWPORT_STATE_CREATE_INFO)")
+            }
+            VkStructureType::PIPELINE_RASTERIZATION_STATE_CREATE_INFO => write!(
+                f,
+                "VkStructureType(PIPELINE_RASTERIZATION_STATE_CREATE_INFO)"
+            ),
+            VkStructureType::PIPELINE_MULTISAMPLE_STATE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(PIPELINE_MULTISAMPLE_STATE_CREATE_INFO)")
+            }
+            VkStructureType::PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO => write!(
+                f,
+                "VkStructureType(PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO)"
+            ),
+            VkStructureType::PIPELINE_COLOR_BLEND_STATE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(PIPELINE_COLOR_BLEND_STATE_CREATE_INFO)")
+            }
+            VkStructureType::PIPELINE_DYNAMIC_STATE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(PIPELINE_DYNAMIC_STATE_CREATE_INFO)")
+            }
+            VkStructureType::GRAPHICS_PIPELINE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(GRAPHICS_PIPELINE_CREATE_INFO)")
+            }
+            VkStructureType::COMPUTE_PIPELINE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(COMPUTE_PIPELINE_CREATE_INFO)")
+            }
+            VkStructureType::PIPELINE_LAYOUT_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(PIPELINE_LAYOUT_CREATE_INFO)")
+            }
+            VkStructureType::SAMPLER_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(SAMPLER_CREATE_INFO)")
+            }
+            VkStructureType::DESCRIPTOR_SET_LAYOUT_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(DESCRIPTOR_SET_LAYOUT_CREATE_INFO)")
+            }
+            VkStructureType::DESCRIPTOR_POOL_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(DESCRIPTOR_POOL_CREATE_INFO)")
+            }
+            VkStructureType::DESCRIPTOR_SET_ALLOCATE_INFO =>
+            {
+                write!(f, "VkStructureType(DESCRIPTOR_SET_ALLOCATE_INFO)")
+            }
+            VkStructureType::WRITE_DESCRIPTOR_SET =>
+            {
+                write!(f, "VkStructureType(WRITE_DESCRIPTOR_SET)")
+            }
+            VkStructureType::COPY_DESCRIPTOR_SET =>
+            {
+                write!(f, "VkStructureType(COPY_DESCRIPTOR_SET)")
+            }
+            VkStructureType::FRAMEBUFFER_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(FRAMEBUFFER_CREATE_INFO)")
+            }
+            VkStructureType::RENDER_PASS_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(RENDER_PASS_CREATE_INFO)")
+            }
+            VkStructureType::COMMAND_POOL_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(COMMAND_POOL_CREATE_INFO)")
+            }
+            VkStructureType::COMMAND_BUFFER_ALLOCATE_INFO =>
+            {
+                write!(f, "VkStructureType(COMMAND_BUFFER_ALLOCATE_INFO)")
+            }
+            VkStructureType::COMMAND_BUFFER_INHERITANCE_INFO =>
+            {
+                write!(f, "VkStructureType(COMMAND_BUFFER_INHERITANCE_INFO)")
+            }
+            VkStructureType::COMMAND_BUFFER_BEGIN_INFO =>
+            {
+                write!(f, "VkStructureType(COMMAND_BUFFER_BEGIN_INFO)")
+            }
+            VkStructureType::RENDER_PASS_BEGIN_INFO =>
+            {
+                write!(f, "VkStructureType(RENDER_PASS_BEGIN_INFO)")
+            }
+            VkStructureType::BUFFER_MEMORY_BARRIER =>
+            {
+                write!(f, "VkStructureType(BUFFER_MEMORY_BARRIER)")
+            }
+            VkStructureType::IMAGE_MEMORY_BARRIER =>
+            {
+                write!(f, "VkStructureType(IMAGE_MEMORY_BARRIER)")
+            }
             VkStructureType::MEMORY_BARRIER => write!(f, "VkStructureType(MEMORY_BARRIER)"),
-            VkStructureType::LOADER_INSTANCE_CREATE_INFO => write!(f, "VkStructureType(LOADER_INSTANCE_CREATE_INFO)"),
-            VkStructureType::LOADER_DEVICE_CREATE_INFO => write!(f, "VkStructureType(LOADER_DEVICE_CREATE_INFO)"),
-            VkStructureType::SWAPCHAIN_CREATE_INFO_KHR => write!(f, "VkStructureType(SWAPCHAIN_CREATE_INFO_KHR)"),
+            VkStructureType::LOADER_INSTANCE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(LOADER_INSTANCE_CREATE_INFO)")
+            }
+            VkStructureType::LOADER_DEVICE_CREATE_INFO =>
+            {
+                write!(f, "VkStructureType(LOADER_DEVICE_CREATE_INFO)")
+            }
+            VkStructureType::SWAPCHAIN_CREATE_INFO_KHR =>
+            {
+                write!(f, "VkStructureType(SWAPCHAIN_CREATE_INFO_KHR)")
+            }
             VkStructureType::PRESENT_INFO_KHR => write!(f, "VkStructureType(PRESENT_INFO_KHR)"),
-            VkStructureType::WIN32_SURFACE_CREATE_INFO_KHR => write!(f, "VkStructureType(WIN32_SURFACE_CREATE_INFO_KHR)"),
-            VkStructureType::DEBUG_UTILS_OBJECT_NAME_INFO_EXT => write!(f, "VkStructureType(DEBUG_UTILS_OBJECT_NAME_INFO_EXT)"),
-            VkStructureType::DEBUG_UTILS_OBJECT_TAG_INFO_EXT => write!(f, "VkStructureType(DEBUG_UTILS_OBJECT_TAG_INFO_EXT)"),
-            VkStructureType::DEBUG_UTILS_LABEL_EXT => write!(f, "VkStructureType(DEBUG_UTILS_LABEL_EXT)"),
-            VkStructureType::DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT => write!(f, "VkStructureType(DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT)"),
-            VkStructureType::DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT => write!(f, "VkStructureType(DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT)"),
+            VkStructureType::WIN32_SURFACE_CREATE_INFO_KHR =>
+            {
+                write!(f, "VkStructureType(WIN32_SURFACE_CREATE_INFO_KHR)")
+            }
+            VkStructureType::DEBUG_UTILS_OBJECT_NAME_INFO_EXT =>
+            {
+                write!(f, "VkStructureType(DEBUG_UTILS_OBJECT_NAME_INFO_EXT)")
+            }
+            VkStructureType::DEBUG_UTILS_OBJECT_TAG_INFO_EXT =>
+            {
+                write!(f, "VkStructureType(DEBUG_UTILS_OBJECT_TAG_INFO_EXT)")
+            }
+            VkStructureType::DEBUG_UTILS_LABEL_EXT =>
+            {
+                write!(f, "VkStructureType(DEBUG_UTILS_LABEL_EXT)")
+            }
+            VkStructureType::DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT => write!(
+                f,
+                "VkStructureType(DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT)"
+            ),
+            VkStructureType::DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT =>
+            {
+                write!(f, "VkStructureType(DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT)")
+            }
             _ => write!(f, "VkStructureType({})", self.0),
         }
     }
@@ -829,7 +1098,8 @@ impl core::fmt::Debug for VkStructureType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkResult(u32);
-impl VkResult {
+impl VkResult
+{
     pub const ERROR_OUT_OF_DATE_KHR: VkResult = VkResult(-1000001004i32 as u32);
     pub const ERROR_NATIVE_WINDOW_IN_USE_KHR: VkResult = VkResult(-1000000001i32 as u32);
     pub const ERROR_SURFACE_LOST_KHR: VkResult = VkResult(-1000000000i32 as u32);
@@ -854,23 +1124,41 @@ impl VkResult {
     pub const SUBOPTIMAL_KHR: VkResult = VkResult(1000001003);
 }
 
-impl core::fmt::Debug for VkResult {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkResult
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkResult::ERROR_OUT_OF_DATE_KHR => write!(f, "VkResult(ERROR_OUT_OF_DATE_KHR)"),
-            VkResult::ERROR_NATIVE_WINDOW_IN_USE_KHR => write!(f, "VkResult(ERROR_NATIVE_WINDOW_IN_USE_KHR)"),
+            VkResult::ERROR_NATIVE_WINDOW_IN_USE_KHR =>
+            {
+                write!(f, "VkResult(ERROR_NATIVE_WINDOW_IN_USE_KHR)")
+            }
             VkResult::ERROR_SURFACE_LOST_KHR => write!(f, "VkResult(ERROR_SURFACE_LOST_KHR)"),
             VkResult::ERROR_FRAGMENTED_POOL => write!(f, "VkResult(ERROR_FRAGMENTED_POOL)"),
-            VkResult::ERROR_FORMAT_NOT_SUPPORTED => write!(f, "VkResult(ERROR_FORMAT_NOT_SUPPORTED)"),
+            VkResult::ERROR_FORMAT_NOT_SUPPORTED =>
+            {
+                write!(f, "VkResult(ERROR_FORMAT_NOT_SUPPORTED)")
+            }
             VkResult::ERROR_TOO_MANY_OBJECTS => write!(f, "VkResult(ERROR_TOO_MANY_OBJECTS)"),
             VkResult::ERROR_INCOMPATIBLE_DRIVER => write!(f, "VkResult(ERROR_INCOMPATIBLE_DRIVER)"),
             VkResult::ERROR_FEATURE_NOT_PRESENT => write!(f, "VkResult(ERROR_FEATURE_NOT_PRESENT)"),
-            VkResult::ERROR_EXTENSION_NOT_PRESENT => write!(f, "VkResult(ERROR_EXTENSION_NOT_PRESENT)"),
+            VkResult::ERROR_EXTENSION_NOT_PRESENT =>
+            {
+                write!(f, "VkResult(ERROR_EXTENSION_NOT_PRESENT)")
+            }
             VkResult::ERROR_LAYER_NOT_PRESENT => write!(f, "VkResult(ERROR_LAYER_NOT_PRESENT)"),
             VkResult::ERROR_MEMORY_MAP_FAILED => write!(f, "VkResult(ERROR_MEMORY_MAP_FAILED)"),
             VkResult::ERROR_DEVICE_LOST => write!(f, "VkResult(ERROR_DEVICE_LOST)"),
-            VkResult::ERROR_INITIALIZATION_FAILED => write!(f, "VkResult(ERROR_INITIALIZATION_FAILED)"),
-            VkResult::ERROR_OUT_OF_DEVICE_MEMORY => write!(f, "VkResult(ERROR_OUT_OF_DEVICE_MEMORY)"),
+            VkResult::ERROR_INITIALIZATION_FAILED =>
+            {
+                write!(f, "VkResult(ERROR_INITIALIZATION_FAILED)")
+            }
+            VkResult::ERROR_OUT_OF_DEVICE_MEMORY =>
+            {
+                write!(f, "VkResult(ERROR_OUT_OF_DEVICE_MEMORY)")
+            }
             VkResult::ERROR_OUT_OF_HOST_MEMORY => write!(f, "VkResult(ERROR_OUT_OF_HOST_MEMORY)"),
             VkResult::SUCCESS => write!(f, "VkResult(SUCCESS)"),
             VkResult::NOT_READY => write!(f, "VkResult(NOT_READY)"),
@@ -887,16 +1175,20 @@ impl core::fmt::Debug for VkResult {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkPresentModeKHR(u32);
-impl VkPresentModeKHR {
+impl VkPresentModeKHR
+{
     pub const IMMEDIATE_KHR: VkPresentModeKHR = VkPresentModeKHR(0);
     pub const MAILBOX_KHR: VkPresentModeKHR = VkPresentModeKHR(1);
     pub const FIFO_KHR: VkPresentModeKHR = VkPresentModeKHR(2);
     pub const FIFO_RELAXED_KHR: VkPresentModeKHR = VkPresentModeKHR(3);
 }
 
-impl core::fmt::Debug for VkPresentModeKHR {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkPresentModeKHR
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkPresentModeKHR::IMMEDIATE_KHR => write!(f, "VkPresentModeKHR(IMMEDIATE_KHR)"),
             VkPresentModeKHR::MAILBOX_KHR => write!(f, "VkPresentModeKHR(MAILBOX_KHR)"),
             VkPresentModeKHR::FIFO_KHR => write!(f, "VkPresentModeKHR(FIFO_KHR)"),
@@ -909,16 +1201,23 @@ impl core::fmt::Debug for VkPresentModeKHR {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkColorSpaceKHR(u32);
-impl VkColorSpaceKHR {
+impl VkColorSpaceKHR
+{
     pub const SRGB_NONLINEAR_KHR: VkColorSpaceKHR = VkColorSpaceKHR(0);
     pub const VK_COLORSPACE_SRGB_NONLINEAR_KHR: VkColorSpaceKHR = VkColorSpaceKHR(0);
 }
 
-impl core::fmt::Debug for VkColorSpaceKHR {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkColorSpaceKHR
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkColorSpaceKHR::SRGB_NONLINEAR_KHR => write!(f, "VkColorSpaceKHR(SRGB_NONLINEAR_KHR)"),
-            VkColorSpaceKHR::VK_COLORSPACE_SRGB_NONLINEAR_KHR => write!(f, "VkColorSpaceKHR(VK_COLORSPACE_SRGB_NONLINEAR_KHR)"),
+            VkColorSpaceKHR::VK_COLORSPACE_SRGB_NONLINEAR_KHR =>
+            {
+                write!(f, "VkColorSpaceKHR(VK_COLORSPACE_SRGB_NONLINEAR_KHR)")
+            }
             _ => write!(f, "VkColorSpaceKHR({})", self.0),
         }
     }
@@ -927,7 +1226,8 @@ impl core::fmt::Debug for VkColorSpaceKHR {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkFormat(u32);
-impl VkFormat {
+impl VkFormat
+{
     pub const UNDEFINED: VkFormat = VkFormat(0);
     pub const R4G4_UNORM_PACK8: VkFormat = VkFormat(1);
     pub const R4G4B4A4_UNORM_PACK16: VkFormat = VkFormat(2);
@@ -1115,9 +1415,12 @@ impl VkFormat {
     pub const ASTC_12X12_SRGB_BLOCK: VkFormat = VkFormat(184);
 }
 
-impl core::fmt::Debug for VkFormat {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkFormat
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkFormat::UNDEFINED => write!(f, "VkFormat(UNDEFINED)"),
             VkFormat::R4G4_UNORM_PACK8 => write!(f, "VkFormat(R4G4_UNORM_PACK8)"),
             VkFormat::R4G4B4A4_UNORM_PACK16 => write!(f, "VkFormat(R4G4B4A4_UNORM_PACK16)"),
@@ -1178,14 +1481,26 @@ impl core::fmt::Debug for VkFormat {
             VkFormat::A8B8G8R8_SRGB_PACK32 => write!(f, "VkFormat(A8B8G8R8_SRGB_PACK32)"),
             VkFormat::A2R10G10B10_UNORM_PACK32 => write!(f, "VkFormat(A2R10G10B10_UNORM_PACK32)"),
             VkFormat::A2R10G10B10_SNORM_PACK32 => write!(f, "VkFormat(A2R10G10B10_SNORM_PACK32)"),
-            VkFormat::A2R10G10B10_USCALED_PACK32 => write!(f, "VkFormat(A2R10G10B10_USCALED_PACK32)"),
-            VkFormat::A2R10G10B10_SSCALED_PACK32 => write!(f, "VkFormat(A2R10G10B10_SSCALED_PACK32)"),
+            VkFormat::A2R10G10B10_USCALED_PACK32 =>
+            {
+                write!(f, "VkFormat(A2R10G10B10_USCALED_PACK32)")
+            }
+            VkFormat::A2R10G10B10_SSCALED_PACK32 =>
+            {
+                write!(f, "VkFormat(A2R10G10B10_SSCALED_PACK32)")
+            }
             VkFormat::A2R10G10B10_UINT_PACK32 => write!(f, "VkFormat(A2R10G10B10_UINT_PACK32)"),
             VkFormat::A2R10G10B10_SINT_PACK32 => write!(f, "VkFormat(A2R10G10B10_SINT_PACK32)"),
             VkFormat::A2B10G10R10_UNORM_PACK32 => write!(f, "VkFormat(A2B10G10R10_UNORM_PACK32)"),
             VkFormat::A2B10G10R10_SNORM_PACK32 => write!(f, "VkFormat(A2B10G10R10_SNORM_PACK32)"),
-            VkFormat::A2B10G10R10_USCALED_PACK32 => write!(f, "VkFormat(A2B10G10R10_USCALED_PACK32)"),
-            VkFormat::A2B10G10R10_SSCALED_PACK32 => write!(f, "VkFormat(A2B10G10R10_SSCALED_PACK32)"),
+            VkFormat::A2B10G10R10_USCALED_PACK32 =>
+            {
+                write!(f, "VkFormat(A2B10G10R10_USCALED_PACK32)")
+            }
+            VkFormat::A2B10G10R10_SSCALED_PACK32 =>
+            {
+                write!(f, "VkFormat(A2B10G10R10_SSCALED_PACK32)")
+            }
             VkFormat::A2B10G10R10_UINT_PACK32 => write!(f, "VkFormat(A2B10G10R10_UINT_PACK32)"),
             VkFormat::A2B10G10R10_SINT_PACK32 => write!(f, "VkFormat(A2B10G10R10_SINT_PACK32)"),
             VkFormat::R16_UNORM => write!(f, "VkFormat(R16_UNORM)"),
@@ -1311,7 +1626,8 @@ impl core::fmt::Debug for VkFormat {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkObjectType(u32);
-impl VkObjectType {
+impl VkObjectType
+{
     pub const UNKNOWN: VkObjectType = VkObjectType(0);
     pub const INSTANCE: VkObjectType = VkObjectType(1);
     pub const PHYSICAL_DEVICE: VkObjectType = VkObjectType(2);
@@ -1343,9 +1659,12 @@ impl VkObjectType {
     pub const DEBUG_UTILS_MESSENGER_EXT: VkObjectType = VkObjectType(1000128000);
 }
 
-impl core::fmt::Debug for VkObjectType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkObjectType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkObjectType::UNKNOWN => write!(f, "VkObjectType(UNKNOWN)"),
             VkObjectType::INSTANCE => write!(f, "VkObjectType(INSTANCE)"),
             VkObjectType::PHYSICAL_DEVICE => write!(f, "VkObjectType(PHYSICAL_DEVICE)"),
@@ -1374,7 +1693,10 @@ impl core::fmt::Debug for VkObjectType {
             VkObjectType::COMMAND_POOL => write!(f, "VkObjectType(COMMAND_POOL)"),
             VkObjectType::SURFACE_KHR => write!(f, "VkObjectType(SURFACE_KHR)"),
             VkObjectType::SWAPCHAIN_KHR => write!(f, "VkObjectType(SWAPCHAIN_KHR)"),
-            VkObjectType::DEBUG_UTILS_MESSENGER_EXT => write!(f, "VkObjectType(DEBUG_UTILS_MESSENGER_EXT)"),
+            VkObjectType::DEBUG_UTILS_MESSENGER_EXT =>
+            {
+                write!(f, "VkObjectType(DEBUG_UTILS_MESSENGER_EXT)")
+            }
             _ => write!(f, "VkObjectType({})", self.0),
         }
     }
@@ -1383,14 +1705,18 @@ impl core::fmt::Debug for VkObjectType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkSharingMode(u32);
-impl VkSharingMode {
+impl VkSharingMode
+{
     pub const EXCLUSIVE: VkSharingMode = VkSharingMode(0);
     pub const CONCURRENT: VkSharingMode = VkSharingMode(1);
 }
 
-impl core::fmt::Debug for VkSharingMode {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkSharingMode
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkSharingMode::EXCLUSIVE => write!(f, "VkSharingMode(EXCLUSIVE)"),
             VkSharingMode::CONCURRENT => write!(f, "VkSharingMode(CONCURRENT)"),
             _ => write!(f, "VkSharingMode({})", self.0),
@@ -1401,7 +1727,8 @@ impl core::fmt::Debug for VkSharingMode {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageLayout(u32);
-impl VkImageLayout {
+impl VkImageLayout
+{
     pub const UNDEFINED: VkImageLayout = VkImageLayout(0);
     pub const GENERAL: VkImageLayout = VkImageLayout(1);
     pub const COLOR_ATTACHMENT_OPTIMAL: VkImageLayout = VkImageLayout(2);
@@ -1414,15 +1741,30 @@ impl VkImageLayout {
     pub const PRESENT_SRC_KHR: VkImageLayout = VkImageLayout(1000001002);
 }
 
-impl core::fmt::Debug for VkImageLayout {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkImageLayout
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkImageLayout::UNDEFINED => write!(f, "VkImageLayout(UNDEFINED)"),
             VkImageLayout::GENERAL => write!(f, "VkImageLayout(GENERAL)"),
-            VkImageLayout::COLOR_ATTACHMENT_OPTIMAL => write!(f, "VkImageLayout(COLOR_ATTACHMENT_OPTIMAL)"),
-            VkImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL => write!(f, "VkImageLayout(DEPTH_STENCIL_ATTACHMENT_OPTIMAL)"),
-            VkImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL => write!(f, "VkImageLayout(DEPTH_STENCIL_READ_ONLY_OPTIMAL)"),
-            VkImageLayout::SHADER_READ_ONLY_OPTIMAL => write!(f, "VkImageLayout(SHADER_READ_ONLY_OPTIMAL)"),
+            VkImageLayout::COLOR_ATTACHMENT_OPTIMAL =>
+            {
+                write!(f, "VkImageLayout(COLOR_ATTACHMENT_OPTIMAL)")
+            }
+            VkImageLayout::DEPTH_STENCIL_ATTACHMENT_OPTIMAL =>
+            {
+                write!(f, "VkImageLayout(DEPTH_STENCIL_ATTACHMENT_OPTIMAL)")
+            }
+            VkImageLayout::DEPTH_STENCIL_READ_ONLY_OPTIMAL =>
+            {
+                write!(f, "VkImageLayout(DEPTH_STENCIL_READ_ONLY_OPTIMAL)")
+            }
+            VkImageLayout::SHADER_READ_ONLY_OPTIMAL =>
+            {
+                write!(f, "VkImageLayout(SHADER_READ_ONLY_OPTIMAL)")
+            }
             VkImageLayout::TRANSFER_SRC_OPTIMAL => write!(f, "VkImageLayout(TRANSFER_SRC_OPTIMAL)"),
             VkImageLayout::TRANSFER_DST_OPTIMAL => write!(f, "VkImageLayout(TRANSFER_DST_OPTIMAL)"),
             VkImageLayout::PREINITIALIZED => write!(f, "VkImageLayout(PREINITIALIZED)"),
@@ -1435,15 +1777,19 @@ impl core::fmt::Debug for VkImageLayout {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkVendorId(u32);
-impl VkVendorId {
+impl VkVendorId
+{
     pub const VIV: VkVendorId = VkVendorId(65537);
     pub const VSI: VkVendorId = VkVendorId(65538);
     pub const KAZAN: VkVendorId = VkVendorId(65539);
 }
 
-impl core::fmt::Debug for VkVendorId {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkVendorId
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkVendorId::VIV => write!(f, "VkVendorId(VIV)"),
             VkVendorId::VSI => write!(f, "VkVendorId(VSI)"),
             VkVendorId::KAZAN => write!(f, "VkVendorId(KAZAN)"),
@@ -1455,16 +1801,23 @@ impl core::fmt::Debug for VkVendorId {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkSubpassContents(u32);
-impl VkSubpassContents {
+impl VkSubpassContents
+{
     pub const INLINE: VkSubpassContents = VkSubpassContents(0);
     pub const SECONDARY_COMMAND_BUFFERS: VkSubpassContents = VkSubpassContents(1);
 }
 
-impl core::fmt::Debug for VkSubpassContents {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkSubpassContents
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkSubpassContents::INLINE => write!(f, "VkSubpassContents(INLINE)"),
-            VkSubpassContents::SECONDARY_COMMAND_BUFFERS => write!(f, "VkSubpassContents(SECONDARY_COMMAND_BUFFERS)"),
+            VkSubpassContents::SECONDARY_COMMAND_BUFFERS =>
+            {
+                write!(f, "VkSubpassContents(SECONDARY_COMMAND_BUFFERS)")
+            }
             _ => write!(f, "VkSubpassContents({})", self.0),
         }
     }
@@ -1473,14 +1826,18 @@ impl core::fmt::Debug for VkSubpassContents {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkFilter(u32);
-impl VkFilter {
+impl VkFilter
+{
     pub const NEAREST: VkFilter = VkFilter(0);
     pub const LINEAR: VkFilter = VkFilter(1);
 }
 
-impl core::fmt::Debug for VkFilter {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkFilter
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkFilter::NEAREST => write!(f, "VkFilter(NEAREST)"),
             VkFilter::LINEAR => write!(f, "VkFilter(LINEAR)"),
             _ => write!(f, "VkFilter({})", self.0),
@@ -1491,14 +1848,18 @@ impl core::fmt::Debug for VkFilter {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkIndexType(u32);
-impl VkIndexType {
+impl VkIndexType
+{
     pub const UINT16: VkIndexType = VkIndexType(0);
     pub const UINT32: VkIndexType = VkIndexType(1);
 }
 
-impl core::fmt::Debug for VkIndexType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkIndexType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkIndexType::UINT16 => write!(f, "VkIndexType(UINT16)"),
             VkIndexType::UINT32 => write!(f, "VkIndexType(UINT32)"),
             _ => write!(f, "VkIndexType({})", self.0),
@@ -1509,14 +1870,18 @@ impl core::fmt::Debug for VkIndexType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkPipelineBindPoint(u32);
-impl VkPipelineBindPoint {
+impl VkPipelineBindPoint
+{
     pub const GRAPHICS: VkPipelineBindPoint = VkPipelineBindPoint(0);
     pub const COMPUTE: VkPipelineBindPoint = VkPipelineBindPoint(1);
 }
 
-impl core::fmt::Debug for VkPipelineBindPoint {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkPipelineBindPoint
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkPipelineBindPoint::GRAPHICS => write!(f, "VkPipelineBindPoint(GRAPHICS)"),
             VkPipelineBindPoint::COMPUTE => write!(f, "VkPipelineBindPoint(COMPUTE)"),
             _ => write!(f, "VkPipelineBindPoint({})", self.0),
@@ -1527,14 +1892,18 @@ impl core::fmt::Debug for VkPipelineBindPoint {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkCommandBufferLevel(u32);
-impl VkCommandBufferLevel {
+impl VkCommandBufferLevel
+{
     pub const PRIMARY: VkCommandBufferLevel = VkCommandBufferLevel(0);
     pub const SECONDARY: VkCommandBufferLevel = VkCommandBufferLevel(1);
 }
 
-impl core::fmt::Debug for VkCommandBufferLevel {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkCommandBufferLevel
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkCommandBufferLevel::PRIMARY => write!(f, "VkCommandBufferLevel(PRIMARY)"),
             VkCommandBufferLevel::SECONDARY => write!(f, "VkCommandBufferLevel(SECONDARY)"),
             _ => write!(f, "VkCommandBufferLevel({})", self.0),
@@ -1545,14 +1914,18 @@ impl core::fmt::Debug for VkCommandBufferLevel {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkAttachmentStoreOp(u32);
-impl VkAttachmentStoreOp {
+impl VkAttachmentStoreOp
+{
     pub const STORE: VkAttachmentStoreOp = VkAttachmentStoreOp(0);
     pub const DONT_CARE: VkAttachmentStoreOp = VkAttachmentStoreOp(1);
 }
 
-impl core::fmt::Debug for VkAttachmentStoreOp {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkAttachmentStoreOp
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkAttachmentStoreOp::STORE => write!(f, "VkAttachmentStoreOp(STORE)"),
             VkAttachmentStoreOp::DONT_CARE => write!(f, "VkAttachmentStoreOp(DONT_CARE)"),
             _ => write!(f, "VkAttachmentStoreOp({})", self.0),
@@ -1563,15 +1936,19 @@ impl core::fmt::Debug for VkAttachmentStoreOp {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkAttachmentLoadOp(u32);
-impl VkAttachmentLoadOp {
+impl VkAttachmentLoadOp
+{
     pub const LOAD: VkAttachmentLoadOp = VkAttachmentLoadOp(0);
     pub const CLEAR: VkAttachmentLoadOp = VkAttachmentLoadOp(1);
     pub const DONT_CARE: VkAttachmentLoadOp = VkAttachmentLoadOp(2);
 }
 
-impl core::fmt::Debug for VkAttachmentLoadOp {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkAttachmentLoadOp
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkAttachmentLoadOp::LOAD => write!(f, "VkAttachmentLoadOp(LOAD)"),
             VkAttachmentLoadOp::CLEAR => write!(f, "VkAttachmentLoadOp(CLEAR)"),
             VkAttachmentLoadOp::DONT_CARE => write!(f, "VkAttachmentLoadOp(DONT_CARE)"),
@@ -1583,7 +1960,8 @@ impl core::fmt::Debug for VkAttachmentLoadOp {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkDescriptorType(u32);
-impl VkDescriptorType {
+impl VkDescriptorType
+{
     pub const SAMPLER: VkDescriptorType = VkDescriptorType(0);
     pub const COMBINED_IMAGE_SAMPLER: VkDescriptorType = VkDescriptorType(1);
     pub const SAMPLED_IMAGE: VkDescriptorType = VkDescriptorType(2);
@@ -1597,19 +1975,37 @@ impl VkDescriptorType {
     pub const INPUT_ATTACHMENT: VkDescriptorType = VkDescriptorType(10);
 }
 
-impl core::fmt::Debug for VkDescriptorType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkDescriptorType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkDescriptorType::SAMPLER => write!(f, "VkDescriptorType(SAMPLER)"),
-            VkDescriptorType::COMBINED_IMAGE_SAMPLER => write!(f, "VkDescriptorType(COMBINED_IMAGE_SAMPLER)"),
+            VkDescriptorType::COMBINED_IMAGE_SAMPLER =>
+            {
+                write!(f, "VkDescriptorType(COMBINED_IMAGE_SAMPLER)")
+            }
             VkDescriptorType::SAMPLED_IMAGE => write!(f, "VkDescriptorType(SAMPLED_IMAGE)"),
             VkDescriptorType::STORAGE_IMAGE => write!(f, "VkDescriptorType(STORAGE_IMAGE)"),
-            VkDescriptorType::UNIFORM_TEXEL_BUFFER => write!(f, "VkDescriptorType(UNIFORM_TEXEL_BUFFER)"),
-            VkDescriptorType::STORAGE_TEXEL_BUFFER => write!(f, "VkDescriptorType(STORAGE_TEXEL_BUFFER)"),
+            VkDescriptorType::UNIFORM_TEXEL_BUFFER =>
+            {
+                write!(f, "VkDescriptorType(UNIFORM_TEXEL_BUFFER)")
+            }
+            VkDescriptorType::STORAGE_TEXEL_BUFFER =>
+            {
+                write!(f, "VkDescriptorType(STORAGE_TEXEL_BUFFER)")
+            }
             VkDescriptorType::UNIFORM_BUFFER => write!(f, "VkDescriptorType(UNIFORM_BUFFER)"),
             VkDescriptorType::STORAGE_BUFFER => write!(f, "VkDescriptorType(STORAGE_BUFFER)"),
-            VkDescriptorType::UNIFORM_BUFFER_DYNAMIC => write!(f, "VkDescriptorType(UNIFORM_BUFFER_DYNAMIC)"),
-            VkDescriptorType::STORAGE_BUFFER_DYNAMIC => write!(f, "VkDescriptorType(STORAGE_BUFFER_DYNAMIC)"),
+            VkDescriptorType::UNIFORM_BUFFER_DYNAMIC =>
+            {
+                write!(f, "VkDescriptorType(UNIFORM_BUFFER_DYNAMIC)")
+            }
+            VkDescriptorType::STORAGE_BUFFER_DYNAMIC =>
+            {
+                write!(f, "VkDescriptorType(STORAGE_BUFFER_DYNAMIC)")
+            }
             VkDescriptorType::INPUT_ATTACHMENT => write!(f, "VkDescriptorType(INPUT_ATTACHMENT)"),
             _ => write!(f, "VkDescriptorType({})", self.0),
         }
@@ -1619,7 +2015,8 @@ impl core::fmt::Debug for VkDescriptorType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkBorderColor(u32);
-impl VkBorderColor {
+impl VkBorderColor
+{
     pub const FLOAT_TRANSPARENT_BLACK: VkBorderColor = VkBorderColor(0);
     pub const INT_TRANSPARENT_BLACK: VkBorderColor = VkBorderColor(1);
     pub const FLOAT_OPAQUE_BLACK: VkBorderColor = VkBorderColor(2);
@@ -1628,11 +2025,20 @@ impl VkBorderColor {
     pub const INT_OPAQUE_WHITE: VkBorderColor = VkBorderColor(5);
 }
 
-impl core::fmt::Debug for VkBorderColor {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
-            VkBorderColor::FLOAT_TRANSPARENT_BLACK => write!(f, "VkBorderColor(FLOAT_TRANSPARENT_BLACK)"),
-            VkBorderColor::INT_TRANSPARENT_BLACK => write!(f, "VkBorderColor(INT_TRANSPARENT_BLACK)"),
+impl core::fmt::Debug for VkBorderColor
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
+            VkBorderColor::FLOAT_TRANSPARENT_BLACK =>
+            {
+                write!(f, "VkBorderColor(FLOAT_TRANSPARENT_BLACK)")
+            }
+            VkBorderColor::INT_TRANSPARENT_BLACK =>
+            {
+                write!(f, "VkBorderColor(INT_TRANSPARENT_BLACK)")
+            }
             VkBorderColor::FLOAT_OPAQUE_BLACK => write!(f, "VkBorderColor(FLOAT_OPAQUE_BLACK)"),
             VkBorderColor::INT_OPAQUE_BLACK => write!(f, "VkBorderColor(INT_OPAQUE_BLACK)"),
             VkBorderColor::FLOAT_OPAQUE_WHITE => write!(f, "VkBorderColor(FLOAT_OPAQUE_WHITE)"),
@@ -1645,7 +2051,8 @@ impl core::fmt::Debug for VkBorderColor {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkCompareOp(u32);
-impl VkCompareOp {
+impl VkCompareOp
+{
     pub const NEVER: VkCompareOp = VkCompareOp(0);
     pub const LESS: VkCompareOp = VkCompareOp(1);
     pub const EQUAL: VkCompareOp = VkCompareOp(2);
@@ -1656,9 +2063,12 @@ impl VkCompareOp {
     pub const ALWAYS: VkCompareOp = VkCompareOp(7);
 }
 
-impl core::fmt::Debug for VkCompareOp {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkCompareOp
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkCompareOp::NEVER => write!(f, "VkCompareOp(NEVER)"),
             VkCompareOp::LESS => write!(f, "VkCompareOp(LESS)"),
             VkCompareOp::EQUAL => write!(f, "VkCompareOp(EQUAL)"),
@@ -1675,20 +2085,30 @@ impl core::fmt::Debug for VkCompareOp {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkSamplerAddressMode(u32);
-impl VkSamplerAddressMode {
+impl VkSamplerAddressMode
+{
     pub const REPEAT: VkSamplerAddressMode = VkSamplerAddressMode(0);
     pub const MIRRORED_REPEAT: VkSamplerAddressMode = VkSamplerAddressMode(1);
     pub const CLAMP_TO_EDGE: VkSamplerAddressMode = VkSamplerAddressMode(2);
     pub const CLAMP_TO_BORDER: VkSamplerAddressMode = VkSamplerAddressMode(3);
 }
 
-impl core::fmt::Debug for VkSamplerAddressMode {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkSamplerAddressMode
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkSamplerAddressMode::REPEAT => write!(f, "VkSamplerAddressMode(REPEAT)"),
-            VkSamplerAddressMode::MIRRORED_REPEAT => write!(f, "VkSamplerAddressMode(MIRRORED_REPEAT)"),
+            VkSamplerAddressMode::MIRRORED_REPEAT =>
+            {
+                write!(f, "VkSamplerAddressMode(MIRRORED_REPEAT)")
+            }
             VkSamplerAddressMode::CLAMP_TO_EDGE => write!(f, "VkSamplerAddressMode(CLAMP_TO_EDGE)"),
-            VkSamplerAddressMode::CLAMP_TO_BORDER => write!(f, "VkSamplerAddressMode(CLAMP_TO_BORDER)"),
+            VkSamplerAddressMode::CLAMP_TO_BORDER =>
+            {
+                write!(f, "VkSamplerAddressMode(CLAMP_TO_BORDER)")
+            }
             _ => write!(f, "VkSamplerAddressMode({})", self.0),
         }
     }
@@ -1697,14 +2117,18 @@ impl core::fmt::Debug for VkSamplerAddressMode {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkSamplerMipmapMode(u32);
-impl VkSamplerMipmapMode {
+impl VkSamplerMipmapMode
+{
     pub const NEAREST: VkSamplerMipmapMode = VkSamplerMipmapMode(0);
     pub const LINEAR: VkSamplerMipmapMode = VkSamplerMipmapMode(1);
 }
 
-impl core::fmt::Debug for VkSamplerMipmapMode {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkSamplerMipmapMode
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkSamplerMipmapMode::NEAREST => write!(f, "VkSamplerMipmapMode(NEAREST)"),
             VkSamplerMipmapMode::LINEAR => write!(f, "VkSamplerMipmapMode(LINEAR)"),
             _ => write!(f, "VkSamplerMipmapMode({})", self.0),
@@ -1715,7 +2139,8 @@ impl core::fmt::Debug for VkSamplerMipmapMode {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkDynamicState(u32);
-impl VkDynamicState {
+impl VkDynamicState
+{
     pub const VIEWPORT: VkDynamicState = VkDynamicState(0);
     pub const SCISSOR: VkDynamicState = VkDynamicState(1);
     pub const LINE_WIDTH: VkDynamicState = VkDynamicState(2);
@@ -1727,16 +2152,22 @@ impl VkDynamicState {
     pub const STENCIL_REFERENCE: VkDynamicState = VkDynamicState(8);
 }
 
-impl core::fmt::Debug for VkDynamicState {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkDynamicState
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkDynamicState::VIEWPORT => write!(f, "VkDynamicState(VIEWPORT)"),
             VkDynamicState::SCISSOR => write!(f, "VkDynamicState(SCISSOR)"),
             VkDynamicState::LINE_WIDTH => write!(f, "VkDynamicState(LINE_WIDTH)"),
             VkDynamicState::DEPTH_BIAS => write!(f, "VkDynamicState(DEPTH_BIAS)"),
             VkDynamicState::BLEND_CONSTANTS => write!(f, "VkDynamicState(BLEND_CONSTANTS)"),
             VkDynamicState::DEPTH_BOUNDS => write!(f, "VkDynamicState(DEPTH_BOUNDS)"),
-            VkDynamicState::STENCIL_COMPARE_MASK => write!(f, "VkDynamicState(STENCIL_COMPARE_MASK)"),
+            VkDynamicState::STENCIL_COMPARE_MASK =>
+            {
+                write!(f, "VkDynamicState(STENCIL_COMPARE_MASK)")
+            }
             VkDynamicState::STENCIL_WRITE_MASK => write!(f, "VkDynamicState(STENCIL_WRITE_MASK)"),
             VkDynamicState::STENCIL_REFERENCE => write!(f, "VkDynamicState(STENCIL_REFERENCE)"),
             _ => write!(f, "VkDynamicState({})", self.0),
@@ -1747,7 +2178,8 @@ impl core::fmt::Debug for VkDynamicState {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkBlendOp(u32);
-impl VkBlendOp {
+impl VkBlendOp
+{
     pub const ADD: VkBlendOp = VkBlendOp(0);
     pub const SUBTRACT: VkBlendOp = VkBlendOp(1);
     pub const REVERSE_SUBTRACT: VkBlendOp = VkBlendOp(2);
@@ -1755,9 +2187,12 @@ impl VkBlendOp {
     pub const MAX: VkBlendOp = VkBlendOp(4);
 }
 
-impl core::fmt::Debug for VkBlendOp {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkBlendOp
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkBlendOp::ADD => write!(f, "VkBlendOp(ADD)"),
             VkBlendOp::SUBTRACT => write!(f, "VkBlendOp(SUBTRACT)"),
             VkBlendOp::REVERSE_SUBTRACT => write!(f, "VkBlendOp(REVERSE_SUBTRACT)"),
@@ -1771,7 +2206,8 @@ impl core::fmt::Debug for VkBlendOp {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkBlendFactor(u32);
-impl VkBlendFactor {
+impl VkBlendFactor
+{
     pub const ZERO: VkBlendFactor = VkBlendFactor(0);
     pub const ONE: VkBlendFactor = VkBlendFactor(1);
     pub const SRC_COLOR: VkBlendFactor = VkBlendFactor(2);
@@ -1793,9 +2229,12 @@ impl VkBlendFactor {
     pub const ONE_MINUS_SRC1_ALPHA: VkBlendFactor = VkBlendFactor(18);
 }
 
-impl core::fmt::Debug for VkBlendFactor {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkBlendFactor
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkBlendFactor::ZERO => write!(f, "VkBlendFactor(ZERO)"),
             VkBlendFactor::ONE => write!(f, "VkBlendFactor(ONE)"),
             VkBlendFactor::SRC_COLOR => write!(f, "VkBlendFactor(SRC_COLOR)"),
@@ -1807,9 +2246,15 @@ impl core::fmt::Debug for VkBlendFactor {
             VkBlendFactor::DST_ALPHA => write!(f, "VkBlendFactor(DST_ALPHA)"),
             VkBlendFactor::ONE_MINUS_DST_ALPHA => write!(f, "VkBlendFactor(ONE_MINUS_DST_ALPHA)"),
             VkBlendFactor::CONSTANT_COLOR => write!(f, "VkBlendFactor(CONSTANT_COLOR)"),
-            VkBlendFactor::ONE_MINUS_CONSTANT_COLOR => write!(f, "VkBlendFactor(ONE_MINUS_CONSTANT_COLOR)"),
+            VkBlendFactor::ONE_MINUS_CONSTANT_COLOR =>
+            {
+                write!(f, "VkBlendFactor(ONE_MINUS_CONSTANT_COLOR)")
+            }
             VkBlendFactor::CONSTANT_ALPHA => write!(f, "VkBlendFactor(CONSTANT_ALPHA)"),
-            VkBlendFactor::ONE_MINUS_CONSTANT_ALPHA => write!(f, "VkBlendFactor(ONE_MINUS_CONSTANT_ALPHA)"),
+            VkBlendFactor::ONE_MINUS_CONSTANT_ALPHA =>
+            {
+                write!(f, "VkBlendFactor(ONE_MINUS_CONSTANT_ALPHA)")
+            }
             VkBlendFactor::SRC_ALPHA_SATURATE => write!(f, "VkBlendFactor(SRC_ALPHA_SATURATE)"),
             VkBlendFactor::SRC1_COLOR => write!(f, "VkBlendFactor(SRC1_COLOR)"),
             VkBlendFactor::ONE_MINUS_SRC1_COLOR => write!(f, "VkBlendFactor(ONE_MINUS_SRC1_COLOR)"),
@@ -1823,7 +2268,8 @@ impl core::fmt::Debug for VkBlendFactor {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkLogicOp(u32);
-impl VkLogicOp {
+impl VkLogicOp
+{
     pub const CLEAR: VkLogicOp = VkLogicOp(0);
     pub const AND: VkLogicOp = VkLogicOp(1);
     pub const AND_REVERSE: VkLogicOp = VkLogicOp(2);
@@ -1842,9 +2288,12 @@ impl VkLogicOp {
     pub const SET: VkLogicOp = VkLogicOp(15);
 }
 
-impl core::fmt::Debug for VkLogicOp {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkLogicOp
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkLogicOp::CLEAR => write!(f, "VkLogicOp(CLEAR)"),
             VkLogicOp::AND => write!(f, "VkLogicOp(AND)"),
             VkLogicOp::AND_REVERSE => write!(f, "VkLogicOp(AND_REVERSE)"),
@@ -1869,7 +2318,8 @@ impl core::fmt::Debug for VkLogicOp {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkStencilOp(u32);
-impl VkStencilOp {
+impl VkStencilOp
+{
     pub const KEEP: VkStencilOp = VkStencilOp(0);
     pub const ZERO: VkStencilOp = VkStencilOp(1);
     pub const REPLACE: VkStencilOp = VkStencilOp(2);
@@ -1880,9 +2330,12 @@ impl VkStencilOp {
     pub const DECREMENT_AND_WRAP: VkStencilOp = VkStencilOp(7);
 }
 
-impl core::fmt::Debug for VkStencilOp {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkStencilOp
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkStencilOp::KEEP => write!(f, "VkStencilOp(KEEP)"),
             VkStencilOp::ZERO => write!(f, "VkStencilOp(ZERO)"),
             VkStencilOp::REPLACE => write!(f, "VkStencilOp(REPLACE)"),
@@ -1899,14 +2352,18 @@ impl core::fmt::Debug for VkStencilOp {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkFrontFace(u32);
-impl VkFrontFace {
+impl VkFrontFace
+{
     pub const COUNTER_CLOCKWISE: VkFrontFace = VkFrontFace(0);
     pub const CLOCKWISE: VkFrontFace = VkFrontFace(1);
 }
 
-impl core::fmt::Debug for VkFrontFace {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkFrontFace
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkFrontFace::COUNTER_CLOCKWISE => write!(f, "VkFrontFace(COUNTER_CLOCKWISE)"),
             VkFrontFace::CLOCKWISE => write!(f, "VkFrontFace(CLOCKWISE)"),
             _ => write!(f, "VkFrontFace({})", self.0),
@@ -1917,15 +2374,19 @@ impl core::fmt::Debug for VkFrontFace {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkPolygonMode(u32);
-impl VkPolygonMode {
+impl VkPolygonMode
+{
     pub const FILL: VkPolygonMode = VkPolygonMode(0);
     pub const LINE: VkPolygonMode = VkPolygonMode(1);
     pub const POINT: VkPolygonMode = VkPolygonMode(2);
 }
 
-impl core::fmt::Debug for VkPolygonMode {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkPolygonMode
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkPolygonMode::FILL => write!(f, "VkPolygonMode(FILL)"),
             VkPolygonMode::LINE => write!(f, "VkPolygonMode(LINE)"),
             VkPolygonMode::POINT => write!(f, "VkPolygonMode(POINT)"),
@@ -1937,7 +2398,8 @@ impl core::fmt::Debug for VkPolygonMode {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkPrimitiveTopology(u32);
-impl VkPrimitiveTopology {
+impl VkPrimitiveTopology
+{
     pub const POINT_LIST: VkPrimitiveTopology = VkPrimitiveTopology(0);
     pub const LINE_LIST: VkPrimitiveTopology = VkPrimitiveTopology(1);
     pub const LINE_STRIP: VkPrimitiveTopology = VkPrimitiveTopology(2);
@@ -1951,19 +2413,34 @@ impl VkPrimitiveTopology {
     pub const PATCH_LIST: VkPrimitiveTopology = VkPrimitiveTopology(10);
 }
 
-impl core::fmt::Debug for VkPrimitiveTopology {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkPrimitiveTopology
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkPrimitiveTopology::POINT_LIST => write!(f, "VkPrimitiveTopology(POINT_LIST)"),
             VkPrimitiveTopology::LINE_LIST => write!(f, "VkPrimitiveTopology(LINE_LIST)"),
             VkPrimitiveTopology::LINE_STRIP => write!(f, "VkPrimitiveTopology(LINE_STRIP)"),
             VkPrimitiveTopology::TRIANGLE_LIST => write!(f, "VkPrimitiveTopology(TRIANGLE_LIST)"),
             VkPrimitiveTopology::TRIANGLE_STRIP => write!(f, "VkPrimitiveTopology(TRIANGLE_STRIP)"),
             VkPrimitiveTopology::TRIANGLE_FAN => write!(f, "VkPrimitiveTopology(TRIANGLE_FAN)"),
-            VkPrimitiveTopology::LINE_LIST_WITH_ADJACENCY => write!(f, "VkPrimitiveTopology(LINE_LIST_WITH_ADJACENCY)"),
-            VkPrimitiveTopology::LINE_STRIP_WITH_ADJACENCY => write!(f, "VkPrimitiveTopology(LINE_STRIP_WITH_ADJACENCY)"),
-            VkPrimitiveTopology::TRIANGLE_LIST_WITH_ADJACENCY => write!(f, "VkPrimitiveTopology(TRIANGLE_LIST_WITH_ADJACENCY)"),
-            VkPrimitiveTopology::TRIANGLE_STRIP_WITH_ADJACENCY => write!(f, "VkPrimitiveTopology(TRIANGLE_STRIP_WITH_ADJACENCY)"),
+            VkPrimitiveTopology::LINE_LIST_WITH_ADJACENCY =>
+            {
+                write!(f, "VkPrimitiveTopology(LINE_LIST_WITH_ADJACENCY)")
+            }
+            VkPrimitiveTopology::LINE_STRIP_WITH_ADJACENCY =>
+            {
+                write!(f, "VkPrimitiveTopology(LINE_STRIP_WITH_ADJACENCY)")
+            }
+            VkPrimitiveTopology::TRIANGLE_LIST_WITH_ADJACENCY =>
+            {
+                write!(f, "VkPrimitiveTopology(TRIANGLE_LIST_WITH_ADJACENCY)")
+            }
+            VkPrimitiveTopology::TRIANGLE_STRIP_WITH_ADJACENCY =>
+            {
+                write!(f, "VkPrimitiveTopology(TRIANGLE_STRIP_WITH_ADJACENCY)")
+            }
             VkPrimitiveTopology::PATCH_LIST => write!(f, "VkPrimitiveTopology(PATCH_LIST)"),
             _ => write!(f, "VkPrimitiveTopology({})", self.0),
         }
@@ -1973,14 +2450,18 @@ impl core::fmt::Debug for VkPrimitiveTopology {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkVertexInputRate(u32);
-impl VkVertexInputRate {
+impl VkVertexInputRate
+{
     pub const VERTEX: VkVertexInputRate = VkVertexInputRate(0);
     pub const INSTANCE: VkVertexInputRate = VkVertexInputRate(1);
 }
 
-impl core::fmt::Debug for VkVertexInputRate {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkVertexInputRate
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkVertexInputRate::VERTEX => write!(f, "VkVertexInputRate(VERTEX)"),
             VkVertexInputRate::INSTANCE => write!(f, "VkVertexInputRate(INSTANCE)"),
             _ => write!(f, "VkVertexInputRate({})", self.0),
@@ -1991,7 +2472,8 @@ impl core::fmt::Debug for VkVertexInputRate {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkComponentSwizzle(u32);
-impl VkComponentSwizzle {
+impl VkComponentSwizzle
+{
     pub const IDENTITY: VkComponentSwizzle = VkComponentSwizzle(0);
     pub const ZERO: VkComponentSwizzle = VkComponentSwizzle(1);
     pub const ONE: VkComponentSwizzle = VkComponentSwizzle(2);
@@ -2001,9 +2483,12 @@ impl VkComponentSwizzle {
     pub const A: VkComponentSwizzle = VkComponentSwizzle(6);
 }
 
-impl core::fmt::Debug for VkComponentSwizzle {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkComponentSwizzle
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkComponentSwizzle::IDENTITY => write!(f, "VkComponentSwizzle(IDENTITY)"),
             VkComponentSwizzle::ZERO => write!(f, "VkComponentSwizzle(ZERO)"),
             VkComponentSwizzle::ONE => write!(f, "VkComponentSwizzle(ONE)"),
@@ -2019,7 +2504,8 @@ impl core::fmt::Debug for VkComponentSwizzle {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageViewType(u32);
-impl VkImageViewType {
+impl VkImageViewType
+{
     pub const K_1D: VkImageViewType = VkImageViewType(0);
     pub const K_2D: VkImageViewType = VkImageViewType(1);
     pub const K_3D: VkImageViewType = VkImageViewType(2);
@@ -2029,9 +2515,12 @@ impl VkImageViewType {
     pub const CUBE_ARRAY: VkImageViewType = VkImageViewType(6);
 }
 
-impl core::fmt::Debug for VkImageViewType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkImageViewType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkImageViewType::K_1D => write!(f, "VkImageViewType(K_1D)"),
             VkImageViewType::K_2D => write!(f, "VkImageViewType(K_2D)"),
             VkImageViewType::K_3D => write!(f, "VkImageViewType(K_3D)"),
@@ -2047,14 +2536,18 @@ impl core::fmt::Debug for VkImageViewType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageTiling(u32);
-impl VkImageTiling {
+impl VkImageTiling
+{
     pub const OPTIMAL: VkImageTiling = VkImageTiling(0);
     pub const LINEAR: VkImageTiling = VkImageTiling(1);
 }
 
-impl core::fmt::Debug for VkImageTiling {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkImageTiling
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkImageTiling::OPTIMAL => write!(f, "VkImageTiling(OPTIMAL)"),
             VkImageTiling::LINEAR => write!(f, "VkImageTiling(LINEAR)"),
             _ => write!(f, "VkImageTiling({})", self.0),
@@ -2065,15 +2558,19 @@ impl core::fmt::Debug for VkImageTiling {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageType(u32);
-impl VkImageType {
+impl VkImageType
+{
     pub const K_1D: VkImageType = VkImageType(0);
     pub const K_2D: VkImageType = VkImageType(1);
     pub const K_3D: VkImageType = VkImageType(2);
 }
 
-impl core::fmt::Debug for VkImageType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkImageType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkImageType::K_1D => write!(f, "VkImageType(K_1D)"),
             VkImageType::K_2D => write!(f, "VkImageType(K_2D)"),
             VkImageType::K_3D => write!(f, "VkImageType(K_3D)"),
@@ -2085,15 +2582,19 @@ impl core::fmt::Debug for VkImageType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkQueryType(u32);
-impl VkQueryType {
+impl VkQueryType
+{
     pub const OCCLUSION: VkQueryType = VkQueryType(0);
     pub const PIPELINE_STATISTICS: VkQueryType = VkQueryType(1);
     pub const TIMESTAMP: VkQueryType = VkQueryType(2);
 }
 
-impl core::fmt::Debug for VkQueryType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkQueryType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkQueryType::OCCLUSION => write!(f, "VkQueryType(OCCLUSION)"),
             VkQueryType::PIPELINE_STATISTICS => write!(f, "VkQueryType(PIPELINE_STATISTICS)"),
             VkQueryType::TIMESTAMP => write!(f, "VkQueryType(TIMESTAMP)"),
@@ -2105,7 +2606,8 @@ impl core::fmt::Debug for VkQueryType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkPhysicalDeviceType(u32);
-impl VkPhysicalDeviceType {
+impl VkPhysicalDeviceType
+{
     pub const OTHER: VkPhysicalDeviceType = VkPhysicalDeviceType(0);
     pub const INTEGRATED_GPU: VkPhysicalDeviceType = VkPhysicalDeviceType(1);
     pub const DISCRETE_GPU: VkPhysicalDeviceType = VkPhysicalDeviceType(2);
@@ -2113,11 +2615,17 @@ impl VkPhysicalDeviceType {
     pub const CPU: VkPhysicalDeviceType = VkPhysicalDeviceType(4);
 }
 
-impl core::fmt::Debug for VkPhysicalDeviceType {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkPhysicalDeviceType
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkPhysicalDeviceType::OTHER => write!(f, "VkPhysicalDeviceType(OTHER)"),
-            VkPhysicalDeviceType::INTEGRATED_GPU => write!(f, "VkPhysicalDeviceType(INTEGRATED_GPU)"),
+            VkPhysicalDeviceType::INTEGRATED_GPU =>
+            {
+                write!(f, "VkPhysicalDeviceType(INTEGRATED_GPU)")
+            }
             VkPhysicalDeviceType::DISCRETE_GPU => write!(f, "VkPhysicalDeviceType(DISCRETE_GPU)"),
             VkPhysicalDeviceType::VIRTUAL_GPU => write!(f, "VkPhysicalDeviceType(VIRTUAL_GPU)"),
             VkPhysicalDeviceType::CPU => write!(f, "VkPhysicalDeviceType(CPU)"),
@@ -2129,13 +2637,17 @@ impl core::fmt::Debug for VkPhysicalDeviceType {
 #[repr(transparent)]
 #[derive(Default, PartialOrd, Copy, Clone, Ord, PartialEq, Eq, Hash)]
 pub struct VkPipelineCacheHeaderVersion(u32);
-impl VkPipelineCacheHeaderVersion {
+impl VkPipelineCacheHeaderVersion
+{
     pub const ONE: VkPipelineCacheHeaderVersion = VkPipelineCacheHeaderVersion(1);
 }
 
-impl core::fmt::Debug for VkPipelineCacheHeaderVersion {
-    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
-    match *self {
+impl core::fmt::Debug for VkPipelineCacheHeaderVersion
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        match *self
+        {
             VkPipelineCacheHeaderVersion::ONE => write!(f, "VkPipelineCacheHeaderVersion(ONE)"),
             _ => write!(f, "VkPipelineCacheHeaderVersion({})", self.0),
         }
@@ -2145,7 +2657,8 @@ impl core::fmt::Debug for VkPipelineCacheHeaderVersion {
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageUsageFlagBits(VkFlags);
-impl VkImageUsageFlagBits {
+impl VkImageUsageFlagBits
+{
     pub const TRANSFER_SRC_BIT: VkImageUsageFlagBits = VkImageUsageFlagBits(1);
     pub const TRANSFER_DST_BIT: VkImageUsageFlagBits = VkImageUsageFlagBits(2);
     pub const SAMPLED_BIT: VkImageUsageFlagBits = VkImageUsageFlagBits(4);
@@ -2156,276 +2669,454 @@ impl VkImageUsageFlagBits {
     pub const INPUT_ATTACHMENT_BIT: VkImageUsageFlagBits = VkImageUsageFlagBits(128);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkImageUsageFlagBits {
+impl core::ops::BitOr for VkImageUsageFlagBits
+{
     type Output = VkImageUsageFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkImageUsageFlagBits {
+impl core::ops::BitOrAssign for VkImageUsageFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkImageUsageFlagBits {
+impl core::ops::BitAnd for VkImageUsageFlagBits
+{
     type Output = VkImageUsageFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkImageUsageFlagBits {
+impl core::ops::BitAndAssign for VkImageUsageFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkImageUsageFlagBits {
+impl core::ops::BitXor for VkImageUsageFlagBits
+{
     type Output = VkImageUsageFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkImageUsageFlagBits {
+impl core::ops::BitXorAssign for VkImageUsageFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCompositeAlphaFlagBitsKHR(VkFlags);
-impl VkCompositeAlphaFlagBitsKHR {
+impl VkCompositeAlphaFlagBitsKHR
+{
     pub const OPAQUE_BIT_KHR: VkCompositeAlphaFlagBitsKHR = VkCompositeAlphaFlagBitsKHR(1);
     pub const PRE_MULTIPLIED_BIT_KHR: VkCompositeAlphaFlagBitsKHR = VkCompositeAlphaFlagBitsKHR(2);
     pub const POST_MULTIPLIED_BIT_KHR: VkCompositeAlphaFlagBitsKHR = VkCompositeAlphaFlagBitsKHR(4);
     pub const INHERIT_BIT_KHR: VkCompositeAlphaFlagBitsKHR = VkCompositeAlphaFlagBitsKHR(8);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkCompositeAlphaFlagBitsKHR {
+impl core::ops::BitOr for VkCompositeAlphaFlagBitsKHR
+{
     type Output = VkCompositeAlphaFlagBitsKHR;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkCompositeAlphaFlagBitsKHR {
+impl core::ops::BitOrAssign for VkCompositeAlphaFlagBitsKHR
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkCompositeAlphaFlagBitsKHR {
+impl core::ops::BitAnd for VkCompositeAlphaFlagBitsKHR
+{
     type Output = VkCompositeAlphaFlagBitsKHR;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkCompositeAlphaFlagBitsKHR {
+impl core::ops::BitAndAssign for VkCompositeAlphaFlagBitsKHR
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkCompositeAlphaFlagBitsKHR {
+impl core::ops::BitXor for VkCompositeAlphaFlagBitsKHR
+{
     type Output = VkCompositeAlphaFlagBitsKHR;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkCompositeAlphaFlagBitsKHR {
+impl core::ops::BitXorAssign for VkCompositeAlphaFlagBitsKHR
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSurfaceTransformFlagBitsKHR(VkFlags);
-impl VkSurfaceTransformFlagBitsKHR {
+impl VkSurfaceTransformFlagBitsKHR
+{
     pub const IDENTITY_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(1);
     pub const ROTATE_90_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(2);
     pub const ROTATE_180_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(4);
     pub const ROTATE_270_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(8);
-    pub const HORIZONTAL_MIRROR_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(16);
-    pub const HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(32);
-    pub const HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(64);
-    pub const HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(128);
+    pub const HORIZONTAL_MIRROR_BIT_KHR: VkSurfaceTransformFlagBitsKHR =
+        VkSurfaceTransformFlagBitsKHR(16);
+    pub const HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR: VkSurfaceTransformFlagBitsKHR =
+        VkSurfaceTransformFlagBitsKHR(32);
+    pub const HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR: VkSurfaceTransformFlagBitsKHR =
+        VkSurfaceTransformFlagBitsKHR(64);
+    pub const HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR: VkSurfaceTransformFlagBitsKHR =
+        VkSurfaceTransformFlagBitsKHR(128);
     pub const INHERIT_BIT_KHR: VkSurfaceTransformFlagBitsKHR = VkSurfaceTransformFlagBitsKHR(256);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkSurfaceTransformFlagBitsKHR {
+impl core::ops::BitOr for VkSurfaceTransformFlagBitsKHR
+{
     type Output = VkSurfaceTransformFlagBitsKHR;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkSurfaceTransformFlagBitsKHR {
+impl core::ops::BitOrAssign for VkSurfaceTransformFlagBitsKHR
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkSurfaceTransformFlagBitsKHR {
+impl core::ops::BitAnd for VkSurfaceTransformFlagBitsKHR
+{
     type Output = VkSurfaceTransformFlagBitsKHR;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkSurfaceTransformFlagBitsKHR {
+impl core::ops::BitAndAssign for VkSurfaceTransformFlagBitsKHR
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkSurfaceTransformFlagBitsKHR {
+impl core::ops::BitXor for VkSurfaceTransformFlagBitsKHR
+{
     type Output = VkSurfaceTransformFlagBitsKHR;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkSurfaceTransformFlagBitsKHR {
+impl core::ops::BitXorAssign for VkSurfaceTransformFlagBitsKHR
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSwapchainCreateFlagBitsKHR(VkFlags);
-impl VkSwapchainCreateFlagBitsKHR {
-
+impl VkSwapchainCreateFlagBitsKHR
+{
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkSwapchainCreateFlagBitsKHR {
+impl core::ops::BitOr for VkSwapchainCreateFlagBitsKHR
+{
     type Output = VkSwapchainCreateFlagBitsKHR;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkSwapchainCreateFlagBitsKHR {
+impl core::ops::BitOrAssign for VkSwapchainCreateFlagBitsKHR
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkSwapchainCreateFlagBitsKHR {
+impl core::ops::BitAnd for VkSwapchainCreateFlagBitsKHR
+{
     type Output = VkSwapchainCreateFlagBitsKHR;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkSwapchainCreateFlagBitsKHR {
+impl core::ops::BitAndAssign for VkSwapchainCreateFlagBitsKHR
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkSwapchainCreateFlagBitsKHR {
+impl core::ops::BitXor for VkSwapchainCreateFlagBitsKHR
+{
     type Output = VkSwapchainCreateFlagBitsKHR;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkSwapchainCreateFlagBitsKHR {
+impl core::ops::BitXorAssign for VkSwapchainCreateFlagBitsKHR
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDebugUtilsMessageTypeFlagBitsEXT(VkFlags);
-impl VkDebugUtilsMessageTypeFlagBitsEXT {
-    pub const GENERAL_BIT_EXT: VkDebugUtilsMessageTypeFlagBitsEXT = VkDebugUtilsMessageTypeFlagBitsEXT(1);
-    pub const VALIDATION_BIT_EXT: VkDebugUtilsMessageTypeFlagBitsEXT = VkDebugUtilsMessageTypeFlagBitsEXT(2);
-    pub const PERFORMANCE_BIT_EXT: VkDebugUtilsMessageTypeFlagBitsEXT = VkDebugUtilsMessageTypeFlagBitsEXT(4);
+impl VkDebugUtilsMessageTypeFlagBitsEXT
+{
+    pub const GENERAL_BIT_EXT: VkDebugUtilsMessageTypeFlagBitsEXT =
+        VkDebugUtilsMessageTypeFlagBitsEXT(1);
+    pub const VALIDATION_BIT_EXT: VkDebugUtilsMessageTypeFlagBitsEXT =
+        VkDebugUtilsMessageTypeFlagBitsEXT(2);
+    pub const PERFORMANCE_BIT_EXT: VkDebugUtilsMessageTypeFlagBitsEXT =
+        VkDebugUtilsMessageTypeFlagBitsEXT(4);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkDebugUtilsMessageTypeFlagBitsEXT {
+impl core::ops::BitOr for VkDebugUtilsMessageTypeFlagBitsEXT
+{
     type Output = VkDebugUtilsMessageTypeFlagBitsEXT;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkDebugUtilsMessageTypeFlagBitsEXT {
+impl core::ops::BitOrAssign for VkDebugUtilsMessageTypeFlagBitsEXT
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkDebugUtilsMessageTypeFlagBitsEXT {
+impl core::ops::BitAnd for VkDebugUtilsMessageTypeFlagBitsEXT
+{
     type Output = VkDebugUtilsMessageTypeFlagBitsEXT;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkDebugUtilsMessageTypeFlagBitsEXT {
+impl core::ops::BitAndAssign for VkDebugUtilsMessageTypeFlagBitsEXT
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkDebugUtilsMessageTypeFlagBitsEXT {
+impl core::ops::BitXor for VkDebugUtilsMessageTypeFlagBitsEXT
+{
     type Output = VkDebugUtilsMessageTypeFlagBitsEXT;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkDebugUtilsMessageTypeFlagBitsEXT {
+impl core::ops::BitXorAssign for VkDebugUtilsMessageTypeFlagBitsEXT
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDebugUtilsMessageSeverityFlagBitsEXT(VkFlags);
-impl VkDebugUtilsMessageSeverityFlagBitsEXT {
-    pub const VERBOSE_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT = VkDebugUtilsMessageSeverityFlagBitsEXT(1);
-    pub const INFO_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT = VkDebugUtilsMessageSeverityFlagBitsEXT(16);
-    pub const WARNING_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT = VkDebugUtilsMessageSeverityFlagBitsEXT(256);
-    pub const ERROR_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT = VkDebugUtilsMessageSeverityFlagBitsEXT(4096);
+impl VkDebugUtilsMessageSeverityFlagBitsEXT
+{
+    pub const VERBOSE_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT =
+        VkDebugUtilsMessageSeverityFlagBitsEXT(1);
+    pub const INFO_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT =
+        VkDebugUtilsMessageSeverityFlagBitsEXT(16);
+    pub const WARNING_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT =
+        VkDebugUtilsMessageSeverityFlagBitsEXT(256);
+    pub const ERROR_BIT_EXT: VkDebugUtilsMessageSeverityFlagBitsEXT =
+        VkDebugUtilsMessageSeverityFlagBitsEXT(4096);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkDebugUtilsMessageSeverityFlagBitsEXT {
+impl core::ops::BitOr for VkDebugUtilsMessageSeverityFlagBitsEXT
+{
     type Output = VkDebugUtilsMessageSeverityFlagBitsEXT;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkDebugUtilsMessageSeverityFlagBitsEXT {
+impl core::ops::BitOrAssign for VkDebugUtilsMessageSeverityFlagBitsEXT
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkDebugUtilsMessageSeverityFlagBitsEXT {
+impl core::ops::BitAnd for VkDebugUtilsMessageSeverityFlagBitsEXT
+{
     type Output = VkDebugUtilsMessageSeverityFlagBitsEXT;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkDebugUtilsMessageSeverityFlagBitsEXT {
+impl core::ops::BitAndAssign for VkDebugUtilsMessageSeverityFlagBitsEXT
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkDebugUtilsMessageSeverityFlagBitsEXT {
+impl core::ops::BitXor for VkDebugUtilsMessageSeverityFlagBitsEXT
+{
     type Output = VkDebugUtilsMessageSeverityFlagBitsEXT;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkDebugUtilsMessageSeverityFlagBitsEXT {
+impl core::ops::BitXorAssign for VkDebugUtilsMessageSeverityFlagBitsEXT
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkAccessFlagBits(VkFlags);
-impl VkAccessFlagBits {
+impl VkAccessFlagBits
+{
     pub const INDIRECT_COMMAND_READ_BIT: VkAccessFlagBits = VkAccessFlagBits(1);
     pub const INDEX_READ_BIT: VkAccessFlagBits = VkAccessFlagBits(2);
     pub const VERTEX_ATTRIBUTE_READ_BIT: VkAccessFlagBits = VkAccessFlagBits(4);
@@ -2445,92 +3136,148 @@ impl VkAccessFlagBits {
     pub const MEMORY_WRITE_BIT: VkAccessFlagBits = VkAccessFlagBits(65536);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkAccessFlagBits {
+impl core::ops::BitOr for VkAccessFlagBits
+{
     type Output = VkAccessFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkAccessFlagBits {
+impl core::ops::BitOrAssign for VkAccessFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkAccessFlagBits {
+impl core::ops::BitAnd for VkAccessFlagBits
+{
     type Output = VkAccessFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkAccessFlagBits {
+impl core::ops::BitAndAssign for VkAccessFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkAccessFlagBits {
+impl core::ops::BitXor for VkAccessFlagBits
+{
     type Output = VkAccessFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkAccessFlagBits {
+impl core::ops::BitXorAssign for VkAccessFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageAspectFlagBits(VkFlags);
-impl VkImageAspectFlagBits {
+impl VkImageAspectFlagBits
+{
     pub const COLOR_BIT: VkImageAspectFlagBits = VkImageAspectFlagBits(1);
     pub const DEPTH_BIT: VkImageAspectFlagBits = VkImageAspectFlagBits(2);
     pub const STENCIL_BIT: VkImageAspectFlagBits = VkImageAspectFlagBits(4);
     pub const METADATA_BIT: VkImageAspectFlagBits = VkImageAspectFlagBits(8);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkImageAspectFlagBits {
+impl core::ops::BitOr for VkImageAspectFlagBits
+{
     type Output = VkImageAspectFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkImageAspectFlagBits {
+impl core::ops::BitOrAssign for VkImageAspectFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkImageAspectFlagBits {
+impl core::ops::BitAnd for VkImageAspectFlagBits
+{
     type Output = VkImageAspectFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkImageAspectFlagBits {
+impl core::ops::BitAndAssign for VkImageAspectFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkImageAspectFlagBits {
+impl core::ops::BitXor for VkImageAspectFlagBits
+{
     type Output = VkImageAspectFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkImageAspectFlagBits {
+impl core::ops::BitXorAssign for VkImageAspectFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkShaderStageFlagBits(VkFlags);
-impl VkShaderStageFlagBits {
+impl VkShaderStageFlagBits
+{
     pub const VERTEX_BIT: VkShaderStageFlagBits = VkShaderStageFlagBits(1);
     pub const TESSELLATION_CONTROL_BIT: VkShaderStageFlagBits = VkShaderStageFlagBits(2);
     pub const TESSELLATION_EVALUATION_BIT: VkShaderStageFlagBits = VkShaderStageFlagBits(4);
@@ -2541,98 +3288,156 @@ impl VkShaderStageFlagBits {
     pub const ALL: VkShaderStageFlagBits = VkShaderStageFlagBits(2147483647);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkShaderStageFlagBits {
+impl core::ops::BitOr for VkShaderStageFlagBits
+{
     type Output = VkShaderStageFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkShaderStageFlagBits {
+impl core::ops::BitOrAssign for VkShaderStageFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkShaderStageFlagBits {
+impl core::ops::BitAnd for VkShaderStageFlagBits
+{
     type Output = VkShaderStageFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkShaderStageFlagBits {
+impl core::ops::BitAndAssign for VkShaderStageFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkShaderStageFlagBits {
+impl core::ops::BitXor for VkShaderStageFlagBits
+{
     type Output = VkShaderStageFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkShaderStageFlagBits {
+impl core::ops::BitXorAssign for VkShaderStageFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkQueryResultFlagBits(VkFlags);
-impl VkQueryResultFlagBits {
+impl VkQueryResultFlagBits
+{
     pub const K_64_BIT: VkQueryResultFlagBits = VkQueryResultFlagBits(1);
     pub const WAIT_BIT: VkQueryResultFlagBits = VkQueryResultFlagBits(2);
     pub const WITH_AVAILABILITY_BIT: VkQueryResultFlagBits = VkQueryResultFlagBits(4);
     pub const PARTIAL_BIT: VkQueryResultFlagBits = VkQueryResultFlagBits(8);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkQueryResultFlagBits {
+impl core::ops::BitOr for VkQueryResultFlagBits
+{
     type Output = VkQueryResultFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkQueryResultFlagBits {
+impl core::ops::BitOrAssign for VkQueryResultFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkQueryResultFlagBits {
+impl core::ops::BitAnd for VkQueryResultFlagBits
+{
     type Output = VkQueryResultFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkQueryResultFlagBits {
+impl core::ops::BitAndAssign for VkQueryResultFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkQueryResultFlagBits {
+impl core::ops::BitXor for VkQueryResultFlagBits
+{
     type Output = VkQueryResultFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkQueryResultFlagBits {
+impl core::ops::BitXorAssign for VkQueryResultFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkPipelineStageFlagBits(VkFlags);
-impl VkPipelineStageFlagBits {
+impl VkPipelineStageFlagBits
+{
     pub const TOP_OF_PIPE_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(1);
     pub const DRAW_INDIRECT_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(2);
     pub const VERTEX_INPUT_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(4);
     pub const VERTEX_SHADER_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(8);
-    pub const TESSELLATION_CONTROL_SHADER_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(16);
-    pub const TESSELLATION_EVALUATION_SHADER_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(32);
+    pub const TESSELLATION_CONTROL_SHADER_BIT: VkPipelineStageFlagBits =
+        VkPipelineStageFlagBits(16);
+    pub const TESSELLATION_EVALUATION_SHADER_BIT: VkPipelineStageFlagBits =
+        VkPipelineStageFlagBits(32);
     pub const GEOMETRY_SHADER_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(64);
     pub const FRAGMENT_SHADER_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(128);
     pub const EARLY_FRAGMENT_TESTS_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(256);
@@ -2646,447 +3451,739 @@ impl VkPipelineStageFlagBits {
     pub const ALL_COMMANDS_BIT: VkPipelineStageFlagBits = VkPipelineStageFlagBits(65536);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkPipelineStageFlagBits {
+impl core::ops::BitOr for VkPipelineStageFlagBits
+{
     type Output = VkPipelineStageFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkPipelineStageFlagBits {
+impl core::ops::BitOrAssign for VkPipelineStageFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkPipelineStageFlagBits {
+impl core::ops::BitAnd for VkPipelineStageFlagBits
+{
     type Output = VkPipelineStageFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkPipelineStageFlagBits {
+impl core::ops::BitAndAssign for VkPipelineStageFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkPipelineStageFlagBits {
+impl core::ops::BitXor for VkPipelineStageFlagBits
+{
     type Output = VkPipelineStageFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkPipelineStageFlagBits {
+impl core::ops::BitXorAssign for VkPipelineStageFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkQueryControlFlagBits(VkFlags);
-impl VkQueryControlFlagBits {
+impl VkQueryControlFlagBits
+{
     pub const PRECISE_BIT: VkQueryControlFlagBits = VkQueryControlFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkQueryControlFlagBits {
+impl core::ops::BitOr for VkQueryControlFlagBits
+{
     type Output = VkQueryControlFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkQueryControlFlagBits {
+impl core::ops::BitOrAssign for VkQueryControlFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkQueryControlFlagBits {
+impl core::ops::BitAnd for VkQueryControlFlagBits
+{
     type Output = VkQueryControlFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkQueryControlFlagBits {
+impl core::ops::BitAndAssign for VkQueryControlFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkQueryControlFlagBits {
+impl core::ops::BitXor for VkQueryControlFlagBits
+{
     type Output = VkQueryControlFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkQueryControlFlagBits {
+impl core::ops::BitXorAssign for VkQueryControlFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDependencyFlagBits(VkFlags);
-impl VkDependencyFlagBits {
+impl VkDependencyFlagBits
+{
     pub const BY_REGION_BIT: VkDependencyFlagBits = VkDependencyFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkDependencyFlagBits {
+impl core::ops::BitOr for VkDependencyFlagBits
+{
     type Output = VkDependencyFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkDependencyFlagBits {
+impl core::ops::BitOrAssign for VkDependencyFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkDependencyFlagBits {
+impl core::ops::BitAnd for VkDependencyFlagBits
+{
     type Output = VkDependencyFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkDependencyFlagBits {
+impl core::ops::BitAndAssign for VkDependencyFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkDependencyFlagBits {
+impl core::ops::BitXor for VkDependencyFlagBits
+{
     type Output = VkDependencyFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkDependencyFlagBits {
+impl core::ops::BitXorAssign for VkDependencyFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkStencilFaceFlagBits(VkFlags);
-impl VkStencilFaceFlagBits {
+impl VkStencilFaceFlagBits
+{
     pub const FRONT_BIT: VkStencilFaceFlagBits = VkStencilFaceFlagBits(1);
     pub const BACK_BIT: VkStencilFaceFlagBits = VkStencilFaceFlagBits(2);
     pub const FRONT_AND_BACK: VkStencilFaceFlagBits = VkStencilFaceFlagBits(3);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkStencilFaceFlagBits {
+impl core::ops::BitOr for VkStencilFaceFlagBits
+{
     type Output = VkStencilFaceFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkStencilFaceFlagBits {
+impl core::ops::BitOrAssign for VkStencilFaceFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkStencilFaceFlagBits {
+impl core::ops::BitAnd for VkStencilFaceFlagBits
+{
     type Output = VkStencilFaceFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkStencilFaceFlagBits {
+impl core::ops::BitAndAssign for VkStencilFaceFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkStencilFaceFlagBits {
+impl core::ops::BitXor for VkStencilFaceFlagBits
+{
     type Output = VkStencilFaceFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkStencilFaceFlagBits {
+impl core::ops::BitXorAssign for VkStencilFaceFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCommandBufferResetFlagBits(VkFlags);
-impl VkCommandBufferResetFlagBits {
+impl VkCommandBufferResetFlagBits
+{
     pub const RELEASE_RESOURCES_BIT: VkCommandBufferResetFlagBits = VkCommandBufferResetFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkCommandBufferResetFlagBits {
+impl core::ops::BitOr for VkCommandBufferResetFlagBits
+{
     type Output = VkCommandBufferResetFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkCommandBufferResetFlagBits {
+impl core::ops::BitOrAssign for VkCommandBufferResetFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkCommandBufferResetFlagBits {
+impl core::ops::BitAnd for VkCommandBufferResetFlagBits
+{
     type Output = VkCommandBufferResetFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkCommandBufferResetFlagBits {
+impl core::ops::BitAndAssign for VkCommandBufferResetFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkCommandBufferResetFlagBits {
+impl core::ops::BitXor for VkCommandBufferResetFlagBits
+{
     type Output = VkCommandBufferResetFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkCommandBufferResetFlagBits {
+impl core::ops::BitXorAssign for VkCommandBufferResetFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkQueryPipelineStatisticFlagBits(VkFlags);
-impl VkQueryPipelineStatisticFlagBits {
-    pub const INPUT_ASSEMBLY_VERTICES_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(1);
-    pub const INPUT_ASSEMBLY_PRIMITIVES_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(2);
-    pub const VERTEX_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(4);
-    pub const GEOMETRY_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(8);
-    pub const GEOMETRY_SHADER_PRIMITIVES_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(16);
-    pub const CLIPPING_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(32);
-    pub const CLIPPING_PRIMITIVES_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(64);
-    pub const FRAGMENT_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(128);
-    pub const TESSELLATION_CONTROL_SHADER_PATCHES_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(256);
-    pub const TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(512);
-    pub const COMPUTE_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits = VkQueryPipelineStatisticFlagBits(1024);
+impl VkQueryPipelineStatisticFlagBits
+{
+    pub const INPUT_ASSEMBLY_VERTICES_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(1);
+    pub const INPUT_ASSEMBLY_PRIMITIVES_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(2);
+    pub const VERTEX_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(4);
+    pub const GEOMETRY_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(8);
+    pub const GEOMETRY_SHADER_PRIMITIVES_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(16);
+    pub const CLIPPING_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(32);
+    pub const CLIPPING_PRIMITIVES_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(64);
+    pub const FRAGMENT_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(128);
+    pub const TESSELLATION_CONTROL_SHADER_PATCHES_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(256);
+    pub const TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(512);
+    pub const COMPUTE_SHADER_INVOCATIONS_BIT: VkQueryPipelineStatisticFlagBits =
+        VkQueryPipelineStatisticFlagBits(1024);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkQueryPipelineStatisticFlagBits {
+impl core::ops::BitOr for VkQueryPipelineStatisticFlagBits
+{
     type Output = VkQueryPipelineStatisticFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkQueryPipelineStatisticFlagBits {
+impl core::ops::BitOrAssign for VkQueryPipelineStatisticFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkQueryPipelineStatisticFlagBits {
+impl core::ops::BitAnd for VkQueryPipelineStatisticFlagBits
+{
     type Output = VkQueryPipelineStatisticFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkQueryPipelineStatisticFlagBits {
+impl core::ops::BitAndAssign for VkQueryPipelineStatisticFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkQueryPipelineStatisticFlagBits {
+impl core::ops::BitXor for VkQueryPipelineStatisticFlagBits
+{
     type Output = VkQueryPipelineStatisticFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkQueryPipelineStatisticFlagBits {
+impl core::ops::BitXorAssign for VkQueryPipelineStatisticFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCommandBufferUsageFlagBits(VkFlags);
-impl VkCommandBufferUsageFlagBits {
+impl VkCommandBufferUsageFlagBits
+{
     pub const ONE_TIME_SUBMIT_BIT: VkCommandBufferUsageFlagBits = VkCommandBufferUsageFlagBits(1);
-    pub const RENDER_PASS_CONTINUE_BIT: VkCommandBufferUsageFlagBits = VkCommandBufferUsageFlagBits(2);
+    pub const RENDER_PASS_CONTINUE_BIT: VkCommandBufferUsageFlagBits =
+        VkCommandBufferUsageFlagBits(2);
     pub const SIMULTANEOUS_USE_BIT: VkCommandBufferUsageFlagBits = VkCommandBufferUsageFlagBits(4);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkCommandBufferUsageFlagBits {
+impl core::ops::BitOr for VkCommandBufferUsageFlagBits
+{
     type Output = VkCommandBufferUsageFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkCommandBufferUsageFlagBits {
+impl core::ops::BitOrAssign for VkCommandBufferUsageFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkCommandBufferUsageFlagBits {
+impl core::ops::BitAnd for VkCommandBufferUsageFlagBits
+{
     type Output = VkCommandBufferUsageFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkCommandBufferUsageFlagBits {
+impl core::ops::BitAndAssign for VkCommandBufferUsageFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkCommandBufferUsageFlagBits {
+impl core::ops::BitXor for VkCommandBufferUsageFlagBits
+{
     type Output = VkCommandBufferUsageFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkCommandBufferUsageFlagBits {
+impl core::ops::BitXorAssign for VkCommandBufferUsageFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCommandPoolResetFlagBits(VkFlags);
-impl VkCommandPoolResetFlagBits {
+impl VkCommandPoolResetFlagBits
+{
     pub const RELEASE_RESOURCES_BIT: VkCommandPoolResetFlagBits = VkCommandPoolResetFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkCommandPoolResetFlagBits {
+impl core::ops::BitOr for VkCommandPoolResetFlagBits
+{
     type Output = VkCommandPoolResetFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkCommandPoolResetFlagBits {
+impl core::ops::BitOrAssign for VkCommandPoolResetFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkCommandPoolResetFlagBits {
+impl core::ops::BitAnd for VkCommandPoolResetFlagBits
+{
     type Output = VkCommandPoolResetFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkCommandPoolResetFlagBits {
+impl core::ops::BitAndAssign for VkCommandPoolResetFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkCommandPoolResetFlagBits {
+impl core::ops::BitXor for VkCommandPoolResetFlagBits
+{
     type Output = VkCommandPoolResetFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkCommandPoolResetFlagBits {
+impl core::ops::BitXorAssign for VkCommandPoolResetFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCommandPoolCreateFlagBits(VkFlags);
-impl VkCommandPoolCreateFlagBits {
+impl VkCommandPoolCreateFlagBits
+{
     pub const TRANSIENT_BIT: VkCommandPoolCreateFlagBits = VkCommandPoolCreateFlagBits(1);
-    pub const RESET_COMMAND_BUFFER_BIT: VkCommandPoolCreateFlagBits = VkCommandPoolCreateFlagBits(2);
+    pub const RESET_COMMAND_BUFFER_BIT: VkCommandPoolCreateFlagBits =
+        VkCommandPoolCreateFlagBits(2);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkCommandPoolCreateFlagBits {
+impl core::ops::BitOr for VkCommandPoolCreateFlagBits
+{
     type Output = VkCommandPoolCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkCommandPoolCreateFlagBits {
+impl core::ops::BitOrAssign for VkCommandPoolCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkCommandPoolCreateFlagBits {
+impl core::ops::BitAnd for VkCommandPoolCreateFlagBits
+{
     type Output = VkCommandPoolCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkCommandPoolCreateFlagBits {
+impl core::ops::BitAndAssign for VkCommandPoolCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkCommandPoolCreateFlagBits {
+impl core::ops::BitXor for VkCommandPoolCreateFlagBits
+{
     type Output = VkCommandPoolCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkCommandPoolCreateFlagBits {
+impl core::ops::BitXorAssign for VkCommandPoolCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSubpassDescriptionFlagBits(VkFlags);
-impl VkSubpassDescriptionFlagBits {
-
+impl VkSubpassDescriptionFlagBits
+{
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkSubpassDescriptionFlagBits {
+impl core::ops::BitOr for VkSubpassDescriptionFlagBits
+{
     type Output = VkSubpassDescriptionFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkSubpassDescriptionFlagBits {
+impl core::ops::BitOrAssign for VkSubpassDescriptionFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkSubpassDescriptionFlagBits {
+impl core::ops::BitAnd for VkSubpassDescriptionFlagBits
+{
     type Output = VkSubpassDescriptionFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkSubpassDescriptionFlagBits {
+impl core::ops::BitAndAssign for VkSubpassDescriptionFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkSubpassDescriptionFlagBits {
+impl core::ops::BitXor for VkSubpassDescriptionFlagBits
+{
     type Output = VkSubpassDescriptionFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkSubpassDescriptionFlagBits {
+impl core::ops::BitXorAssign for VkSubpassDescriptionFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSampleCountFlagBits(VkFlags);
-impl VkSampleCountFlagBits {
+impl VkSampleCountFlagBits
+{
     pub const K_1_BIT: VkSampleCountFlagBits = VkSampleCountFlagBits(1);
     pub const K_2_BIT: VkSampleCountFlagBits = VkSampleCountFlagBits(2);
     pub const K_4_BIT: VkSampleCountFlagBits = VkSampleCountFlagBits(4);
@@ -3096,395 +4193,645 @@ impl VkSampleCountFlagBits {
     pub const K_64_BIT: VkSampleCountFlagBits = VkSampleCountFlagBits(64);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkSampleCountFlagBits {
+impl core::ops::BitOr for VkSampleCountFlagBits
+{
     type Output = VkSampleCountFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkSampleCountFlagBits {
+impl core::ops::BitOrAssign for VkSampleCountFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkSampleCountFlagBits {
+impl core::ops::BitAnd for VkSampleCountFlagBits
+{
     type Output = VkSampleCountFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkSampleCountFlagBits {
+impl core::ops::BitAndAssign for VkSampleCountFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkSampleCountFlagBits {
+impl core::ops::BitXor for VkSampleCountFlagBits
+{
     type Output = VkSampleCountFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkSampleCountFlagBits {
+impl core::ops::BitXorAssign for VkSampleCountFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkAttachmentDescriptionFlagBits(VkFlags);
-impl VkAttachmentDescriptionFlagBits {
+impl VkAttachmentDescriptionFlagBits
+{
     pub const MAY_ALIAS_BIT: VkAttachmentDescriptionFlagBits = VkAttachmentDescriptionFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkAttachmentDescriptionFlagBits {
+impl core::ops::BitOr for VkAttachmentDescriptionFlagBits
+{
     type Output = VkAttachmentDescriptionFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkAttachmentDescriptionFlagBits {
+impl core::ops::BitOrAssign for VkAttachmentDescriptionFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkAttachmentDescriptionFlagBits {
+impl core::ops::BitAnd for VkAttachmentDescriptionFlagBits
+{
     type Output = VkAttachmentDescriptionFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkAttachmentDescriptionFlagBits {
+impl core::ops::BitAndAssign for VkAttachmentDescriptionFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkAttachmentDescriptionFlagBits {
+impl core::ops::BitXor for VkAttachmentDescriptionFlagBits
+{
     type Output = VkAttachmentDescriptionFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkAttachmentDescriptionFlagBits {
+impl core::ops::BitXorAssign for VkAttachmentDescriptionFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDescriptorPoolCreateFlagBits(VkFlags);
-impl VkDescriptorPoolCreateFlagBits {
-    pub const FREE_DESCRIPTOR_SET_BIT: VkDescriptorPoolCreateFlagBits = VkDescriptorPoolCreateFlagBits(1);
+impl VkDescriptorPoolCreateFlagBits
+{
+    pub const FREE_DESCRIPTOR_SET_BIT: VkDescriptorPoolCreateFlagBits =
+        VkDescriptorPoolCreateFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkDescriptorPoolCreateFlagBits {
+impl core::ops::BitOr for VkDescriptorPoolCreateFlagBits
+{
     type Output = VkDescriptorPoolCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkDescriptorPoolCreateFlagBits {
+impl core::ops::BitOrAssign for VkDescriptorPoolCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkDescriptorPoolCreateFlagBits {
+impl core::ops::BitAnd for VkDescriptorPoolCreateFlagBits
+{
     type Output = VkDescriptorPoolCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkDescriptorPoolCreateFlagBits {
+impl core::ops::BitAndAssign for VkDescriptorPoolCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkDescriptorPoolCreateFlagBits {
+impl core::ops::BitXor for VkDescriptorPoolCreateFlagBits
+{
     type Output = VkDescriptorPoolCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkDescriptorPoolCreateFlagBits {
+impl core::ops::BitXorAssign for VkDescriptorPoolCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDescriptorSetLayoutCreateFlagBits(VkFlags);
-impl VkDescriptorSetLayoutCreateFlagBits {
-
+impl VkDescriptorSetLayoutCreateFlagBits
+{
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkDescriptorSetLayoutCreateFlagBits {
+impl core::ops::BitOr for VkDescriptorSetLayoutCreateFlagBits
+{
     type Output = VkDescriptorSetLayoutCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkDescriptorSetLayoutCreateFlagBits {
+impl core::ops::BitOrAssign for VkDescriptorSetLayoutCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkDescriptorSetLayoutCreateFlagBits {
+impl core::ops::BitAnd for VkDescriptorSetLayoutCreateFlagBits
+{
     type Output = VkDescriptorSetLayoutCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkDescriptorSetLayoutCreateFlagBits {
+impl core::ops::BitAndAssign for VkDescriptorSetLayoutCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkDescriptorSetLayoutCreateFlagBits {
+impl core::ops::BitXor for VkDescriptorSetLayoutCreateFlagBits
+{
     type Output = VkDescriptorSetLayoutCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkDescriptorSetLayoutCreateFlagBits {
+impl core::ops::BitXorAssign for VkDescriptorSetLayoutCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSamplerCreateFlagBits(VkFlags);
-impl VkSamplerCreateFlagBits {
-
+impl VkSamplerCreateFlagBits
+{
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkSamplerCreateFlagBits {
+impl core::ops::BitOr for VkSamplerCreateFlagBits
+{
     type Output = VkSamplerCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkSamplerCreateFlagBits {
+impl core::ops::BitOrAssign for VkSamplerCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkSamplerCreateFlagBits {
+impl core::ops::BitAnd for VkSamplerCreateFlagBits
+{
     type Output = VkSamplerCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkSamplerCreateFlagBits {
+impl core::ops::BitAndAssign for VkSamplerCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkSamplerCreateFlagBits {
+impl core::ops::BitXor for VkSamplerCreateFlagBits
+{
     type Output = VkSamplerCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkSamplerCreateFlagBits {
+impl core::ops::BitXorAssign for VkSamplerCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkPipelineCreateFlagBits(VkFlags);
-impl VkPipelineCreateFlagBits {
+impl VkPipelineCreateFlagBits
+{
     pub const DISABLE_OPTIMIZATION_BIT: VkPipelineCreateFlagBits = VkPipelineCreateFlagBits(1);
     pub const ALLOW_DERIVATIVES_BIT: VkPipelineCreateFlagBits = VkPipelineCreateFlagBits(2);
     pub const DERIVATIVE_BIT: VkPipelineCreateFlagBits = VkPipelineCreateFlagBits(4);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkPipelineCreateFlagBits {
+impl core::ops::BitOr for VkPipelineCreateFlagBits
+{
     type Output = VkPipelineCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkPipelineCreateFlagBits {
+impl core::ops::BitOrAssign for VkPipelineCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkPipelineCreateFlagBits {
+impl core::ops::BitAnd for VkPipelineCreateFlagBits
+{
     type Output = VkPipelineCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkPipelineCreateFlagBits {
+impl core::ops::BitAndAssign for VkPipelineCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkPipelineCreateFlagBits {
+impl core::ops::BitXor for VkPipelineCreateFlagBits
+{
     type Output = VkPipelineCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkPipelineCreateFlagBits {
+impl core::ops::BitXorAssign for VkPipelineCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkColorComponentFlagBits(VkFlags);
-impl VkColorComponentFlagBits {
+impl VkColorComponentFlagBits
+{
     pub const R_BIT: VkColorComponentFlagBits = VkColorComponentFlagBits(1);
     pub const G_BIT: VkColorComponentFlagBits = VkColorComponentFlagBits(2);
     pub const B_BIT: VkColorComponentFlagBits = VkColorComponentFlagBits(4);
     pub const A_BIT: VkColorComponentFlagBits = VkColorComponentFlagBits(8);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkColorComponentFlagBits {
+impl core::ops::BitOr for VkColorComponentFlagBits
+{
     type Output = VkColorComponentFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkColorComponentFlagBits {
+impl core::ops::BitOrAssign for VkColorComponentFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkColorComponentFlagBits {
+impl core::ops::BitAnd for VkColorComponentFlagBits
+{
     type Output = VkColorComponentFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkColorComponentFlagBits {
+impl core::ops::BitAndAssign for VkColorComponentFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkColorComponentFlagBits {
+impl core::ops::BitXor for VkColorComponentFlagBits
+{
     type Output = VkColorComponentFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkColorComponentFlagBits {
+impl core::ops::BitXorAssign for VkColorComponentFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCullModeFlagBits(VkFlags);
-impl VkCullModeFlagBits {
+impl VkCullModeFlagBits
+{
     pub const NONE: VkCullModeFlagBits = VkCullModeFlagBits(0);
     pub const FRONT_BIT: VkCullModeFlagBits = VkCullModeFlagBits(1);
     pub const BACK_BIT: VkCullModeFlagBits = VkCullModeFlagBits(2);
     pub const FRONT_AND_BACK: VkCullModeFlagBits = VkCullModeFlagBits(3);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkCullModeFlagBits {
+impl core::ops::BitOr for VkCullModeFlagBits
+{
     type Output = VkCullModeFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkCullModeFlagBits {
+impl core::ops::BitOrAssign for VkCullModeFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkCullModeFlagBits {
+impl core::ops::BitAnd for VkCullModeFlagBits
+{
     type Output = VkCullModeFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkCullModeFlagBits {
+impl core::ops::BitAndAssign for VkCullModeFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkCullModeFlagBits {
+impl core::ops::BitXor for VkCullModeFlagBits
+{
     type Output = VkCullModeFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkCullModeFlagBits {
+impl core::ops::BitXorAssign for VkCullModeFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageViewCreateFlagBits(VkFlags);
-impl VkImageViewCreateFlagBits {
-
+impl VkImageViewCreateFlagBits
+{
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkImageViewCreateFlagBits {
+impl core::ops::BitOr for VkImageViewCreateFlagBits
+{
     type Output = VkImageViewCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkImageViewCreateFlagBits {
+impl core::ops::BitOrAssign for VkImageViewCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkImageViewCreateFlagBits {
+impl core::ops::BitAnd for VkImageViewCreateFlagBits
+{
     type Output = VkImageViewCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkImageViewCreateFlagBits {
+impl core::ops::BitAndAssign for VkImageViewCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkImageViewCreateFlagBits {
+impl core::ops::BitXor for VkImageViewCreateFlagBits
+{
     type Output = VkImageViewCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkImageViewCreateFlagBits {
+impl core::ops::BitXorAssign for VkImageViewCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageCreateFlagBits(VkFlags);
-impl VkImageCreateFlagBits {
+impl VkImageCreateFlagBits
+{
     pub const SPARSE_BINDING_BIT: VkImageCreateFlagBits = VkImageCreateFlagBits(1);
     pub const SPARSE_RESIDENCY_BIT: VkImageCreateFlagBits = VkImageCreateFlagBits(2);
     pub const SPARSE_ALIASED_BIT: VkImageCreateFlagBits = VkImageCreateFlagBits(4);
@@ -3492,46 +4839,74 @@ impl VkImageCreateFlagBits {
     pub const CUBE_COMPATIBLE_BIT: VkImageCreateFlagBits = VkImageCreateFlagBits(16);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkImageCreateFlagBits {
+impl core::ops::BitOr for VkImageCreateFlagBits
+{
     type Output = VkImageCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkImageCreateFlagBits {
+impl core::ops::BitOrAssign for VkImageCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkImageCreateFlagBits {
+impl core::ops::BitAnd for VkImageCreateFlagBits
+{
     type Output = VkImageCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkImageCreateFlagBits {
+impl core::ops::BitAndAssign for VkImageCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkImageCreateFlagBits {
+impl core::ops::BitXor for VkImageCreateFlagBits
+{
     type Output = VkImageCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkImageCreateFlagBits {
+impl core::ops::BitXorAssign for VkImageCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkBufferUsageFlagBits(VkFlags);
-impl VkBufferUsageFlagBits {
+impl VkBufferUsageFlagBits
+{
     pub const TRANSFER_SRC_BIT: VkBufferUsageFlagBits = VkBufferUsageFlagBits(1);
     pub const TRANSFER_DST_BIT: VkBufferUsageFlagBits = VkBufferUsageFlagBits(2);
     pub const UNIFORM_TEXEL_BUFFER_BIT: VkBufferUsageFlagBits = VkBufferUsageFlagBits(4);
@@ -3543,307 +4918,503 @@ impl VkBufferUsageFlagBits {
     pub const INDIRECT_BUFFER_BIT: VkBufferUsageFlagBits = VkBufferUsageFlagBits(256);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkBufferUsageFlagBits {
+impl core::ops::BitOr for VkBufferUsageFlagBits
+{
     type Output = VkBufferUsageFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkBufferUsageFlagBits {
+impl core::ops::BitOrAssign for VkBufferUsageFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkBufferUsageFlagBits {
+impl core::ops::BitAnd for VkBufferUsageFlagBits
+{
     type Output = VkBufferUsageFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkBufferUsageFlagBits {
+impl core::ops::BitAndAssign for VkBufferUsageFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkBufferUsageFlagBits {
+impl core::ops::BitXor for VkBufferUsageFlagBits
+{
     type Output = VkBufferUsageFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkBufferUsageFlagBits {
+impl core::ops::BitXorAssign for VkBufferUsageFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkBufferCreateFlagBits(VkFlags);
-impl VkBufferCreateFlagBits {
+impl VkBufferCreateFlagBits
+{
     pub const SPARSE_BINDING_BIT: VkBufferCreateFlagBits = VkBufferCreateFlagBits(1);
     pub const SPARSE_RESIDENCY_BIT: VkBufferCreateFlagBits = VkBufferCreateFlagBits(2);
     pub const SPARSE_ALIASED_BIT: VkBufferCreateFlagBits = VkBufferCreateFlagBits(4);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkBufferCreateFlagBits {
+impl core::ops::BitOr for VkBufferCreateFlagBits
+{
     type Output = VkBufferCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkBufferCreateFlagBits {
+impl core::ops::BitOrAssign for VkBufferCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkBufferCreateFlagBits {
+impl core::ops::BitAnd for VkBufferCreateFlagBits
+{
     type Output = VkBufferCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkBufferCreateFlagBits {
+impl core::ops::BitAndAssign for VkBufferCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkBufferCreateFlagBits {
+impl core::ops::BitXor for VkBufferCreateFlagBits
+{
     type Output = VkBufferCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkBufferCreateFlagBits {
+impl core::ops::BitXorAssign for VkBufferCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkFenceCreateFlagBits(VkFlags);
-impl VkFenceCreateFlagBits {
+impl VkFenceCreateFlagBits
+{
     pub const SIGNALED_BIT: VkFenceCreateFlagBits = VkFenceCreateFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkFenceCreateFlagBits {
+impl core::ops::BitOr for VkFenceCreateFlagBits
+{
     type Output = VkFenceCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkFenceCreateFlagBits {
+impl core::ops::BitOrAssign for VkFenceCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkFenceCreateFlagBits {
+impl core::ops::BitAnd for VkFenceCreateFlagBits
+{
     type Output = VkFenceCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkFenceCreateFlagBits {
+impl core::ops::BitAndAssign for VkFenceCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkFenceCreateFlagBits {
+impl core::ops::BitXor for VkFenceCreateFlagBits
+{
     type Output = VkFenceCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkFenceCreateFlagBits {
+impl core::ops::BitXorAssign for VkFenceCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSparseMemoryBindFlagBits(VkFlags);
-impl VkSparseMemoryBindFlagBits {
+impl VkSparseMemoryBindFlagBits
+{
     pub const METADATA_BIT: VkSparseMemoryBindFlagBits = VkSparseMemoryBindFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkSparseMemoryBindFlagBits {
+impl core::ops::BitOr for VkSparseMemoryBindFlagBits
+{
     type Output = VkSparseMemoryBindFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkSparseMemoryBindFlagBits {
+impl core::ops::BitOrAssign for VkSparseMemoryBindFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkSparseMemoryBindFlagBits {
+impl core::ops::BitAnd for VkSparseMemoryBindFlagBits
+{
     type Output = VkSparseMemoryBindFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkSparseMemoryBindFlagBits {
+impl core::ops::BitAndAssign for VkSparseMemoryBindFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkSparseMemoryBindFlagBits {
+impl core::ops::BitXor for VkSparseMemoryBindFlagBits
+{
     type Output = VkSparseMemoryBindFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkSparseMemoryBindFlagBits {
+impl core::ops::BitXorAssign for VkSparseMemoryBindFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSparseImageFormatFlagBits(VkFlags);
-impl VkSparseImageFormatFlagBits {
+impl VkSparseImageFormatFlagBits
+{
     pub const SINGLE_MIPTAIL_BIT: VkSparseImageFormatFlagBits = VkSparseImageFormatFlagBits(1);
     pub const ALIGNED_MIP_SIZE_BIT: VkSparseImageFormatFlagBits = VkSparseImageFormatFlagBits(2);
-    pub const NONSTANDARD_BLOCK_SIZE_BIT: VkSparseImageFormatFlagBits = VkSparseImageFormatFlagBits(4);
+    pub const NONSTANDARD_BLOCK_SIZE_BIT: VkSparseImageFormatFlagBits =
+        VkSparseImageFormatFlagBits(4);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkSparseImageFormatFlagBits {
+impl core::ops::BitOr for VkSparseImageFormatFlagBits
+{
     type Output = VkSparseImageFormatFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkSparseImageFormatFlagBits {
+impl core::ops::BitOrAssign for VkSparseImageFormatFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkSparseImageFormatFlagBits {
+impl core::ops::BitAnd for VkSparseImageFormatFlagBits
+{
     type Output = VkSparseImageFormatFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkSparseImageFormatFlagBits {
+impl core::ops::BitAndAssign for VkSparseImageFormatFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkSparseImageFormatFlagBits {
+impl core::ops::BitXor for VkSparseImageFormatFlagBits
+{
     type Output = VkSparseImageFormatFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkSparseImageFormatFlagBits {
+impl core::ops::BitXorAssign for VkSparseImageFormatFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDeviceQueueCreateFlagBits(VkFlags);
-impl VkDeviceQueueCreateFlagBits {
-
+impl VkDeviceQueueCreateFlagBits
+{
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkDeviceQueueCreateFlagBits {
+impl core::ops::BitOr for VkDeviceQueueCreateFlagBits
+{
     type Output = VkDeviceQueueCreateFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkDeviceQueueCreateFlagBits {
+impl core::ops::BitOrAssign for VkDeviceQueueCreateFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkDeviceQueueCreateFlagBits {
+impl core::ops::BitAnd for VkDeviceQueueCreateFlagBits
+{
     type Output = VkDeviceQueueCreateFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkDeviceQueueCreateFlagBits {
+impl core::ops::BitAndAssign for VkDeviceQueueCreateFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkDeviceQueueCreateFlagBits {
+impl core::ops::BitXor for VkDeviceQueueCreateFlagBits
+{
     type Output = VkDeviceQueueCreateFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkDeviceQueueCreateFlagBits {
+impl core::ops::BitXorAssign for VkDeviceQueueCreateFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkMemoryHeapFlagBits(VkFlags);
-impl VkMemoryHeapFlagBits {
+impl VkMemoryHeapFlagBits
+{
     pub const DEVICE_LOCAL_BIT: VkMemoryHeapFlagBits = VkMemoryHeapFlagBits(1);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkMemoryHeapFlagBits {
+impl core::ops::BitOr for VkMemoryHeapFlagBits
+{
     type Output = VkMemoryHeapFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkMemoryHeapFlagBits {
+impl core::ops::BitOrAssign for VkMemoryHeapFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkMemoryHeapFlagBits {
+impl core::ops::BitAnd for VkMemoryHeapFlagBits
+{
     type Output = VkMemoryHeapFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkMemoryHeapFlagBits {
+impl core::ops::BitAndAssign for VkMemoryHeapFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkMemoryHeapFlagBits {
+impl core::ops::BitXor for VkMemoryHeapFlagBits
+{
     type Output = VkMemoryHeapFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkMemoryHeapFlagBits {
+impl core::ops::BitXorAssign for VkMemoryHeapFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkMemoryPropertyFlagBits(VkFlags);
-impl VkMemoryPropertyFlagBits {
+impl VkMemoryPropertyFlagBits
+{
     pub const DEVICE_LOCAL_BIT: VkMemoryPropertyFlagBits = VkMemoryPropertyFlagBits(1);
     pub const HOST_VISIBLE_BIT: VkMemoryPropertyFlagBits = VkMemoryPropertyFlagBits(2);
     pub const HOST_COHERENT_BIT: VkMemoryPropertyFlagBits = VkMemoryPropertyFlagBits(4);
@@ -3851,146 +5422,232 @@ impl VkMemoryPropertyFlagBits {
     pub const LAZILY_ALLOCATED_BIT: VkMemoryPropertyFlagBits = VkMemoryPropertyFlagBits(16);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkMemoryPropertyFlagBits {
+impl core::ops::BitOr for VkMemoryPropertyFlagBits
+{
     type Output = VkMemoryPropertyFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkMemoryPropertyFlagBits {
+impl core::ops::BitOrAssign for VkMemoryPropertyFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkMemoryPropertyFlagBits {
+impl core::ops::BitAnd for VkMemoryPropertyFlagBits
+{
     type Output = VkMemoryPropertyFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkMemoryPropertyFlagBits {
+impl core::ops::BitAndAssign for VkMemoryPropertyFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkMemoryPropertyFlagBits {
+impl core::ops::BitXor for VkMemoryPropertyFlagBits
+{
     type Output = VkMemoryPropertyFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkMemoryPropertyFlagBits {
+impl core::ops::BitXorAssign for VkMemoryPropertyFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkQueueFlagBits(VkFlags);
-impl VkQueueFlagBits {
+impl VkQueueFlagBits
+{
     pub const GRAPHICS_BIT: VkQueueFlagBits = VkQueueFlagBits(1);
     pub const COMPUTE_BIT: VkQueueFlagBits = VkQueueFlagBits(2);
     pub const TRANSFER_BIT: VkQueueFlagBits = VkQueueFlagBits(4);
     pub const SPARSE_BINDING_BIT: VkQueueFlagBits = VkQueueFlagBits(8);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkQueueFlagBits {
+impl core::ops::BitOr for VkQueueFlagBits
+{
     type Output = VkQueueFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkQueueFlagBits {
+impl core::ops::BitOrAssign for VkQueueFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkQueueFlagBits {
+impl core::ops::BitAnd for VkQueueFlagBits
+{
     type Output = VkQueueFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkQueueFlagBits {
+impl core::ops::BitAndAssign for VkQueueFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkQueueFlagBits {
+impl core::ops::BitXor for VkQueueFlagBits
+{
     type Output = VkQueueFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkQueueFlagBits {
+impl core::ops::BitXorAssign for VkQueueFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkFormatFeatureFlagBits(VkFlags);
-impl VkFormatFeatureFlagBits {
+impl VkFormatFeatureFlagBits
+{
     pub const SAMPLED_IMAGE_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(1);
     pub const STORAGE_IMAGE_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(2);
     pub const STORAGE_IMAGE_ATOMIC_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(4);
     pub const UNIFORM_TEXEL_BUFFER_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(8);
     pub const STORAGE_TEXEL_BUFFER_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(16);
-    pub const STORAGE_TEXEL_BUFFER_ATOMIC_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(32);
+    pub const STORAGE_TEXEL_BUFFER_ATOMIC_BIT: VkFormatFeatureFlagBits =
+        VkFormatFeatureFlagBits(32);
     pub const VERTEX_BUFFER_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(64);
     pub const COLOR_ATTACHMENT_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(128);
     pub const COLOR_ATTACHMENT_BLEND_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(256);
     pub const DEPTH_STENCIL_ATTACHMENT_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(512);
     pub const BLIT_SRC_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(1024);
     pub const BLIT_DST_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(2048);
-    pub const SAMPLED_IMAGE_FILTER_LINEAR_BIT: VkFormatFeatureFlagBits = VkFormatFeatureFlagBits(4096);
+    pub const SAMPLED_IMAGE_FILTER_LINEAR_BIT: VkFormatFeatureFlagBits =
+        VkFormatFeatureFlagBits(4096);
 
     #[inline]
-    pub fn contains(&self, other: Self) -> bool { return (self.0 & other.0) == other.0; }
+    pub fn contains(&self, other: Self) -> bool
+    {
+        return (self.0 & other.0) == other.0;
+    }
 }
 
-impl core::ops::BitOr for VkFormatFeatureFlagBits {
+impl core::ops::BitOr for VkFormatFeatureFlagBits
+{
     type Output = VkFormatFeatureFlagBits;
     #[inline]
-    fn bitor(self, rhs: Self) -> Self { Self(self.0 | rhs.0) }
+    fn bitor(self, rhs: Self) -> Self
+    {
+        Self(self.0 | rhs.0)
+    }
 }
 
-impl core::ops::BitOrAssign for VkFormatFeatureFlagBits {
+impl core::ops::BitOrAssign for VkFormatFeatureFlagBits
+{
     #[inline]
-    fn bitor_assign(&mut self, rhs: Self) { self.0 |= rhs.0; }
+    fn bitor_assign(&mut self, rhs: Self)
+    {
+        self.0 |= rhs.0;
+    }
 }
 
-impl core::ops::BitAnd for VkFormatFeatureFlagBits {
+impl core::ops::BitAnd for VkFormatFeatureFlagBits
+{
     type Output = VkFormatFeatureFlagBits;
     #[inline]
-    fn bitand(self, rhs: Self) -> Self { Self(self.0 & rhs.0) }
+    fn bitand(self, rhs: Self) -> Self
+    {
+        Self(self.0 & rhs.0)
+    }
 }
 
-impl core::ops::BitAndAssign for VkFormatFeatureFlagBits {
+impl core::ops::BitAndAssign for VkFormatFeatureFlagBits
+{
     #[inline]
-    fn bitand_assign(&mut self, rhs: Self) { self.0 &= rhs.0; }
+    fn bitand_assign(&mut self, rhs: Self)
+    {
+        self.0 &= rhs.0;
+    }
 }
 
-impl core::ops::BitXor for VkFormatFeatureFlagBits {
+impl core::ops::BitXor for VkFormatFeatureFlagBits
+{
     type Output = VkFormatFeatureFlagBits;
     #[inline]
-    fn bitxor(self, rhs: Self) -> Self { Self(self.0 ^ rhs.0) }
+    fn bitxor(self, rhs: Self) -> Self
+    {
+        Self(self.0 ^ rhs.0)
+    }
 }
 
-impl core::ops::BitXorAssign for VkFormatFeatureFlagBits {
+impl core::ops::BitXorAssign for VkFormatFeatureFlagBits
+{
     #[inline]
-    fn bitxor_assign(&mut self, rhs: Self) { self.0 ^= rhs.0; }
+    fn bitxor_assign(&mut self, rhs: Self)
+    {
+        self.0 ^= rhs.0;
+    }
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkAllocationCallbacks {
+pub struct VkAllocationCallbacks
+{
     pub p_user_data: *mut core::ffi::c_void,
     pub pfn_allocation: PfnVkAllocationFunction,
     pub pfn_reallocation: PfnVkReallocationFunction,
@@ -3999,10 +5656,14 @@ pub struct VkAllocationCallbacks {
     pub pfn_internal_free: PfnVkInternalFreeNotification,
 }
 
-pub trait ExtendsAllocationCallbacks { }
+pub trait ExtendsAllocationCallbacks
+{
+}
 
-impl Default for VkAllocationCallbacks {
-    fn default() -> Self {
+impl Default for VkAllocationCallbacks
+{
+    fn default() -> Self
+    {
         Self {
             p_user_data: core::ptr::null_mut(),
             pfn_allocation: unsafe { core::mem::zeroed() },
@@ -4016,7 +5677,8 @@ impl Default for VkAllocationCallbacks {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkWin32SurfaceCreateInfoKHR {
+pub struct VkWin32SurfaceCreateInfoKHR
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkWin32SurfaceCreateFlagsKHR,
@@ -4024,10 +5686,14 @@ pub struct VkWin32SurfaceCreateInfoKHR {
     pub hwnd: HWND,
 }
 
-pub trait ExtendsWin32SurfaceCreateInfoKHR { }
+pub trait ExtendsWin32SurfaceCreateInfoKHR
+{
+}
 
-impl Default for VkWin32SurfaceCreateInfoKHR {
-    fn default() -> Self {
+impl Default for VkWin32SurfaceCreateInfoKHR
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::WIN32_SURFACE_CREATE_INFO_KHR,
             p_next: core::ptr::null(),
@@ -4040,15 +5706,20 @@ impl Default for VkWin32SurfaceCreateInfoKHR {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSurfaceFormatKHR {
+pub struct VkSurfaceFormatKHR
+{
     pub format: VkFormat,
     pub color_space: VkColorSpaceKHR,
 }
 
-pub trait ExtendsSurfaceFormatKHR { }
+pub trait ExtendsSurfaceFormatKHR
+{
+}
 
-impl Default for VkSurfaceFormatKHR {
-    fn default() -> Self {
+impl Default for VkSurfaceFormatKHR
+{
+    fn default() -> Self
+    {
         Self {
             format: VkFormat::default(),
             color_space: VkColorSpaceKHR::default(),
@@ -4058,7 +5729,8 @@ impl Default for VkSurfaceFormatKHR {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSurfaceCapabilitiesKHR {
+pub struct VkSurfaceCapabilitiesKHR
+{
     pub min_image_count: u32,
     pub max_image_count: u32,
     pub current_extent: VkExtent2D,
@@ -4071,10 +5743,14 @@ pub struct VkSurfaceCapabilitiesKHR {
     pub supported_usage_flags: VkImageUsageFlags,
 }
 
-pub trait ExtendsSurfaceCapabilitiesKHR { }
+pub trait ExtendsSurfaceCapabilitiesKHR
+{
+}
 
-impl Default for VkSurfaceCapabilitiesKHR {
-    fn default() -> Self {
+impl Default for VkSurfaceCapabilitiesKHR
+{
+    fn default() -> Self
+    {
         Self {
             min_image_count: 0,
             max_image_count: 0,
@@ -4092,15 +5768,20 @@ impl Default for VkSurfaceCapabilitiesKHR {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkExtent2D {
+pub struct VkExtent2D
+{
     pub width: u32,
     pub height: u32,
 }
 
-pub trait ExtendsExtent2D { }
+pub trait ExtendsExtent2D
+{
+}
 
-impl Default for VkExtent2D {
-    fn default() -> Self {
+impl Default for VkExtent2D
+{
+    fn default() -> Self
+    {
         Self {
             width: 0,
             height: 0,
@@ -4110,7 +5791,8 @@ impl Default for VkExtent2D {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPresentInfoKHR {
+pub struct VkPresentInfoKHR
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub wait_semaphore_count: u32,
@@ -4121,10 +5803,14 @@ pub struct VkPresentInfoKHR {
     pub p_results: *mut VkResult,
 }
 
-pub trait ExtendsPresentInfoKHR { }
+pub trait ExtendsPresentInfoKHR
+{
+}
 
-impl Default for VkPresentInfoKHR {
-    fn default() -> Self {
+impl Default for VkPresentInfoKHR
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PRESENT_INFO_KHR,
             p_next: core::ptr::null(),
@@ -4140,7 +5826,8 @@ impl Default for VkPresentInfoKHR {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSwapchainCreateInfoKHR {
+pub struct VkSwapchainCreateInfoKHR
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkSwapchainCreateFlagsKHR,
@@ -4161,10 +5848,14 @@ pub struct VkSwapchainCreateInfoKHR {
     pub old_swapchain: VkSwapchainKHR,
 }
 
-pub trait ExtendsSwapchainCreateInfoKHR { }
+pub trait ExtendsSwapchainCreateInfoKHR
+{
+}
 
-impl Default for VkSwapchainCreateInfoKHR {
-    fn default() -> Self {
+impl Default for VkSwapchainCreateInfoKHR
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::SWAPCHAIN_CREATE_INFO_KHR,
             p_next: core::ptr::null(),
@@ -4190,7 +5881,8 @@ impl Default for VkSwapchainCreateInfoKHR {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDebugUtilsMessengerCallbackDataEXT {
+pub struct VkDebugUtilsMessengerCallbackDataEXT
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkDebugUtilsMessengerCallbackDataFlagsEXT,
@@ -4205,10 +5897,14 @@ pub struct VkDebugUtilsMessengerCallbackDataEXT {
     pub p_objects: *const VkDebugUtilsObjectNameInfoEXT,
 }
 
-pub trait ExtendsDebugUtilsMessengerCallbackDataEXT { }
+pub trait ExtendsDebugUtilsMessengerCallbackDataEXT
+{
+}
 
-impl Default for VkDebugUtilsMessengerCallbackDataEXT {
-    fn default() -> Self {
+impl Default for VkDebugUtilsMessengerCallbackDataEXT
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT,
             p_next: core::ptr::null(),
@@ -4228,7 +5924,8 @@ impl Default for VkDebugUtilsMessengerCallbackDataEXT {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDebugUtilsObjectNameInfoEXT {
+pub struct VkDebugUtilsObjectNameInfoEXT
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub object_type: VkObjectType,
@@ -4236,10 +5933,14 @@ pub struct VkDebugUtilsObjectNameInfoEXT {
     pub p_object_name: *const u8,
 }
 
-pub trait ExtendsDebugUtilsObjectNameInfoEXT { }
+pub trait ExtendsDebugUtilsObjectNameInfoEXT
+{
+}
 
-impl Default for VkDebugUtilsObjectNameInfoEXT {
-    fn default() -> Self {
+impl Default for VkDebugUtilsObjectNameInfoEXT
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DEBUG_UTILS_OBJECT_NAME_INFO_EXT,
             p_next: core::ptr::null(),
@@ -4252,17 +5953,22 @@ impl Default for VkDebugUtilsObjectNameInfoEXT {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDebugUtilsLabelEXT {
+pub struct VkDebugUtilsLabelEXT
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub p_label_name: *const u8,
     pub color: [f32; 4],
 }
 
-pub trait ExtendsDebugUtilsLabelEXT { }
+pub trait ExtendsDebugUtilsLabelEXT
+{
+}
 
-impl Default for VkDebugUtilsLabelEXT {
-    fn default() -> Self {
+impl Default for VkDebugUtilsLabelEXT
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DEBUG_UTILS_LABEL_EXT,
             p_next: core::ptr::null(),
@@ -4274,7 +5980,8 @@ impl Default for VkDebugUtilsLabelEXT {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDebugUtilsMessengerCreateInfoEXT {
+pub struct VkDebugUtilsMessengerCreateInfoEXT
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkDebugUtilsMessengerCreateFlagsEXT,
@@ -4284,11 +5991,15 @@ pub struct VkDebugUtilsMessengerCreateInfoEXT {
     pub p_user_data: *mut core::ffi::c_void,
 }
 
-pub trait ExtendsDebugUtilsMessengerCreateInfoEXT { }
-impl ExtendsInstanceCreateInfo for VkDebugUtilsMessengerCreateInfoEXT { }
+pub trait ExtendsDebugUtilsMessengerCreateInfoEXT
+{
+}
+impl ExtendsInstanceCreateInfo for VkDebugUtilsMessengerCreateInfoEXT {}
 
-impl Default for VkDebugUtilsMessengerCreateInfoEXT {
-    fn default() -> Self {
+impl Default for VkDebugUtilsMessengerCreateInfoEXT
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
             p_next: core::ptr::null(),
@@ -4303,7 +6014,8 @@ impl Default for VkDebugUtilsMessengerCreateInfoEXT {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDebugUtilsObjectTagInfoEXT {
+pub struct VkDebugUtilsObjectTagInfoEXT
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub object_type: VkObjectType,
@@ -4313,10 +6025,14 @@ pub struct VkDebugUtilsObjectTagInfoEXT {
     pub p_tag: *const core::ffi::c_void,
 }
 
-pub trait ExtendsDebugUtilsObjectTagInfoEXT { }
+pub trait ExtendsDebugUtilsObjectTagInfoEXT
+{
+}
 
-impl Default for VkDebugUtilsObjectTagInfoEXT {
-    fn default() -> Self {
+impl Default for VkDebugUtilsObjectTagInfoEXT
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DEBUG_UTILS_OBJECT_TAG_INFO_EXT,
             p_next: core::ptr::null(),
@@ -4331,15 +6047,20 @@ impl Default for VkDebugUtilsObjectTagInfoEXT {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkBaseInStructure {
+pub struct VkBaseInStructure
+{
     pub s_type: VkStructureType,
     pub p_next: *const VkBaseInStructure,
 }
 
-pub trait ExtendsBaseInStructure { }
+pub trait ExtendsBaseInStructure
+{
+}
 
-impl Default for VkBaseInStructure {
-    fn default() -> Self {
+impl Default for VkBaseInStructure
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::default(),
             p_next: core::ptr::null(),
@@ -4349,15 +6070,20 @@ impl Default for VkBaseInStructure {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkBaseOutStructure {
+pub struct VkBaseOutStructure
+{
     pub s_type: VkStructureType,
     pub p_next: *mut VkBaseOutStructure,
 }
 
-pub trait ExtendsBaseOutStructure { }
+pub trait ExtendsBaseOutStructure
+{
+}
 
-impl Default for VkBaseOutStructure {
-    fn default() -> Self {
+impl Default for VkBaseOutStructure
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::default(),
             p_next: core::ptr::null_mut(),
@@ -4367,17 +6093,22 @@ impl Default for VkBaseOutStructure {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkMemoryBarrier {
+pub struct VkMemoryBarrier
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub src_access_mask: VkAccessFlags,
     pub dst_access_mask: VkAccessFlags,
 }
 
-pub trait ExtendsMemoryBarrier { }
+pub trait ExtendsMemoryBarrier
+{
+}
 
-impl Default for VkMemoryBarrier {
-    fn default() -> Self {
+impl Default for VkMemoryBarrier
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::MEMORY_BARRIER,
             p_next: core::ptr::null(),
@@ -4389,7 +6120,8 @@ impl Default for VkMemoryBarrier {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageMemoryBarrier {
+pub struct VkImageMemoryBarrier
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub src_access_mask: VkAccessFlags,
@@ -4402,10 +6134,14 @@ pub struct VkImageMemoryBarrier {
     pub subresource_range: VkImageSubresourceRange,
 }
 
-pub trait ExtendsImageMemoryBarrier { }
+pub trait ExtendsImageMemoryBarrier
+{
+}
 
-impl Default for VkImageMemoryBarrier {
-    fn default() -> Self {
+impl Default for VkImageMemoryBarrier
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::IMAGE_MEMORY_BARRIER,
             p_next: core::ptr::null(),
@@ -4423,7 +6159,8 @@ impl Default for VkImageMemoryBarrier {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageSubresourceRange {
+pub struct VkImageSubresourceRange
+{
     pub aspect_mask: VkImageAspectFlags,
     pub base_mip_level: u32,
     pub level_count: u32,
@@ -4431,10 +6168,14 @@ pub struct VkImageSubresourceRange {
     pub layer_count: u32,
 }
 
-pub trait ExtendsImageSubresourceRange { }
+pub trait ExtendsImageSubresourceRange
+{
+}
 
-impl Default for VkImageSubresourceRange {
-    fn default() -> Self {
+impl Default for VkImageSubresourceRange
+{
+    fn default() -> Self
+    {
         Self {
             aspect_mask: VkImageAspectFlags::default(),
             base_mip_level: 0,
@@ -4447,17 +6188,22 @@ impl Default for VkImageSubresourceRange {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDrawIndirectCommand {
+pub struct VkDrawIndirectCommand
+{
     pub vertex_count: u32,
     pub instance_count: u32,
     pub first_vertex: u32,
     pub first_instance: u32,
 }
 
-pub trait ExtendsDrawIndirectCommand { }
+pub trait ExtendsDrawIndirectCommand
+{
+}
 
-impl Default for VkDrawIndirectCommand {
-    fn default() -> Self {
+impl Default for VkDrawIndirectCommand
+{
+    fn default() -> Self
+    {
         Self {
             vertex_count: 0,
             instance_count: 0,
@@ -4469,7 +6215,8 @@ impl Default for VkDrawIndirectCommand {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDrawIndexedIndirectCommand {
+pub struct VkDrawIndexedIndirectCommand
+{
     pub index_count: u32,
     pub instance_count: u32,
     pub first_index: u32,
@@ -4477,10 +6224,14 @@ pub struct VkDrawIndexedIndirectCommand {
     pub first_instance: u32,
 }
 
-pub trait ExtendsDrawIndexedIndirectCommand { }
+pub trait ExtendsDrawIndexedIndirectCommand
+{
+}
 
-impl Default for VkDrawIndexedIndirectCommand {
-    fn default() -> Self {
+impl Default for VkDrawIndexedIndirectCommand
+{
+    fn default() -> Self
+    {
         Self {
             index_count: 0,
             instance_count: 0,
@@ -4493,27 +6244,29 @@ impl Default for VkDrawIndexedIndirectCommand {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDispatchIndirectCommand {
+pub struct VkDispatchIndirectCommand
+{
     pub x: u32,
     pub y: u32,
     pub z: u32,
 }
 
-pub trait ExtendsDispatchIndirectCommand { }
+pub trait ExtendsDispatchIndirectCommand
+{
+}
 
-impl Default for VkDispatchIndirectCommand {
-    fn default() -> Self {
-        Self {
-            x: 0,
-            y: 0,
-            z: 0,
-        }
+impl Default for VkDispatchIndirectCommand
+{
+    fn default() -> Self
+    {
+        Self { x: 0, y: 0, z: 0 }
     }
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkBufferMemoryBarrier {
+pub struct VkBufferMemoryBarrier
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub src_access_mask: VkAccessFlags,
@@ -4525,10 +6278,14 @@ pub struct VkBufferMemoryBarrier {
     pub size: VkDeviceSize,
 }
 
-pub trait ExtendsBufferMemoryBarrier { }
+pub trait ExtendsBufferMemoryBarrier
+{
+}
 
-impl Default for VkBufferMemoryBarrier {
-    fn default() -> Self {
+impl Default for VkBufferMemoryBarrier
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::BUFFER_MEMORY_BARRIER,
             p_next: core::ptr::null(),
@@ -4545,7 +6302,8 @@ impl Default for VkBufferMemoryBarrier {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkRenderPassBeginInfo {
+pub struct VkRenderPassBeginInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub render_pass: VkRenderPass,
@@ -4555,10 +6313,14 @@ pub struct VkRenderPassBeginInfo {
     pub p_clear_values: *const VkClearValue,
 }
 
-pub trait ExtendsRenderPassBeginInfo { }
+pub trait ExtendsRenderPassBeginInfo
+{
+}
 
-impl Default for VkRenderPassBeginInfo {
-    fn default() -> Self {
+impl Default for VkRenderPassBeginInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::RENDER_PASS_BEGIN_INFO,
             p_next: core::ptr::null(),
@@ -4573,15 +6335,20 @@ impl Default for VkRenderPassBeginInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkClearDepthStencilValue {
+pub struct VkClearDepthStencilValue
+{
     pub depth: f32,
     pub stencil: u32,
 }
 
-pub trait ExtendsClearDepthStencilValue { }
+pub trait ExtendsClearDepthStencilValue
+{
+}
 
-impl Default for VkClearDepthStencilValue {
-    fn default() -> Self {
+impl Default for VkClearDepthStencilValue
+{
+    fn default() -> Self
+    {
         Self {
             depth: 0.0,
             stencil: 0,
@@ -4591,15 +6358,20 @@ impl Default for VkClearDepthStencilValue {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkRect2D {
+pub struct VkRect2D
+{
     pub offset: VkOffset2D,
     pub extent: VkExtent2D,
 }
 
-pub trait ExtendsRect2D { }
+pub trait ExtendsRect2D
+{
+}
 
-impl Default for VkRect2D {
-    fn default() -> Self {
+impl Default for VkRect2D
+{
+    fn default() -> Self
+    {
         Self {
             offset: VkOffset2D::default(),
             extent: VkExtent2D::default(),
@@ -4609,25 +6381,28 @@ impl Default for VkRect2D {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkOffset2D {
+pub struct VkOffset2D
+{
     pub x: i32,
     pub y: i32,
 }
 
-pub trait ExtendsOffset2D { }
+pub trait ExtendsOffset2D
+{
+}
 
-impl Default for VkOffset2D {
-    fn default() -> Self {
-        Self {
-            x: 0,
-            y: 0,
-        }
+impl Default for VkOffset2D
+{
+    fn default() -> Self
+    {
+        Self { x: 0, y: 0 }
     }
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageResolve {
+pub struct VkImageResolve
+{
     pub src_subresource: VkImageSubresourceLayers,
     pub src_offset: VkOffset3D,
     pub dst_subresource: VkImageSubresourceLayers,
@@ -4635,10 +6410,14 @@ pub struct VkImageResolve {
     pub extent: VkExtent3D,
 }
 
-pub trait ExtendsImageResolve { }
+pub trait ExtendsImageResolve
+{
+}
 
-impl Default for VkImageResolve {
-    fn default() -> Self {
+impl Default for VkImageResolve
+{
+    fn default() -> Self
+    {
         Self {
             src_subresource: VkImageSubresourceLayers::default(),
             src_offset: VkOffset3D::default(),
@@ -4651,16 +6430,21 @@ impl Default for VkImageResolve {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkExtent3D {
+pub struct VkExtent3D
+{
     pub width: u32,
     pub height: u32,
     pub depth: u32,
 }
 
-pub trait ExtendsExtent3D { }
+pub trait ExtendsExtent3D
+{
+}
 
-impl Default for VkExtent3D {
-    fn default() -> Self {
+impl Default for VkExtent3D
+{
+    fn default() -> Self
+    {
         Self {
             width: 0,
             height: 0,
@@ -4671,37 +6455,43 @@ impl Default for VkExtent3D {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkOffset3D {
+pub struct VkOffset3D
+{
     pub x: i32,
     pub y: i32,
     pub z: i32,
 }
 
-pub trait ExtendsOffset3D { }
+pub trait ExtendsOffset3D
+{
+}
 
-impl Default for VkOffset3D {
-    fn default() -> Self {
-        Self {
-            x: 0,
-            y: 0,
-            z: 0,
-        }
+impl Default for VkOffset3D
+{
+    fn default() -> Self
+    {
+        Self { x: 0, y: 0, z: 0 }
     }
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageSubresourceLayers {
+pub struct VkImageSubresourceLayers
+{
     pub aspect_mask: VkImageAspectFlags,
     pub mip_level: u32,
     pub base_array_layer: u32,
     pub layer_count: u32,
 }
 
-pub trait ExtendsImageSubresourceLayers { }
+pub trait ExtendsImageSubresourceLayers
+{
+}
 
-impl Default for VkImageSubresourceLayers {
-    fn default() -> Self {
+impl Default for VkImageSubresourceLayers
+{
+    fn default() -> Self
+    {
         Self {
             aspect_mask: VkImageAspectFlags::default(),
             mip_level: 0,
@@ -4713,16 +6503,21 @@ impl Default for VkImageSubresourceLayers {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkClearRect {
+pub struct VkClearRect
+{
     pub rect: VkRect2D,
     pub base_array_layer: u32,
     pub layer_count: u32,
 }
 
-pub trait ExtendsClearRect { }
+pub trait ExtendsClearRect
+{
+}
 
-impl Default for VkClearRect {
-    fn default() -> Self {
+impl Default for VkClearRect
+{
+    fn default() -> Self
+    {
         Self {
             rect: VkRect2D::default(),
             base_array_layer: 0,
@@ -4733,16 +6528,21 @@ impl Default for VkClearRect {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkClearAttachment {
+pub struct VkClearAttachment
+{
     pub aspect_mask: VkImageAspectFlags,
     pub color_attachment: u32,
     pub clear_value: VkClearValue,
 }
 
-pub trait ExtendsClearAttachment { }
+pub trait ExtendsClearAttachment
+{
+}
 
-impl Default for VkClearAttachment {
-    fn default() -> Self {
+impl Default for VkClearAttachment
+{
+    fn default() -> Self
+    {
         Self {
             aspect_mask: VkImageAspectFlags::default(),
             color_attachment: 0,
@@ -4753,7 +6553,8 @@ impl Default for VkClearAttachment {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkBufferImageCopy {
+pub struct VkBufferImageCopy
+{
     pub buffer_offset: VkDeviceSize,
     pub buffer_row_length: u32,
     pub buffer_image_height: u32,
@@ -4762,10 +6563,14 @@ pub struct VkBufferImageCopy {
     pub image_extent: VkExtent3D,
 }
 
-pub trait ExtendsBufferImageCopy { }
+pub trait ExtendsBufferImageCopy
+{
+}
 
-impl Default for VkBufferImageCopy {
-    fn default() -> Self {
+impl Default for VkBufferImageCopy
+{
+    fn default() -> Self
+    {
         Self {
             buffer_offset: VkDeviceSize::default(),
             buffer_row_length: 0,
@@ -4779,17 +6584,22 @@ impl Default for VkBufferImageCopy {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageBlit {
+pub struct VkImageBlit
+{
     pub src_subresource: VkImageSubresourceLayers,
     pub src_offsets: [VkOffset3D; 2],
     pub dst_subresource: VkImageSubresourceLayers,
     pub dst_offsets: [VkOffset3D; 2],
 }
 
-pub trait ExtendsImageBlit { }
+pub trait ExtendsImageBlit
+{
+}
 
-impl Default for VkImageBlit {
-    fn default() -> Self {
+impl Default for VkImageBlit
+{
+    fn default() -> Self
+    {
         Self {
             src_subresource: VkImageSubresourceLayers::default(),
             src_offsets: [VkOffset3D::default(), VkOffset3D::default()],
@@ -4801,7 +6611,8 @@ impl Default for VkImageBlit {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageCopy {
+pub struct VkImageCopy
+{
     pub src_subresource: VkImageSubresourceLayers,
     pub src_offset: VkOffset3D,
     pub dst_subresource: VkImageSubresourceLayers,
@@ -4809,10 +6620,14 @@ pub struct VkImageCopy {
     pub extent: VkExtent3D,
 }
 
-pub trait ExtendsImageCopy { }
+pub trait ExtendsImageCopy
+{
+}
 
-impl Default for VkImageCopy {
-    fn default() -> Self {
+impl Default for VkImageCopy
+{
+    fn default() -> Self
+    {
         Self {
             src_subresource: VkImageSubresourceLayers::default(),
             src_offset: VkOffset3D::default(),
@@ -4825,16 +6640,21 @@ impl Default for VkImageCopy {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkBufferCopy {
+pub struct VkBufferCopy
+{
     pub src_offset: VkDeviceSize,
     pub dst_offset: VkDeviceSize,
     pub size: VkDeviceSize,
 }
 
-pub trait ExtendsBufferCopy { }
+pub trait ExtendsBufferCopy
+{
+}
 
-impl Default for VkBufferCopy {
-    fn default() -> Self {
+impl Default for VkBufferCopy
+{
+    fn default() -> Self
+    {
         Self {
             src_offset: VkDeviceSize::default(),
             dst_offset: VkDeviceSize::default(),
@@ -4845,7 +6665,8 @@ impl Default for VkBufferCopy {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkViewport {
+pub struct VkViewport
+{
     pub x: f32,
     pub y: f32,
     pub width: f32,
@@ -4854,10 +6675,14 @@ pub struct VkViewport {
     pub max_depth: f32,
 }
 
-pub trait ExtendsViewport { }
+pub trait ExtendsViewport
+{
+}
 
-impl Default for VkViewport {
-    fn default() -> Self {
+impl Default for VkViewport
+{
+    fn default() -> Self
+    {
         Self {
             x: 0.0,
             y: 0.0,
@@ -4871,17 +6696,22 @@ impl Default for VkViewport {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkCommandBufferBeginInfo {
+pub struct VkCommandBufferBeginInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkCommandBufferUsageFlags,
     pub p_inheritance_info: *const VkCommandBufferInheritanceInfo,
 }
 
-pub trait ExtendsCommandBufferBeginInfo { }
+pub trait ExtendsCommandBufferBeginInfo
+{
+}
 
-impl Default for VkCommandBufferBeginInfo {
-    fn default() -> Self {
+impl Default for VkCommandBufferBeginInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::COMMAND_BUFFER_BEGIN_INFO,
             p_next: core::ptr::null(),
@@ -4893,7 +6723,8 @@ impl Default for VkCommandBufferBeginInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkCommandBufferInheritanceInfo {
+pub struct VkCommandBufferInheritanceInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub render_pass: VkRenderPass,
@@ -4904,10 +6735,14 @@ pub struct VkCommandBufferInheritanceInfo {
     pub pipeline_statistics: VkQueryPipelineStatisticFlags,
 }
 
-pub trait ExtendsCommandBufferInheritanceInfo { }
+pub trait ExtendsCommandBufferInheritanceInfo
+{
+}
 
-impl Default for VkCommandBufferInheritanceInfo {
-    fn default() -> Self {
+impl Default for VkCommandBufferInheritanceInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::COMMAND_BUFFER_INHERITANCE_INFO,
             p_next: core::ptr::null(),
@@ -4923,7 +6758,8 @@ impl Default for VkCommandBufferInheritanceInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkCommandBufferAllocateInfo {
+pub struct VkCommandBufferAllocateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub command_pool: VkCommandPool,
@@ -4931,10 +6767,14 @@ pub struct VkCommandBufferAllocateInfo {
     pub command_buffer_count: u32,
 }
 
-pub trait ExtendsCommandBufferAllocateInfo { }
+pub trait ExtendsCommandBufferAllocateInfo
+{
+}
 
-impl Default for VkCommandBufferAllocateInfo {
-    fn default() -> Self {
+impl Default for VkCommandBufferAllocateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::COMMAND_BUFFER_ALLOCATE_INFO,
             p_next: core::ptr::null(),
@@ -4947,17 +6787,22 @@ impl Default for VkCommandBufferAllocateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkCommandPoolCreateInfo {
+pub struct VkCommandPoolCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkCommandPoolCreateFlags,
     pub queue_family_index: u32,
 }
 
-pub trait ExtendsCommandPoolCreateInfo { }
+pub trait ExtendsCommandPoolCreateInfo
+{
+}
 
-impl Default for VkCommandPoolCreateInfo {
-    fn default() -> Self {
+impl Default for VkCommandPoolCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::COMMAND_POOL_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -4969,7 +6814,8 @@ impl Default for VkCommandPoolCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkRenderPassCreateInfo {
+pub struct VkRenderPassCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkRenderPassCreateFlags,
@@ -4981,10 +6827,14 @@ pub struct VkRenderPassCreateInfo {
     pub p_dependencies: *const VkSubpassDependency,
 }
 
-pub trait ExtendsRenderPassCreateInfo { }
+pub trait ExtendsRenderPassCreateInfo
+{
+}
 
-impl Default for VkRenderPassCreateInfo {
-    fn default() -> Self {
+impl Default for VkRenderPassCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::RENDER_PASS_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5001,7 +6851,8 @@ impl Default for VkRenderPassCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSubpassDependency {
+pub struct VkSubpassDependency
+{
     pub src_subpass: u32,
     pub dst_subpass: u32,
     pub src_stage_mask: VkPipelineStageFlags,
@@ -5011,10 +6862,14 @@ pub struct VkSubpassDependency {
     pub dependency_flags: VkDependencyFlags,
 }
 
-pub trait ExtendsSubpassDependency { }
+pub trait ExtendsSubpassDependency
+{
+}
 
-impl Default for VkSubpassDependency {
-    fn default() -> Self {
+impl Default for VkSubpassDependency
+{
+    fn default() -> Self
+    {
         Self {
             src_subpass: 0,
             dst_subpass: 0,
@@ -5029,7 +6884,8 @@ impl Default for VkSubpassDependency {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSubpassDescription {
+pub struct VkSubpassDescription
+{
     pub flags: VkSubpassDescriptionFlags,
     pub pipeline_bind_point: VkPipelineBindPoint,
     pub input_attachment_count: u32,
@@ -5042,10 +6898,14 @@ pub struct VkSubpassDescription {
     pub p_preserve_attachments: *const u32,
 }
 
-pub trait ExtendsSubpassDescription { }
+pub trait ExtendsSubpassDescription
+{
+}
 
-impl Default for VkSubpassDescription {
-    fn default() -> Self {
+impl Default for VkSubpassDescription
+{
+    fn default() -> Self
+    {
         Self {
             flags: VkSubpassDescriptionFlags::default(),
             pipeline_bind_point: VkPipelineBindPoint::default(),
@@ -5063,15 +6923,20 @@ impl Default for VkSubpassDescription {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkAttachmentReference {
+pub struct VkAttachmentReference
+{
     pub attachment: u32,
     pub layout: VkImageLayout,
 }
 
-pub trait ExtendsAttachmentReference { }
+pub trait ExtendsAttachmentReference
+{
+}
 
-impl Default for VkAttachmentReference {
-    fn default() -> Self {
+impl Default for VkAttachmentReference
+{
+    fn default() -> Self
+    {
         Self {
             attachment: 0,
             layout: VkImageLayout::default(),
@@ -5081,7 +6946,8 @@ impl Default for VkAttachmentReference {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkAttachmentDescription {
+pub struct VkAttachmentDescription
+{
     pub flags: VkAttachmentDescriptionFlags,
     pub format: VkFormat,
     pub samples: VkSampleCountFlagBits,
@@ -5093,10 +6959,14 @@ pub struct VkAttachmentDescription {
     pub final_layout: VkImageLayout,
 }
 
-pub trait ExtendsAttachmentDescription { }
+pub trait ExtendsAttachmentDescription
+{
+}
 
-impl Default for VkAttachmentDescription {
-    fn default() -> Self {
+impl Default for VkAttachmentDescription
+{
+    fn default() -> Self
+    {
         Self {
             flags: VkAttachmentDescriptionFlags::default(),
             format: VkFormat::default(),
@@ -5113,7 +6983,8 @@ impl Default for VkAttachmentDescription {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkFramebufferCreateInfo {
+pub struct VkFramebufferCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkFramebufferCreateFlags,
@@ -5125,10 +6996,14 @@ pub struct VkFramebufferCreateInfo {
     pub layers: u32,
 }
 
-pub trait ExtendsFramebufferCreateInfo { }
+pub trait ExtendsFramebufferCreateInfo
+{
+}
 
-impl Default for VkFramebufferCreateInfo {
-    fn default() -> Self {
+impl Default for VkFramebufferCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::FRAMEBUFFER_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5145,7 +7020,8 @@ impl Default for VkFramebufferCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkCopyDescriptorSet {
+pub struct VkCopyDescriptorSet
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub src_set: VkDescriptorSet,
@@ -5157,10 +7033,14 @@ pub struct VkCopyDescriptorSet {
     pub descriptor_count: u32,
 }
 
-pub trait ExtendsCopyDescriptorSet { }
+pub trait ExtendsCopyDescriptorSet
+{
+}
 
-impl Default for VkCopyDescriptorSet {
-    fn default() -> Self {
+impl Default for VkCopyDescriptorSet
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::COPY_DESCRIPTOR_SET,
             p_next: core::ptr::null(),
@@ -5177,7 +7057,8 @@ impl Default for VkCopyDescriptorSet {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkWriteDescriptorSet {
+pub struct VkWriteDescriptorSet
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub dst_set: VkDescriptorSet,
@@ -5190,10 +7071,14 @@ pub struct VkWriteDescriptorSet {
     pub p_texel_buffer_view: *const VkBufferView,
 }
 
-pub trait ExtendsWriteDescriptorSet { }
+pub trait ExtendsWriteDescriptorSet
+{
+}
 
-impl Default for VkWriteDescriptorSet {
-    fn default() -> Self {
+impl Default for VkWriteDescriptorSet
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::WRITE_DESCRIPTOR_SET,
             p_next: core::ptr::null(),
@@ -5211,16 +7096,21 @@ impl Default for VkWriteDescriptorSet {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDescriptorBufferInfo {
+pub struct VkDescriptorBufferInfo
+{
     pub buffer: VkBuffer,
     pub offset: VkDeviceSize,
     pub range: VkDeviceSize,
 }
 
-pub trait ExtendsDescriptorBufferInfo { }
+pub trait ExtendsDescriptorBufferInfo
+{
+}
 
-impl Default for VkDescriptorBufferInfo {
-    fn default() -> Self {
+impl Default for VkDescriptorBufferInfo
+{
+    fn default() -> Self
+    {
         Self {
             buffer: VkBuffer::default(),
             offset: VkDeviceSize::default(),
@@ -5231,16 +7121,21 @@ impl Default for VkDescriptorBufferInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDescriptorImageInfo {
+pub struct VkDescriptorImageInfo
+{
     pub sampler: VkSampler,
     pub image_view: VkImageView,
     pub image_layout: VkImageLayout,
 }
 
-pub trait ExtendsDescriptorImageInfo { }
+pub trait ExtendsDescriptorImageInfo
+{
+}
 
-impl Default for VkDescriptorImageInfo {
-    fn default() -> Self {
+impl Default for VkDescriptorImageInfo
+{
+    fn default() -> Self
+    {
         Self {
             sampler: VkSampler::default(),
             image_view: VkImageView::default(),
@@ -5251,7 +7146,8 @@ impl Default for VkDescriptorImageInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDescriptorSetAllocateInfo {
+pub struct VkDescriptorSetAllocateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub descriptor_pool: VkDescriptorPool,
@@ -5259,10 +7155,14 @@ pub struct VkDescriptorSetAllocateInfo {
     pub p_set_layouts: *const VkDescriptorSetLayout,
 }
 
-pub trait ExtendsDescriptorSetAllocateInfo { }
+pub trait ExtendsDescriptorSetAllocateInfo
+{
+}
 
-impl Default for VkDescriptorSetAllocateInfo {
-    fn default() -> Self {
+impl Default for VkDescriptorSetAllocateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DESCRIPTOR_SET_ALLOCATE_INFO,
             p_next: core::ptr::null(),
@@ -5275,7 +7175,8 @@ impl Default for VkDescriptorSetAllocateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDescriptorPoolCreateInfo {
+pub struct VkDescriptorPoolCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkDescriptorPoolCreateFlags,
@@ -5284,10 +7185,14 @@ pub struct VkDescriptorPoolCreateInfo {
     pub p_pool_sizes: *const VkDescriptorPoolSize,
 }
 
-pub trait ExtendsDescriptorPoolCreateInfo { }
+pub trait ExtendsDescriptorPoolCreateInfo
+{
+}
 
-impl Default for VkDescriptorPoolCreateInfo {
-    fn default() -> Self {
+impl Default for VkDescriptorPoolCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DESCRIPTOR_POOL_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5301,15 +7206,20 @@ impl Default for VkDescriptorPoolCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDescriptorPoolSize {
+pub struct VkDescriptorPoolSize
+{
     pub kind: VkDescriptorType,
     pub descriptor_count: u32,
 }
 
-pub trait ExtendsDescriptorPoolSize { }
+pub trait ExtendsDescriptorPoolSize
+{
+}
 
-impl Default for VkDescriptorPoolSize {
-    fn default() -> Self {
+impl Default for VkDescriptorPoolSize
+{
+    fn default() -> Self
+    {
         Self {
             kind: VkDescriptorType::default(),
             descriptor_count: 0,
@@ -5319,7 +7229,8 @@ impl Default for VkDescriptorPoolSize {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDescriptorSetLayoutCreateInfo {
+pub struct VkDescriptorSetLayoutCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkDescriptorSetLayoutCreateFlags,
@@ -5327,10 +7238,14 @@ pub struct VkDescriptorSetLayoutCreateInfo {
     pub p_bindings: *const VkDescriptorSetLayoutBinding,
 }
 
-pub trait ExtendsDescriptorSetLayoutCreateInfo { }
+pub trait ExtendsDescriptorSetLayoutCreateInfo
+{
+}
 
-impl Default for VkDescriptorSetLayoutCreateInfo {
-    fn default() -> Self {
+impl Default for VkDescriptorSetLayoutCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5343,7 +7258,8 @@ impl Default for VkDescriptorSetLayoutCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDescriptorSetLayoutBinding {
+pub struct VkDescriptorSetLayoutBinding
+{
     pub binding: u32,
     pub descriptor_type: VkDescriptorType,
     pub descriptor_count: u32,
@@ -5351,10 +7267,14 @@ pub struct VkDescriptorSetLayoutBinding {
     pub p_immutable_samplers: *const VkSampler,
 }
 
-pub trait ExtendsDescriptorSetLayoutBinding { }
+pub trait ExtendsDescriptorSetLayoutBinding
+{
+}
 
-impl Default for VkDescriptorSetLayoutBinding {
-    fn default() -> Self {
+impl Default for VkDescriptorSetLayoutBinding
+{
+    fn default() -> Self
+    {
         Self {
             binding: 0,
             descriptor_type: VkDescriptorType::default(),
@@ -5367,7 +7287,8 @@ impl Default for VkDescriptorSetLayoutBinding {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSamplerCreateInfo {
+pub struct VkSamplerCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkSamplerCreateFlags,
@@ -5388,10 +7309,14 @@ pub struct VkSamplerCreateInfo {
     pub unnormalized_coordinates: VkBool32,
 }
 
-pub trait ExtendsSamplerCreateInfo { }
+pub trait ExtendsSamplerCreateInfo
+{
+}
 
-impl Default for VkSamplerCreateInfo {
-    fn default() -> Self {
+impl Default for VkSamplerCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::SAMPLER_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5417,7 +7342,8 @@ impl Default for VkSamplerCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineLayoutCreateInfo {
+pub struct VkPipelineLayoutCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineLayoutCreateFlags,
@@ -5427,10 +7353,14 @@ pub struct VkPipelineLayoutCreateInfo {
     pub p_push_constant_ranges: *const VkPushConstantRange,
 }
 
-pub trait ExtendsPipelineLayoutCreateInfo { }
+pub trait ExtendsPipelineLayoutCreateInfo
+{
+}
 
-impl Default for VkPipelineLayoutCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineLayoutCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_LAYOUT_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5445,16 +7375,21 @@ impl Default for VkPipelineLayoutCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPushConstantRange {
+pub struct VkPushConstantRange
+{
     pub stage_flags: VkShaderStageFlags,
     pub offset: u32,
     pub size: u32,
 }
 
-pub trait ExtendsPushConstantRange { }
+pub trait ExtendsPushConstantRange
+{
+}
 
-impl Default for VkPushConstantRange {
-    fn default() -> Self {
+impl Default for VkPushConstantRange
+{
+    fn default() -> Self
+    {
         Self {
             stage_flags: VkShaderStageFlags::default(),
             offset: 0,
@@ -5465,7 +7400,8 @@ impl Default for VkPushConstantRange {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkComputePipelineCreateInfo {
+pub struct VkComputePipelineCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineCreateFlags,
@@ -5475,10 +7411,14 @@ pub struct VkComputePipelineCreateInfo {
     pub base_pipeline_index: i32,
 }
 
-pub trait ExtendsComputePipelineCreateInfo { }
+pub trait ExtendsComputePipelineCreateInfo
+{
+}
 
-impl Default for VkComputePipelineCreateInfo {
-    fn default() -> Self {
+impl Default for VkComputePipelineCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::COMPUTE_PIPELINE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5493,7 +7433,8 @@ impl Default for VkComputePipelineCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineShaderStageCreateInfo {
+pub struct VkPipelineShaderStageCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineShaderStageCreateFlags,
@@ -5503,10 +7444,14 @@ pub struct VkPipelineShaderStageCreateInfo {
     pub p_specialization_info: *const VkSpecializationInfo,
 }
 
-pub trait ExtendsPipelineShaderStageCreateInfo { }
+pub trait ExtendsPipelineShaderStageCreateInfo
+{
+}
 
-impl Default for VkPipelineShaderStageCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineShaderStageCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_SHADER_STAGE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5521,17 +7466,22 @@ impl Default for VkPipelineShaderStageCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSpecializationInfo {
+pub struct VkSpecializationInfo
+{
     pub map_entry_count: u32,
     pub p_map_entries: *const VkSpecializationMapEntry,
     pub data_size: usize,
     pub p_data: *const core::ffi::c_void,
 }
 
-pub trait ExtendsSpecializationInfo { }
+pub trait ExtendsSpecializationInfo
+{
+}
 
-impl Default for VkSpecializationInfo {
-    fn default() -> Self {
+impl Default for VkSpecializationInfo
+{
+    fn default() -> Self
+    {
         Self {
             map_entry_count: 0,
             p_map_entries: core::ptr::null(),
@@ -5543,16 +7493,21 @@ impl Default for VkSpecializationInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSpecializationMapEntry {
+pub struct VkSpecializationMapEntry
+{
     pub ant_id: u32,
     pub offset: u32,
     pub size: usize,
 }
 
-pub trait ExtendsSpecializationMapEntry { }
+pub trait ExtendsSpecializationMapEntry
+{
+}
 
-impl Default for VkSpecializationMapEntry {
-    fn default() -> Self {
+impl Default for VkSpecializationMapEntry
+{
+    fn default() -> Self
+    {
         Self {
             ant_id: 0,
             offset: 0,
@@ -5563,7 +7518,8 @@ impl Default for VkSpecializationMapEntry {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkGraphicsPipelineCreateInfo {
+pub struct VkGraphicsPipelineCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineCreateFlags,
@@ -5585,10 +7541,14 @@ pub struct VkGraphicsPipelineCreateInfo {
     pub base_pipeline_index: i32,
 }
 
-pub trait ExtendsGraphicsPipelineCreateInfo { }
+pub trait ExtendsGraphicsPipelineCreateInfo
+{
+}
 
-impl Default for VkGraphicsPipelineCreateInfo {
-    fn default() -> Self {
+impl Default for VkGraphicsPipelineCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::GRAPHICS_PIPELINE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5615,7 +7575,8 @@ impl Default for VkGraphicsPipelineCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineDynamicStateCreateInfo {
+pub struct VkPipelineDynamicStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineDynamicStateCreateFlags,
@@ -5623,10 +7584,14 @@ pub struct VkPipelineDynamicStateCreateInfo {
     pub p_dynamic_states: *const VkDynamicState,
 }
 
-pub trait ExtendsPipelineDynamicStateCreateInfo { }
+pub trait ExtendsPipelineDynamicStateCreateInfo
+{
+}
 
-impl Default for VkPipelineDynamicStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineDynamicStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_DYNAMIC_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5639,7 +7604,8 @@ impl Default for VkPipelineDynamicStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineColorBlendStateCreateInfo {
+pub struct VkPipelineColorBlendStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineColorBlendStateCreateFlags,
@@ -5650,10 +7616,14 @@ pub struct VkPipelineColorBlendStateCreateInfo {
     pub blend_constants: [f32; 4],
 }
 
-pub trait ExtendsPipelineColorBlendStateCreateInfo { }
+pub trait ExtendsPipelineColorBlendStateCreateInfo
+{
+}
 
-impl Default for VkPipelineColorBlendStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineColorBlendStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5669,7 +7639,8 @@ impl Default for VkPipelineColorBlendStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineColorBlendAttachmentState {
+pub struct VkPipelineColorBlendAttachmentState
+{
     pub blend_enable: VkBool32,
     pub src_color_blend_factor: VkBlendFactor,
     pub dst_color_blend_factor: VkBlendFactor,
@@ -5680,10 +7651,14 @@ pub struct VkPipelineColorBlendAttachmentState {
     pub color_write_mask: VkColorComponentFlags,
 }
 
-pub trait ExtendsPipelineColorBlendAttachmentState { }
+pub trait ExtendsPipelineColorBlendAttachmentState
+{
+}
 
-impl Default for VkPipelineColorBlendAttachmentState {
-    fn default() -> Self {
+impl Default for VkPipelineColorBlendAttachmentState
+{
+    fn default() -> Self
+    {
         Self {
             blend_enable: VkBool32::default(),
             src_color_blend_factor: VkBlendFactor::default(),
@@ -5699,7 +7674,8 @@ impl Default for VkPipelineColorBlendAttachmentState {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineDepthStencilStateCreateInfo {
+pub struct VkPipelineDepthStencilStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineDepthStencilStateCreateFlags,
@@ -5714,10 +7690,14 @@ pub struct VkPipelineDepthStencilStateCreateInfo {
     pub max_depth_bounds: f32,
 }
 
-pub trait ExtendsPipelineDepthStencilStateCreateInfo { }
+pub trait ExtendsPipelineDepthStencilStateCreateInfo
+{
+}
 
-impl Default for VkPipelineDepthStencilStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineDepthStencilStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5737,7 +7717,8 @@ impl Default for VkPipelineDepthStencilStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkStencilOpState {
+pub struct VkStencilOpState
+{
     pub fail_op: VkStencilOp,
     pub pass_op: VkStencilOp,
     pub depth_fail_op: VkStencilOp,
@@ -5747,10 +7728,14 @@ pub struct VkStencilOpState {
     pub reference: u32,
 }
 
-pub trait ExtendsStencilOpState { }
+pub trait ExtendsStencilOpState
+{
+}
 
-impl Default for VkStencilOpState {
-    fn default() -> Self {
+impl Default for VkStencilOpState
+{
+    fn default() -> Self
+    {
         Self {
             fail_op: VkStencilOp::default(),
             pass_op: VkStencilOp::default(),
@@ -5765,7 +7750,8 @@ impl Default for VkStencilOpState {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineMultisampleStateCreateInfo {
+pub struct VkPipelineMultisampleStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineMultisampleStateCreateFlags,
@@ -5777,10 +7763,14 @@ pub struct VkPipelineMultisampleStateCreateInfo {
     pub alpha_to_one_enable: VkBool32,
 }
 
-pub trait ExtendsPipelineMultisampleStateCreateInfo { }
+pub trait ExtendsPipelineMultisampleStateCreateInfo
+{
+}
 
-impl Default for VkPipelineMultisampleStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineMultisampleStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5797,7 +7787,8 @@ impl Default for VkPipelineMultisampleStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineRasterizationStateCreateInfo {
+pub struct VkPipelineRasterizationStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineRasterizationStateCreateFlags,
@@ -5813,10 +7804,14 @@ pub struct VkPipelineRasterizationStateCreateInfo {
     pub line_width: f32,
 }
 
-pub trait ExtendsPipelineRasterizationStateCreateInfo { }
+pub trait ExtendsPipelineRasterizationStateCreateInfo
+{
+}
 
-impl Default for VkPipelineRasterizationStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineRasterizationStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5837,7 +7832,8 @@ impl Default for VkPipelineRasterizationStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineViewportStateCreateInfo {
+pub struct VkPipelineViewportStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineViewportStateCreateFlags,
@@ -5847,10 +7843,14 @@ pub struct VkPipelineViewportStateCreateInfo {
     pub p_scissors: *const VkRect2D,
 }
 
-pub trait ExtendsPipelineViewportStateCreateInfo { }
+pub trait ExtendsPipelineViewportStateCreateInfo
+{
+}
 
-impl Default for VkPipelineViewportStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineViewportStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_VIEWPORT_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5865,17 +7865,22 @@ impl Default for VkPipelineViewportStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineTessellationStateCreateInfo {
+pub struct VkPipelineTessellationStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineTessellationStateCreateFlags,
     pub patch_control_points: u32,
 }
 
-pub trait ExtendsPipelineTessellationStateCreateInfo { }
+pub trait ExtendsPipelineTessellationStateCreateInfo
+{
+}
 
-impl Default for VkPipelineTessellationStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineTessellationStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_TESSELLATION_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5887,7 +7892,8 @@ impl Default for VkPipelineTessellationStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineInputAssemblyStateCreateInfo {
+pub struct VkPipelineInputAssemblyStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineInputAssemblyStateCreateFlags,
@@ -5895,10 +7901,14 @@ pub struct VkPipelineInputAssemblyStateCreateInfo {
     pub primitive_restart_enable: VkBool32,
 }
 
-pub trait ExtendsPipelineInputAssemblyStateCreateInfo { }
+pub trait ExtendsPipelineInputAssemblyStateCreateInfo
+{
+}
 
-impl Default for VkPipelineInputAssemblyStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineInputAssemblyStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5911,7 +7921,8 @@ impl Default for VkPipelineInputAssemblyStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineVertexInputStateCreateInfo {
+pub struct VkPipelineVertexInputStateCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineVertexInputStateCreateFlags,
@@ -5921,10 +7932,14 @@ pub struct VkPipelineVertexInputStateCreateInfo {
     pub p_vertex_attribute_descriptions: *const VkVertexInputAttributeDescription,
 }
 
-pub trait ExtendsPipelineVertexInputStateCreateInfo { }
+pub trait ExtendsPipelineVertexInputStateCreateInfo
+{
+}
 
-impl Default for VkPipelineVertexInputStateCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineVertexInputStateCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -5939,17 +7954,22 @@ impl Default for VkPipelineVertexInputStateCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkVertexInputAttributeDescription {
+pub struct VkVertexInputAttributeDescription
+{
     pub location: u32,
     pub binding: u32,
     pub format: VkFormat,
     pub offset: u32,
 }
 
-pub trait ExtendsVertexInputAttributeDescription { }
+pub trait ExtendsVertexInputAttributeDescription
+{
+}
 
-impl Default for VkVertexInputAttributeDescription {
-    fn default() -> Self {
+impl Default for VkVertexInputAttributeDescription
+{
+    fn default() -> Self
+    {
         Self {
             location: 0,
             binding: 0,
@@ -5961,16 +7981,21 @@ impl Default for VkVertexInputAttributeDescription {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkVertexInputBindingDescription {
+pub struct VkVertexInputBindingDescription
+{
     pub binding: u32,
     pub stride: u32,
     pub input_rate: VkVertexInputRate,
 }
 
-pub trait ExtendsVertexInputBindingDescription { }
+pub trait ExtendsVertexInputBindingDescription
+{
+}
 
-impl Default for VkVertexInputBindingDescription {
-    fn default() -> Self {
+impl Default for VkVertexInputBindingDescription
+{
+    fn default() -> Self
+    {
         Self {
             binding: 0,
             stride: 0,
@@ -5981,7 +8006,8 @@ impl Default for VkVertexInputBindingDescription {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPipelineCacheCreateInfo {
+pub struct VkPipelineCacheCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkPipelineCacheCreateFlags,
@@ -5989,10 +8015,14 @@ pub struct VkPipelineCacheCreateInfo {
     pub p_initial_data: *const core::ffi::c_void,
 }
 
-pub trait ExtendsPipelineCacheCreateInfo { }
+pub trait ExtendsPipelineCacheCreateInfo
+{
+}
 
-impl Default for VkPipelineCacheCreateInfo {
-    fn default() -> Self {
+impl Default for VkPipelineCacheCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::PIPELINE_CACHE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6005,7 +8035,8 @@ impl Default for VkPipelineCacheCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkShaderModuleCreateInfo {
+pub struct VkShaderModuleCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkShaderModuleCreateFlags,
@@ -6013,10 +8044,14 @@ pub struct VkShaderModuleCreateInfo {
     pub p_code: *const u32,
 }
 
-pub trait ExtendsShaderModuleCreateInfo { }
+pub trait ExtendsShaderModuleCreateInfo
+{
+}
 
-impl Default for VkShaderModuleCreateInfo {
-    fn default() -> Self {
+impl Default for VkShaderModuleCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::SHADER_MODULE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6029,7 +8064,8 @@ impl Default for VkShaderModuleCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageViewCreateInfo {
+pub struct VkImageViewCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkImageViewCreateFlags,
@@ -6040,10 +8076,14 @@ pub struct VkImageViewCreateInfo {
     pub subresource_range: VkImageSubresourceRange,
 }
 
-pub trait ExtendsImageViewCreateInfo { }
+pub trait ExtendsImageViewCreateInfo
+{
+}
 
-impl Default for VkImageViewCreateInfo {
-    fn default() -> Self {
+impl Default for VkImageViewCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::IMAGE_VIEW_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6059,17 +8099,22 @@ impl Default for VkImageViewCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkComponentMapping {
+pub struct VkComponentMapping
+{
     pub r: VkComponentSwizzle,
     pub g: VkComponentSwizzle,
     pub b: VkComponentSwizzle,
     pub a: VkComponentSwizzle,
 }
 
-pub trait ExtendsComponentMapping { }
+pub trait ExtendsComponentMapping
+{
+}
 
-impl Default for VkComponentMapping {
-    fn default() -> Self {
+impl Default for VkComponentMapping
+{
+    fn default() -> Self
+    {
         Self {
             r: VkComponentSwizzle::default(),
             g: VkComponentSwizzle::default(),
@@ -6081,7 +8126,8 @@ impl Default for VkComponentMapping {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSubresourceLayout {
+pub struct VkSubresourceLayout
+{
     pub offset: VkDeviceSize,
     pub size: VkDeviceSize,
     pub row_pitch: VkDeviceSize,
@@ -6089,10 +8135,14 @@ pub struct VkSubresourceLayout {
     pub depth_pitch: VkDeviceSize,
 }
 
-pub trait ExtendsSubresourceLayout { }
+pub trait ExtendsSubresourceLayout
+{
+}
 
-impl Default for VkSubresourceLayout {
-    fn default() -> Self {
+impl Default for VkSubresourceLayout
+{
+    fn default() -> Self
+    {
         Self {
             offset: VkDeviceSize::default(),
             size: VkDeviceSize::default(),
@@ -6105,16 +8155,21 @@ impl Default for VkSubresourceLayout {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageSubresource {
+pub struct VkImageSubresource
+{
     pub aspect_mask: VkImageAspectFlags,
     pub mip_level: u32,
     pub array_layer: u32,
 }
 
-pub trait ExtendsImageSubresource { }
+pub trait ExtendsImageSubresource
+{
+}
 
-impl Default for VkImageSubresource {
-    fn default() -> Self {
+impl Default for VkImageSubresource
+{
+    fn default() -> Self
+    {
         Self {
             aspect_mask: VkImageAspectFlags::default(),
             mip_level: 0,
@@ -6125,7 +8180,8 @@ impl Default for VkImageSubresource {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageCreateInfo {
+pub struct VkImageCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkImageCreateFlags,
@@ -6143,10 +8199,14 @@ pub struct VkImageCreateInfo {
     pub initial_layout: VkImageLayout,
 }
 
-pub trait ExtendsImageCreateInfo { }
+pub trait ExtendsImageCreateInfo
+{
+}
 
-impl Default for VkImageCreateInfo {
-    fn default() -> Self {
+impl Default for VkImageCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::IMAGE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6169,7 +8229,8 @@ impl Default for VkImageCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkBufferViewCreateInfo {
+pub struct VkBufferViewCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkBufferViewCreateFlags,
@@ -6179,10 +8240,14 @@ pub struct VkBufferViewCreateInfo {
     pub range: VkDeviceSize,
 }
 
-pub trait ExtendsBufferViewCreateInfo { }
+pub trait ExtendsBufferViewCreateInfo
+{
+}
 
-impl Default for VkBufferViewCreateInfo {
-    fn default() -> Self {
+impl Default for VkBufferViewCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::BUFFER_VIEW_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6197,7 +8262,8 @@ impl Default for VkBufferViewCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkBufferCreateInfo {
+pub struct VkBufferCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkBufferCreateFlags,
@@ -6208,10 +8274,14 @@ pub struct VkBufferCreateInfo {
     pub p_queue_family_indices: *const u32,
 }
 
-pub trait ExtendsBufferCreateInfo { }
+pub trait ExtendsBufferCreateInfo
+{
+}
 
-impl Default for VkBufferCreateInfo {
-    fn default() -> Self {
+impl Default for VkBufferCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::BUFFER_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6227,7 +8297,8 @@ impl Default for VkBufferCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkQueryPoolCreateInfo {
+pub struct VkQueryPoolCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkQueryPoolCreateFlags,
@@ -6236,10 +8307,14 @@ pub struct VkQueryPoolCreateInfo {
     pub pipeline_statistics: VkQueryPipelineStatisticFlags,
 }
 
-pub trait ExtendsQueryPoolCreateInfo { }
+pub trait ExtendsQueryPoolCreateInfo
+{
+}
 
-impl Default for VkQueryPoolCreateInfo {
-    fn default() -> Self {
+impl Default for VkQueryPoolCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::QUERY_POOL_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6253,16 +8328,21 @@ impl Default for VkQueryPoolCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkEventCreateInfo {
+pub struct VkEventCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkEventCreateFlags,
 }
 
-pub trait ExtendsEventCreateInfo { }
+pub trait ExtendsEventCreateInfo
+{
+}
 
-impl Default for VkEventCreateInfo {
-    fn default() -> Self {
+impl Default for VkEventCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::EVENT_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6273,16 +8353,21 @@ impl Default for VkEventCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSemaphoreCreateInfo {
+pub struct VkSemaphoreCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkSemaphoreCreateFlags,
 }
 
-pub trait ExtendsSemaphoreCreateInfo { }
+pub trait ExtendsSemaphoreCreateInfo
+{
+}
 
-impl Default for VkSemaphoreCreateInfo {
-    fn default() -> Self {
+impl Default for VkSemaphoreCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::SEMAPHORE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6293,16 +8378,21 @@ impl Default for VkSemaphoreCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkFenceCreateInfo {
+pub struct VkFenceCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkFenceCreateFlags,
 }
 
-pub trait ExtendsFenceCreateInfo { }
+pub trait ExtendsFenceCreateInfo
+{
+}
 
-impl Default for VkFenceCreateInfo {
-    fn default() -> Self {
+impl Default for VkFenceCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::FENCE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6313,7 +8403,8 @@ impl Default for VkFenceCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkBindSparseInfo {
+pub struct VkBindSparseInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub wait_semaphore_count: u32,
@@ -6328,10 +8419,14 @@ pub struct VkBindSparseInfo {
     pub p_signal_semaphores: *const VkSemaphore,
 }
 
-pub trait ExtendsBindSparseInfo { }
+pub trait ExtendsBindSparseInfo
+{
+}
 
-impl Default for VkBindSparseInfo {
-    fn default() -> Self {
+impl Default for VkBindSparseInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::BIND_SPARSE_INFO,
             p_next: core::ptr::null(),
@@ -6351,16 +8446,21 @@ impl Default for VkBindSparseInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSparseImageMemoryBindInfo {
+pub struct VkSparseImageMemoryBindInfo
+{
     pub image: VkImage,
     pub bind_count: u32,
     pub p_binds: *const VkSparseImageMemoryBind,
 }
 
-pub trait ExtendsSparseImageMemoryBindInfo { }
+pub trait ExtendsSparseImageMemoryBindInfo
+{
+}
 
-impl Default for VkSparseImageMemoryBindInfo {
-    fn default() -> Self {
+impl Default for VkSparseImageMemoryBindInfo
+{
+    fn default() -> Self
+    {
         Self {
             image: VkImage::default(),
             bind_count: 0,
@@ -6371,7 +8471,8 @@ impl Default for VkSparseImageMemoryBindInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSparseImageMemoryBind {
+pub struct VkSparseImageMemoryBind
+{
     pub subresource: VkImageSubresource,
     pub offset: VkOffset3D,
     pub extent: VkExtent3D,
@@ -6380,10 +8481,14 @@ pub struct VkSparseImageMemoryBind {
     pub flags: VkSparseMemoryBindFlags,
 }
 
-pub trait ExtendsSparseImageMemoryBind { }
+pub trait ExtendsSparseImageMemoryBind
+{
+}
 
-impl Default for VkSparseImageMemoryBind {
-    fn default() -> Self {
+impl Default for VkSparseImageMemoryBind
+{
+    fn default() -> Self
+    {
         Self {
             subresource: VkImageSubresource::default(),
             offset: VkOffset3D::default(),
@@ -6397,16 +8502,21 @@ impl Default for VkSparseImageMemoryBind {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSparseImageOpaqueMemoryBindInfo {
+pub struct VkSparseImageOpaqueMemoryBindInfo
+{
     pub image: VkImage,
     pub bind_count: u32,
     pub p_binds: *const VkSparseMemoryBind,
 }
 
-pub trait ExtendsSparseImageOpaqueMemoryBindInfo { }
+pub trait ExtendsSparseImageOpaqueMemoryBindInfo
+{
+}
 
-impl Default for VkSparseImageOpaqueMemoryBindInfo {
-    fn default() -> Self {
+impl Default for VkSparseImageOpaqueMemoryBindInfo
+{
+    fn default() -> Self
+    {
         Self {
             image: VkImage::default(),
             bind_count: 0,
@@ -6417,7 +8527,8 @@ impl Default for VkSparseImageOpaqueMemoryBindInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSparseMemoryBind {
+pub struct VkSparseMemoryBind
+{
     pub resource_offset: VkDeviceSize,
     pub size: VkDeviceSize,
     pub memory: VkDeviceMemory,
@@ -6425,10 +8536,14 @@ pub struct VkSparseMemoryBind {
     pub flags: VkSparseMemoryBindFlags,
 }
 
-pub trait ExtendsSparseMemoryBind { }
+pub trait ExtendsSparseMemoryBind
+{
+}
 
-impl Default for VkSparseMemoryBind {
-    fn default() -> Self {
+impl Default for VkSparseMemoryBind
+{
+    fn default() -> Self
+    {
         Self {
             resource_offset: VkDeviceSize::default(),
             size: VkDeviceSize::default(),
@@ -6441,16 +8556,21 @@ impl Default for VkSparseMemoryBind {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSparseBufferMemoryBindInfo {
+pub struct VkSparseBufferMemoryBindInfo
+{
     pub buffer: VkBuffer,
     pub bind_count: u32,
     pub p_binds: *const VkSparseMemoryBind,
 }
 
-pub trait ExtendsSparseBufferMemoryBindInfo { }
+pub trait ExtendsSparseBufferMemoryBindInfo
+{
+}
 
-impl Default for VkSparseBufferMemoryBindInfo {
-    fn default() -> Self {
+impl Default for VkSparseBufferMemoryBindInfo
+{
+    fn default() -> Self
+    {
         Self {
             buffer: VkBuffer::default(),
             bind_count: 0,
@@ -6461,16 +8581,21 @@ impl Default for VkSparseBufferMemoryBindInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSparseImageFormatProperties {
+pub struct VkSparseImageFormatProperties
+{
     pub aspect_mask: VkImageAspectFlags,
     pub image_granularity: VkExtent3D,
     pub flags: VkSparseImageFormatFlags,
 }
 
-pub trait ExtendsSparseImageFormatProperties { }
+pub trait ExtendsSparseImageFormatProperties
+{
+}
 
-impl Default for VkSparseImageFormatProperties {
-    fn default() -> Self {
+impl Default for VkSparseImageFormatProperties
+{
+    fn default() -> Self
+    {
         Self {
             aspect_mask: VkImageAspectFlags::default(),
             image_granularity: VkExtent3D::default(),
@@ -6481,7 +8606,8 @@ impl Default for VkSparseImageFormatProperties {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSparseImageMemoryRequirements {
+pub struct VkSparseImageMemoryRequirements
+{
     pub format_properties: VkSparseImageFormatProperties,
     pub image_mip_tail_first_lod: u32,
     pub image_mip_tail_size: VkDeviceSize,
@@ -6489,10 +8615,14 @@ pub struct VkSparseImageMemoryRequirements {
     pub image_mip_tail_stride: VkDeviceSize,
 }
 
-pub trait ExtendsSparseImageMemoryRequirements { }
+pub trait ExtendsSparseImageMemoryRequirements
+{
+}
 
-impl Default for VkSparseImageMemoryRequirements {
-    fn default() -> Self {
+impl Default for VkSparseImageMemoryRequirements
+{
+    fn default() -> Self
+    {
         Self {
             format_properties: VkSparseImageFormatProperties::default(),
             image_mip_tail_first_lod: 0,
@@ -6505,16 +8635,21 @@ impl Default for VkSparseImageMemoryRequirements {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkMemoryRequirements {
+pub struct VkMemoryRequirements
+{
     pub size: VkDeviceSize,
     pub alignment: VkDeviceSize,
     pub memory_type_bits: u32,
 }
 
-pub trait ExtendsMemoryRequirements { }
+pub trait ExtendsMemoryRequirements
+{
+}
 
-impl Default for VkMemoryRequirements {
-    fn default() -> Self {
+impl Default for VkMemoryRequirements
+{
+    fn default() -> Self
+    {
         Self {
             size: VkDeviceSize::default(),
             alignment: VkDeviceSize::default(),
@@ -6525,7 +8660,8 @@ impl Default for VkMemoryRequirements {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkMappedMemoryRange {
+pub struct VkMappedMemoryRange
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub memory: VkDeviceMemory,
@@ -6533,10 +8669,14 @@ pub struct VkMappedMemoryRange {
     pub size: VkDeviceSize,
 }
 
-pub trait ExtendsMappedMemoryRange { }
+pub trait ExtendsMappedMemoryRange
+{
+}
 
-impl Default for VkMappedMemoryRange {
-    fn default() -> Self {
+impl Default for VkMappedMemoryRange
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::MAPPED_MEMORY_RANGE,
             p_next: core::ptr::null(),
@@ -6549,17 +8689,22 @@ impl Default for VkMappedMemoryRange {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkMemoryAllocateInfo {
+pub struct VkMemoryAllocateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub allocation_size: VkDeviceSize,
     pub memory_type_index: u32,
 }
 
-pub trait ExtendsMemoryAllocateInfo { }
+pub trait ExtendsMemoryAllocateInfo
+{
+}
 
-impl Default for VkMemoryAllocateInfo {
-    fn default() -> Self {
+impl Default for VkMemoryAllocateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::MEMORY_ALLOCATE_INFO,
             p_next: core::ptr::null(),
@@ -6571,7 +8716,8 @@ impl Default for VkMemoryAllocateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkSubmitInfo {
+pub struct VkSubmitInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub wait_semaphore_count: u32,
@@ -6583,10 +8729,14 @@ pub struct VkSubmitInfo {
     pub p_signal_semaphores: *const VkSemaphore,
 }
 
-pub trait ExtendsSubmitInfo { }
+pub trait ExtendsSubmitInfo
+{
+}
 
-impl Default for VkSubmitInfo {
-    fn default() -> Self {
+impl Default for VkSubmitInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::SUBMIT_INFO,
             p_next: core::ptr::null(),
@@ -6603,39 +8753,82 @@ impl Default for VkSubmitInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkLayerProperties {
+pub struct VkLayerProperties
+{
     pub layer_name: [u8; 256],
     pub spec_version: u32,
     pub implementation_version: u32,
     pub description: [u8; 256],
 }
 
-pub trait ExtendsLayerProperties { }
+pub trait ExtendsLayerProperties
+{
+}
 
-impl Default for VkLayerProperties {
-    fn default() -> Self {
+impl Default for VkLayerProperties
+{
+    fn default() -> Self
+    {
         Self {
-            layer_name: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            layer_name: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0,
+            ],
             spec_version: 0,
             implementation_version: 0,
-            description: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            description: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0,
+            ],
         }
     }
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkExtensionProperties {
+pub struct VkExtensionProperties
+{
     pub extension_name: [u8; 256],
     pub spec_version: u32,
 }
 
-pub trait ExtendsExtensionProperties { }
+pub trait ExtendsExtensionProperties
+{
+}
 
-impl Default for VkExtensionProperties {
-    fn default() -> Self {
+impl Default for VkExtensionProperties
+{
+    fn default() -> Self
+    {
         Self {
-            extension_name: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            extension_name: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0,
+            ],
             spec_version: 0,
         }
     }
@@ -6643,7 +8836,8 @@ impl Default for VkExtensionProperties {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDeviceCreateInfo {
+pub struct VkDeviceCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkDeviceCreateFlags,
@@ -6656,10 +8850,14 @@ pub struct VkDeviceCreateInfo {
     pub p_enabled_features: *const VkPhysicalDeviceFeatures,
 }
 
-pub trait ExtendsDeviceCreateInfo { }
+pub trait ExtendsDeviceCreateInfo
+{
+}
 
-impl Default for VkDeviceCreateInfo {
-    fn default() -> Self {
+impl Default for VkDeviceCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DEVICE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6677,7 +8875,8 @@ impl Default for VkDeviceCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPhysicalDeviceFeatures {
+pub struct VkPhysicalDeviceFeatures
+{
     pub robust_buffer_access: VkBool32,
     pub full_draw_index_uint_32: VkBool32,
     pub image_cube_array: VkBool32,
@@ -6735,10 +8934,14 @@ pub struct VkPhysicalDeviceFeatures {
     pub inherited_queries: VkBool32,
 }
 
-pub trait ExtendsPhysicalDeviceFeatures { }
+pub trait ExtendsPhysicalDeviceFeatures
+{
+}
 
-impl Default for VkPhysicalDeviceFeatures {
-    fn default() -> Self {
+impl Default for VkPhysicalDeviceFeatures
+{
+    fn default() -> Self
+    {
         Self {
             robust_buffer_access: VkBool32::default(),
             full_draw_index_uint_32: VkBool32::default(),
@@ -6801,7 +9004,8 @@ impl Default for VkPhysicalDeviceFeatures {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkDeviceQueueCreateInfo {
+pub struct VkDeviceQueueCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkDeviceQueueCreateFlags,
@@ -6810,10 +9014,14 @@ pub struct VkDeviceQueueCreateInfo {
     pub p_queue_priorities: *const f32,
 }
 
-pub trait ExtendsDeviceQueueCreateInfo { }
+pub trait ExtendsDeviceQueueCreateInfo
+{
+}
 
-impl Default for VkDeviceQueueCreateInfo {
-    fn default() -> Self {
+impl Default for VkDeviceQueueCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::DEVICE_QUEUE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -6827,37 +9035,97 @@ impl Default for VkDeviceQueueCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPhysicalDeviceMemoryProperties {
+pub struct VkPhysicalDeviceMemoryProperties
+{
     pub memory_type_count: u32,
     pub memory_types: [VkMemoryType; 32],
     pub memory_heap_count: u32,
     pub memory_heaps: [VkMemoryHeap; 16],
 }
 
-pub trait ExtendsPhysicalDeviceMemoryProperties { }
+pub trait ExtendsPhysicalDeviceMemoryProperties
+{
+}
 
-impl Default for VkPhysicalDeviceMemoryProperties {
-    fn default() -> Self {
+impl Default for VkPhysicalDeviceMemoryProperties
+{
+    fn default() -> Self
+    {
         Self {
             memory_type_count: 0,
-            memory_types: [VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default(), VkMemoryType::default()],
+            memory_types: [
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+                VkMemoryType::default(),
+            ],
             memory_heap_count: 0,
-            memory_heaps: [VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default(), VkMemoryHeap::default()],
+            memory_heaps: [
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+                VkMemoryHeap::default(),
+            ],
         }
     }
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkMemoryHeap {
+pub struct VkMemoryHeap
+{
     pub size: VkDeviceSize,
     pub flags: VkMemoryHeapFlags,
 }
 
-pub trait ExtendsMemoryHeap { }
+pub trait ExtendsMemoryHeap
+{
+}
 
-impl Default for VkMemoryHeap {
-    fn default() -> Self {
+impl Default for VkMemoryHeap
+{
+    fn default() -> Self
+    {
         Self {
             size: VkDeviceSize::default(),
             flags: VkMemoryHeapFlags::default(),
@@ -6867,15 +9135,20 @@ impl Default for VkMemoryHeap {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkMemoryType {
+pub struct VkMemoryType
+{
     pub property_flags: VkMemoryPropertyFlags,
     pub heap_index: u32,
 }
 
-pub trait ExtendsMemoryType { }
+pub trait ExtendsMemoryType
+{
+}
 
-impl Default for VkMemoryType {
-    fn default() -> Self {
+impl Default for VkMemoryType
+{
+    fn default() -> Self
+    {
         Self {
             property_flags: VkMemoryPropertyFlags::default(),
             heap_index: 0,
@@ -6885,17 +9158,22 @@ impl Default for VkMemoryType {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkQueueFamilyProperties {
+pub struct VkQueueFamilyProperties
+{
     pub queue_flags: VkQueueFlags,
     pub queue_count: u32,
     pub timestamp_valid_bits: u32,
     pub min_image_transfer_granularity: VkExtent3D,
 }
 
-pub trait ExtendsQueueFamilyProperties { }
+pub trait ExtendsQueueFamilyProperties
+{
+}
 
-impl Default for VkQueueFamilyProperties {
-    fn default() -> Self {
+impl Default for VkQueueFamilyProperties
+{
+    fn default() -> Self
+    {
         Self {
             queue_flags: VkQueueFlags::default(),
             queue_count: 0,
@@ -6907,7 +9185,8 @@ impl Default for VkQueueFamilyProperties {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPhysicalDeviceProperties {
+pub struct VkPhysicalDeviceProperties
+{
     pub api_version: u32,
     pub driver_version: u32,
     pub vendor_id: u32,
@@ -6919,17 +9198,32 @@ pub struct VkPhysicalDeviceProperties {
     pub sparse_properties: VkPhysicalDeviceSparseProperties,
 }
 
-pub trait ExtendsPhysicalDeviceProperties { }
+pub trait ExtendsPhysicalDeviceProperties
+{
+}
 
-impl Default for VkPhysicalDeviceProperties {
-    fn default() -> Self {
+impl Default for VkPhysicalDeviceProperties
+{
+    fn default() -> Self
+    {
         Self {
             api_version: 0,
             driver_version: 0,
             vendor_id: 0,
             device_id: 0,
             device_type: VkPhysicalDeviceType::default(),
-            device_name: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            device_name: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0,
+            ],
             pipeline_cache_uuid: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             limits: VkPhysicalDeviceLimits::default(),
             sparse_properties: VkPhysicalDeviceSparseProperties::default(),
@@ -6939,7 +9233,8 @@ impl Default for VkPhysicalDeviceProperties {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPhysicalDeviceSparseProperties {
+pub struct VkPhysicalDeviceSparseProperties
+{
     pub residency_standard_2_d_block_shape: VkBool32,
     pub residency_standard_2_d_multisample_block_shape: VkBool32,
     pub residency_standard_3_d_block_shape: VkBool32,
@@ -6947,10 +9242,14 @@ pub struct VkPhysicalDeviceSparseProperties {
     pub residency_non_resident_strict: VkBool32,
 }
 
-pub trait ExtendsPhysicalDeviceSparseProperties { }
+pub trait ExtendsPhysicalDeviceSparseProperties
+{
+}
 
-impl Default for VkPhysicalDeviceSparseProperties {
-    fn default() -> Self {
+impl Default for VkPhysicalDeviceSparseProperties
+{
+    fn default() -> Self
+    {
         Self {
             residency_standard_2_d_block_shape: VkBool32::default(),
             residency_standard_2_d_multisample_block_shape: VkBool32::default(),
@@ -6963,7 +9262,8 @@ impl Default for VkPhysicalDeviceSparseProperties {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkPhysicalDeviceLimits {
+pub struct VkPhysicalDeviceLimits
+{
     pub max_image_dimension_1_d: u32,
     pub max_image_dimension_2_d: u32,
     pub max_image_dimension_3_d: u32,
@@ -7072,10 +9372,14 @@ pub struct VkPhysicalDeviceLimits {
     pub non_coherent_atom_size: VkDeviceSize,
 }
 
-pub trait ExtendsPhysicalDeviceLimits { }
+pub trait ExtendsPhysicalDeviceLimits
+{
+}
 
-impl Default for VkPhysicalDeviceLimits {
-    fn default() -> Self {
+impl Default for VkPhysicalDeviceLimits
+{
+    fn default() -> Self
+    {
         Self {
             max_image_dimension_1_d: 0,
             max_image_dimension_2_d: 0,
@@ -7189,7 +9493,8 @@ impl Default for VkPhysicalDeviceLimits {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkImageFormatProperties {
+pub struct VkImageFormatProperties
+{
     pub max_extent: VkExtent3D,
     pub max_mip_levels: u32,
     pub max_array_layers: u32,
@@ -7197,10 +9502,14 @@ pub struct VkImageFormatProperties {
     pub max_resource_size: VkDeviceSize,
 }
 
-pub trait ExtendsImageFormatProperties { }
+pub trait ExtendsImageFormatProperties
+{
+}
 
-impl Default for VkImageFormatProperties {
-    fn default() -> Self {
+impl Default for VkImageFormatProperties
+{
+    fn default() -> Self
+    {
         Self {
             max_extent: VkExtent3D::default(),
             max_mip_levels: 0,
@@ -7213,16 +9522,21 @@ impl Default for VkImageFormatProperties {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkFormatProperties {
+pub struct VkFormatProperties
+{
     pub linear_tiling_features: VkFormatFeatureFlags,
     pub optimal_tiling_features: VkFormatFeatureFlags,
     pub buffer_features: VkFormatFeatureFlags,
 }
 
-pub trait ExtendsFormatProperties { }
+pub trait ExtendsFormatProperties
+{
+}
 
-impl Default for VkFormatProperties {
-    fn default() -> Self {
+impl Default for VkFormatProperties
+{
+    fn default() -> Self
+    {
         Self {
             linear_tiling_features: VkFormatFeatureFlags::default(),
             optimal_tiling_features: VkFormatFeatureFlags::default(),
@@ -7233,7 +9547,8 @@ impl Default for VkFormatProperties {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkInstanceCreateInfo {
+pub struct VkInstanceCreateInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub flags: VkInstanceCreateFlags,
@@ -7244,10 +9559,14 @@ pub struct VkInstanceCreateInfo {
     pub pp_enabled_extension_names: *const *const u8,
 }
 
-pub trait ExtendsInstanceCreateInfo { }
+pub trait ExtendsInstanceCreateInfo
+{
+}
 
-impl Default for VkInstanceCreateInfo {
-    fn default() -> Self {
+impl Default for VkInstanceCreateInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::INSTANCE_CREATE_INFO,
             p_next: core::ptr::null(),
@@ -7263,7 +9582,8 @@ impl Default for VkInstanceCreateInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub struct VkApplicationInfo {
+pub struct VkApplicationInfo
+{
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
     pub p_application_name: *const u8,
@@ -7273,10 +9593,14 @@ pub struct VkApplicationInfo {
     pub api_version: u32,
 }
 
-pub trait ExtendsApplicationInfo { }
+pub trait ExtendsApplicationInfo
+{
+}
 
-impl Default for VkApplicationInfo {
-    fn default() -> Self {
+impl Default for VkApplicationInfo
+{
+    fn default() -> Self
+    {
         Self {
             s_type: VkStructureType::APPLICATION_INFO,
             p_next: core::ptr::null(),
@@ -7291,27 +9615,33 @@ impl Default for VkApplicationInfo {
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub union VkClearValue {
+pub union VkClearValue
+{
     pub color: VkClearColorValue,
     pub depth_stencil: VkClearDepthStencilValue,
 }
 
-impl Default for VkClearValue {
-    fn default() -> Self {
+impl Default for VkClearValue
+{
+    fn default() -> Self
+    {
         unsafe { core::mem::zeroed() }
     }
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
-pub union VkClearColorValue {
+pub union VkClearColorValue
+{
     pub float_32: [f32; 4],
     pub int_32: [i32; 4],
     pub uint_32: [u32; 4],
 }
 
-impl Default for VkClearColorValue {
-    fn default() -> Self {
+impl Default for VkClearColorValue
+{
+    fn default() -> Self
+    {
         unsafe { core::mem::zeroed() }
     }
 }
@@ -7330,10 +9660,8 @@ pub type PfnVkInternalAllocationNotification = extern "system" fn(
     allocation_scope: VkSystemAllocationScope,
 );
 
-pub type PfnVkFreeFunction = extern "system" fn(
-    p_user_data: *mut core::ffi::c_void,
-    p_memory: *mut core::ffi::c_void,
-);
+pub type PfnVkFreeFunction =
+    extern "system" fn(p_user_data: *mut core::ffi::c_void, p_memory: *mut core::ffi::c_void);
 
 pub type PfnVkReallocationFunction = extern "system" fn(
     p_user_data: *mut core::ffi::c_void,
@@ -7357,13 +9685,10 @@ pub type PfnVkDebugUtilsMessengerCallbackEXT = extern "system" fn(
     p_user_data: *mut core::ffi::c_void,
 ) -> VkBool32;
 
-pub type PfnVkVoidFunction = extern "system" fn(
-);
+pub type PfnVkVoidFunction = extern "system" fn();
 
-pub type PfnVkGetPhysicalDeviceWin32PresentationSupportKHR = extern "system" fn(
-    physical_device: VkPhysicalDevice,
-    queue_family_index: u32,
-) -> VkBool32;
+pub type PfnVkGetPhysicalDeviceWin32PresentationSupportKHR =
+    extern "system" fn(physical_device: VkPhysicalDevice, queue_family_index: u32) -> VkBool32;
 
 pub type PfnVkCreateWin32SurfaceKHR = extern "system" fn(
     instance: VkInstance,
@@ -7405,10 +9730,8 @@ pub type PfnVkDestroySurfaceKHR = extern "system" fn(
     p_allocator: *const VkAllocationCallbacks,
 );
 
-pub type PfnVkQueuePresentKHR = extern "system" fn(
-    queue: VkQueue,
-    p_present_info: *const VkPresentInfoKHR,
-) -> VkResult;
+pub type PfnVkQueuePresentKHR =
+    extern "system" fn(queue: VkQueue, p_present_info: *const VkPresentInfoKHR) -> VkResult;
 
 pub type PfnVkAcquireNextImageKHR = extern "system" fn(
     device: VkDevice,
@@ -7459,33 +9782,21 @@ pub type PfnVkCreateDebugUtilsMessengerEXT = extern "system" fn(
     p_messenger: *mut VkDebugUtilsMessengerEXT,
 ) -> VkResult;
 
-pub type PfnVkCmdInsertDebugUtilsLabelEXT = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-    p_label_info: *const VkDebugUtilsLabelEXT,
-);
+pub type PfnVkCmdInsertDebugUtilsLabelEXT =
+    extern "system" fn(command_buffer: VkCommandBuffer, p_label_info: *const VkDebugUtilsLabelEXT);
 
-pub type PfnVkCmdEndDebugUtilsLabelEXT = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-);
+pub type PfnVkCmdEndDebugUtilsLabelEXT = extern "system" fn(command_buffer: VkCommandBuffer);
 
-pub type PfnVkCmdBeginDebugUtilsLabelEXT = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-    p_label_info: *const VkDebugUtilsLabelEXT,
-);
+pub type PfnVkCmdBeginDebugUtilsLabelEXT =
+    extern "system" fn(command_buffer: VkCommandBuffer, p_label_info: *const VkDebugUtilsLabelEXT);
 
-pub type PfnVkQueueInsertDebugUtilsLabelEXT = extern "system" fn(
-    queue: VkQueue,
-    p_label_info: *const VkDebugUtilsLabelEXT,
-);
+pub type PfnVkQueueInsertDebugUtilsLabelEXT =
+    extern "system" fn(queue: VkQueue, p_label_info: *const VkDebugUtilsLabelEXT);
 
-pub type PfnVkQueueEndDebugUtilsLabelEXT = extern "system" fn(
-    queue: VkQueue,
-);
+pub type PfnVkQueueEndDebugUtilsLabelEXT = extern "system" fn(queue: VkQueue);
 
-pub type PfnVkQueueBeginDebugUtilsLabelEXT = extern "system" fn(
-    queue: VkQueue,
-    p_label_info: *const VkDebugUtilsLabelEXT,
-);
+pub type PfnVkQueueBeginDebugUtilsLabelEXT =
+    extern "system" fn(queue: VkQueue, p_label_info: *const VkDebugUtilsLabelEXT);
 
 pub type PfnVkSetDebugUtilsObjectTagEXT = extern "system" fn(
     device: VkDevice,
@@ -7503,14 +9814,10 @@ pub type PfnVkCmdExecuteCommands = extern "system" fn(
     p_command_buffers: *const VkCommandBuffer,
 );
 
-pub type PfnVkCmdEndRenderPass = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-);
+pub type PfnVkCmdEndRenderPass = extern "system" fn(command_buffer: VkCommandBuffer);
 
-pub type PfnVkCmdNextSubpass = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-    contents: VkSubpassContents,
-);
+pub type PfnVkCmdNextSubpass =
+    extern "system" fn(command_buffer: VkCommandBuffer, contents: VkSubpassContents);
 
 pub type PfnVkCmdBeginRenderPass = extern "system" fn(
     command_buffer: VkCommandBuffer,
@@ -7552,11 +9859,8 @@ pub type PfnVkCmdResetQueryPool = extern "system" fn(
     query_count: u32,
 );
 
-pub type PfnVkCmdEndQuery = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-    query_pool: VkQueryPool,
-    query: u32,
-);
+pub type PfnVkCmdEndQuery =
+    extern "system" fn(command_buffer: VkCommandBuffer, query_pool: VkQueryPool, query: u32);
 
 pub type PfnVkCmdBeginQuery = extern "system" fn(
     command_buffer: VkCommandBuffer,
@@ -7703,11 +10007,8 @@ pub type PfnVkCmdCopyBuffer = extern "system" fn(
     p_regions: *const VkBufferCopy,
 );
 
-pub type PfnVkCmdDispatchIndirect = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-    buffer: VkBuffer,
-    offset: VkDeviceSize,
-);
+pub type PfnVkCmdDispatchIndirect =
+    extern "system" fn(command_buffer: VkCommandBuffer, buffer: VkBuffer, offset: VkDeviceSize);
 
 pub type PfnVkCmdDispatch = extern "system" fn(
     command_buffer: VkCommandBuffer,
@@ -7799,10 +10100,8 @@ pub type PfnVkCmdSetDepthBounds = extern "system" fn(
     max_depth_bounds: f32,
 );
 
-pub type PfnVkCmdSetBlendConstants = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-    blend_constants: [f32; 4],
-);
+pub type PfnVkCmdSetBlendConstants =
+    extern "system" fn(command_buffer: VkCommandBuffer, blend_constants: [f32; 4]);
 
 pub type PfnVkCmdSetDepthBias = extern "system" fn(
     command_buffer: VkCommandBuffer,
@@ -7811,10 +10110,8 @@ pub type PfnVkCmdSetDepthBias = extern "system" fn(
     depth_bias_slope_factor: f32,
 );
 
-pub type PfnVkCmdSetLineWidth = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-    line_width: f32,
-);
+pub type PfnVkCmdSetLineWidth =
+    extern "system" fn(command_buffer: VkCommandBuffer, line_width: f32);
 
 pub type PfnVkCmdSetScissor = extern "system" fn(
     command_buffer: VkCommandBuffer,
@@ -7841,9 +10138,7 @@ pub type PfnVkResetCommandBuffer = extern "system" fn(
     flags: VkCommandBufferResetFlags,
 ) -> VkResult;
 
-pub type PfnVkEndCommandBuffer = extern "system" fn(
-    command_buffer: VkCommandBuffer,
-) -> VkResult;
+pub type PfnVkEndCommandBuffer = extern "system" fn(command_buffer: VkCommandBuffer) -> VkResult;
 
 pub type PfnVkBeginCommandBuffer = extern "system" fn(
     command_buffer: VkCommandBuffer,
@@ -7882,11 +10177,8 @@ pub type PfnVkCreateCommandPool = extern "system" fn(
     p_command_pool: *mut VkCommandPool,
 ) -> VkResult;
 
-pub type PfnVkGetRenderAreaGranularity = extern "system" fn(
-    device: VkDevice,
-    render_pass: VkRenderPass,
-    p_granularity: *mut VkExtent2D,
-);
+pub type PfnVkGetRenderAreaGranularity =
+    extern "system" fn(device: VkDevice, render_pass: VkRenderPass, p_granularity: *mut VkExtent2D);
 
 pub type PfnVkDestroyRenderPass = extern "system" fn(
     device: VkDevice,
@@ -8077,11 +10369,8 @@ pub type PfnVkGetImageSubresourceLayout = extern "system" fn(
     p_layout: *mut VkSubresourceLayout,
 );
 
-pub type PfnVkDestroyImage = extern "system" fn(
-    device: VkDevice,
-    image: VkImage,
-    p_allocator: *const VkAllocationCallbacks,
-);
+pub type PfnVkDestroyImage =
+    extern "system" fn(device: VkDevice, image: VkImage, p_allocator: *const VkAllocationCallbacks);
 
 pub type PfnVkCreateImage = extern "system" fn(
     device: VkDevice,
@@ -8140,26 +10429,14 @@ pub type PfnVkCreateQueryPool = extern "system" fn(
     p_query_pool: *mut VkQueryPool,
 ) -> VkResult;
 
-pub type PfnVkResetEvent = extern "system" fn(
-    device: VkDevice,
-    event: VkEvent,
-) -> VkResult;
+pub type PfnVkResetEvent = extern "system" fn(device: VkDevice, event: VkEvent) -> VkResult;
 
-pub type PfnVkSetEvent = extern "system" fn(
-    device: VkDevice,
-    event: VkEvent,
-) -> VkResult;
+pub type PfnVkSetEvent = extern "system" fn(device: VkDevice, event: VkEvent) -> VkResult;
 
-pub type PfnVkGetEventStatus = extern "system" fn(
-    device: VkDevice,
-    event: VkEvent,
-) -> VkResult;
+pub type PfnVkGetEventStatus = extern "system" fn(device: VkDevice, event: VkEvent) -> VkResult;
 
-pub type PfnVkDestroyEvent = extern "system" fn(
-    device: VkDevice,
-    event: VkEvent,
-    p_allocator: *const VkAllocationCallbacks,
-);
+pub type PfnVkDestroyEvent =
+    extern "system" fn(device: VkDevice, event: VkEvent, p_allocator: *const VkAllocationCallbacks);
 
 pub type PfnVkCreateEvent = extern "system" fn(
     device: VkDevice,
@@ -8189,22 +10466,13 @@ pub type PfnVkWaitForFences = extern "system" fn(
     timeout: u64,
 ) -> VkResult;
 
-pub type PfnVkGetFenceStatus = extern "system" fn(
-    device: VkDevice,
-    fence: VkFence,
-) -> VkResult;
+pub type PfnVkGetFenceStatus = extern "system" fn(device: VkDevice, fence: VkFence) -> VkResult;
 
-pub type PfnVkResetFences = extern "system" fn(
-    device: VkDevice,
-    fence_count: u32,
-    p_fences: *const VkFence,
-) -> VkResult;
+pub type PfnVkResetFences =
+    extern "system" fn(device: VkDevice, fence_count: u32, p_fences: *const VkFence) -> VkResult;
 
-pub type PfnVkDestroyFence = extern "system" fn(
-    device: VkDevice,
-    fence: VkFence,
-    p_allocator: *const VkAllocationCallbacks,
-);
+pub type PfnVkDestroyFence =
+    extern "system" fn(device: VkDevice, fence: VkFence, p_allocator: *const VkAllocationCallbacks);
 
 pub type PfnVkCreateFence = extern "system" fn(
     device: VkDevice,
@@ -8282,10 +10550,7 @@ pub type PfnVkFlushMappedMemoryRanges = extern "system" fn(
     p_memory_ranges: *const VkMappedMemoryRange,
 ) -> VkResult;
 
-pub type PfnVkUnmapMemory = extern "system" fn(
-    device: VkDevice,
-    memory: VkDeviceMemory,
-);
+pub type PfnVkUnmapMemory = extern "system" fn(device: VkDevice, memory: VkDeviceMemory);
 
 pub type PfnVkMapMemory = extern "system" fn(
     device: VkDevice,
@@ -8309,13 +10574,9 @@ pub type PfnVkAllocateMemory = extern "system" fn(
     p_memory: *mut VkDeviceMemory,
 ) -> VkResult;
 
-pub type PfnVkDeviceWaitIdle = extern "system" fn(
-    device: VkDevice,
-) -> VkResult;
+pub type PfnVkDeviceWaitIdle = extern "system" fn(device: VkDevice) -> VkResult;
 
-pub type PfnVkQueueWaitIdle = extern "system" fn(
-    queue: VkQueue,
-) -> VkResult;
+pub type PfnVkQueueWaitIdle = extern "system" fn(queue: VkQueue) -> VkResult;
 
 pub type PfnVkQueueSubmit = extern "system" fn(
     queue: VkQueue,
@@ -8355,10 +10616,8 @@ pub type PfnVkEnumerateInstanceExtensionProperties = extern "system" fn(
     p_properties: *mut VkExtensionProperties,
 ) -> VkResult;
 
-pub type PfnVkDestroyDevice = extern "system" fn(
-    device: VkDevice,
-    p_allocator: *const VkAllocationCallbacks,
-);
+pub type PfnVkDestroyDevice =
+    extern "system" fn(device: VkDevice, p_allocator: *const VkAllocationCallbacks);
 
 pub type PfnVkCreateDevice = extern "system" fn(
     physical_device: VkPhysicalDevice,
@@ -8367,15 +10626,11 @@ pub type PfnVkCreateDevice = extern "system" fn(
     p_device: *mut VkDevice,
 ) -> VkResult;
 
-pub type PfnVkGetDeviceProcAddr = extern "system" fn(
-    device: VkDevice,
-    p_name: *const u8,
-) -> PfnVkVoidFunction;
+pub type PfnVkGetDeviceProcAddr =
+    extern "system" fn(device: VkDevice, p_name: *const u8) -> PfnVkVoidFunction;
 
-pub type PfnVkGetInstanceProcAddr = extern "system" fn(
-    instance: VkInstance,
-    p_name: *const u8,
-) -> PfnVkVoidFunction;
+pub type PfnVkGetInstanceProcAddr =
+    extern "system" fn(instance: VkInstance, p_name: *const u8) -> PfnVkVoidFunction;
 
 pub type PfnVkGetPhysicalDeviceMemoryProperties = extern "system" fn(
     physical_device: VkPhysicalDevice,
@@ -8420,14 +10675,11 @@ pub type PfnVkEnumeratePhysicalDevices = extern "system" fn(
     p_physical_devices: *mut VkPhysicalDevice,
 ) -> VkResult;
 
-pub type PfnVkDestroyInstance = extern "system" fn(
-    instance: VkInstance,
-    p_allocator: *const VkAllocationCallbacks,
-);
+pub type PfnVkDestroyInstance =
+    extern "system" fn(instance: VkInstance, p_allocator: *const VkAllocationCallbacks);
 
 pub type PfnVkCreateInstance = extern "system" fn(
     p_create_info: *const VkInstanceCreateInfo,
     p_allocator: *const VkAllocationCallbacks,
     p_instance: *mut VkInstance,
 ) -> VkResult;
-

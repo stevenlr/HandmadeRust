@@ -1,4 +1,4 @@
-use core::mem::{size_of, align_of};
+use core::mem::{align_of, size_of};
 
 #[derive(Copy, Clone)]
 pub struct Layout
@@ -11,17 +11,12 @@ impl Layout
 {
     pub fn new(size: usize) -> Self
     {
-        Self
-        {
-            size,
-            align: 4,
-        }
+        Self { size, align: 4 }
     }
 
     pub fn from_type<T>() -> Self
     {
-        Self
-        {
+        Self {
             size: size_of::<T>(),
             align: align_of::<T>(),
         }
@@ -29,8 +24,7 @@ impl Layout
 
     pub fn from_type_array<T>(length: usize) -> Self
     {
-        Self
-        {
+        Self {
             size: size_of::<T>() * length,
             align: align_of::<T>(),
         }
@@ -54,7 +48,7 @@ mod tests
         let l1 = Layout::from_type::<i64>();
         assert!(l1.size == 8);
         assert!(l1.align == 8);
-        
+
         let l2 = Layout::from_type::<u8>();
         assert!(l2.size == 1);
         assert!(l2.align == 1);

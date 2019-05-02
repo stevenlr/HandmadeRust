@@ -3,7 +3,7 @@ use super::{Allocator, Layout};
 use core::ffi::c_void;
 use core::ptr::NonNull;
 
-static mut GLOBAL_ALLOCATOR : Option<&'static mut Allocator> = None;
+static mut GLOBAL_ALLOCATOR: Option<&'static mut Allocator> = None;
 
 pub unsafe fn set_global_allocator(alloc: &'static mut Allocator)
 {

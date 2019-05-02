@@ -6,7 +6,7 @@ use crate::containers::HashMap;
 
 pub struct HashSet<T, A = GlobalAllocator>
 where
-    T: Sized + Eq + Hash ,
+    T: Sized + Eq + Hash,
     A: Allocator + Clone,
 {
     map: HashMap<T, (), A>,
@@ -19,8 +19,7 @@ where
 {
     pub fn new_with(alloc: A) -> Self
     {
-        Self
-        {
+        Self {
             map: HashMap::new_with(alloc),
         }
     }

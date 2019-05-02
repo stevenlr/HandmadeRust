@@ -1,9 +1,9 @@
-use core::borrow::{Borrow, BorrowMut};
-use core::convert::{AsRef, AsMut};
-use core::marker::{Unsize, PhantomData};
-use core::ops::{Deref, DerefMut, CoerceUnsized};
-use core::ptr::{NonNull, drop_in_place, write};
 use crate::alloc::{alloc_one, Allocator, GlobalAllocator};
+use core::borrow::{Borrow, BorrowMut};
+use core::convert::{AsMut, AsRef};
+use core::marker::{PhantomData, Unsize};
+use core::ops::{CoerceUnsized, Deref, DerefMut};
+use core::ptr::{drop_in_place, write, NonNull};
 
 pub struct Unq<T: ?Sized, A: Allocator>
 {
@@ -16,21 +16,16 @@ impl<T, A: Allocator> Unq<T, A>
 {
     pub fn new_with(value: T, mut alloc: A) -> Self
     {
-        let mut ptr = unsafe
-        {
-            alloc_one::<T>(&mut alloc).expect("Allocation error")
-        };
+        let mut ptr = unsafe { alloc_one::<T>(&mut alloc).expect("Allocation error") };
 
-        unsafe
-        {
+        unsafe {
             write(ptr.as_mut(), value);
         }
 
-        Self
-        {
+        Self {
             ptr,
             alloc,
-            _phantom: PhantomData{},
+            _phantom: PhantomData {},
         }
     }
 }
@@ -39,7 +34,7 @@ impl<T: ?Sized, A: Allocator> Unq<T, A>
 {
     pub fn leak<'a>(unq: Unq<T, A>) -> &'a mut T
     where
-        A: 'a
+        A: 'a,
     {
         let reference = unsafe { &mut *unq.ptr.as_ptr() };
         core::mem::forget(unq);
@@ -62,10 +57,7 @@ impl<T: ?Sized, A: Allocator> Deref for Unq<T, A>
     #[inline]
     fn deref(&self) -> &Self::Target
     {
-        unsafe
-        {
-            self.ptr.as_ref()
-        }
+        unsafe { self.ptr.as_ref() }
     }
 }
 
@@ -74,10 +66,7 @@ impl<T: ?Sized, A: Allocator> DerefMut for Unq<T, A>
     #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target
     {
-        unsafe
-        {
-            self.ptr.as_mut()
-        }
+        unsafe { self.ptr.as_mut() }
     }
 }
 
@@ -121,8 +110,7 @@ impl<T: ?Sized, A: Allocator> Drop for Unq<T, A>
 {
     fn drop(&mut self)
     {
-        unsafe
-        {
+        unsafe {
             drop_in_place(self.ptr.as_ptr());
             self.alloc.dealloc_aligned(self.ptr.cast().as_ptr());
         }
@@ -135,7 +123,7 @@ impl<T: ?Sized + Unsize<U>, U: ?Sized, A: Allocator> CoerceUnsized<Unq<U, A>> fo
 mod tests
 {
     use super::*;
-    use crate::alloc::{Win32HeapAllocator, set_global_allocator};
+    use crate::alloc::{set_global_allocator, Win32HeapAllocator};
 
     struct MyObject<'a>
     {
@@ -174,7 +162,15 @@ mod tests
         let mut dropped = false;
 
         {
-            let mut p = Unq::new_with(MyObject{ x: 1, y: 2, s: "hello", dropped: &mut dropped }, &alloc);
+            let mut p = Unq::new_with(
+                MyObject {
+                    x: 1,
+                    y: 2,
+                    s: "hello",
+                    dropped: &mut dropped,
+                },
+                &alloc,
+            );
 
             assert!(p.x == 1);
             assert!(p.y == 2);
@@ -218,7 +214,7 @@ mod tests
 
     fn create_dst<A: Allocator>(x: i32, alloc: A) -> Unq<dyn MyTrait, A>
     {
-        Unq::new_with(MyObject2{ x }, alloc)
+        Unq::new_with(MyObject2 { x }, alloc)
     }
 
     #[test]
@@ -261,8 +257,7 @@ mod tests
         let alloc = Win32HeapAllocator::default();
         let mut alloc_ref = &alloc;
 
-        unsafe
-        {
+        unsafe {
             set_global_allocator(core::mem::transmute(&mut alloc_ref as &mut Allocator));
         }
 

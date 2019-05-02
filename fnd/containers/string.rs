@@ -18,8 +18,7 @@ impl<A: Allocator> String<A>
 {
     pub fn new_with(alloc: A) -> Self
     {
-        Self
-        {
+        Self {
             buf: Array::new_with(alloc),
         }
     }
@@ -30,8 +29,7 @@ impl<A: Allocator> String<A>
         let mut buf = Array::new_with(alloc);
         buf.resize(slice.len(), 0);
 
-        unsafe
-        {
+        unsafe {
             copy_nonoverlapping(s.as_ptr(), buf.as_mut_ptr(), slice.len());
         }
 
@@ -83,10 +81,7 @@ impl<A: Allocator> Deref for String<A>
     #[inline]
     fn deref(&self) -> &str
     {
-        unsafe
-        {
-            str::from_utf8_unchecked(&self.buf)
-        }
+        unsafe { str::from_utf8_unchecked(&self.buf) }
     }
 }
 
@@ -95,10 +90,7 @@ impl<A: Allocator> DerefMut for String<A>
     #[inline]
     fn deref_mut(&mut self) -> &mut str
     {
-        unsafe
-        {
-            str::from_utf8_unchecked_mut(&mut self.buf)
-        }
+        unsafe { str::from_utf8_unchecked_mut(&mut self.buf) }
     }
 }
 
@@ -122,8 +114,7 @@ where
     }
 }
 
-impl<A: Allocator> Eq for String<A>
-{}
+impl<A: Allocator> Eq for String<A> {}
 
 impl<A: Allocator> hash::Hash for String<A>
 {
@@ -138,7 +129,7 @@ mod tests
 {
     use super::*;
     use crate::alloc::Win32HeapAllocator;
-    use crate::containers::{HashSet, HashMap};
+    use crate::containers::{HashMap, HashSet};
 
     #[test]
     fn str()

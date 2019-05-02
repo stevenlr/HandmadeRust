@@ -1,10 +1,10 @@
-use core::hash::Hasher;
 use core::cmp;
+use core::hash::Hasher;
 use core::mem::transmute;
 use core::ptr::copy_nonoverlapping;
 
-const C : i32 = 2;
-const D : i32 = 4;
+const C: i32 = 2;
+const D: i32 = 4;
 
 pub struct SipHash
 {
@@ -46,8 +46,7 @@ impl SipHash
 {
     pub fn new(k0: u64, k1: u64) -> Self
     {
-        Self
-        {
+        Self {
             v0: k0 ^ 0x736f6d6570736575u64,
             v1: k1 ^ 0x646f72616e646f6du64,
             v2: k0 ^ 0x6c7967656e657261u64,
@@ -57,11 +56,14 @@ impl SipHash
 
     fn bytes_to_m(&self, bytes: &[u8], start: usize) -> u64
     {
-        let mut value : u64 = 0;
+        let mut value: u64 = 0;
         let size = cmp::min(bytes.len() - start, 8);
-        unsafe
-        {
-            copy_nonoverlapping(bytes.as_ptr().offset(start as isize), transmute(&mut value), size);
+        unsafe {
+            copy_nonoverlapping(
+                bytes.as_ptr().offset(start as isize),
+                transmute(&mut value),
+                size,
+            );
         }
         if size < 8
         {

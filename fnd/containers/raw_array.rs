@@ -3,7 +3,7 @@ use core::marker::PhantomData;
 use core::mem::size_of;
 use core::ptr::null_mut;
 
-use crate::alloc::{Allocator, alloc_array};
+use crate::alloc::{alloc_array, Allocator};
 
 pub struct RawArray<T, A: Allocator>
 {
@@ -19,12 +19,11 @@ impl<T, A: Allocator> RawArray<T, A>
     {
         let capacity = if size_of::<T>() == 0 { !0 } else { 0 };
 
-        Self
-        {
+        Self {
             ptr: null_mut(),
             capacity,
             alloc,
-            _phantom: PhantomData{},
+            _phantom: PhantomData {},
         }
     }
 
@@ -35,8 +34,7 @@ impl<T, A: Allocator> RawArray<T, A>
             return;
         }
 
-        let ptr = unsafe
-        {
+        let ptr = unsafe {
             alloc_array::<T>(&mut self.alloc, new_capacity)
                 .expect("Allocation error")
                 .as_ptr()
@@ -44,8 +42,7 @@ impl<T, A: Allocator> RawArray<T, A>
 
         if self.capacity > 0
         {
-            unsafe
-            {
+            unsafe {
                 ptr.copy_from(self.ptr, self.capacity);
                 self.alloc.dealloc_aligned(self.ptr as *mut c_void);
             }
@@ -62,8 +59,7 @@ impl<T, A: Allocator> Drop for RawArray<T, A>
     {
         if !self.ptr.is_null()
         {
-            unsafe
-            {
+            unsafe {
                 self.alloc.dealloc_aligned(self.ptr as *mut c_void);
             }
         }
