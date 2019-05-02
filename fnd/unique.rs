@@ -1,7 +1,8 @@
-use core::ffi::c_void;
-use core::ptr::{NonNull, drop_in_place, write};
+use core::borrow::{Borrow, BorrowMut};
+use core::convert::{AsRef, AsMut};
 use core::marker::{Unsize, PhantomData};
 use core::ops::{Deref, DerefMut, CoerceUnsized};
+use core::ptr::{NonNull, drop_in_place, write};
 use crate::alloc::{alloc_one, Allocator, GlobalAllocator};
 
 pub struct Unq<T: ?Sized, A: Allocator>
@@ -32,7 +33,10 @@ impl<T, A: Allocator> Unq<T, A>
             _phantom: PhantomData{},
         }
     }
+}
 
+impl<T: ?Sized, A: Allocator> Unq<T, A>
+{
     pub fn leak<'a>(unq: Unq<T, A>) -> &'a mut T
     where
         A: 'a
@@ -55,6 +59,7 @@ impl<T: ?Sized, A: Allocator> Deref for Unq<T, A>
 {
     type Target = T;
 
+    #[inline]
     fn deref(&self) -> &Self::Target
     {
         unsafe
@@ -66,12 +71,49 @@ impl<T: ?Sized, A: Allocator> Deref for Unq<T, A>
 
 impl<T: ?Sized, A: Allocator> DerefMut for Unq<T, A>
 {
+    #[inline]
     fn deref_mut(&mut self) -> &mut Self::Target
     {
         unsafe
         {
             self.ptr.as_mut()
         }
+    }
+}
+
+impl<T: ?Sized, A: Allocator> AsRef<T> for Unq<T, A>
+{
+    #[inline]
+    fn as_ref(&self) -> &T
+    {
+        self
+    }
+}
+
+impl<T: ?Sized, A: Allocator> AsMut<T> for Unq<T, A>
+{
+    #[inline]
+    fn as_mut(&mut self) -> &mut T
+    {
+        self
+    }
+}
+
+impl<T: ?Sized, A: Allocator> Borrow<T> for Unq<T, A>
+{
+    #[inline]
+    fn borrow(&self) -> &T
+    {
+        self
+    }
+}
+
+impl<T: ?Sized, A: Allocator> BorrowMut<T> for Unq<T, A>
+{
+    #[inline]
+    fn borrow_mut(&mut self) -> &mut T
+    {
+        self
     }
 }
 
@@ -82,7 +124,7 @@ impl<T: ?Sized, A: Allocator> Drop for Unq<T, A>
         unsafe
         {
             drop_in_place(self.ptr.as_ptr());
-            self.alloc.dealloc_aligned(self.ptr.cast::<c_void>().as_ptr());
+            self.alloc.dealloc_aligned(self.ptr.cast().as_ptr());
         }
     }
 }

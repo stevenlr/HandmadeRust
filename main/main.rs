@@ -1,6 +1,6 @@
 use core::mem::transmute;
 
-use fnd::unique::Unq;
+use fnd::Unq;
 use fnd::alloc::{Win32HeapAllocator, set_global_allocator};
 use fnd::containers::Array;
 use fnd::str::CStr;

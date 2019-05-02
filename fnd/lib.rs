@@ -1,7 +1,11 @@
-#![feature(unsize, coerce_unsized)]
+#![feature(unsize, coerce_unsized, optin_builtin_traits)]
 
 pub mod alloc;
-pub mod unique;
+mod unique;
+mod shared;
 pub mod containers;
 pub mod hash;
 pub mod str;
+
+pub use unique::Unq;
+pub use shared::Shared;
