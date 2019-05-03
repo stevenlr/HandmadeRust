@@ -5,17 +5,17 @@ use core::ptr::null_mut;
 
 use crate::alloc::{alloc_array, Allocator};
 
-pub struct RawArray<T, A: Allocator>
+pub(crate) struct RawArray<T, A: Allocator>
 {
-    pub ptr: *mut T,
-    pub capacity: usize,
-    alloc: A,
+    pub(crate) ptr: *mut T,
+    pub(crate) capacity: usize,
+    pub(crate) alloc: A,
     _phantom: PhantomData<T>,
 }
 
 impl<T, A: Allocator> RawArray<T, A>
 {
-    pub fn new(alloc: A) -> Self
+    pub(crate) fn new(alloc: A) -> Self
     {
         let capacity = if size_of::<T>() == 0 { !0 } else { 0 };
 
@@ -27,7 +27,7 @@ impl<T, A: Allocator> RawArray<T, A>
         }
     }
 
-    pub fn reserve(&mut self, new_capacity: usize)
+    pub(crate) fn reserve(&mut self, new_capacity: usize)
     {
         if new_capacity <= self.capacity
         {
