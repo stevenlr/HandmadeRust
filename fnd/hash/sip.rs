@@ -30,7 +30,7 @@ fn round(mut v0: u64, mut v1: u64, mut v2: u64, mut v3: u64) -> (u64, u64, u64, 
     v3 = v3.rotate_left(21);
     v1 ^= v2;
     v3 ^= v0;
-    v2.rotate_left(32);
+    v2 = v2.rotate_left(32);
     return (v0, v1, v2, v3);
 }
 
