@@ -1,0 +1,9 @@
+language: rust
+rust:
+  - nightly
+jobs:
+  include:
+    - stage: build
+      script: cargo build -p main
+    - stage: test
+      script: cargo test -p fnd
