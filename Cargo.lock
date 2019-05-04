@@ -3,6 +3,9 @@
 [[package]]
 name = "fnd"
 version = "0.1.0"
+dependencies = [
+ "win32 0.1.0",
+]
 
 [[package]]
 name = "main"

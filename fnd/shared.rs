@@ -284,7 +284,7 @@ impl<T: ?Sized, A: Allocator> Borrow<T> for Shared<T, A>
 mod tests
 {
     use super::*;
-    use crate::alloc::Win32HeapAllocator;
+    use crate::alloc::SystemAllocator;
     use core::cell::RefCell;
     use core::mem::drop;
 
@@ -321,7 +321,7 @@ mod tests
     #[test]
     fn simple()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let dropped = Cell::new(false);
 
         {
@@ -360,7 +360,7 @@ mod tests
     #[test]
     fn multiple_references()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let dropped = Cell::new(false);
 
         let p = Shared::new_with(
@@ -389,7 +389,7 @@ mod tests
     #[test]
     fn multiple_references_weak()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let dropped = Cell::new(false);
 
         let p = Shared::new_with(
@@ -459,7 +459,7 @@ mod tests
     #[test]
     fn dst()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let my_dst = create_dst(42, &alloc);
         assert!(my_dst.do_something() == 42);
     }
@@ -472,7 +472,7 @@ mod tests
     #[test]
     fn closure()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let closure = create_closure(5, &alloc);
 
         assert!(closure(5) == 10);

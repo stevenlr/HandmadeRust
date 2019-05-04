@@ -233,7 +233,7 @@ where
 mod tests
 {
     use super::*;
-    use crate::alloc::Win32HeapAllocator;
+    use crate::alloc::SystemAllocator;
     use core::cell::Cell;
 
     struct Droppable<'a>
@@ -252,7 +252,7 @@ mod tests
     #[test]
     fn simple()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut q = Queue::new_with(&alloc);
 
         assert!(q.is_empty());
@@ -296,7 +296,7 @@ mod tests
     #[test]
     fn wrap_around()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut q = Queue::new_with(&alloc);
 
         q.reserve(3);
@@ -329,7 +329,7 @@ mod tests
     #[test]
     fn clear()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut q = Queue::new_with(&alloc);
 
         q.reserve(3);
@@ -348,7 +348,7 @@ mod tests
     #[test]
     fn drop()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
 
         let d1 = Cell::new(false);
         let d2 = Cell::new(false);
@@ -380,7 +380,7 @@ mod tests
     #[test]
     fn reserve_normal()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut q = Queue::new_with(&alloc);
 
         q.reserve(3);
@@ -400,7 +400,7 @@ mod tests
     #[test]
     fn reserve_wrap()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut q = Queue::new_with(&alloc);
 
         q.reserve(3);
@@ -422,7 +422,7 @@ mod tests
     #[test]
     fn zst()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut q = Queue::new_with(&alloc);
 
         q.push(());

@@ -184,7 +184,7 @@ impl<T, A: Allocator> DerefMut for Array<T, A>
 mod tests
 {
     use super::*;
-    use crate::alloc::Win32HeapAllocator;
+    use crate::alloc::SystemAllocator;
 
     struct DropCheck<'a>
     {
@@ -210,7 +210,7 @@ mod tests
     #[test]
     fn push_pop()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut a = Array::new_with(&alloc);
 
         a.push(1);
@@ -245,7 +245,7 @@ mod tests
     #[test]
     fn drop()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut dropped = false;
 
         {
@@ -269,7 +269,7 @@ mod tests
     #[test]
     fn slice()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut a = Array::new_with(&alloc);
 
         a.push(1);
@@ -291,7 +291,7 @@ mod tests
     #[test]
     fn subslice()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut a = Array::new_with(&alloc);
 
         a.push(1);
@@ -323,7 +323,7 @@ mod tests
     #[test]
     fn iter()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut a = Array::new_with(&alloc);
 
         a.push(1);
@@ -346,7 +346,7 @@ mod tests
     #[test]
     fn resize()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut a = Array::new_with(&alloc);
 
         a.push(1);
@@ -364,7 +364,7 @@ mod tests
     #[test]
     fn zst()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut a = Array::new_with(&alloc);
 
         a.push(());

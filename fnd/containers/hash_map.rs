@@ -393,12 +393,12 @@ where
 mod tests
 {
     use super::*;
-    use crate::alloc::Win32HeapAllocator;
+    use crate::alloc::SystemAllocator;
 
     #[test]
     fn contains()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut set = HashMap::new_with(&alloc);
         assert!(!set.contains(&5));
         assert!(set.insert(5, 4));
@@ -415,7 +415,7 @@ mod tests
     #[test]
     fn insert()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut set = HashMap::new_with(&alloc);
 
         assert!(set.insert(5, 1));
@@ -429,7 +429,7 @@ mod tests
     #[test]
     fn len()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut set = HashMap::new_with(&alloc);
 
         assert!(set.len() == 0);
@@ -444,7 +444,7 @@ mod tests
     #[test]
     fn remove()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut set = HashMap::new_with(&alloc);
 
         set.insert(1, 0);
@@ -479,7 +479,7 @@ mod tests
     #[test]
     fn zst()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut set = HashMap::new_with(&alloc);
 
         assert!(!set.contains(&()));
@@ -498,7 +498,7 @@ mod tests
     #[test]
     fn find()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut set = HashMap::new_with(&alloc);
 
         set.insert(0, 0);

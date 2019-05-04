@@ -128,13 +128,13 @@ impl<A: Allocator> hash::Hash for String<A>
 mod tests
 {
     use super::*;
-    use crate::alloc::Win32HeapAllocator;
+    use crate::alloc::SystemAllocator;
     use crate::containers::{HashMap, HashSet};
 
     #[test]
     fn str()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let hello = String::from_str_with("hello", &alloc);
         let mut world = String::from_str_with("world", &alloc);
         world.make_ascii_uppercase();
@@ -148,7 +148,7 @@ mod tests
     #[test]
     fn set()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut set = HashSet::new_with(&alloc);
 
         assert!(set.insert(String::from_str_with("hello", &alloc)));
@@ -162,7 +162,7 @@ mod tests
     #[test]
     fn map()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut map = HashMap::new_with(&alloc);
 
         map.insert(String::from_str_with("Hello", &alloc), 42);

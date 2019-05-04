@@ -1,6 +1,6 @@
 use core::mem::transmute;
 
-use fnd::alloc::{set_global_allocator, Win32HeapAllocator};
+use fnd::alloc::{set_global_allocator, SystemAllocator};
 use fnd::containers::Array;
 use fnd::str::CStr;
 use fnd::Unq;
@@ -10,14 +10,14 @@ use vk::types::*;
 
 use win32::kernel32::*;
 
-static mut ALLOCATOR: Option<&Win32HeapAllocator> = None;
+static mut ALLOCATOR: Option<&SystemAllocator> = None;
 
 fn init_global_allocator()
 {
-    let allocator = Win32HeapAllocator::default();
+    let allocator = SystemAllocator::default();
     unsafe {
         ALLOCATOR = Some(transmute(Unq::leak(Unq::new_with(
-            Win32HeapAllocator::default(),
+            SystemAllocator::default(),
             &allocator,
         ))));
         set_global_allocator(ALLOCATOR.as_mut().unwrap());

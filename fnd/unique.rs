@@ -123,7 +123,7 @@ impl<T: ?Sized + Unsize<U>, U: ?Sized, A: Allocator> CoerceUnsized<Unq<U, A>> fo
 mod tests
 {
     use super::*;
-    use crate::alloc::{set_global_allocator, Win32HeapAllocator};
+    use crate::alloc::{set_global_allocator, SystemAllocator};
 
     struct MyObject<'a>
     {
@@ -158,7 +158,7 @@ mod tests
     #[test]
     fn simple()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut dropped = false;
 
         {
@@ -220,7 +220,7 @@ mod tests
     #[test]
     fn dst()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let my_dst = create_dst(42, &alloc);
         assert!(my_dst.do_something() == 42);
     }
@@ -233,7 +233,7 @@ mod tests
     #[test]
     fn closure()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let closure = create_closure(5, &alloc);
 
         assert!(closure(5) == 10);
@@ -243,7 +243,7 @@ mod tests
     #[test]
     fn leak()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let int = Unq::new_with(45, &alloc);
         let int = Unq::leak(int);
         assert_eq!(45, *int);
@@ -254,7 +254,7 @@ mod tests
     #[test]
     fn with_global()
     {
-        let alloc = Win32HeapAllocator::default();
+        let alloc = SystemAllocator::default();
         let mut alloc_ref = &alloc;
 
         unsafe {
