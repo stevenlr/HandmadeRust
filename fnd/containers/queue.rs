@@ -121,7 +121,7 @@ where
 
     pub fn push(&mut self, value: T)
     {
-        if self.full
+        if self.full || self.buffer.capacity == 0
         {
             self.grow();
         }
@@ -145,6 +145,7 @@ where
             let index = self.tail;
 
             self.tail = self.increment_wrap(self.tail);
+            self.full = false;
 
             Some(unsafe { self.buffer.ptr.offset(index as isize).read() })
         }
@@ -194,6 +195,10 @@ where
                 }
             }
         }
+
+        self.full = false;
+        self.head = 0;
+        self.tail = 0;
     }
 
     #[inline]
@@ -221,5 +226,220 @@ where
         {
             self.clear();
         }
+    }
+}
+
+#[cfg(test)]
+mod tests
+{
+    use super::*;
+    use crate::alloc::Win32HeapAllocator;
+    use core::cell::Cell;
+
+    struct Droppable<'a>
+    {
+        pub dropped: &'a Cell<bool>,
+    }
+
+    impl<'a> Drop for Droppable<'a>
+    {
+        fn drop(&mut self)
+        {
+            self.dropped.set(true);
+        }
+    }
+
+    #[test]
+    fn simple()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut q = Queue::new_with(&alloc);
+
+        assert!(q.is_empty());
+        assert!(q.len() == 0);
+        assert!(q.peek().is_none());
+        assert!(q.peek_mut().is_none());
+        assert!(q.pop().is_none());
+
+        q.push(1);
+        assert!(!q.is_empty());
+        assert!(q.len() == 1);
+        assert!(q.peek() == Some(&1));
+        assert!(q.peek_mut() == Some(&mut 1));
+
+        q.push(2);
+        assert!(!q.is_empty());
+        assert!(q.len() == 2);
+        assert!(q.peek() == Some(&1));
+        assert!(q.peek_mut() == Some(&mut 1));
+
+        *q.peek_mut().unwrap() = 3;
+        assert!(!q.is_empty());
+        assert!(q.len() == 2);
+        assert!(q.peek() == Some(&3));
+        assert!(q.peek_mut() == Some(&mut 3));
+
+        assert!(q.pop() == Some(3));
+        assert!(!q.is_empty());
+        assert_eq!(q.len(), 1);
+        assert!(q.peek() == Some(&2));
+        assert!(q.peek_mut() == Some(&mut 2));
+
+        assert!(q.pop() == Some(2));
+        assert!(q.is_empty());
+        assert!(q.len() == 0);
+        assert!(q.peek().is_none());
+        assert!(q.peek_mut().is_none());
+        assert!(q.pop().is_none());
+    }
+
+    #[test]
+    fn wrap_around()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut q = Queue::new_with(&alloc);
+
+        q.reserve(3);
+        q.push(1);
+        q.push(2);
+        q.push(3);
+
+        // [1 2 3]
+        assert_eq!(q.pop(), Some(1));
+
+        // x [2 3]
+        q.push(4);
+
+        // 4] [2 3
+        assert_eq!(q.pop(), Some(2));
+
+        // 4] x [3
+        q.push(5);
+
+        // [4 5] x
+        assert_eq!(q.pop(), Some(3));
+
+        // x [5] x
+        assert_eq!(q.pop(), Some(4));
+
+        // x x x
+        assert_eq!(q.pop(), Some(5));
+    }
+
+    #[test]
+    fn clear()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut q = Queue::new_with(&alloc);
+
+        q.reserve(3);
+        q.push(1);
+        q.push(2);
+        q.push(3);
+
+        q.clear();
+        assert!(q.is_empty());
+        assert!(q.len() == 0);
+        assert!(q.peek().is_none());
+        assert!(q.peek_mut().is_none());
+        assert!(q.pop().is_none());
+    }
+
+    #[test]
+    fn drop()
+    {
+        let alloc = Win32HeapAllocator::default();
+
+        let d1 = Cell::new(false);
+        let d2 = Cell::new(false);
+        let d3 = Cell::new(false);
+
+        let mut q = Queue::new_with(&alloc);
+
+        q.push(Droppable { dropped: &d1 });
+        q.push(Droppable { dropped: &d2 });
+        q.push(Droppable { dropped: &d3 });
+
+        assert!(!d1.get());
+        assert!(!d2.get());
+        assert!(!d3.get());
+
+        q.pop();
+
+        assert!(d1.get());
+        assert!(!d2.get());
+        assert!(!d3.get());
+
+        q.clear();
+
+        assert!(d1.get());
+        assert!(d2.get());
+        assert!(d3.get());
+    }
+
+    #[test]
+    fn reserve_normal()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut q = Queue::new_with(&alloc);
+
+        q.reserve(3);
+        q.push(1);
+        q.push(2);
+        q.push(3);
+        q.pop();
+
+        // x [2 3]
+        q.reserve(12);
+
+        assert_eq!(q.pop(), Some(2));
+        assert_eq!(q.pop(), Some(3));
+        assert!(q.is_empty());
+    }
+
+    #[test]
+    fn reserve_wrap()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut q = Queue::new_with(&alloc);
+
+        q.reserve(3);
+        q.push(1);
+        q.push(2);
+        q.push(3);
+        q.pop();
+        q.push(4);
+        q.pop();
+
+        // 4] x [3
+        q.reserve(12);
+
+        assert_eq!(q.pop(), Some(3));
+        assert_eq!(q.pop(), Some(4));
+        assert!(q.is_empty());
+    }
+
+    #[test]
+    fn zst()
+    {
+        let alloc = Win32HeapAllocator::default();
+        let mut q = Queue::new_with(&alloc);
+
+        q.push(());
+        q.push(());
+        q.push(());
+        assert!(q.len() == 3);
+
+        q.pop();
+        q.pop();
+        assert!(q.len() == 1);
+
+        q.push(());
+        q.push(());
+        q.push(());
+        assert!(q.len() == 4);
+
+        q.clear();
+        assert!(q.is_empty());
     }
 }
