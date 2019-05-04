@@ -1,5 +1,9 @@
-Handmade Rust
+Handmade Rust [![Build Status](https://travis-ci.org/stevenlr/HandmadeRust.svg?branch=master)](https://travis-ci.org/stevenlr/HandmadeRust)
 =====================
+
+This is a project to create a Vulkan rendering engine using only the Rust `core` library, no `std`, `alloc`, or any other external dependencies. It is accompanied by a [blog series](http://stevenlr.com).
+
+Right now it only targets Windows. This may change in this future.
 
 Crates
 ----------------
