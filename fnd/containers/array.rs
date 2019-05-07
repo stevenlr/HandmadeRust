@@ -2,6 +2,7 @@ use core::mem::needs_drop;
 use core::ops::{Deref, DerefMut};
 use core::ptr::drop_in_place;
 use core::slice;
+use core::iter::FromIterator;
 
 use crate::alloc::{Allocator, GlobalAllocator, Layout};
 use crate::containers::RawArray;
@@ -177,6 +178,48 @@ impl<T, A: Allocator> DerefMut for Array<T, A>
     fn deref_mut(&mut self) -> &mut Self::Target
     {
         unsafe { slice::from_raw_parts_mut(self.buffer.ptr, self.size) }
+    }
+}
+
+impl<T, A: Allocator> Extend<T> for Array<T, A>
+{
+    fn extend<I>(&mut self, iter: I)
+    where
+        I: IntoIterator<Item = T>
+    {
+        for e in iter
+        {
+            self.push(e);
+        }
+    }
+}
+
+impl<'a, T: 'a, A: Allocator> Extend<&'a T> for Array<T, A>
+where
+    T: Copy
+{
+    fn extend<I>(&mut self, iter: I)
+    where
+        I: IntoIterator<Item = &'a T>
+    {
+        for e in iter
+        {
+            self.push(*e);
+        }
+    }
+}
+
+impl<T, A: Allocator> FromIterator<T> for Array<T, A>
+where
+    A: Default
+{
+    fn from_iter<I>(iter: I) -> Self
+    where
+        I: IntoIterator<Item = T>
+    {
+        let mut array = Array::new_with(A::default());
+        array.extend(iter);
+        return array;
     }
 }
 
@@ -357,6 +400,23 @@ mod tests
         assert!(a[0] == 1);
         assert!(a[1] == 7);
         assert!(a[2] == 7);
+        assert!(a[3] == 2);
+        assert!(a[4] == 3);
+    }
+
+    #[test]
+    fn extend()
+    {
+        let alloc = SystemAllocator::default();
+        let mut a = Array::new_with(&alloc);
+
+        a.push(1);
+        a.extend([7, 8].iter());
+        a.extend(&[2, 3]);
+
+        assert!(a[0] == 1);
+        assert!(a[1] == 7);
+        assert!(a[2] == 8);
         assert!(a[3] == 2);
         assert!(a[4] == 3);
     }

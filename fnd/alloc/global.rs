@@ -17,6 +17,15 @@ pub unsafe fn set_global_allocator(alloc: &'static mut Allocator)
 
 pub struct GlobalAllocator;
 
+impl Default for GlobalAllocator
+{
+    #[inline]
+    fn default() -> GlobalAllocator
+    {
+        GlobalAllocator
+    }
+}
+
 impl Clone for GlobalAllocator
 {
     #[inline]
