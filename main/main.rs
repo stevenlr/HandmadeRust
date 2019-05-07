@@ -101,10 +101,7 @@ impl Window
                 user32::ShowWindow(window, win32::SW_SHOW);
             }
 
-            Some(Self {
-                hinstance,
-                window,
-            })
+            Some(Self { hinstance, window })
         }
     }
 

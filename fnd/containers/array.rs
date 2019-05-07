@@ -1,8 +1,8 @@
+use core::iter::FromIterator;
 use core::mem::needs_drop;
 use core::ops::{Deref, DerefMut};
 use core::ptr::drop_in_place;
 use core::slice;
-use core::iter::FromIterator;
 
 use crate::alloc::{Allocator, GlobalAllocator, Layout};
 use crate::containers::RawArray;
@@ -185,7 +185,7 @@ impl<T, A: Allocator> Extend<T> for Array<T, A>
 {
     fn extend<I>(&mut self, iter: I)
     where
-        I: IntoIterator<Item = T>
+        I: IntoIterator<Item = T>,
     {
         for e in iter
         {
@@ -196,11 +196,11 @@ impl<T, A: Allocator> Extend<T> for Array<T, A>
 
 impl<'a, T: 'a, A: Allocator> Extend<&'a T> for Array<T, A>
 where
-    T: Copy
+    T: Copy,
 {
     fn extend<I>(&mut self, iter: I)
     where
-        I: IntoIterator<Item = &'a T>
+        I: IntoIterator<Item = &'a T>,
     {
         for e in iter
         {
@@ -211,11 +211,11 @@ where
 
 impl<T, A: Allocator> FromIterator<T> for Array<T, A>
 where
-    A: Default
+    A: Default,
 {
     fn from_iter<I>(iter: I) -> Self
     where
-        I: IntoIterator<Item = T>
+        I: IntoIterator<Item = T>,
     {
         let mut array = Array::new_with(A::default());
         array.extend(iter);
