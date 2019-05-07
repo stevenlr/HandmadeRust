@@ -1,5 +1,4 @@
-pub type HINSTANCE = usize;
-pub type HWND = usize;
+use win32::{HINSTANCE, HWND};
 
 pub const VK_KHR_WIN32_SURFACE_SPEC_VERSION: u32 = 6;
 pub const VK_KHR_SURFACE_SPEC_VERSION: u32 = 25;
@@ -5698,8 +5697,8 @@ impl Default for VkWin32SurfaceCreateInfoKHR
             s_type: VkStructureType::WIN32_SURFACE_CREATE_INFO_KHR,
             p_next: core::ptr::null(),
             flags: VkWin32SurfaceCreateFlagsKHR::default(),
-            hinstance: 0,
-            hwnd: 0,
+            hinstance: core::ptr::null_mut(),
+            hwnd: core::ptr::null_mut(),
         }
     }
 }

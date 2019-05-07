@@ -1,4 +1,5 @@
 use core::mem::transmute;
+use core::ptr::{null, null_mut};
 
 use fnd::alloc::{set_global_allocator, SystemAllocator};
 use fnd::containers::Array;
@@ -8,7 +9,8 @@ use fnd::Unq;
 use vk::builders::*;
 use vk::types::*;
 
-use win32::kernel32::*;
+use win32::kernel32;
+use win32::user32;
 
 static mut ALLOCATOR: Option<&SystemAllocator> = None;
 
@@ -44,11 +46,49 @@ fn main()
 {
     init_global_allocator();
 
-    let hinstance = unsafe { GetModuleHandleA(0 as _) as HINSTANCE };
+    let hinstance = unsafe { kernel32::GetModuleHandleA(0 as _) as win32::HINSTANCE };
 
-    let vk_module = unsafe { LoadLibraryA(b"vulkan-1.dll\0".as_ptr()) };
+    let wnd_class_name = b"HandmadeRustClass\0".as_ptr();
+
+    let wnd_class = win32::WNDCLASSA {
+        style: win32::CS_VREDRAW | win32::CS_HREDRAW,
+        lpfnWndProc: user32::DefWindowProcA,
+        cbClsExtra: 0,
+        cbWndExtra: 0,
+        hInstance: hinstance,
+        hIcon: null_mut(),
+        hCursor: null_mut(),
+        hbrBackground: null_mut(),
+        lpszMenuName: null(),
+        lpszClassName: wnd_class_name,
+    };
+
+    let window = unsafe {
+        user32::RegisterClassA(&wnd_class);
+        user32::CreateWindowExA(
+            0,
+            wnd_class_name,
+            b"Handmade Rust\0".as_ptr(),
+            win32::WS_OVERLAPPEDWINDOW,
+            win32::CW_USEDEFAULT,
+            win32::CW_USEDEFAULT,
+            1280,
+            720,
+            null_mut(),
+            null_mut(),
+            hinstance,
+            null_mut(),
+        )
+    };
+
+    assert!(window != null_mut());
+    unsafe {
+        user32::ShowWindow(window, win32::SW_SHOW);
+    }
+
+    let vk_module = unsafe { kernel32::LoadLibraryA(b"vulkan-1.dll\0".as_ptr()) };
     let vk_entry = vk::EntryPoint::new(|fn_name| unsafe {
-        transmute(GetProcAddress(vk_module, fn_name.as_ptr()))
+        transmute(kernel32::GetProcAddress(vk_module, fn_name.as_ptr()))
     });
 
     let instance_extensions = &[
@@ -84,8 +124,8 @@ fn main()
     }
 
     let create_info = VkWin32SurfaceCreateInfoKHRBuilder::new()
-        // .hinstance( ... )
-        /*.hwnd( ... )*/;
+        .hinstance(hinstance)
+        .hwnd(window);
 
     let vk_surface = vk_instance
         .create_win_32_surface_khr(&create_info, None)
@@ -128,6 +168,18 @@ fn main()
     let vk_device = vk::Device::new(vk_device, &vk_instance);
 
     let vk_queue = vk_device.get_device_queue(queue_family_index, 0);
+
+    loop
+    {
+        let mut msg: win32::MSG = unsafe { core::mem::zeroed() };
+        while unsafe { user32::PeekMessageA(&mut msg, window, 0, 0, win32::PM_REMOVE) } > 0
+        {
+            unsafe {
+                user32::TranslateMessage(&msg);
+                user32::DispatchMessageA(&msg);
+            }
+        }
+    }
 
     vk_device.queue_wait_idle(vk_queue).unwrap();
     vk_device.device_wait_idle().unwrap();
