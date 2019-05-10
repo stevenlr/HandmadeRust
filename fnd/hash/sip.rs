@@ -1,7 +1,4 @@
-use core::cmp;
-use core::hash::Hasher;
-use core::mem::transmute;
-use core::ptr::copy_nonoverlapping;
+use core::{cmp, hash::Hasher, mem::transmute, ptr::copy_nonoverlapping};
 
 const C: i32 = 2;
 const D: i32 = 4;

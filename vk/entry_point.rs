@@ -1,5 +1,7 @@
-use crate::commands::{EntryCommands, StaticCommands};
-use crate::types::*;
+use crate::{
+    commands::{EntryCommands, StaticCommands},
+    types::*,
+};
 
 #[derive(Clone)]
 pub struct EntryPoint

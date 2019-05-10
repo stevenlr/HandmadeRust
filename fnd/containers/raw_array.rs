@@ -1,7 +1,4 @@
-use core::ffi::c_void;
-use core::marker::PhantomData;
-use core::mem::size_of;
-use core::ptr::null_mut;
+use core::{ffi::c_void, marker::PhantomData, mem::size_of, ptr::null_mut};
 
 use crate::alloc::{alloc_array, Allocator};
 

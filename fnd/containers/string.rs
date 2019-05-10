@@ -1,13 +1,16 @@
-use crate::alloc::{Allocator, GlobalAllocator};
-use crate::containers::Array;
+use crate::{
+    alloc::{Allocator, GlobalAllocator},
+    containers::Array,
+};
 
-use core::borrow::Borrow;
-use core::cmp::{Eq, PartialEq};
-use core::fmt;
-use core::hash;
-use core::ops::{Deref, DerefMut};
-use core::ptr::copy_nonoverlapping;
-use core::str;
+use core::{
+    borrow::Borrow,
+    cmp::{Eq, PartialEq},
+    fmt, hash,
+    ops::{Deref, DerefMut},
+    ptr::copy_nonoverlapping,
+    str,
+};
 
 pub struct String<A: Allocator = GlobalAllocator>
 {
@@ -128,8 +131,10 @@ impl<A: Allocator> hash::Hash for String<A>
 mod tests
 {
     use super::*;
-    use crate::alloc::SystemAllocator;
-    use crate::containers::{HashMap, HashSet};
+    use crate::{
+        alloc::SystemAllocator,
+        containers::{HashMap, HashSet},
+    };
 
     #[test]
     fn str()

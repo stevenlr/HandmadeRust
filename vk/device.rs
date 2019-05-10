@@ -1,6 +1,4 @@
-use crate::commands::DeviceCommands;
-use crate::instance::Instance;
-use crate::types::*;
+use crate::{commands::DeviceCommands, instance::Instance, types::*};
 
 #[derive(Clone)]
 pub struct Device

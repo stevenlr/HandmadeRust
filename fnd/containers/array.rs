@@ -1,11 +1,15 @@
-use core::iter::FromIterator;
-use core::mem::needs_drop;
-use core::ops::{Deref, DerefMut};
-use core::ptr::drop_in_place;
-use core::slice;
+use core::{
+    iter::FromIterator,
+    mem::needs_drop,
+    ops::{Deref, DerefMut},
+    ptr::drop_in_place,
+    slice,
+};
 
-use crate::alloc::{Allocator, GlobalAllocator, Layout};
-use crate::containers::RawArray;
+use crate::{
+    alloc::{Allocator, GlobalAllocator, Layout},
+    containers::RawArray,
+};
 
 pub struct Array<T, A: Allocator = GlobalAllocator>
 {
@@ -180,6 +184,9 @@ impl<T, A: Allocator> DerefMut for Array<T, A>
         unsafe { slice::from_raw_parts_mut(self.buffer.ptr, self.size) }
     }
 }
+
+// @Todo For Extend and FromIterator, try to use size_hint,
+// and maybe TrustedLen to reserve some memory before inserting.
 
 impl<T, A: Allocator> Extend<T> for Array<T, A>
 {

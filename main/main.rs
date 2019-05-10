@@ -1,16 +1,21 @@
-use core::mem::transmute;
-use core::ptr::{null, null_mut};
+use core::{
+    cell::RefCell,
+    marker::PhantomPinned,
+    mem::transmute,
+    pin::Pin,
+    ptr::{null, null_mut},
+};
 
-use fnd::alloc::{set_global_allocator, SystemAllocator};
-use fnd::containers::Array;
-use fnd::str::CStr;
-use fnd::Unq;
+use fnd::{
+    alloc::{set_global_allocator, SystemAllocator},
+    containers::{Array, Queue},
+    str::CStr,
+    Unq,
+};
 
-use vk::builders::*;
-use vk::types::*;
+use vk::{builders::*, types::*};
 
-use win32::kernel32;
-use win32::user32;
+use win32::{kernel32, user32};
 
 static mut ALLOCATOR: Option<&SystemAllocator> = None;
 
@@ -42,10 +47,78 @@ fn get_gpu_queue_family_properties(
     return prps;
 }
 
+enum Event
+{
+    DestroyWindow,
+}
+
+struct EventQueue
+{
+    queue: RefCell<Queue<Event>>,
+
+    // We add this so EventQueue is !Unpin because we need
+    // the raw pointer to the queue in the events callback.
+    _pin: PhantomPinned,
+}
+
+impl EventQueue
+{
+    fn new() -> Self
+    {
+        Self {
+            queue: RefCell::new(Queue::new()),
+            _pin: PhantomPinned,
+        }
+    }
+
+    #[inline]
+    fn queue_event(&self, event: Event)
+    {
+        self.queue.borrow_mut().push(event);
+    }
+
+    #[inline]
+    fn poll_event(&self) -> Option<Event>
+    {
+        self.queue.borrow_mut().pop()
+    }
+}
+
+fn queue_event(window: win32::HWND, event: Event)
+{
+    let queue =
+        unsafe { user32::GetWindowLongPtrA(window, win32::GWLP_USERDATA) as *const EventQueue };
+
+    if !queue.is_null()
+    {
+        let queue: &EventQueue = unsafe { &*queue };
+        queue.queue_event(event);
+    }
+}
+
+unsafe extern "system" fn wnd_proc(
+    hwnd: win32::HWND,
+    msg: win32::UINT,
+    w_param: win32::WPARAM,
+    l_param: win32::LPARAM,
+) -> win32::LRESULT
+{
+    match msg
+    {
+        win32::WM_DESTROY =>
+        {
+            queue_event(hwnd, Event::DestroyWindow);
+            0
+        }
+        _ => user32::DefWindowProcA(hwnd, msg, w_param, l_param),
+    }
+}
+
 struct Window
 {
     hinstance: win32::HINSTANCE,
     window: win32::HWND,
+    queue: Pin<Unq<EventQueue>>,
 }
 
 impl Window
@@ -58,7 +131,7 @@ impl Window
 
         let wnd_class = win32::WNDCLASSA {
             style: win32::CS_VREDRAW | win32::CS_HREDRAW,
-            lpfnWndProc: user32::DefWindowProcA,
+            lpfnWndProc: wnd_proc,
             cbClsExtra: 0,
             cbWndExtra: 0,
             hInstance: hinstance,
@@ -82,8 +155,8 @@ impl Window
                 win32::WS_OVERLAPPEDWINDOW,
                 win32::CW_USEDEFAULT,
                 win32::CW_USEDEFAULT,
-                1280,
-                720,
+                width,
+                height,
                 null_mut(),
                 null_mut(),
                 hinstance,
@@ -97,11 +170,22 @@ impl Window
         }
         else
         {
+            let event_queue = Unq::pin(EventQueue::new());
+
             unsafe {
                 user32::ShowWindow(window, win32::SW_SHOW);
+                user32::SetWindowLongPtrA(
+                    window,
+                    win32::GWLP_USERDATA,
+                    &*event_queue as *const _ as _,
+                );
             }
 
-            Some(Self { hinstance, window })
+            Some(Self {
+                hinstance,
+                window,
+                queue: event_queue,
+            })
         }
     }
 
@@ -127,13 +211,29 @@ impl Window
             }
         }
     }
+
+    #[inline]
+    fn poll_event(&self) -> Option<Event>
+    {
+        self.handle_events();
+        self.queue.poll_event()
+    }
+}
+
+impl Drop for Window
+{
+    fn drop(&mut self)
+    {
+        unsafe {
+            user32::SetWindowLongPtrA(self.window, win32::GWLP_USERDATA, 0);
+            user32::DestroyWindow(self.window);
+        }
+    }
 }
 
 fn main()
 {
     init_global_allocator();
-
-    let hinstance = unsafe { kernel32::GetModuleHandleA(0 as _) as win32::HINSTANCE };
 
     let window = Window::new(1280, 720, "Handmade Rust").unwrap();
 
@@ -213,9 +313,15 @@ fn main()
 
     let vk_queue = vk_device.get_device_queue(queue_family_index, 0);
 
-    loop
+    'outer_loop: loop
     {
-        window.handle_events();
+        while let Some(event) = window.poll_event()
+        {
+            match event
+            {
+                Event::DestroyWindow => break 'outer_loop,
+            }
+        }
     }
 
     vk_device.queue_wait_idle(vk_queue).unwrap();

@@ -1,11 +1,14 @@
 use crate::alloc::{alloc_one, Allocator, GlobalAllocator};
-use core::borrow::{Borrow, BorrowMut};
-use core::convert::{AsMut, AsRef};
-use core::marker::{PhantomData, Unsize};
-use core::ops::{CoerceUnsized, Deref, DerefMut};
-use core::ptr::{drop_in_place, write, NonNull};
+use core::{
+    borrow::{Borrow, BorrowMut},
+    convert::{AsMut, AsRef},
+    marker::{PhantomData, Unsize},
+    ops::{CoerceUnsized, Deref, DerefMut},
+    pin::Pin,
+    ptr::{drop_in_place, write, NonNull},
+};
 
-pub struct Unq<T: ?Sized, A: Allocator>
+pub struct Unq<T: ?Sized, A: Allocator = GlobalAllocator>
 {
     ptr: NonNull<T>,
     alloc: A,
@@ -28,6 +31,11 @@ impl<T, A: Allocator> Unq<T, A>
             _phantom: PhantomData {},
         }
     }
+
+    pub fn pin_with(value: T, alloc: A) -> Pin<Self>
+    {
+        unsafe { Pin::new_unchecked(Self::new_with(value, alloc)) }
+    }
 }
 
 impl<T: ?Sized, A: Allocator> Unq<T, A>
@@ -47,6 +55,11 @@ impl<T> Unq<T, GlobalAllocator>
     pub fn new(value: T) -> Self
     {
         Self::new_with(value, GlobalAllocator)
+    }
+
+    pub fn pin(value: T) -> Pin<Self>
+    {
+        Self::pin_with(value, GlobalAllocator)
     }
 }
 

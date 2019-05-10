@@ -1,8 +1,9 @@
-use core::borrow::Borrow;
-use core::hash::*;
+use core::{borrow::Borrow, hash::*};
 
-use crate::alloc::{Allocator, GlobalAllocator};
-use crate::containers::HashMap;
+use crate::{
+    alloc::{Allocator, GlobalAllocator},
+    containers::HashMap,
+};
 
 pub struct HashSet<T, A = GlobalAllocator>
 where

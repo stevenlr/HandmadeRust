@@ -1,7 +1,5 @@
 use super::Layout;
-use core::ffi::c_void;
-use core::mem::size_of;
-use core::ptr::NonNull;
+use core::{ffi::c_void, mem::size_of, ptr::NonNull};
 
 pub trait Allocator
 {

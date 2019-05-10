@@ -1,6 +1,5 @@
 use super::{Allocator, Layout};
-use core::ffi::c_void;
-use core::ptr::NonNull;
+use core::{ffi::c_void, ptr::NonNull};
 
 use win32::{kernel32, HANDLE};
 

@@ -1,10 +1,14 @@
-use core::borrow::Borrow;
-use core::hash::*;
-use core::mem::{replace, swap};
+use core::{
+    borrow::Borrow,
+    hash::*,
+    mem::{replace, swap},
+};
 
-use crate::alloc::{Allocator, GlobalAllocator};
-use crate::containers::Array;
-use crate::hash::SipHash;
+use crate::{
+    alloc::{Allocator, GlobalAllocator},
+    containers::Array,
+    hash::SipHash,
+};
 
 // @Todo Base resize on load factor.
 
@@ -195,6 +199,25 @@ where
         }
     }
 
+    pub fn find_mut<Q>(&mut self, hash: u64, key: &Q) -> Option<&mut V>
+    where
+        K: Borrow<Q>,
+        Q: Eq + ?Sized,
+    {
+        let find = self.find_bucket(key, hash);
+        match find
+        {
+            FindResult::Present(index) => match self.buckets[index]
+            {
+                Some(Bucket {
+                    value: ref mut v, ..
+                }) => Some(v),
+                _ => None,
+            },
+            _ => None,
+        }
+    }
+
     pub fn len(&self) -> usize
     {
         self.shortb.iter().filter(|x| x.is_occupied()).count()
@@ -368,13 +391,22 @@ where
         self.inner.len()
     }
 
-    pub fn find<Q>(&self, key: &Q) -> Option<&V>
+    pub fn find<'a, Q>(&'a self, key: &Q) -> Option<&'a V>
     where
         K: Borrow<Q>,
         Q: Hash + Eq + ?Sized,
     {
         let hash = self.compute_hash(key);
         return self.inner.find(hash, key);
+    }
+
+    pub fn find_mut<'a, Q>(&'a mut self, key: &Q) -> Option<&'a mut V>
+    where
+        K: Borrow<Q>,
+        Q: Hash + Eq + ?Sized,
+    {
+        let hash = self.compute_hash(key);
+        return self.inner.find_mut(hash, key);
     }
 }
 

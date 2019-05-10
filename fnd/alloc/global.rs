@@ -1,7 +1,6 @@
 use super::{Allocator, Layout};
 
-use core::ffi::c_void;
-use core::ptr::NonNull;
+use core::{ffi::c_void, ptr::NonNull};
 
 static mut GLOBAL_ALLOCATOR: Option<&'static mut Allocator> = None;
 

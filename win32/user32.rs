@@ -28,4 +28,7 @@ extern "system" {
     ) -> BOOL;
     pub fn TranslateMessage(lpMsg: *const MSG) -> BOOL;
     pub fn DispatchMessageA(lpMsg: *const MSG) -> LRESULT;
+    pub fn DestroyWindow(hWnd: HWND) -> BOOL;
+    pub fn GetWindowLongPtrA(hWnd: HWND, nIndex: i32) -> LONG_PTR;
+    pub fn SetWindowLongPtrA(hWnd: HWND, nIndex: i32, dwNewLong: LONG_PTR) -> LONG_PTR;
 }

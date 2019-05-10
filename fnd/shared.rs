@@ -1,10 +1,12 @@
 use crate::alloc::{alloc_one, Allocator, GlobalAllocator};
-use core::borrow::Borrow;
-use core::cell::Cell;
-use core::convert::AsRef;
-use core::marker::{PhantomData, Send, Sync, Unsize};
-use core::ops::{CoerceUnsized, Deref};
-use core::ptr::{drop_in_place, write, NonNull};
+use core::{
+    borrow::Borrow,
+    cell::Cell,
+    convert::AsRef,
+    marker::{PhantomData, Send, Sync, Unsize},
+    ops::{CoerceUnsized, Deref},
+    ptr::{drop_in_place, write, NonNull},
+};
 
 struct SharedInner<T: ?Sized>
 {
@@ -52,7 +54,7 @@ impl<T: ?Sized> SharedInner<T>
     }
 }
 
-pub struct Shared<T: ?Sized, A: Allocator>
+pub struct Shared<T: ?Sized, A: Allocator = GlobalAllocator>
 {
     ptr: NonNull<SharedInner<T>>,
     alloc: A,
@@ -285,8 +287,7 @@ mod tests
 {
     use super::*;
     use crate::alloc::SystemAllocator;
-    use core::cell::RefCell;
-    use core::mem::drop;
+    use core::{cell::RefCell, mem::drop};
 
     struct MyObject<'a>
     {

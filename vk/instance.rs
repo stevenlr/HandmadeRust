@@ -1,6 +1,4 @@
-use crate::commands::InstanceCommands;
-use crate::entry_point::EntryPoint;
-use crate::types::*;
+use crate::{commands::InstanceCommands, entry_point::EntryPoint, types::*};
 
 #[derive(Clone)]
 pub struct Instance

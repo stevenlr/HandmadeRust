@@ -1,8 +1,9 @@
-use core::mem::needs_drop;
-use core::ptr::drop_in_place;
+use core::{mem::needs_drop, ptr::drop_in_place};
 
-use crate::alloc::{Allocator, GlobalAllocator, Layout};
-use crate::containers::RawArray;
+use crate::{
+    alloc::{Allocator, GlobalAllocator, Layout},
+    containers::RawArray,
+};
 
 pub struct Queue<T, A: Allocator + Clone = GlobalAllocator>
 {

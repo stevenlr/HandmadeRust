@@ -1,5 +1,4 @@
-use crate::types::*;
-use crate::utils::*;
+use crate::{types::*, utils::*};
 use win32::{HINSTANCE, HWND};
 
 pub struct VkAllocationCallbacksBuilder<'a>
