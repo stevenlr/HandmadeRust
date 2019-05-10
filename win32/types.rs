@@ -30,6 +30,8 @@ pub type LONG_PTR = isize;
 pub type WNDPROC =
     unsafe extern "system" fn(hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
 
+pub type ThreadProc = unsafe extern "system" fn(lpParameter: LPVOID) -> DWORD;
+
 pub const CS_BYTEALIGNCLIENT: UINT = 0x1000;
 pub const CS_BYTEALIGNWINDOW: UINT = 0x2000;
 pub const CS_CLASSDC: UINT = 0x0040;
@@ -380,6 +382,8 @@ pub const GWL_STYLE: i32 = -16;
 pub const GWLP_USERDATA: i32 = -21;
 pub const GWLP_WNDPROC: i32 = -4;
 
+pub const INFINITE: DWORD = 0xffffffff;
+
 #[repr(C)]
 pub struct WNDCLASSA
 {
@@ -412,4 +416,12 @@ pub struct MSG
     time: DWORD,
     pt: POINT,
     lPrivate: DWORD,
+}
+
+#[repr(C)]
+pub struct SECURITY_ATTRIBUTES
+{
+    nLength: DWORD,
+    lpSecurityDescriptor: LPVOID,
+    bInheritHandle: BOOL,
 }
