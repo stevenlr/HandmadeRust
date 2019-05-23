@@ -26,6 +26,7 @@ impl Device
         p_present_info: &VkPresentInfoKHR,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.queue_present_khr(queue, p_present_info) };
         return match ret
         {
@@ -44,6 +45,7 @@ impl Device
     ) -> Result<(VkResult, u32), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.acquire_next_image_khr(
                 self.handle,
@@ -70,6 +72,7 @@ impl Device
     ) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_swapchain_image_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.get_swapchain_images_khr(
                 self.handle,
@@ -93,6 +96,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let mut p_swapchain_image_count = p_swapchain_images.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.get_swapchain_images_khr(
                 self.handle,
@@ -115,6 +119,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_swapchain_khr(
                 self.handle,
@@ -135,6 +140,7 @@ impl Device
     ) -> Result<(VkResult, VkSwapchainKHR), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_swapchain_khr(
                 self.handle,
@@ -161,6 +167,7 @@ impl Device
     )
     {
         let command_buffer_count = p_command_buffers.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_execute_commands(
                 command_buffer,
@@ -172,11 +179,13 @@ impl Device
 
     pub fn cmd_end_render_pass(&self, command_buffer: VkCommandBuffer)
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.cmd_end_render_pass(command_buffer) };
     }
 
     pub fn cmd_next_subpass(&self, command_buffer: VkCommandBuffer, contents: VkSubpassContents)
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.cmd_next_subpass(command_buffer, contents) };
     }
 
@@ -187,6 +196,7 @@ impl Device
         contents: VkSubpassContents,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_begin_render_pass(command_buffer, p_render_pass_begin, contents)
@@ -203,6 +213,7 @@ impl Device
     )
     {
         let size = p_values.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_push_constants(
                 command_buffer,
@@ -227,6 +238,7 @@ impl Device
         flags: VkQueryResultFlags,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_copy_query_pool_results(
                 command_buffer,
@@ -249,6 +261,7 @@ impl Device
         query: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_write_timestamp(command_buffer, pipeline_stage, query_pool, query)
@@ -263,6 +276,7 @@ impl Device
         query_count: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_reset_query_pool(command_buffer, query_pool, first_query, query_count)
@@ -276,6 +290,7 @@ impl Device
         query: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.cmd_end_query(command_buffer, query_pool, query) };
     }
 
@@ -287,6 +302,7 @@ impl Device
         flags: VkQueryControlFlags,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_begin_query(command_buffer, query_pool, query, flags)
@@ -307,6 +323,7 @@ impl Device
         let memory_barrier_count = p_memory_barriers.len() as _;
         let buffer_memory_barrier_count = p_buffer_memory_barriers.len() as _;
         let image_memory_barrier_count = p_image_memory_barriers.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_pipeline_barrier(
                 command_buffer,
@@ -338,6 +355,7 @@ impl Device
         let memory_barrier_count = p_memory_barriers.len() as _;
         let buffer_memory_barrier_count = p_buffer_memory_barriers.len() as _;
         let image_memory_barrier_count = p_image_memory_barriers.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_wait_events(
                 command_buffer,
@@ -362,6 +380,7 @@ impl Device
         stage_mask: VkPipelineStageFlags,
     )
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.cmd_reset_event(command_buffer, event, stage_mask) };
     }
 
@@ -372,6 +391,7 @@ impl Device
         stage_mask: VkPipelineStageFlags,
     )
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.cmd_set_event(command_buffer, event, stage_mask) };
     }
 
@@ -386,6 +406,7 @@ impl Device
     )
     {
         let region_count = p_regions.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_resolve_image(
                 command_buffer,
@@ -408,6 +429,7 @@ impl Device
     {
         let attachment_count = p_attachments.len() as _;
         let rect_count = p_rects.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_clear_attachments(
                 command_buffer,
@@ -429,6 +451,7 @@ impl Device
     )
     {
         let range_count = p_ranges.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_clear_depth_stencil_image(
                 command_buffer,
@@ -451,6 +474,7 @@ impl Device
     )
     {
         let range_count = p_ranges.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_clear_color_image(
                 command_buffer,
@@ -472,6 +496,7 @@ impl Device
         data: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_fill_buffer(command_buffer, dst_buffer, dst_offset, size, data)
@@ -487,6 +512,7 @@ impl Device
     )
     {
         let data_size = p_data.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_update_buffer(
                 command_buffer,
@@ -508,6 +534,7 @@ impl Device
     )
     {
         let region_count = p_regions.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_copy_image_to_buffer(
                 command_buffer,
@@ -530,6 +557,7 @@ impl Device
     )
     {
         let region_count = p_regions.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_copy_buffer_to_image(
                 command_buffer,
@@ -554,6 +582,7 @@ impl Device
     )
     {
         let region_count = p_regions.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_blit_image(
                 command_buffer,
@@ -579,6 +608,7 @@ impl Device
     )
     {
         let region_count = p_regions.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_copy_image(
                 command_buffer,
@@ -601,6 +631,7 @@ impl Device
     )
     {
         let region_count = p_regions.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_copy_buffer(
                 command_buffer,
@@ -619,6 +650,7 @@ impl Device
         offset: VkDeviceSize,
     )
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.cmd_dispatch_indirect(command_buffer, buffer, offset) };
     }
 
@@ -630,6 +662,7 @@ impl Device
         group_count_z: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_dispatch(command_buffer, group_count_x, group_count_y, group_count_z)
@@ -645,6 +678,7 @@ impl Device
         stride: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_draw_indexed_indirect(command_buffer, buffer, offset, draw_count, stride)
@@ -660,6 +694,7 @@ impl Device
         stride: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_draw_indirect(command_buffer, buffer, offset, draw_count, stride)
@@ -676,6 +711,7 @@ impl Device
         first_instance: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_draw_indexed(
                 command_buffer,
@@ -697,6 +733,7 @@ impl Device
         first_instance: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_draw(
                 command_buffer,
@@ -718,6 +755,7 @@ impl Device
     {
         let binding_count = p_buffers.len() as _;
         assert!(binding_count as usize == p_offsets.len());
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_bind_vertex_buffers(
                 command_buffer,
@@ -737,6 +775,7 @@ impl Device
         index_type: VkIndexType,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_bind_index_buffer(command_buffer, buffer, offset, index_type)
@@ -755,6 +794,7 @@ impl Device
     {
         let descriptor_set_count = p_descriptor_sets.len() as _;
         let dynamic_offset_count = p_dynamic_offsets.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_bind_descriptor_sets(
                 command_buffer,
@@ -776,6 +816,7 @@ impl Device
         reference: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_set_stencil_reference(command_buffer, face_mask, reference)
@@ -789,6 +830,7 @@ impl Device
         write_mask: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_set_stencil_write_mask(command_buffer, face_mask, write_mask)
@@ -802,6 +844,7 @@ impl Device
         compare_mask: u32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_set_stencil_compare_mask(command_buffer, face_mask, compare_mask)
@@ -815,6 +858,7 @@ impl Device
         max_depth_bounds: f32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_set_depth_bounds(command_buffer, min_depth_bounds, max_depth_bounds)
@@ -827,6 +871,7 @@ impl Device
         blend_constants: [f32; 4],
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_set_blend_constants(command_buffer, blend_constants)
@@ -841,6 +886,7 @@ impl Device
         depth_bias_slope_factor: f32,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_set_depth_bias(
                 command_buffer,
@@ -853,6 +899,7 @@ impl Device
 
     pub fn cmd_set_line_width(&self, command_buffer: VkCommandBuffer, line_width: f32)
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.cmd_set_line_width(command_buffer, line_width) };
     }
 
@@ -864,6 +911,7 @@ impl Device
     )
     {
         let scissor_count = p_scissors.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_set_scissor(
                 command_buffer,
@@ -882,6 +930,7 @@ impl Device
     )
     {
         let viewport_count = p_viewports.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.cmd_set_viewport(
                 command_buffer,
@@ -899,6 +948,7 @@ impl Device
         pipeline: VkPipeline,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .cmd_bind_pipeline(command_buffer, pipeline_bind_point, pipeline)
@@ -911,6 +961,7 @@ impl Device
         flags: VkCommandBufferResetFlags,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.reset_command_buffer(command_buffer, flags) };
         return match ret
         {
@@ -922,6 +973,7 @@ impl Device
     pub fn end_command_buffer(&self, command_buffer: VkCommandBuffer)
         -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.end_command_buffer(command_buffer) };
         return match ret
         {
@@ -936,6 +988,7 @@ impl Device
         p_begin_info: &VkCommandBufferBeginInfo,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.begin_command_buffer(command_buffer, p_begin_info) };
         return match ret
         {
@@ -951,6 +1004,7 @@ impl Device
     )
     {
         let command_buffer_count = p_command_buffers.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.free_command_buffers(
                 self.handle,
@@ -968,6 +1022,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         assert!(p_allocate_info.command_buffer_count as usize == p_command_buffers.len());
+        #[allow(unused)]
         let ret = unsafe {
             self.d.allocate_command_buffers(
                 self.handle,
@@ -988,6 +1043,7 @@ impl Device
         flags: VkCommandPoolResetFlags,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.reset_command_pool(self.handle, command_pool, flags) };
         return match ret
         {
@@ -1002,6 +1058,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_command_pool(
                 self.handle,
@@ -1022,6 +1079,7 @@ impl Device
     ) -> Result<(VkResult, VkCommandPool), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_command_pool(
                 self.handle,
@@ -1044,6 +1102,7 @@ impl Device
     pub fn get_render_area_granularity(&self, render_pass: VkRenderPass) -> VkExtent2D
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .get_render_area_granularity(self.handle, render_pass, &mut ret_value)
@@ -1057,6 +1116,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_render_pass(
                 self.handle,
@@ -1077,6 +1137,7 @@ impl Device
     ) -> Result<(VkResult, VkRenderPass), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_render_pass(
                 self.handle,
@@ -1102,6 +1163,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_framebuffer(
                 self.handle,
@@ -1122,6 +1184,7 @@ impl Device
     ) -> Result<(VkResult, VkFramebuffer), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_framebuffer(
                 self.handle,
@@ -1149,6 +1212,7 @@ impl Device
     {
         let descriptor_write_count = p_descriptor_writes.len() as _;
         let descriptor_copy_count = p_descriptor_copies.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.update_descriptor_sets(
                 self.handle,
@@ -1167,6 +1231,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let descriptor_set_count = p_descriptor_sets.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.free_descriptor_sets(
                 self.handle,
@@ -1189,6 +1254,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         assert!(p_allocate_info.descriptor_set_count as usize == p_descriptor_sets.len());
+        #[allow(unused)]
         let ret = unsafe {
             self.d.allocate_descriptor_sets(
                 self.handle,
@@ -1209,6 +1275,7 @@ impl Device
         flags: VkDescriptorPoolResetFlags,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .reset_descriptor_pool(self.handle, descriptor_pool, flags)
@@ -1226,6 +1293,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_descriptor_pool(
                 self.handle,
@@ -1246,6 +1314,7 @@ impl Device
     ) -> Result<(VkResult, VkDescriptorPool), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_descriptor_pool(
                 self.handle,
@@ -1271,6 +1340,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_descriptor_set_layout(
                 self.handle,
@@ -1291,6 +1361,7 @@ impl Device
     ) -> Result<(VkResult, VkDescriptorSetLayout), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_descriptor_set_layout(
                 self.handle,
@@ -1312,6 +1383,7 @@ impl Device
 
     pub fn destroy_sampler(&self, sampler: VkSampler, p_allocator: Option<&VkAllocationCallbacks>)
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_sampler(
                 self.handle,
@@ -1332,6 +1404,7 @@ impl Device
     ) -> Result<(VkResult, VkSampler), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_sampler(
                 self.handle,
@@ -1357,6 +1430,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_pipeline_layout(
                 self.handle,
@@ -1377,6 +1451,7 @@ impl Device
     ) -> Result<(VkResult, VkPipelineLayout), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_pipeline_layout(
                 self.handle,
@@ -1402,6 +1477,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_pipeline(
                 self.handle,
@@ -1425,6 +1501,7 @@ impl Device
     {
         let create_info_count = p_create_infos.len() as _;
         assert!(create_info_count as usize == p_pipelines.len());
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_compute_pipelines(
                 self.handle,
@@ -1456,6 +1533,7 @@ impl Device
     {
         let create_info_count = p_create_infos.len() as _;
         assert!(create_info_count as usize == p_pipelines.len());
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_graphics_pipelines(
                 self.handle,
@@ -1484,6 +1562,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let src_cache_count = p_src_caches.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.merge_pipeline_caches(
                 self.handle,
@@ -1505,6 +1584,7 @@ impl Device
     ) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_data_size = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.get_pipeline_cache_data(
                 self.handle,
@@ -1528,6 +1608,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let mut p_data_size = p_data.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.get_pipeline_cache_data(
                 self.handle,
@@ -1550,6 +1631,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_pipeline_cache(
                 self.handle,
@@ -1570,6 +1652,7 @@ impl Device
     ) -> Result<(VkResult, VkPipelineCache), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_pipeline_cache(
                 self.handle,
@@ -1595,6 +1678,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_shader_module(
                 self.handle,
@@ -1615,6 +1699,7 @@ impl Device
     ) -> Result<(VkResult, VkShaderModule), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_shader_module(
                 self.handle,
@@ -1640,6 +1725,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_image_view(
                 self.handle,
@@ -1660,6 +1746,7 @@ impl Device
     ) -> Result<(VkResult, VkImageView), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_image_view(
                 self.handle,
@@ -1686,6 +1773,7 @@ impl Device
     ) -> VkSubresourceLayout
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .get_image_subresource_layout(self.handle, image, p_subresource, &mut ret_value)
@@ -1695,6 +1783,7 @@ impl Device
 
     pub fn destroy_image(&self, image: VkImage, p_allocator: Option<&VkAllocationCallbacks>)
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_image(
                 self.handle,
@@ -1715,6 +1804,7 @@ impl Device
     ) -> Result<(VkResult, VkImage), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_image(
                 self.handle,
@@ -1740,6 +1830,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_buffer_view(
                 self.handle,
@@ -1760,6 +1851,7 @@ impl Device
     ) -> Result<(VkResult, VkBufferView), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_buffer_view(
                 self.handle,
@@ -1781,6 +1873,7 @@ impl Device
 
     pub fn destroy_buffer(&self, buffer: VkBuffer, p_allocator: Option<&VkAllocationCallbacks>)
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_buffer(
                 self.handle,
@@ -1801,6 +1894,7 @@ impl Device
     ) -> Result<(VkResult, VkBuffer), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_buffer(
                 self.handle,
@@ -1831,6 +1925,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let data_size = p_data.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.get_query_pool_results(
                 self.handle,
@@ -1857,6 +1952,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_query_pool(
                 self.handle,
@@ -1877,6 +1973,7 @@ impl Device
     ) -> Result<(VkResult, VkQueryPool), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_query_pool(
                 self.handle,
@@ -1898,6 +1995,7 @@ impl Device
 
     pub fn reset_event(&self, event: VkEvent) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.reset_event(self.handle, event) };
         return match ret
         {
@@ -1908,6 +2006,7 @@ impl Device
 
     pub fn set_event(&self, event: VkEvent) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.set_event(self.handle, event) };
         return match ret
         {
@@ -1918,6 +2017,7 @@ impl Device
 
     pub fn get_event_status(&self, event: VkEvent) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.get_event_status(self.handle, event) };
         return match ret
         {
@@ -1929,6 +2029,7 @@ impl Device
 
     pub fn destroy_event(&self, event: VkEvent, p_allocator: Option<&VkAllocationCallbacks>)
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_event(
                 self.handle,
@@ -1949,6 +2050,7 @@ impl Device
     ) -> Result<(VkResult, VkEvent), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_event(
                 self.handle,
@@ -1974,6 +2076,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_semaphore(
                 self.handle,
@@ -1994,6 +2097,7 @@ impl Device
     ) -> Result<(VkResult, VkSemaphore), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_semaphore(
                 self.handle,
@@ -2021,6 +2125,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let fence_count = p_fences.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.wait_for_fences(
                 self.handle,
@@ -2040,6 +2145,7 @@ impl Device
 
     pub fn get_fence_status(&self, fence: VkFence) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.get_fence_status(self.handle, fence) };
         return match ret
         {
@@ -2052,6 +2158,7 @@ impl Device
     pub fn reset_fences(&self, p_fences: &[VkFence]) -> Result<VkResult, VkResult>
     {
         let fence_count = p_fences.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.reset_fences(
                 self.handle,
@@ -2068,6 +2175,7 @@ impl Device
 
     pub fn destroy_fence(&self, fence: VkFence, p_allocator: Option<&VkAllocationCallbacks>)
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_fence(
                 self.handle,
@@ -2088,6 +2196,7 @@ impl Device
     ) -> Result<(VkResult, VkFence), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.create_fence(
                 self.handle,
@@ -2115,6 +2224,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let bind_info_count = p_bind_info.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.queue_bind_sparse(
                 queue,
@@ -2133,6 +2243,7 @@ impl Device
     pub fn get_image_sparse_memory_requirements_count(&self, image: VkImage) -> usize
     {
         let mut p_sparse_memory_requirement_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.get_image_sparse_memory_requirements(
                 self.handle,
@@ -2151,6 +2262,7 @@ impl Device
     )
     {
         let mut p_sparse_memory_requirement_count = p_sparse_memory_requirements.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.get_image_sparse_memory_requirements(
                 self.handle,
@@ -2164,6 +2276,7 @@ impl Device
     pub fn get_image_memory_requirements(&self, image: VkImage) -> VkMemoryRequirements
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .get_image_memory_requirements(self.handle, image, &mut ret_value)
@@ -2174,6 +2287,7 @@ impl Device
     pub fn get_buffer_memory_requirements(&self, buffer: VkBuffer) -> VkMemoryRequirements
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .get_buffer_memory_requirements(self.handle, buffer, &mut ret_value)
@@ -2188,6 +2302,7 @@ impl Device
         memory_offset: VkDeviceSize,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .bind_image_memory(self.handle, image, memory, memory_offset)
@@ -2206,6 +2321,7 @@ impl Device
         memory_offset: VkDeviceSize,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .bind_buffer_memory(self.handle, buffer, memory, memory_offset)
@@ -2220,6 +2336,7 @@ impl Device
     pub fn get_device_memory_commitment(&self, memory: VkDeviceMemory) -> VkDeviceSize
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .get_device_memory_commitment(self.handle, memory, &mut ret_value)
@@ -2233,6 +2350,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let memory_range_count = p_memory_ranges.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.invalidate_mapped_memory_ranges(
                 self.handle,
@@ -2253,6 +2371,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let memory_range_count = p_memory_ranges.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.flush_mapped_memory_ranges(
                 self.handle,
@@ -2269,6 +2388,7 @@ impl Device
 
     pub fn unmap_memory(&self, memory: VkDeviceMemory)
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.unmap_memory(self.handle, memory) };
     }
 
@@ -2281,6 +2401,7 @@ impl Device
     ) -> Result<(VkResult, *mut core::ffi::c_void), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .map_memory(self.handle, memory, offset, size, flags, &mut ret_value)
@@ -2294,6 +2415,7 @@ impl Device
 
     pub fn free_memory(&self, memory: VkDeviceMemory, p_allocator: Option<&VkAllocationCallbacks>)
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.free_memory(
                 self.handle,
@@ -2314,6 +2436,7 @@ impl Device
     ) -> Result<(VkResult, VkDeviceMemory), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d.allocate_memory(
                 self.handle,
@@ -2335,6 +2458,7 @@ impl Device
 
     pub fn device_wait_idle(&self) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.device_wait_idle(self.handle) };
         return match ret
         {
@@ -2345,6 +2469,7 @@ impl Device
 
     pub fn queue_wait_idle(&self, queue: VkQueue) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.d.queue_wait_idle(queue) };
         return match ret
         {
@@ -2361,6 +2486,7 @@ impl Device
     ) -> Result<VkResult, VkResult>
     {
         let submit_count = p_submits.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.d.queue_submit(
                 queue,
@@ -2379,6 +2505,7 @@ impl Device
     pub fn get_device_queue(&self, queue_family_index: u32, queue_index: u32) -> VkQueue
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.d
                 .get_device_queue(self.handle, queue_family_index, queue_index, &mut ret_value)
@@ -2388,6 +2515,7 @@ impl Device
 
     pub fn destroy_device(&self, p_allocator: Option<&VkAllocationCallbacks>)
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.d.destroy_device(
                 self.handle,

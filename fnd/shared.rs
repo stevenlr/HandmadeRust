@@ -253,6 +253,8 @@ where
 
 impl<T: ?Sized + Unsize<U>, U: ?Sized, A: Allocator> CoerceUnsized<Shared<U, A>> for Shared<T, A> {}
 
+impl<T: ?Sized, A: Allocator> Unpin for Shared<T, A> {}
+
 impl<T: ?Sized, A: Allocator> Deref for Shared<T, A>
 {
     type Target = T;

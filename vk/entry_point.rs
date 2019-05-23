@@ -27,6 +27,7 @@ impl EntryPoint
     pub fn enumerate_instance_layer_properties_count(&self) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_property_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.e
                 .enumerate_instance_layer_properties(&mut p_property_count, core::ptr::null_mut())
@@ -45,6 +46,7 @@ impl EntryPoint
     ) -> Result<VkResult, VkResult>
     {
         let mut p_property_count = p_properties.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.e.enumerate_instance_layer_properties(
                 &mut p_property_count,
@@ -65,6 +67,7 @@ impl EntryPoint
     ) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_property_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.e.enumerate_instance_extension_properties(
                 match p_layer_name
@@ -91,6 +94,7 @@ impl EntryPoint
     ) -> Result<VkResult, VkResult>
     {
         let mut p_property_count = p_properties.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.e.enumerate_instance_extension_properties(
                 match p_layer_name
@@ -112,6 +116,7 @@ impl EntryPoint
 
     pub fn get_instance_proc_addr(&self, instance: VkInstance, p_name: &[u8]) -> PfnVkVoidFunction
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.s
                 .get_instance_proc_addr(instance, core::mem::transmute(p_name.as_ptr()))
@@ -126,6 +131,7 @@ impl EntryPoint
     ) -> Result<(VkResult, VkInstance), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.e.create_instance(
                 p_create_info,

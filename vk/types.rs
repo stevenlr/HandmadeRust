@@ -1,3 +1,4 @@
+#![allow(unused_assignments, unreachable_patterns)]
 use win32::{HINSTANCE, HWND};
 
 pub const VK_KHR_WIN32_SURFACE_SPEC_VERSION: u32 = 6;
@@ -2731,6 +2732,89 @@ impl core::ops::BitXorAssign for VkImageUsageFlagBits
     }
 }
 
+impl core::fmt::Debug for VkImageUsageFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkImageUsageFlagBits::TRANSFER_SRC_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSFER_SRC_BIT")?;
+        }
+        if self.contains(VkImageUsageFlagBits::TRANSFER_DST_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSFER_DST_BIT")?;
+        }
+        if self.contains(VkImageUsageFlagBits::SAMPLED_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SAMPLED_BIT")?;
+        }
+        if self.contains(VkImageUsageFlagBits::STORAGE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("STORAGE_BIT")?;
+        }
+        if self.contains(VkImageUsageFlagBits::COLOR_ATTACHMENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COLOR_ATTACHMENT_BIT")?;
+        }
+        if self.contains(VkImageUsageFlagBits::DEPTH_STENCIL_ATTACHMENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DEPTH_STENCIL_ATTACHMENT_BIT")?;
+        }
+        if self.contains(VkImageUsageFlagBits::TRANSIENT_ATTACHMENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSIENT_ATTACHMENT_BIT")?;
+        }
+        if self.contains(VkImageUsageFlagBits::INPUT_ATTACHMENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INPUT_ATTACHMENT_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCompositeAlphaFlagBitsKHR(VkFlags);
@@ -2802,6 +2886,53 @@ impl core::ops::BitXorAssign for VkCompositeAlphaFlagBitsKHR
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkCompositeAlphaFlagBitsKHR
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkCompositeAlphaFlagBitsKHR::OPAQUE_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("OPAQUE_BIT_KHR")?;
+        }
+        if self.contains(VkCompositeAlphaFlagBitsKHR::PRE_MULTIPLIED_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("PRE_MULTIPLIED_BIT_KHR")?;
+        }
+        if self.contains(VkCompositeAlphaFlagBitsKHR::POST_MULTIPLIED_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("POST_MULTIPLIED_BIT_KHR")?;
+        }
+        if self.contains(VkCompositeAlphaFlagBitsKHR::INHERIT_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INHERIT_BIT_KHR")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -2888,6 +3019,98 @@ impl core::ops::BitXorAssign for VkSurfaceTransformFlagBitsKHR
     }
 }
 
+impl core::fmt::Debug for VkSurfaceTransformFlagBitsKHR
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkSurfaceTransformFlagBitsKHR::IDENTITY_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("IDENTITY_BIT_KHR")?;
+        }
+        if self.contains(VkSurfaceTransformFlagBitsKHR::ROTATE_90_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ROTATE_90_BIT_KHR")?;
+        }
+        if self.contains(VkSurfaceTransformFlagBitsKHR::ROTATE_180_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ROTATE_180_BIT_KHR")?;
+        }
+        if self.contains(VkSurfaceTransformFlagBitsKHR::ROTATE_270_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ROTATE_270_BIT_KHR")?;
+        }
+        if self.contains(VkSurfaceTransformFlagBitsKHR::HORIZONTAL_MIRROR_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HORIZONTAL_MIRROR_BIT_KHR")?;
+        }
+        if self.contains(VkSurfaceTransformFlagBitsKHR::HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HORIZONTAL_MIRROR_ROTATE_90_BIT_KHR")?;
+        }
+        if self.contains(VkSurfaceTransformFlagBitsKHR::HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HORIZONTAL_MIRROR_ROTATE_180_BIT_KHR")?;
+        }
+        if self.contains(VkSurfaceTransformFlagBitsKHR::HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HORIZONTAL_MIRROR_ROTATE_270_BIT_KHR")?;
+        }
+        if self.contains(VkSurfaceTransformFlagBitsKHR::INHERIT_BIT_KHR)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INHERIT_BIT_KHR")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSwapchainCreateFlagBitsKHR(VkFlags);
@@ -2954,6 +3177,17 @@ impl core::ops::BitXorAssign for VkSwapchainCreateFlagBitsKHR
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkSwapchainCreateFlagBitsKHR
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        return f.write_str(")");
     }
 }
 
@@ -3033,6 +3267,44 @@ impl core::ops::BitXorAssign for VkDebugUtilsMessageTypeFlagBitsEXT
     }
 }
 
+impl core::fmt::Debug for VkDebugUtilsMessageTypeFlagBitsEXT
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkDebugUtilsMessageTypeFlagBitsEXT::GENERAL_BIT_EXT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("GENERAL_BIT_EXT")?;
+        }
+        if self.contains(VkDebugUtilsMessageTypeFlagBitsEXT::VALIDATION_BIT_EXT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VALIDATION_BIT_EXT")?;
+        }
+        if self.contains(VkDebugUtilsMessageTypeFlagBitsEXT::PERFORMANCE_BIT_EXT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("PERFORMANCE_BIT_EXT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDebugUtilsMessageSeverityFlagBitsEXT(VkFlags);
@@ -3108,6 +3380,53 @@ impl core::ops::BitXorAssign for VkDebugUtilsMessageSeverityFlagBitsEXT
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkDebugUtilsMessageSeverityFlagBitsEXT
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkDebugUtilsMessageSeverityFlagBitsEXT::VERBOSE_BIT_EXT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VERBOSE_BIT_EXT")?;
+        }
+        if self.contains(VkDebugUtilsMessageSeverityFlagBitsEXT::INFO_BIT_EXT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INFO_BIT_EXT")?;
+        }
+        if self.contains(VkDebugUtilsMessageSeverityFlagBitsEXT::WARNING_BIT_EXT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("WARNING_BIT_EXT")?;
+        }
+        if self.contains(VkDebugUtilsMessageSeverityFlagBitsEXT::ERROR_BIT_EXT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ERROR_BIT_EXT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -3198,6 +3517,170 @@ impl core::ops::BitXorAssign for VkAccessFlagBits
     }
 }
 
+impl core::fmt::Debug for VkAccessFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkAccessFlagBits::INDIRECT_COMMAND_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INDIRECT_COMMAND_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::INDEX_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INDEX_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::VERTEX_ATTRIBUTE_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VERTEX_ATTRIBUTE_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::UNIFORM_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("UNIFORM_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::INPUT_ATTACHMENT_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INPUT_ATTACHMENT_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::SHADER_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SHADER_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::SHADER_WRITE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SHADER_WRITE_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::COLOR_ATTACHMENT_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COLOR_ATTACHMENT_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::COLOR_ATTACHMENT_WRITE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COLOR_ATTACHMENT_WRITE_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::DEPTH_STENCIL_ATTACHMENT_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DEPTH_STENCIL_ATTACHMENT_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::DEPTH_STENCIL_ATTACHMENT_WRITE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DEPTH_STENCIL_ATTACHMENT_WRITE_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::TRANSFER_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSFER_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::TRANSFER_WRITE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSFER_WRITE_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::HOST_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HOST_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::HOST_WRITE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HOST_WRITE_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::MEMORY_READ_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("MEMORY_READ_BIT")?;
+        }
+        if self.contains(VkAccessFlagBits::MEMORY_WRITE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("MEMORY_WRITE_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageAspectFlagBits(VkFlags);
@@ -3269,6 +3752,53 @@ impl core::ops::BitXorAssign for VkImageAspectFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkImageAspectFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkImageAspectFlagBits::COLOR_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COLOR_BIT")?;
+        }
+        if self.contains(VkImageAspectFlagBits::DEPTH_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DEPTH_BIT")?;
+        }
+        if self.contains(VkImageAspectFlagBits::STENCIL_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("STENCIL_BIT")?;
+        }
+        if self.contains(VkImageAspectFlagBits::METADATA_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("METADATA_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -3350,6 +3880,89 @@ impl core::ops::BitXorAssign for VkShaderStageFlagBits
     }
 }
 
+impl core::fmt::Debug for VkShaderStageFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkShaderStageFlagBits::VERTEX_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VERTEX_BIT")?;
+        }
+        if self.contains(VkShaderStageFlagBits::TESSELLATION_CONTROL_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TESSELLATION_CONTROL_BIT")?;
+        }
+        if self.contains(VkShaderStageFlagBits::TESSELLATION_EVALUATION_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TESSELLATION_EVALUATION_BIT")?;
+        }
+        if self.contains(VkShaderStageFlagBits::GEOMETRY_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("GEOMETRY_BIT")?;
+        }
+        if self.contains(VkShaderStageFlagBits::FRAGMENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("FRAGMENT_BIT")?;
+        }
+        if self.contains(VkShaderStageFlagBits::ALL_GRAPHICS)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ALL_GRAPHICS")?;
+        }
+        if self.contains(VkShaderStageFlagBits::COMPUTE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COMPUTE_BIT")?;
+        }
+        if self.contains(VkShaderStageFlagBits::ALL)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ALL")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkQueryResultFlagBits(VkFlags);
@@ -3421,6 +4034,53 @@ impl core::ops::BitXorAssign for VkQueryResultFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkQueryResultFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkQueryResultFlagBits::K_64_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("K_64_BIT")?;
+        }
+        if self.contains(VkQueryResultFlagBits::WAIT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("WAIT_BIT")?;
+        }
+        if self.contains(VkQueryResultFlagBits::WITH_AVAILABILITY_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("WITH_AVAILABILITY_BIT")?;
+        }
+        if self.contains(VkQueryResultFlagBits::PARTIAL_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("PARTIAL_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -3513,6 +4173,170 @@ impl core::ops::BitXorAssign for VkPipelineStageFlagBits
     }
 }
 
+impl core::fmt::Debug for VkPipelineStageFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkPipelineStageFlagBits::TOP_OF_PIPE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TOP_OF_PIPE_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::DRAW_INDIRECT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DRAW_INDIRECT_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::VERTEX_INPUT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VERTEX_INPUT_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::VERTEX_SHADER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VERTEX_SHADER_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::TESSELLATION_CONTROL_SHADER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TESSELLATION_CONTROL_SHADER_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::TESSELLATION_EVALUATION_SHADER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TESSELLATION_EVALUATION_SHADER_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::GEOMETRY_SHADER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("GEOMETRY_SHADER_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::FRAGMENT_SHADER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("FRAGMENT_SHADER_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::EARLY_FRAGMENT_TESTS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("EARLY_FRAGMENT_TESTS_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::LATE_FRAGMENT_TESTS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("LATE_FRAGMENT_TESTS_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::COLOR_ATTACHMENT_OUTPUT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COLOR_ATTACHMENT_OUTPUT_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::COMPUTE_SHADER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COMPUTE_SHADER_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::TRANSFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSFER_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::BOTTOM_OF_PIPE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("BOTTOM_OF_PIPE_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::HOST_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HOST_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::ALL_GRAPHICS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ALL_GRAPHICS_BIT")?;
+        }
+        if self.contains(VkPipelineStageFlagBits::ALL_COMMANDS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ALL_COMMANDS_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkQueryControlFlagBits(VkFlags);
@@ -3584,6 +4408,26 @@ impl core::ops::BitXorAssign for VkQueryControlFlagBits
     }
 }
 
+impl core::fmt::Debug for VkQueryControlFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkQueryControlFlagBits::PRECISE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("PRECISE_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDependencyFlagBits(VkFlags);
@@ -3652,6 +4496,26 @@ impl core::ops::BitXorAssign for VkDependencyFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkDependencyFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkDependencyFlagBits::BY_REGION_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("BY_REGION_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -3728,6 +4592,44 @@ impl core::ops::BitXorAssign for VkStencilFaceFlagBits
     }
 }
 
+impl core::fmt::Debug for VkStencilFaceFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkStencilFaceFlagBits::FRONT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("FRONT_BIT")?;
+        }
+        if self.contains(VkStencilFaceFlagBits::BACK_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("BACK_BIT")?;
+        }
+        if self.contains(VkStencilFaceFlagBits::FRONT_AND_BACK)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("FRONT_AND_BACK")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCommandBufferResetFlagBits(VkFlags);
@@ -3796,6 +4698,26 @@ impl core::ops::BitXorAssign for VkCommandBufferResetFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkCommandBufferResetFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkCommandBufferResetFlagBits::RELEASE_RESOURCES_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("RELEASE_RESOURCES_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -3891,6 +4813,118 @@ impl core::ops::BitXorAssign for VkQueryPipelineStatisticFlagBits
     }
 }
 
+impl core::fmt::Debug for VkQueryPipelineStatisticFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkQueryPipelineStatisticFlagBits::INPUT_ASSEMBLY_VERTICES_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INPUT_ASSEMBLY_VERTICES_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::INPUT_ASSEMBLY_PRIMITIVES_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INPUT_ASSEMBLY_PRIMITIVES_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::VERTEX_SHADER_INVOCATIONS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VERTEX_SHADER_INVOCATIONS_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::GEOMETRY_SHADER_INVOCATIONS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("GEOMETRY_SHADER_INVOCATIONS_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::GEOMETRY_SHADER_PRIMITIVES_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("GEOMETRY_SHADER_PRIMITIVES_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::CLIPPING_INVOCATIONS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("CLIPPING_INVOCATIONS_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::CLIPPING_PRIMITIVES_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("CLIPPING_PRIMITIVES_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::FRAGMENT_SHADER_INVOCATIONS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("FRAGMENT_SHADER_INVOCATIONS_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::TESSELLATION_CONTROL_SHADER_PATCHES_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TESSELLATION_CONTROL_SHADER_PATCHES_BIT")?;
+        }
+        if self.contains(
+            VkQueryPipelineStatisticFlagBits::TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT,
+        )
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TESSELLATION_EVALUATION_SHADER_INVOCATIONS_BIT")?;
+        }
+        if self.contains(VkQueryPipelineStatisticFlagBits::COMPUTE_SHADER_INVOCATIONS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COMPUTE_SHADER_INVOCATIONS_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCommandBufferUsageFlagBits(VkFlags);
@@ -3965,6 +4999,44 @@ impl core::ops::BitXorAssign for VkCommandBufferUsageFlagBits
     }
 }
 
+impl core::fmt::Debug for VkCommandBufferUsageFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkCommandBufferUsageFlagBits::ONE_TIME_SUBMIT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ONE_TIME_SUBMIT_BIT")?;
+        }
+        if self.contains(VkCommandBufferUsageFlagBits::RENDER_PASS_CONTINUE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("RENDER_PASS_CONTINUE_BIT")?;
+        }
+        if self.contains(VkCommandBufferUsageFlagBits::SIMULTANEOUS_USE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SIMULTANEOUS_USE_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCommandPoolResetFlagBits(VkFlags);
@@ -4033,6 +5105,26 @@ impl core::ops::BitXorAssign for VkCommandPoolResetFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkCommandPoolResetFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkCommandPoolResetFlagBits::RELEASE_RESOURCES_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("RELEASE_RESOURCES_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -4109,6 +5201,35 @@ impl core::ops::BitXorAssign for VkCommandPoolCreateFlagBits
     }
 }
 
+impl core::fmt::Debug for VkCommandPoolCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkCommandPoolCreateFlagBits::TRANSIENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSIENT_BIT")?;
+        }
+        if self.contains(VkCommandPoolCreateFlagBits::RESET_COMMAND_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("RESET_COMMAND_BUFFER_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSubpassDescriptionFlagBits(VkFlags);
@@ -4175,6 +5296,17 @@ impl core::ops::BitXorAssign for VkSubpassDescriptionFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkSubpassDescriptionFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        return f.write_str(")");
     }
 }
 
@@ -4255,6 +5387,80 @@ impl core::ops::BitXorAssign for VkSampleCountFlagBits
     }
 }
 
+impl core::fmt::Debug for VkSampleCountFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkSampleCountFlagBits::K_1_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("K_1_BIT")?;
+        }
+        if self.contains(VkSampleCountFlagBits::K_2_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("K_2_BIT")?;
+        }
+        if self.contains(VkSampleCountFlagBits::K_4_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("K_4_BIT")?;
+        }
+        if self.contains(VkSampleCountFlagBits::K_8_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("K_8_BIT")?;
+        }
+        if self.contains(VkSampleCountFlagBits::K_16_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("K_16_BIT")?;
+        }
+        if self.contains(VkSampleCountFlagBits::K_32_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("K_32_BIT")?;
+        }
+        if self.contains(VkSampleCountFlagBits::K_64_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("K_64_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkAttachmentDescriptionFlagBits(VkFlags);
@@ -4323,6 +5529,26 @@ impl core::ops::BitXorAssign for VkAttachmentDescriptionFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkAttachmentDescriptionFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkAttachmentDescriptionFlagBits::MAY_ALIAS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("MAY_ALIAS_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -4398,6 +5624,26 @@ impl core::ops::BitXorAssign for VkDescriptorPoolCreateFlagBits
     }
 }
 
+impl core::fmt::Debug for VkDescriptorPoolCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkDescriptorPoolCreateFlagBits::FREE_DESCRIPTOR_SET_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("FREE_DESCRIPTOR_SET_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDescriptorSetLayoutCreateFlagBits(VkFlags);
@@ -4467,6 +5713,17 @@ impl core::ops::BitXorAssign for VkDescriptorSetLayoutCreateFlagBits
     }
 }
 
+impl core::fmt::Debug for VkDescriptorSetLayoutCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSamplerCreateFlagBits(VkFlags);
@@ -4533,6 +5790,17 @@ impl core::ops::BitXorAssign for VkSamplerCreateFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkSamplerCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        return f.write_str(")");
     }
 }
 
@@ -4606,6 +5874,44 @@ impl core::ops::BitXorAssign for VkPipelineCreateFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkPipelineCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkPipelineCreateFlagBits::DISABLE_OPTIMIZATION_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DISABLE_OPTIMIZATION_BIT")?;
+        }
+        if self.contains(VkPipelineCreateFlagBits::ALLOW_DERIVATIVES_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ALLOW_DERIVATIVES_BIT")?;
+        }
+        if self.contains(VkPipelineCreateFlagBits::DERIVATIVE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DERIVATIVE_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -4683,6 +5989,53 @@ impl core::ops::BitXorAssign for VkColorComponentFlagBits
     }
 }
 
+impl core::fmt::Debug for VkColorComponentFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkColorComponentFlagBits::R_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("R_BIT")?;
+        }
+        if self.contains(VkColorComponentFlagBits::G_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("G_BIT")?;
+        }
+        if self.contains(VkColorComponentFlagBits::B_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("B_BIT")?;
+        }
+        if self.contains(VkColorComponentFlagBits::A_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("A_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkCullModeFlagBits(VkFlags);
@@ -4757,6 +6110,53 @@ impl core::ops::BitXorAssign for VkCullModeFlagBits
     }
 }
 
+impl core::fmt::Debug for VkCullModeFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkCullModeFlagBits::NONE)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("NONE")?;
+        }
+        if self.contains(VkCullModeFlagBits::FRONT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("FRONT_BIT")?;
+        }
+        if self.contains(VkCullModeFlagBits::BACK_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("BACK_BIT")?;
+        }
+        if self.contains(VkCullModeFlagBits::FRONT_AND_BACK)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("FRONT_AND_BACK")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkImageViewCreateFlagBits(VkFlags);
@@ -4823,6 +6223,17 @@ impl core::ops::BitXorAssign for VkImageViewCreateFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkImageViewCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        return f.write_str(")");
     }
 }
 
@@ -4898,6 +6309,62 @@ impl core::ops::BitXorAssign for VkImageCreateFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkImageCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkImageCreateFlagBits::SPARSE_BINDING_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SPARSE_BINDING_BIT")?;
+        }
+        if self.contains(VkImageCreateFlagBits::SPARSE_RESIDENCY_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SPARSE_RESIDENCY_BIT")?;
+        }
+        if self.contains(VkImageCreateFlagBits::SPARSE_ALIASED_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SPARSE_ALIASED_BIT")?;
+        }
+        if self.contains(VkImageCreateFlagBits::MUTABLE_FORMAT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("MUTABLE_FORMAT_BIT")?;
+        }
+        if self.contains(VkImageCreateFlagBits::CUBE_COMPATIBLE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("CUBE_COMPATIBLE_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -4980,6 +6447,98 @@ impl core::ops::BitXorAssign for VkBufferUsageFlagBits
     }
 }
 
+impl core::fmt::Debug for VkBufferUsageFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkBufferUsageFlagBits::TRANSFER_SRC_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSFER_SRC_BIT")?;
+        }
+        if self.contains(VkBufferUsageFlagBits::TRANSFER_DST_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSFER_DST_BIT")?;
+        }
+        if self.contains(VkBufferUsageFlagBits::UNIFORM_TEXEL_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("UNIFORM_TEXEL_BUFFER_BIT")?;
+        }
+        if self.contains(VkBufferUsageFlagBits::STORAGE_TEXEL_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("STORAGE_TEXEL_BUFFER_BIT")?;
+        }
+        if self.contains(VkBufferUsageFlagBits::UNIFORM_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("UNIFORM_BUFFER_BIT")?;
+        }
+        if self.contains(VkBufferUsageFlagBits::STORAGE_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("STORAGE_BUFFER_BIT")?;
+        }
+        if self.contains(VkBufferUsageFlagBits::INDEX_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INDEX_BUFFER_BIT")?;
+        }
+        if self.contains(VkBufferUsageFlagBits::VERTEX_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VERTEX_BUFFER_BIT")?;
+        }
+        if self.contains(VkBufferUsageFlagBits::INDIRECT_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("INDIRECT_BUFFER_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkBufferCreateFlagBits(VkFlags);
@@ -5050,6 +6609,44 @@ impl core::ops::BitXorAssign for VkBufferCreateFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkBufferCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkBufferCreateFlagBits::SPARSE_BINDING_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SPARSE_BINDING_BIT")?;
+        }
+        if self.contains(VkBufferCreateFlagBits::SPARSE_RESIDENCY_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SPARSE_RESIDENCY_BIT")?;
+        }
+        if self.contains(VkBufferCreateFlagBits::SPARSE_ALIASED_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SPARSE_ALIASED_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -5124,6 +6721,26 @@ impl core::ops::BitXorAssign for VkFenceCreateFlagBits
     }
 }
 
+impl core::fmt::Debug for VkFenceCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkFenceCreateFlagBits::SIGNALED_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SIGNALED_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkSparseMemoryBindFlagBits(VkFlags);
@@ -5192,6 +6809,26 @@ impl core::ops::BitXorAssign for VkSparseMemoryBindFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkSparseMemoryBindFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkSparseMemoryBindFlagBits::METADATA_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("METADATA_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -5269,6 +6906,44 @@ impl core::ops::BitXorAssign for VkSparseImageFormatFlagBits
     }
 }
 
+impl core::fmt::Debug for VkSparseImageFormatFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkSparseImageFormatFlagBits::SINGLE_MIPTAIL_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SINGLE_MIPTAIL_BIT")?;
+        }
+        if self.contains(VkSparseImageFormatFlagBits::ALIGNED_MIP_SIZE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("ALIGNED_MIP_SIZE_BIT")?;
+        }
+        if self.contains(VkSparseImageFormatFlagBits::NONSTANDARD_BLOCK_SIZE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("NONSTANDARD_BLOCK_SIZE_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkDeviceQueueCreateFlagBits(VkFlags);
@@ -5335,6 +7010,17 @@ impl core::ops::BitXorAssign for VkDeviceQueueCreateFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkDeviceQueueCreateFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        return f.write_str(")");
     }
 }
 
@@ -5406,6 +7092,26 @@ impl core::ops::BitXorAssign for VkMemoryHeapFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkMemoryHeapFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkMemoryHeapFlagBits::DEVICE_LOCAL_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DEVICE_LOCAL_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -5484,6 +7190,62 @@ impl core::ops::BitXorAssign for VkMemoryPropertyFlagBits
     }
 }
 
+impl core::fmt::Debug for VkMemoryPropertyFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkMemoryPropertyFlagBits::DEVICE_LOCAL_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DEVICE_LOCAL_BIT")?;
+        }
+        if self.contains(VkMemoryPropertyFlagBits::HOST_VISIBLE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HOST_VISIBLE_BIT")?;
+        }
+        if self.contains(VkMemoryPropertyFlagBits::HOST_COHERENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HOST_COHERENT_BIT")?;
+        }
+        if self.contains(VkMemoryPropertyFlagBits::HOST_CACHED_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("HOST_CACHED_BIT")?;
+        }
+        if self.contains(VkMemoryPropertyFlagBits::LAZILY_ALLOCATED_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("LAZILY_ALLOCATED_BIT")?;
+        }
+        return f.write_str(")");
+    }
+}
+
 #[repr(transparent)]
 #[derive(Default, Copy, Clone, PartialOrd, Ord, PartialEq, Eq, Hash)]
 pub struct VkQueueFlagBits(VkFlags);
@@ -5555,6 +7317,53 @@ impl core::ops::BitXorAssign for VkQueueFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkQueueFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkQueueFlagBits::GRAPHICS_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("GRAPHICS_BIT")?;
+        }
+        if self.contains(VkQueueFlagBits::COMPUTE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COMPUTE_BIT")?;
+        }
+        if self.contains(VkQueueFlagBits::TRANSFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("TRANSFER_BIT")?;
+        }
+        if self.contains(VkQueueFlagBits::SPARSE_BINDING_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SPARSE_BINDING_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 
@@ -5640,6 +7449,134 @@ impl core::ops::BitXorAssign for VkFormatFeatureFlagBits
     fn bitxor_assign(&mut self, rhs: Self)
     {
         self.0 ^= rhs.0;
+    }
+}
+
+impl core::fmt::Debug for VkFormatFeatureFlagBits
+{
+    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
+    {
+        f.write_str("%s(")?;
+        #[allow(unused_mut, unused)]
+        let mut first = true;
+        if self.contains(VkFormatFeatureFlagBits::SAMPLED_IMAGE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SAMPLED_IMAGE_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::STORAGE_IMAGE_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("STORAGE_IMAGE_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::STORAGE_IMAGE_ATOMIC_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("STORAGE_IMAGE_ATOMIC_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::UNIFORM_TEXEL_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("UNIFORM_TEXEL_BUFFER_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::STORAGE_TEXEL_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("STORAGE_TEXEL_BUFFER_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::STORAGE_TEXEL_BUFFER_ATOMIC_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("STORAGE_TEXEL_BUFFER_ATOMIC_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::VERTEX_BUFFER_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("VERTEX_BUFFER_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::COLOR_ATTACHMENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COLOR_ATTACHMENT_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::COLOR_ATTACHMENT_BLEND_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("COLOR_ATTACHMENT_BLEND_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::DEPTH_STENCIL_ATTACHMENT_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("DEPTH_STENCIL_ATTACHMENT_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::BLIT_SRC_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("BLIT_SRC_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::BLIT_DST_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("BLIT_DST_BIT")?;
+        }
+        if self.contains(VkFormatFeatureFlagBits::SAMPLED_IMAGE_FILTER_LINEAR_BIT)
+        {
+            if !first
+            {
+                f.write_str(" | ")?;
+            }
+            first = false;
+            f.write_str("SAMPLED_IMAGE_FILTER_LINEAR_BIT")?;
+        }
+        return f.write_str(")");
     }
 }
 

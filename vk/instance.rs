@@ -26,6 +26,7 @@ impl Instance
         queue_family_index: u32,
     ) -> VkBool32
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_win_32_presentation_support_khr(
                 physical_device,
@@ -42,6 +43,7 @@ impl Instance
     ) -> Result<(VkResult, VkSurfaceKHR), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i.create_win_32_surface_khr(
                 self.handle,
@@ -68,6 +70,7 @@ impl Instance
     ) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_present_mode_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_surface_present_modes_khr(
                 physical_device,
@@ -92,6 +95,7 @@ impl Instance
     ) -> Result<VkResult, VkResult>
     {
         let mut p_present_mode_count = p_present_modes.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_surface_present_modes_khr(
                 physical_device,
@@ -115,6 +119,7 @@ impl Instance
     ) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_surface_format_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_surface_formats_khr(
                 physical_device,
@@ -139,6 +144,7 @@ impl Instance
     ) -> Result<VkResult, VkResult>
     {
         let mut p_surface_format_count = p_surface_formats.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_surface_formats_khr(
                 physical_device,
@@ -162,6 +168,7 @@ impl Instance
     ) -> Result<(VkResult, VkSurfaceCapabilitiesKHR), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_surface_capabilities_khr(
                 physical_device,
@@ -184,6 +191,7 @@ impl Instance
     ) -> Result<(VkResult, bool), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_surface_support_khr(
                 physical_device,
@@ -192,6 +200,7 @@ impl Instance
                 &mut ret_value,
             )
         };
+        #[allow(unused)]
         let ret_value = ret_value == VK_TRUE;
         return match ret
         {
@@ -206,6 +215,7 @@ impl Instance
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i.destroy_surface_khr(
                 self.handle,
@@ -226,6 +236,7 @@ impl Instance
         p_callback_data: &VkDebugUtilsMessengerCallbackDataEXT,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i.submit_debug_utils_message_ext(
                 self.handle,
@@ -242,6 +253,7 @@ impl Instance
         p_allocator: Option<&VkAllocationCallbacks>,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i.destroy_debug_utils_messenger_ext(
                 self.handle,
@@ -262,6 +274,7 @@ impl Instance
     ) -> Result<(VkResult, VkDebugUtilsMessengerEXT), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i.create_debug_utils_messenger_ext(
                 self.handle,
@@ -287,6 +300,7 @@ impl Instance
         p_label_info: &VkDebugUtilsLabelEXT,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .cmd_insert_debug_utils_label_ext(command_buffer, p_label_info)
@@ -295,6 +309,7 @@ impl Instance
 
     pub fn cmd_end_debug_utils_label_ext(&self, command_buffer: VkCommandBuffer)
     {
+        #[allow(unused)]
         let ret = unsafe { self.i.cmd_end_debug_utils_label_ext(command_buffer) };
     }
 
@@ -304,6 +319,7 @@ impl Instance
         p_label_info: &VkDebugUtilsLabelEXT,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .cmd_begin_debug_utils_label_ext(command_buffer, p_label_info)
@@ -316,6 +332,7 @@ impl Instance
         p_label_info: &VkDebugUtilsLabelEXT,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .queue_insert_debug_utils_label_ext(queue, p_label_info)
@@ -324,6 +341,7 @@ impl Instance
 
     pub fn queue_end_debug_utils_label_ext(&self, queue: VkQueue)
     {
+        #[allow(unused)]
         let ret = unsafe { self.i.queue_end_debug_utils_label_ext(queue) };
     }
 
@@ -333,6 +351,7 @@ impl Instance
         p_label_info: &VkDebugUtilsLabelEXT,
     )
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .queue_begin_debug_utils_label_ext(queue, p_label_info)
@@ -345,6 +364,7 @@ impl Instance
         p_tag_info: &VkDebugUtilsObjectTagInfoEXT,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.i.set_debug_utils_object_tag_ext(device, p_tag_info) };
         return match ret
         {
@@ -359,6 +379,7 @@ impl Instance
         p_name_info: &VkDebugUtilsObjectNameInfoEXT,
     ) -> Result<VkResult, VkResult>
     {
+        #[allow(unused)]
         let ret = unsafe { self.i.set_debug_utils_object_name_ext(device, p_name_info) };
         return match ret
         {
@@ -378,6 +399,7 @@ impl Instance
     ) -> usize
     {
         let mut p_property_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_sparse_image_format_properties(
                 physical_device,
@@ -405,6 +427,7 @@ impl Instance
     )
     {
         let mut p_property_count = p_properties.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_sparse_image_format_properties(
                 physical_device,
@@ -425,6 +448,7 @@ impl Instance
     ) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_property_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.enumerate_device_layer_properties(
                 physical_device,
@@ -447,6 +471,7 @@ impl Instance
     ) -> Result<VkResult, VkResult>
     {
         let mut p_property_count = p_properties.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.enumerate_device_layer_properties(
                 physical_device,
@@ -469,6 +494,7 @@ impl Instance
     ) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_property_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.enumerate_device_extension_properties(
                 physical_device,
@@ -497,6 +523,7 @@ impl Instance
     ) -> Result<VkResult, VkResult>
     {
         let mut p_property_count = p_properties.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.enumerate_device_extension_properties(
                 physical_device,
@@ -525,6 +552,7 @@ impl Instance
     ) -> Result<(VkResult, VkDevice), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i.create_device(
                 physical_device,
@@ -546,6 +574,7 @@ impl Instance
 
     pub fn get_device_proc_addr(&self, device: VkDevice, p_name: &[u8]) -> PfnVkVoidFunction
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .get_device_proc_addr(device, core::mem::transmute(p_name.as_ptr()))
@@ -559,6 +588,7 @@ impl Instance
     ) -> VkPhysicalDeviceMemoryProperties
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .get_physical_device_memory_properties(physical_device, &mut ret_value)
@@ -572,6 +602,7 @@ impl Instance
     ) -> usize
     {
         let mut p_queue_family_property_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_queue_family_properties(
                 physical_device,
@@ -589,6 +620,7 @@ impl Instance
     )
     {
         let mut p_queue_family_property_count = p_queue_family_properties.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_queue_family_properties(
                 physical_device,
@@ -604,6 +636,7 @@ impl Instance
     ) -> VkPhysicalDeviceProperties
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .get_physical_device_properties(physical_device, &mut ret_value)
@@ -622,6 +655,7 @@ impl Instance
     ) -> Result<(VkResult, VkImageFormatProperties), VkResult>
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_image_format_properties(
                 physical_device,
@@ -647,6 +681,7 @@ impl Instance
     ) -> VkFormatProperties
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .get_physical_device_format_properties(physical_device, format, &mut ret_value)
@@ -660,6 +695,7 @@ impl Instance
     ) -> VkPhysicalDeviceFeatures
     {
         let mut ret_value = unsafe { core::mem::uninitialized() };
+        #[allow(unused)]
         let ret = unsafe {
             self.i
                 .get_physical_device_features(physical_device, &mut ret_value)
@@ -670,6 +706,7 @@ impl Instance
     pub fn enumerate_physical_devices_count(&self) -> Result<(VkResult, usize), VkResult>
     {
         let mut p_physical_device_count = 0;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.enumerate_physical_devices(
                 self.handle,
@@ -691,6 +728,7 @@ impl Instance
     ) -> Result<VkResult, VkResult>
     {
         let mut p_physical_device_count = p_physical_devices.len() as _;
+        #[allow(unused)]
         let ret = unsafe {
             self.i.enumerate_physical_devices(
                 self.handle,
@@ -708,6 +746,7 @@ impl Instance
 
     pub fn destroy_instance(&self, p_allocator: Option<&VkAllocationCallbacks>)
     {
+        #[allow(unused)]
         let ret = unsafe {
             self.i.destroy_instance(
                 self.handle,

@@ -132,6 +132,8 @@ impl<T: ?Sized, A: Allocator> Drop for Unq<T, A>
 
 impl<T: ?Sized + Unsize<U>, U: ?Sized, A: Allocator> CoerceUnsized<Unq<U, A>> for Unq<T, A> {}
 
+impl<T: ?Sized, A: Allocator> Unpin for Unq<T, A> {}
+
 #[cfg(test)]
 mod tests
 {
