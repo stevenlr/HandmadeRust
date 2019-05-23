@@ -211,16 +211,10 @@ fn main()
         .1;
     let vk_queue = vk_device.get_device_queue(queue_family_index, 0);
 
-    'outer_loop: loop
+    window.events_loop(|e| match *e
     {
-        while let Some(event) = window.poll_event()
-        {
-            match event
-            {
-                Event::DestroyWindow => break 'outer_loop,
-            }
-        }
-    }
+        Event::DestroyWindow => false,
+    });
 
     vk_device.queue_wait_idle(vk_queue).unwrap();
     vk_device.device_wait_idle().unwrap();

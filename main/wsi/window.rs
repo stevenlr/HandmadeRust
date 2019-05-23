@@ -136,10 +136,20 @@ impl Window
     }
 
     #[inline]
-    pub fn poll_event(&self) -> Option<Event>
+    pub fn events_loop(&self, mut f: impl FnMut(&Event) -> bool)
     {
-        self.handle_events();
-        self.queue.poll_event()
+        'outer_loop: loop
+        {
+            self.handle_events();
+
+            while let Some(event) = self.queue.poll_event()
+            {
+                if !f(&event)
+                {
+                    break 'outer_loop;
+                }
+            }
+        }
     }
 }
 
