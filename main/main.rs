@@ -41,6 +41,26 @@ fn get_gpu_queue_family_properties(
     return prps;
 }
 
+extern "system" fn messenger_cb(
+    _message_severity: VkDebugUtilsMessageSeverityFlagBitsEXT,
+    _message_types: VkDebugUtilsMessageTypeFlagsEXT,
+    p_callback_data: *const VkDebugUtilsMessengerCallbackDataEXT,
+    _p_user_data: *mut core::ffi::c_void,
+) -> VkBool32
+{
+    unsafe {
+        let callback_data: &VkDebugUtilsMessengerCallbackDataEXT = &*p_callback_data;
+        match CStr::from_bytes_null_terminated_unchecked(callback_data.p_message).as_str()
+        {
+            Ok(s) => println!("{}", s),
+            _ =>
+            {}
+        }
+    }
+
+    return VK_FALSE;
+}
+
 fn main()
 {
     init_global_allocator();
@@ -53,12 +73,12 @@ fn main()
     });
 
     let instance_extensions = &[
-        //VK_EXT_DEBUG_UTILS_EXTENSION_NAME__C.as_ptr(),
+        VK_EXT_DEBUG_UTILS_EXTENSION_NAME__C.as_ptr(),
         VK_KHR_SURFACE_EXTENSION_NAME__C.as_ptr(),
         VK_KHR_WIN32_SURFACE_EXTENSION_NAME__C.as_ptr(),
     ];
 
-    let layers = &[b"VK_LAYER_LUNARG_standard_validation\0".as_ptr()];
+    let layers = &[b"VK_LAYER_KHRONOS_validation\0".as_ptr()];
 
     let create_info = VkInstanceCreateInfoBuilder::new()
         .pp_enabled_extension_names(instance_extensions)
@@ -66,6 +86,22 @@ fn main()
 
     let vk_instance = vk_entry.create_instance(&create_info, None).unwrap().1;
     let vk_instance = vk::Instance::new(vk_instance, &vk_entry);
+
+    let create_info = VkDebugUtilsMessengerCreateInfoEXTBuilder::new()
+        .message_severity(
+            VkDebugUtilsMessageSeverityFlagBitsEXT::ERROR_BIT_EXT
+                | VkDebugUtilsMessageSeverityFlagBitsEXT::WARNING_BIT_EXT,
+        )
+        .message_type(
+            VkDebugUtilsMessageTypeFlagBitsEXT::GENERAL_BIT_EXT
+                | VkDebugUtilsMessageTypeFlagBitsEXT::VALIDATION_BIT_EXT,
+        )
+        .pfn_user_callback(messenger_cb);
+
+    let debug_messenger = vk_instance
+        .create_debug_utils_messenger_ext(&create_info, None)
+        .unwrap()
+        .1;
 
     let gpu_count = vk_instance.enumerate_physical_devices_count().unwrap().1;
     println!("{} GPU(s)", gpu_count);
@@ -93,12 +129,21 @@ fn main()
     let queue_family_index = queue_family_properties
         .iter()
         .enumerate()
-        .filter(|(_, prps)| {
-            prps.queue_flags.contains(
+        .filter(|(index, prps)| {
+            let queue_type_ok = prps.queue_flags.contains(
                 VkQueueFlagBits::GRAPHICS_BIT
                     | VkQueueFlagBits::COMPUTE_BIT
                     | VkQueueFlagBits::TRANSFER_BIT,
-            )
+            );
+            let surface_ok = vk_instance
+                .get_physical_device_surface_support_khr(gpu, *index as u32, vk_surface)
+                .unwrap()
+                .1;
+            let present_ok = vk_instance
+                .get_physical_device_win_32_presentation_support_khr(gpu, *index as u32)
+                == VK_TRUE;
+
+            return queue_type_ok && surface_ok && present_ok;
         })
         .nth(0)
         .unwrap()
@@ -113,7 +158,12 @@ fn main()
         .p_queue_priorities(queue_priorities)
         .build()];
 
-    let create_info = VkDeviceCreateInfoBuilder::new().p_queue_create_infos(queue_create_infos);
+    let device_extensions = &[VK_KHR_SWAPCHAIN_EXTENSION_NAME__C.as_ptr()];
+
+    let create_info = VkDeviceCreateInfoBuilder::new()
+        .p_queue_create_infos(queue_create_infos)
+        .pp_enabled_extension_names(device_extensions)
+        .pp_enabled_layer_names(layers);
 
     let vk_device = vk_instance
         .create_device(gpu, &create_info, None)
@@ -121,6 +171,44 @@ fn main()
         .1;
     let vk_device = vk::Device::new(vk_device, &vk_instance);
 
+    let surface_prps = vk_instance
+        .get_physical_device_surface_capabilities_khr(gpu, vk_surface)
+        .unwrap()
+        .1;
+
+    let format_count = vk_instance
+        .get_physical_device_surface_formats_khr_count(gpu, vk_surface)
+        .unwrap()
+        .1;
+    let mut formats = Array::new();
+    formats.resize(format_count, VkSurfaceFormatKHR::default());
+
+    vk_instance
+        .get_physical_device_surface_formats_khr(gpu, vk_surface, &mut formats)
+        .unwrap();
+
+    let queue_families = &[queue_family_index];
+
+    let create_info = VkSwapchainCreateInfoKHRBuilder::new()
+        .surface(vk_surface)
+        .min_image_count(2)
+        .image_format(VkFormat::B8G8R8A8_UNORM)
+        .image_color_space(VkColorSpaceKHR::SRGB_NONLINEAR_KHR)
+        .image_extent(surface_prps.current_extent)
+        .image_array_layers(1)
+        .image_usage(VkImageUsageFlagBits::COLOR_ATTACHMENT_BIT)
+        .image_sharing_mode(VkSharingMode::EXCLUSIVE)
+        .p_queue_family_indices(queue_families)
+        .pre_transform(VkSurfaceTransformFlagBitsKHR::IDENTITY_BIT_KHR)
+        .composite_alpha(VkCompositeAlphaFlagBitsKHR::OPAQUE_BIT_KHR)
+        .present_mode(VkPresentModeKHR::FIFO_KHR)
+        .clipped(true)
+        .old_swapchain(VkSwapchainKHR::null());
+
+    let vk_swapchain = vk_device
+        .create_swapchain_khr(&create_info, None)
+        .unwrap()
+        .1;
     let vk_queue = vk_device.get_device_queue(queue_family_index, 0);
 
     'outer_loop: loop
@@ -136,7 +224,9 @@ fn main()
 
     vk_device.queue_wait_idle(vk_queue).unwrap();
     vk_device.device_wait_idle().unwrap();
+    vk_device.destroy_swapchain_khr(vk_swapchain, None);
     vk_device.destroy_device(None);
     vk_instance.destroy_surface_khr(vk_surface, None);
+    vk_instance.destroy_debug_utils_messenger_ext(debug_messenger, None);
     vk_instance.destroy_instance(None);
 }
