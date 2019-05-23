@@ -2736,7 +2736,7 @@ impl core::fmt::Debug for VkImageUsageFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkImageUsageFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkImageUsageFlagBits::TRANSFER_SRC_BIT)
@@ -2893,7 +2893,7 @@ impl core::fmt::Debug for VkCompositeAlphaFlagBitsKHR
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkCompositeAlphaFlagBitsKHR(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkCompositeAlphaFlagBitsKHR::OPAQUE_BIT_KHR)
@@ -3023,7 +3023,7 @@ impl core::fmt::Debug for VkSurfaceTransformFlagBitsKHR
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkSurfaceTransformFlagBitsKHR(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkSurfaceTransformFlagBitsKHR::IDENTITY_BIT_KHR)
@@ -3184,7 +3184,7 @@ impl core::fmt::Debug for VkSwapchainCreateFlagBitsKHR
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkSwapchainCreateFlagBitsKHR(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         return f.write_str(")");
@@ -3271,7 +3271,7 @@ impl core::fmt::Debug for VkDebugUtilsMessageTypeFlagBitsEXT
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkDebugUtilsMessageTypeFlagBitsEXT(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkDebugUtilsMessageTypeFlagBitsEXT::GENERAL_BIT_EXT)
@@ -3387,7 +3387,7 @@ impl core::fmt::Debug for VkDebugUtilsMessageSeverityFlagBitsEXT
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkDebugUtilsMessageSeverityFlagBitsEXT(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkDebugUtilsMessageSeverityFlagBitsEXT::VERBOSE_BIT_EXT)
@@ -3521,7 +3521,7 @@ impl core::fmt::Debug for VkAccessFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkAccessFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkAccessFlagBits::INDIRECT_COMMAND_READ_BIT)
@@ -3759,7 +3759,7 @@ impl core::fmt::Debug for VkImageAspectFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkImageAspectFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkImageAspectFlagBits::COLOR_BIT)
@@ -3884,7 +3884,7 @@ impl core::fmt::Debug for VkShaderStageFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkShaderStageFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkShaderStageFlagBits::VERTEX_BIT)
@@ -4041,7 +4041,7 @@ impl core::fmt::Debug for VkQueryResultFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkQueryResultFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkQueryResultFlagBits::K_64_BIT)
@@ -4177,7 +4177,7 @@ impl core::fmt::Debug for VkPipelineStageFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkPipelineStageFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkPipelineStageFlagBits::TOP_OF_PIPE_BIT)
@@ -4412,7 +4412,7 @@ impl core::fmt::Debug for VkQueryControlFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkQueryControlFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkQueryControlFlagBits::PRECISE_BIT)
@@ -4503,7 +4503,7 @@ impl core::fmt::Debug for VkDependencyFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkDependencyFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkDependencyFlagBits::BY_REGION_BIT)
@@ -4596,7 +4596,7 @@ impl core::fmt::Debug for VkStencilFaceFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkStencilFaceFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkStencilFaceFlagBits::FRONT_BIT)
@@ -4705,7 +4705,7 @@ impl core::fmt::Debug for VkCommandBufferResetFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkCommandBufferResetFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkCommandBufferResetFlagBits::RELEASE_RESOURCES_BIT)
@@ -4817,7 +4817,7 @@ impl core::fmt::Debug for VkQueryPipelineStatisticFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkQueryPipelineStatisticFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkQueryPipelineStatisticFlagBits::INPUT_ASSEMBLY_VERTICES_BIT)
@@ -5003,7 +5003,7 @@ impl core::fmt::Debug for VkCommandBufferUsageFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkCommandBufferUsageFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkCommandBufferUsageFlagBits::ONE_TIME_SUBMIT_BIT)
@@ -5112,7 +5112,7 @@ impl core::fmt::Debug for VkCommandPoolResetFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkCommandPoolResetFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkCommandPoolResetFlagBits::RELEASE_RESOURCES_BIT)
@@ -5205,7 +5205,7 @@ impl core::fmt::Debug for VkCommandPoolCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkCommandPoolCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkCommandPoolCreateFlagBits::TRANSIENT_BIT)
@@ -5303,7 +5303,7 @@ impl core::fmt::Debug for VkSubpassDescriptionFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkSubpassDescriptionFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         return f.write_str(")");
@@ -5391,7 +5391,7 @@ impl core::fmt::Debug for VkSampleCountFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkSampleCountFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkSampleCountFlagBits::K_1_BIT)
@@ -5536,7 +5536,7 @@ impl core::fmt::Debug for VkAttachmentDescriptionFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkAttachmentDescriptionFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkAttachmentDescriptionFlagBits::MAY_ALIAS_BIT)
@@ -5628,7 +5628,7 @@ impl core::fmt::Debug for VkDescriptorPoolCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkDescriptorPoolCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkDescriptorPoolCreateFlagBits::FREE_DESCRIPTOR_SET_BIT)
@@ -5717,7 +5717,7 @@ impl core::fmt::Debug for VkDescriptorSetLayoutCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkDescriptorSetLayoutCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         return f.write_str(")");
@@ -5797,7 +5797,7 @@ impl core::fmt::Debug for VkSamplerCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkSamplerCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         return f.write_str(")");
@@ -5881,7 +5881,7 @@ impl core::fmt::Debug for VkPipelineCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkPipelineCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkPipelineCreateFlagBits::DISABLE_OPTIMIZATION_BIT)
@@ -5993,7 +5993,7 @@ impl core::fmt::Debug for VkColorComponentFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkColorComponentFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkColorComponentFlagBits::R_BIT)
@@ -6114,7 +6114,7 @@ impl core::fmt::Debug for VkCullModeFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkCullModeFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkCullModeFlagBits::NONE)
@@ -6230,7 +6230,7 @@ impl core::fmt::Debug for VkImageViewCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkImageViewCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         return f.write_str(")");
@@ -6316,7 +6316,7 @@ impl core::fmt::Debug for VkImageCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkImageCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkImageCreateFlagBits::SPARSE_BINDING_BIT)
@@ -6451,7 +6451,7 @@ impl core::fmt::Debug for VkBufferUsageFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkBufferUsageFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkBufferUsageFlagBits::TRANSFER_SRC_BIT)
@@ -6616,7 +6616,7 @@ impl core::fmt::Debug for VkBufferCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkBufferCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkBufferCreateFlagBits::SPARSE_BINDING_BIT)
@@ -6725,7 +6725,7 @@ impl core::fmt::Debug for VkFenceCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkFenceCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkFenceCreateFlagBits::SIGNALED_BIT)
@@ -6816,7 +6816,7 @@ impl core::fmt::Debug for VkSparseMemoryBindFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkSparseMemoryBindFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkSparseMemoryBindFlagBits::METADATA_BIT)
@@ -6910,7 +6910,7 @@ impl core::fmt::Debug for VkSparseImageFormatFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkSparseImageFormatFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkSparseImageFormatFlagBits::SINGLE_MIPTAIL_BIT)
@@ -7017,7 +7017,7 @@ impl core::fmt::Debug for VkDeviceQueueCreateFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkDeviceQueueCreateFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         return f.write_str(")");
@@ -7099,7 +7099,7 @@ impl core::fmt::Debug for VkMemoryHeapFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkMemoryHeapFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkMemoryHeapFlagBits::DEVICE_LOCAL_BIT)
@@ -7194,7 +7194,7 @@ impl core::fmt::Debug for VkMemoryPropertyFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkMemoryPropertyFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkMemoryPropertyFlagBits::DEVICE_LOCAL_BIT)
@@ -7324,7 +7324,7 @@ impl core::fmt::Debug for VkQueueFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkQueueFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkQueueFlagBits::GRAPHICS_BIT)
@@ -7456,7 +7456,7 @@ impl core::fmt::Debug for VkFormatFeatureFlagBits
 {
     fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result
     {
-        f.write_str("%s(")?;
+        f.write_str("VkFormatFeatureFlagBits(")?;
         #[allow(unused_mut, unused)]
         let mut first = true;
         if self.contains(VkFormatFeatureFlagBits::SAMPLED_IMAGE_BIT)

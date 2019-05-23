@@ -303,7 +303,7 @@ for t in model["enum_types"]:
     fp.write("}\n\n")
     fp.write("impl core::fmt::Debug for %s {\n" % enum_name)
     fp.write("    fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {\n")
-    fp.write("        f.write_str(\"%s(\")?;\n")
+    fp.write("        f.write_str(\"%s(\")?;\n" % enum_name)
     fp.write("        #[allow(unused_mut, unused)]\n")
     fp.write("        let mut first = true;\n")
     for v in t.values:
