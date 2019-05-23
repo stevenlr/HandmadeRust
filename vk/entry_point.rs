@@ -12,7 +12,7 @@ pub struct EntryPoint
 
 impl EntryPoint
 {
-    pub fn new(load_fn: impl Fn(&[u8]) -> PfnVkVoidFunction) -> Self
+    pub fn new(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self
     {
         let static_commands = StaticCommands::load(load_fn);
         let entry_commands = EntryCommands::load(|fn_name| unsafe {
@@ -114,7 +114,11 @@ impl EntryPoint
         };
     }
 
-    pub fn get_instance_proc_addr(&self, instance: VkInstance, p_name: &[u8]) -> PfnVkVoidFunction
+    pub fn get_instance_proc_addr(
+        &self,
+        instance: VkInstance,
+        p_name: &[u8],
+    ) -> Option<PfnVkVoidFunction>
     {
         #[allow(unused)]
         let ret = unsafe {

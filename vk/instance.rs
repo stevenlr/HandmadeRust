@@ -572,7 +572,8 @@ impl Instance
         };
     }
 
-    pub fn get_device_proc_addr(&self, device: VkDevice, p_name: &[u8]) -> PfnVkVoidFunction
+    pub fn get_device_proc_addr(&self, device: VkDevice, p_name: &[u8])
+        -> Option<PfnVkVoidFunction>
     {
         #[allow(unused)]
         let ret = unsafe {

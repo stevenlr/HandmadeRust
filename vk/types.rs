@@ -7585,11 +7585,11 @@ impl core::fmt::Debug for VkFormatFeatureFlagBits
 pub struct VkAllocationCallbacks
 {
     pub p_user_data: *mut core::ffi::c_void,
-    pub pfn_allocation: PfnVkAllocationFunction,
-    pub pfn_reallocation: PfnVkReallocationFunction,
-    pub pfn_free: PfnVkFreeFunction,
-    pub pfn_internal_allocation: PfnVkInternalAllocationNotification,
-    pub pfn_internal_free: PfnVkInternalFreeNotification,
+    pub pfn_allocation: Option<PfnVkAllocationFunction>,
+    pub pfn_reallocation: Option<PfnVkReallocationFunction>,
+    pub pfn_free: Option<PfnVkFreeFunction>,
+    pub pfn_internal_allocation: Option<PfnVkInternalAllocationNotification>,
+    pub pfn_internal_free: Option<PfnVkInternalFreeNotification>,
 }
 
 pub trait ExtendsAllocationCallbacks
@@ -7923,7 +7923,7 @@ pub struct VkDebugUtilsMessengerCreateInfoEXT
     pub flags: VkDebugUtilsMessengerCreateFlagsEXT,
     pub message_severity: VkDebugUtilsMessageSeverityFlagsEXT,
     pub message_type: VkDebugUtilsMessageTypeFlagsEXT,
-    pub pfn_user_callback: PfnVkDebugUtilsMessengerCallbackEXT,
+    pub pfn_user_callback: Option<PfnVkDebugUtilsMessengerCallbackEXT>,
     pub p_user_data: *mut core::ffi::c_void,
 }
 
@@ -12563,10 +12563,10 @@ pub type PfnVkCreateDevice = extern "system" fn(
 ) -> VkResult;
 
 pub type PfnVkGetDeviceProcAddr =
-    extern "system" fn(device: VkDevice, p_name: *const u8) -> PfnVkVoidFunction;
+    extern "system" fn(device: VkDevice, p_name: *const u8) -> Option<PfnVkVoidFunction>;
 
 pub type PfnVkGetInstanceProcAddr =
-    extern "system" fn(instance: VkInstance, p_name: *const u8) -> PfnVkVoidFunction;
+    extern "system" fn(instance: VkInstance, p_name: *const u8) -> Option<PfnVkVoidFunction>;
 
 pub type PfnVkGetPhysicalDeviceMemoryProperties = extern "system" fn(
     physical_device: VkPhysicalDevice,

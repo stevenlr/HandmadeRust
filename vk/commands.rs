@@ -8,7 +8,7 @@ pub struct StaticCommands
 
 impl StaticCommands
 {
-    pub fn load(load_fn: impl Fn(&[u8]) -> PfnVkVoidFunction) -> Self
+    pub fn load(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self
     {
         StaticCommands {
             pfn_get_instance_proc_addr: unsafe {
@@ -22,7 +22,7 @@ impl StaticCommands
         &self,
         instance: VkInstance,
         p_name: *const u8,
-    ) -> PfnVkVoidFunction
+    ) -> Option<PfnVkVoidFunction>
     {
         (self.pfn_get_instance_proc_addr)(instance, p_name)
     }
@@ -38,7 +38,7 @@ pub struct EntryCommands
 
 impl EntryCommands
 {
-    pub fn load(load_fn: impl Fn(&[u8]) -> PfnVkVoidFunction) -> Self
+    pub fn load(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self
     {
         EntryCommands {
             pfn_enumerate_instance_layer_properties: unsafe {
@@ -128,7 +128,7 @@ pub struct InstanceCommands
 
 impl InstanceCommands
 {
-    pub fn load(load_fn: impl Fn(&[u8]) -> PfnVkVoidFunction) -> Self
+    pub fn load(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self
     {
         InstanceCommands {
             pfn_get_physical_device_win_32_presentation_support_khr: unsafe {
@@ -516,7 +516,7 @@ impl InstanceCommands
         &self,
         device: VkDevice,
         p_name: *const u8,
-    ) -> PfnVkVoidFunction
+    ) -> Option<PfnVkVoidFunction>
     {
         (self.pfn_get_device_proc_addr)(device, p_name)
     }
@@ -758,7 +758,7 @@ pub struct DeviceCommands
 
 impl DeviceCommands
 {
-    pub fn load(load_fn: impl Fn(&[u8]) -> PfnVkVoidFunction) -> Self
+    pub fn load(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self
     {
         DeviceCommands {
             pfn_queue_present_khr: unsafe { core::mem::transmute(load_fn(b"vkQueuePresentKHR\0")) },

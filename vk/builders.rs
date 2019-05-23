@@ -37,7 +37,7 @@ impl<'a> VkAllocationCallbacksBuilder<'a>
 
     pub fn pfn_allocation(
         mut self,
-        value: PfnVkAllocationFunction,
+        value: Option<PfnVkAllocationFunction>,
     ) -> VkAllocationCallbacksBuilder<'a>
     {
         self.s.pfn_allocation = value;
@@ -46,14 +46,15 @@ impl<'a> VkAllocationCallbacksBuilder<'a>
 
     pub fn pfn_reallocation(
         mut self,
-        value: PfnVkReallocationFunction,
+        value: Option<PfnVkReallocationFunction>,
     ) -> VkAllocationCallbacksBuilder<'a>
     {
         self.s.pfn_reallocation = value;
         self
     }
 
-    pub fn pfn_free(mut self, value: PfnVkFreeFunction) -> VkAllocationCallbacksBuilder<'a>
+    pub fn pfn_free(mut self, value: Option<PfnVkFreeFunction>)
+        -> VkAllocationCallbacksBuilder<'a>
     {
         self.s.pfn_free = value;
         self
@@ -61,7 +62,7 @@ impl<'a> VkAllocationCallbacksBuilder<'a>
 
     pub fn pfn_internal_allocation(
         mut self,
-        value: PfnVkInternalAllocationNotification,
+        value: Option<PfnVkInternalAllocationNotification>,
     ) -> VkAllocationCallbacksBuilder<'a>
     {
         self.s.pfn_internal_allocation = value;
@@ -70,7 +71,7 @@ impl<'a> VkAllocationCallbacksBuilder<'a>
 
     pub fn pfn_internal_free(
         mut self,
-        value: PfnVkInternalFreeNotification,
+        value: Option<PfnVkInternalFreeNotification>,
     ) -> VkAllocationCallbacksBuilder<'a>
     {
         self.s.pfn_internal_free = value;
@@ -1029,7 +1030,7 @@ impl<'a> VkDebugUtilsMessengerCreateInfoEXTBuilder<'a>
 
     pub fn pfn_user_callback(
         mut self,
-        value: PfnVkDebugUtilsMessengerCallbackEXT,
+        value: Option<PfnVkDebugUtilsMessengerCallbackEXT>,
     ) -> VkDebugUtilsMessengerCreateInfoEXTBuilder<'a>
     {
         self.s.pfn_user_callback = value;

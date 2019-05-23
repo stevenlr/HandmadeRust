@@ -109,7 +109,7 @@ def to_rust_type(name: str) -> str:
     elif name == "size_t":
         return "usize"
     elif name.startswith("PFN_vk"):
-        return "PfnVk" + remove_prefix(name, "PFN_vk")
+        return "Option<PfnVk" + remove_prefix(name, "PFN_vk") + ">"
     else:
         return name
 
@@ -403,7 +403,7 @@ def write_commands_collection(fp, type: str, struct_name: str):
         fp.write("    pfn_%s: PfnVk%s,\n" % (camel_to_snake(t.name[2:]), t.name[2:]))
     fp.write("}\n\n")
     fp.write("impl %s {\n" % struct_name)
-    fp.write("    pub fn load(load_fn: impl Fn(&[u8]) -> PfnVkVoidFunction) -> Self {\n")
+    fp.write("    pub fn load(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self {\n")
     fp.write("        %s {\n" % struct_name)
     for t in model["commands"]:
         if t.type != type:
@@ -986,7 +986,7 @@ fp.write("    pub(crate) s: StaticCommands,\n")
 fp.write("    pub(crate) e: EntryCommands,\n")
 fp.write("}\n\n")
 fp.write("impl EntryPoint {\n")
-fp.write("    pub fn new(load_fn: impl Fn(&[u8]) -> PfnVkVoidFunction) -> Self {\n")
+fp.write("    pub fn new(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self {\n")
 fp.write("        let static_commands = StaticCommands::load(load_fn);\n")
 fp.write("        let entry_commands = EntryCommands::load(|fn_name| {\n")
 fp.write("            unsafe { static_commands.get_instance_proc_addr(VkInstance::null(), fn_name.as_ptr()) }\n")

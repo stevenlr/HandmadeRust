@@ -96,7 +96,7 @@ fn main()
             VkDebugUtilsMessageTypeFlagBitsEXT::GENERAL_BIT_EXT
                 | VkDebugUtilsMessageTypeFlagBitsEXT::VALIDATION_BIT_EXT,
         )
-        .pfn_user_callback(messenger_cb);
+        .pfn_user_callback(Some(messenger_cb));
 
     let debug_messenger = vk_instance
         .create_debug_utils_messenger_ext(&create_info, None)
