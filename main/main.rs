@@ -252,7 +252,7 @@ fn main()
 
     let queue_families = &[queue_family_index];
 
-    let image_count = find_best_image_count(&vk_instance, gpu, vk_surface, 2).unwrap();
+    let image_count = find_best_image_count(&vk_instance, gpu, vk_surface, 3).unwrap();
     let (format, color_space) = find_best_surface_format(
         &vk_instance,
         gpu,
@@ -292,6 +292,47 @@ fn main()
         .1;
     println!("Swapchain created");
 
+    let image_count = vk_device
+        .get_swapchain_images_khr_count(vk_swapchain)
+        .unwrap()
+        .1;
+    let mut images = Array::new();
+    images.resize_default(image_count);
+
+    vk_device
+        .get_swapchain_images_khr(vk_swapchain, &mut images)
+        .unwrap();
+    println!("    Swapchain uses {} images", images.len());
+
+    let create_info = VkImageViewCreateInfoBuilder::new()
+        .view_type(VkImageViewType::K_2D)
+        .format(format)
+        .components(
+            VkComponentMappingBuilder::new()
+                .r(VkComponentSwizzle::R)
+                .g(VkComponentSwizzle::G)
+                .b(VkComponentSwizzle::B)
+                .a(VkComponentSwizzle::A)
+                .build(),
+        )
+        .subresource_range(
+            VkImageSubresourceRangeBuilder::new()
+                .aspect_mask(VkImageAspectFlags::COLOR_BIT)
+                .base_mip_level(0)
+                .base_array_layer(0)
+                .level_count(1)
+                .layer_count(1)
+                .build(),
+        );
+
+    let image_views: Array<VkImageView> = images
+        .iter()
+        .map(|img| {
+            let create_info = create_info.clone().image(*img);
+            return vk_device.create_image_view(&create_info, None).unwrap().1;
+        })
+        .collect();
+
     let vk_queue = vk_device.get_device_queue(queue_family_index, 0);
 
     window.events_loop(|e| match *e
@@ -301,6 +342,11 @@ fn main()
 
     vk_device.queue_wait_idle(vk_queue).unwrap();
     vk_device.device_wait_idle().unwrap();
+
+    image_views.into_iter().for_each(|view| {
+        vk_device.destroy_image_view(view, None);
+    });
+
     vk_device.destroy_swapchain_khr(vk_swapchain, None);
     vk_device.destroy_device(None);
     vk_instance.destroy_surface_khr(vk_surface, None);
