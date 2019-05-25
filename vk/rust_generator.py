@@ -450,6 +450,7 @@ fp.write("use crate::types::*;\n\n")
 
 for t in model["structure_types"]:
     struct_name = t.name
+    fp.write("#[derive(Clone)]\n")
     fp.write("pub struct %sBuilder<'a> {\n" % struct_name)
     fp.write("    s: %s,\n" % struct_name)
     fp.write("    _p: core::marker::PhantomData<&'a ()>,\n")

@@ -1,6 +1,7 @@
 use crate::{types::*, utils::*};
 use win32::{HINSTANCE, HWND};
 
+#[derive(Clone)]
 pub struct VkAllocationCallbacksBuilder<'a>
 {
     s: VkAllocationCallbacks,
@@ -97,6 +98,7 @@ impl<'a> core::ops::DerefMut for VkAllocationCallbacksBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkWin32SurfaceCreateInfoKHRBuilder<'a>
 {
     s: VkWin32SurfaceCreateInfoKHR,
@@ -177,6 +179,7 @@ impl<'a> core::ops::DerefMut for VkWin32SurfaceCreateInfoKHRBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSurfaceFormatKHRBuilder<'a>
 {
     s: VkSurfaceFormatKHR,
@@ -229,6 +232,7 @@ impl<'a> core::ops::DerefMut for VkSurfaceFormatKHRBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSurfaceCapabilitiesKHRBuilder<'a>
 {
     s: VkSurfaceCapabilitiesKHR,
@@ -341,6 +345,7 @@ impl<'a> core::ops::DerefMut for VkSurfaceCapabilitiesKHRBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkExtent2DBuilder<'a>
 {
     s: VkExtent2D,
@@ -393,6 +398,7 @@ impl<'a> core::ops::DerefMut for VkExtent2DBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPresentInfoKHRBuilder<'a>
 {
     s: VkPresentInfoKHR,
@@ -492,6 +498,7 @@ impl<'a> core::ops::DerefMut for VkPresentInfoKHRBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSwapchainCreateInfoKHRBuilder<'a>
 {
     s: VkSwapchainCreateInfoKHR,
@@ -662,6 +669,7 @@ impl<'a> core::ops::DerefMut for VkSwapchainCreateInfoKHRBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDebugUtilsMessengerCallbackDataEXTBuilder<'a>
 {
     s: VkDebugUtilsMessengerCallbackDataEXT,
@@ -812,6 +820,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsMessengerCallbackDataEXTBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDebugUtilsObjectNameInfoEXTBuilder<'a>
 {
     s: VkDebugUtilsObjectNameInfoEXT,
@@ -889,6 +898,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsObjectNameInfoEXTBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDebugUtilsLabelEXTBuilder<'a>
 {
     s: VkDebugUtilsLabelEXT,
@@ -960,6 +970,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsLabelEXTBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDebugUtilsMessengerCreateInfoEXTBuilder<'a>
 {
     s: VkDebugUtilsMessengerCreateInfoEXT,
@@ -1069,6 +1080,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsMessengerCreateInfoEXTBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDebugUtilsObjectTagInfoEXTBuilder<'a>
 {
     s: VkDebugUtilsObjectTagInfoEXT,
@@ -1162,6 +1174,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsObjectTagInfoEXTBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkBaseInStructureBuilder<'a>
 {
     s: VkBaseInStructure,
@@ -1221,6 +1234,7 @@ impl<'a> core::ops::DerefMut for VkBaseInStructureBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkBaseOutStructureBuilder<'a>
 {
     s: VkBaseOutStructure,
@@ -1280,6 +1294,7 @@ impl<'a> core::ops::DerefMut for VkBaseOutStructureBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkMemoryBarrierBuilder<'a>
 {
     s: VkMemoryBarrier,
@@ -1351,6 +1366,7 @@ impl<'a> core::ops::DerefMut for VkMemoryBarrierBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageMemoryBarrierBuilder<'a>
 {
     s: VkImageMemoryBarrier,
@@ -1461,6 +1477,7 @@ impl<'a> core::ops::DerefMut for VkImageMemoryBarrierBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageSubresourceRangeBuilder<'a>
 {
     s: VkImageSubresourceRange,
@@ -1531,6 +1548,7 @@ impl<'a> core::ops::DerefMut for VkImageSubresourceRangeBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDrawIndirectCommandBuilder<'a>
 {
     s: VkDrawIndirectCommand,
@@ -1595,6 +1613,7 @@ impl<'a> core::ops::DerefMut for VkDrawIndirectCommandBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDrawIndexedIndirectCommandBuilder<'a>
 {
     s: VkDrawIndexedIndirectCommand,
@@ -1665,6 +1684,7 @@ impl<'a> core::ops::DerefMut for VkDrawIndexedIndirectCommandBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDispatchIndirectCommandBuilder<'a>
 {
     s: VkDispatchIndirectCommand,
@@ -1723,6 +1743,7 @@ impl<'a> core::ops::DerefMut for VkDispatchIndirectCommandBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkBufferMemoryBarrierBuilder<'a>
 {
     s: VkBufferMemoryBarrier,
@@ -1824,6 +1845,7 @@ impl<'a> core::ops::DerefMut for VkBufferMemoryBarrierBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkRenderPassBeginInfoBuilder<'a>
 {
     s: VkRenderPassBeginInfo,
@@ -1915,6 +1937,7 @@ impl<'a> core::ops::DerefMut for VkRenderPassBeginInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkClearDepthStencilValueBuilder<'a>
 {
     s: VkClearDepthStencilValue,
@@ -1967,6 +1990,7 @@ impl<'a> core::ops::DerefMut for VkClearDepthStencilValueBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkRect2DBuilder<'a>
 {
     s: VkRect2D,
@@ -2019,6 +2043,7 @@ impl<'a> core::ops::DerefMut for VkRect2DBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkOffset2DBuilder<'a>
 {
     s: VkOffset2D,
@@ -2071,6 +2096,7 @@ impl<'a> core::ops::DerefMut for VkOffset2DBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageResolveBuilder<'a>
 {
     s: VkImageResolve,
@@ -2141,6 +2167,7 @@ impl<'a> core::ops::DerefMut for VkImageResolveBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkExtent3DBuilder<'a>
 {
     s: VkExtent3D,
@@ -2199,6 +2226,7 @@ impl<'a> core::ops::DerefMut for VkExtent3DBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkOffset3DBuilder<'a>
 {
     s: VkOffset3D,
@@ -2257,6 +2285,7 @@ impl<'a> core::ops::DerefMut for VkOffset3DBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageSubresourceLayersBuilder<'a>
 {
     s: VkImageSubresourceLayers,
@@ -2321,6 +2350,7 @@ impl<'a> core::ops::DerefMut for VkImageSubresourceLayersBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkClearRectBuilder<'a>
 {
     s: VkClearRect,
@@ -2379,6 +2409,7 @@ impl<'a> core::ops::DerefMut for VkClearRectBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkClearAttachmentBuilder<'a>
 {
     s: VkClearAttachment,
@@ -2437,6 +2468,7 @@ impl<'a> core::ops::DerefMut for VkClearAttachmentBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkBufferImageCopyBuilder<'a>
 {
     s: VkBufferImageCopy,
@@ -2516,6 +2548,7 @@ impl<'a> core::ops::DerefMut for VkBufferImageCopyBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageBlitBuilder<'a>
 {
     s: VkImageBlit,
@@ -2580,6 +2613,7 @@ impl<'a> core::ops::DerefMut for VkImageBlitBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageCopyBuilder<'a>
 {
     s: VkImageCopy,
@@ -2650,6 +2684,7 @@ impl<'a> core::ops::DerefMut for VkImageCopyBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkBufferCopyBuilder<'a>
 {
     s: VkBufferCopy,
@@ -2708,6 +2743,7 @@ impl<'a> core::ops::DerefMut for VkBufferCopyBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkViewportBuilder<'a>
 {
     s: VkViewport,
@@ -2784,6 +2820,7 @@ impl<'a> core::ops::DerefMut for VkViewportBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkCommandBufferBeginInfoBuilder<'a>
 {
     s: VkCommandBufferBeginInfo,
@@ -2863,6 +2900,7 @@ impl<'a> core::ops::DerefMut for VkCommandBufferBeginInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkCommandBufferInheritanceInfoBuilder<'a>
 {
     s: VkCommandBufferInheritanceInfo,
@@ -2968,6 +3006,7 @@ impl<'a> core::ops::DerefMut for VkCommandBufferInheritanceInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkCommandBufferAllocateInfoBuilder<'a>
 {
     s: VkCommandBufferAllocateInfo,
@@ -3045,6 +3084,7 @@ impl<'a> core::ops::DerefMut for VkCommandBufferAllocateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkCommandPoolCreateInfoBuilder<'a>
 {
     s: VkCommandPoolCreateInfo,
@@ -3116,6 +3156,7 @@ impl<'a> core::ops::DerefMut for VkCommandPoolCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkRenderPassCreateInfoBuilder<'a>
 {
     s: VkRenderPassCreateInfo,
@@ -3229,6 +3270,7 @@ impl<'a> core::ops::DerefMut for VkRenderPassCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSubpassDependencyBuilder<'a>
 {
     s: VkSubpassDependency,
@@ -3311,6 +3353,7 @@ impl<'a> core::ops::DerefMut for VkSubpassDependencyBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSubpassDescriptionBuilder<'a>
 {
     s: VkSubpassDescription,
@@ -3434,6 +3477,7 @@ impl<'a> core::ops::DerefMut for VkSubpassDescriptionBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkAttachmentReferenceBuilder<'a>
 {
     s: VkAttachmentReference,
@@ -3486,6 +3530,7 @@ impl<'a> core::ops::DerefMut for VkAttachmentReferenceBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkAttachmentDescriptionBuilder<'a>
 {
     s: VkAttachmentDescription,
@@ -3589,6 +3634,7 @@ impl<'a> core::ops::DerefMut for VkAttachmentDescriptionBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkFramebufferCreateInfoBuilder<'a>
 {
     s: VkFramebufferCreateInfo,
@@ -3692,6 +3738,7 @@ impl<'a> core::ops::DerefMut for VkFramebufferCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkCopyDescriptorSetBuilder<'a>
 {
     s: VkCopyDescriptorSet,
@@ -3793,6 +3840,7 @@ impl<'a> core::ops::DerefMut for VkCopyDescriptorSetBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkWriteDescriptorSetBuilder<'a>
 {
     s: VkWriteDescriptorSet,
@@ -3912,6 +3960,7 @@ impl<'a> core::ops::DerefMut for VkWriteDescriptorSetBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDescriptorBufferInfoBuilder<'a>
 {
     s: VkDescriptorBufferInfo,
@@ -3970,6 +4019,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorBufferInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDescriptorImageInfoBuilder<'a>
 {
     s: VkDescriptorImageInfo,
@@ -4028,6 +4078,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorImageInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDescriptorSetAllocateInfoBuilder<'a>
 {
     s: VkDescriptorSetAllocateInfo,
@@ -4112,6 +4163,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorSetAllocateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDescriptorPoolCreateInfoBuilder<'a>
 {
     s: VkDescriptorPoolCreateInfo,
@@ -4202,6 +4254,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorPoolCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDescriptorPoolSizeBuilder<'a>
 {
     s: VkDescriptorPoolSize,
@@ -4254,6 +4307,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorPoolSizeBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDescriptorSetLayoutCreateInfoBuilder<'a>
 {
     s: VkDescriptorSetLayoutCreateInfo,
@@ -4338,6 +4392,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorSetLayoutCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDescriptorSetLayoutBindingBuilder<'a>
 {
     s: VkDescriptorSetLayoutBinding,
@@ -4418,6 +4473,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorSetLayoutBindingBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSamplerCreateInfoBuilder<'a>
 {
     s: VkSamplerCreateInfo,
@@ -4573,6 +4629,7 @@ impl<'a> core::ops::DerefMut for VkSamplerCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineLayoutCreateInfoBuilder<'a>
 {
     s: VkPipelineLayoutCreateInfo,
@@ -4674,6 +4731,7 @@ impl<'a> core::ops::DerefMut for VkPipelineLayoutCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPushConstantRangeBuilder<'a>
 {
     s: VkPushConstantRange,
@@ -4732,6 +4790,7 @@ impl<'a> core::ops::DerefMut for VkPushConstantRangeBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkComputePipelineCreateInfoBuilder<'a>
 {
     s: VkComputePipelineCreateInfo,
@@ -4827,6 +4886,7 @@ impl<'a> core::ops::DerefMut for VkComputePipelineCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineShaderStageCreateInfoBuilder<'a>
 {
     s: VkPipelineShaderStageCreateInfo,
@@ -4929,6 +4989,7 @@ impl<'a> core::ops::DerefMut for VkPipelineShaderStageCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSpecializationInfoBuilder<'a>
 {
     s: VkSpecializationInfo,
@@ -4998,6 +5059,7 @@ impl<'a> core::ops::DerefMut for VkSpecializationInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSpecializationMapEntryBuilder<'a>
 {
     s: VkSpecializationMapEntry,
@@ -5056,6 +5118,7 @@ impl<'a> core::ops::DerefMut for VkSpecializationMapEntryBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkGraphicsPipelineCreateInfoBuilder<'a>
 {
     s: VkGraphicsPipelineCreateInfo,
@@ -5284,6 +5347,7 @@ impl<'a> core::ops::DerefMut for VkGraphicsPipelineCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineDynamicStateCreateInfoBuilder<'a>
 {
     s: VkPipelineDynamicStateCreateInfo,
@@ -5369,6 +5433,7 @@ impl<'a> core::ops::DerefMut for VkPipelineDynamicStateCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineColorBlendStateCreateInfoBuilder<'a>
 {
     s: VkPipelineColorBlendStateCreateInfo,
@@ -5479,6 +5544,7 @@ impl<'a> core::ops::DerefMut for VkPipelineColorBlendStateCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineColorBlendAttachmentStateBuilder<'a>
 {
     s: VkPipelineColorBlendAttachmentState,
@@ -5588,6 +5654,7 @@ impl<'a> core::ops::DerefMut for VkPipelineColorBlendAttachmentStateBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineDepthStencilStateCreateInfoBuilder<'a>
 {
     s: VkPipelineDepthStencilStateCreateInfo,
@@ -5740,6 +5807,7 @@ impl<'a> core::ops::DerefMut for VkPipelineDepthStencilStateCreateInfoBuilder<'a
     }
 }
 
+#[derive(Clone)]
 pub struct VkStencilOpStateBuilder<'a>
 {
     s: VkStencilOpState,
@@ -5822,6 +5890,7 @@ impl<'a> core::ops::DerefMut for VkStencilOpStateBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineMultisampleStateCreateInfoBuilder<'a>
 {
     s: VkPipelineMultisampleStateCreateInfo,
@@ -5947,6 +6016,7 @@ impl<'a> core::ops::DerefMut for VkPipelineMultisampleStateCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineRasterizationStateCreateInfoBuilder<'a>
 {
     s: VkPipelineRasterizationStateCreateInfo,
@@ -6105,6 +6175,7 @@ impl<'a> core::ops::DerefMut for VkPipelineRasterizationStateCreateInfoBuilder<'
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineViewportStateCreateInfoBuilder<'a>
 {
     s: VkPipelineViewportStateCreateInfo,
@@ -6206,6 +6277,7 @@ impl<'a> core::ops::DerefMut for VkPipelineViewportStateCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineTessellationStateCreateInfoBuilder<'a>
 {
     s: VkPipelineTessellationStateCreateInfo,
@@ -6286,6 +6358,7 @@ impl<'a> core::ops::DerefMut for VkPipelineTessellationStateCreateInfoBuilder<'a
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineInputAssemblyStateCreateInfoBuilder<'a>
 {
     s: VkPipelineInputAssemblyStateCreateInfo,
@@ -6375,6 +6448,7 @@ impl<'a> core::ops::DerefMut for VkPipelineInputAssemblyStateCreateInfoBuilder<'
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineVertexInputStateCreateInfoBuilder<'a>
 {
     s: VkPipelineVertexInputStateCreateInfo,
@@ -6484,6 +6558,7 @@ impl<'a> core::ops::DerefMut for VkPipelineVertexInputStateCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkVertexInputAttributeDescriptionBuilder<'a>
 {
     s: VkVertexInputAttributeDescription,
@@ -6548,6 +6623,7 @@ impl<'a> core::ops::DerefMut for VkVertexInputAttributeDescriptionBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkVertexInputBindingDescriptionBuilder<'a>
 {
     s: VkVertexInputBindingDescription,
@@ -6609,6 +6685,7 @@ impl<'a> core::ops::DerefMut for VkVertexInputBindingDescriptionBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPipelineCacheCreateInfoBuilder<'a>
 {
     s: VkPipelineCacheCreateInfo,
@@ -6693,6 +6770,7 @@ impl<'a> core::ops::DerefMut for VkPipelineCacheCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkShaderModuleCreateInfoBuilder<'a>
 {
     s: VkShaderModuleCreateInfo,
@@ -6772,6 +6850,7 @@ impl<'a> core::ops::DerefMut for VkShaderModuleCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageViewCreateInfoBuilder<'a>
 {
     s: VkImageViewCreateInfo,
@@ -6870,6 +6949,7 @@ impl<'a> core::ops::DerefMut for VkImageViewCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkComponentMappingBuilder<'a>
 {
     s: VkComponentMapping,
@@ -6934,6 +7014,7 @@ impl<'a> core::ops::DerefMut for VkComponentMappingBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSubresourceLayoutBuilder<'a>
 {
     s: VkSubresourceLayout,
@@ -7004,6 +7085,7 @@ impl<'a> core::ops::DerefMut for VkSubresourceLayoutBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageSubresourceBuilder<'a>
 {
     s: VkImageSubresource,
@@ -7062,6 +7144,7 @@ impl<'a> core::ops::DerefMut for VkImageSubresourceBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageCreateInfoBuilder<'a>
 {
     s: VkImageCreateInfo,
@@ -7200,6 +7283,7 @@ impl<'a> core::ops::DerefMut for VkImageCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkBufferViewCreateInfoBuilder<'a>
 {
     s: VkBufferViewCreateInfo,
@@ -7289,6 +7373,7 @@ impl<'a> core::ops::DerefMut for VkBufferViewCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkBufferCreateInfoBuilder<'a>
 {
     s: VkBufferCreateInfo,
@@ -7385,6 +7470,7 @@ impl<'a> core::ops::DerefMut for VkBufferCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkQueryPoolCreateInfoBuilder<'a>
 {
     s: VkQueryPoolCreateInfo,
@@ -7471,6 +7557,7 @@ impl<'a> core::ops::DerefMut for VkQueryPoolCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkEventCreateInfoBuilder<'a>
 {
     s: VkEventCreateInfo,
@@ -7536,6 +7623,7 @@ impl<'a> core::ops::DerefMut for VkEventCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSemaphoreCreateInfoBuilder<'a>
 {
     s: VkSemaphoreCreateInfo,
@@ -7601,6 +7689,7 @@ impl<'a> core::ops::DerefMut for VkSemaphoreCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkFenceCreateInfoBuilder<'a>
 {
     s: VkFenceCreateInfo,
@@ -7666,6 +7755,7 @@ impl<'a> core::ops::DerefMut for VkFenceCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkBindSparseInfoBuilder<'a>
 {
     s: VkBindSparseInfo,
@@ -7799,6 +7889,7 @@ impl<'a> core::ops::DerefMut for VkBindSparseInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSparseImageMemoryBindInfoBuilder<'a>
 {
     s: VkSparseImageMemoryBindInfo,
@@ -7861,6 +7952,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageMemoryBindInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSparseImageMemoryBindBuilder<'a>
 {
     s: VkSparseImageMemoryBind,
@@ -7937,6 +8029,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageMemoryBindBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSparseImageOpaqueMemoryBindInfoBuilder<'a>
 {
     s: VkSparseImageOpaqueMemoryBindInfo,
@@ -7999,6 +8092,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageOpaqueMemoryBindInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSparseMemoryBindBuilder<'a>
 {
     s: VkSparseMemoryBind,
@@ -8069,6 +8163,7 @@ impl<'a> core::ops::DerefMut for VkSparseMemoryBindBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSparseBufferMemoryBindInfoBuilder<'a>
 {
     s: VkSparseBufferMemoryBindInfo,
@@ -8131,6 +8226,7 @@ impl<'a> core::ops::DerefMut for VkSparseBufferMemoryBindInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSparseImageFormatPropertiesBuilder<'a>
 {
     s: VkSparseImageFormatProperties,
@@ -8198,6 +8294,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageFormatPropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSparseImageMemoryRequirementsBuilder<'a>
 {
     s: VkSparseImageMemoryRequirements,
@@ -8283,6 +8380,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageMemoryRequirementsBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkMemoryRequirementsBuilder<'a>
 {
     s: VkMemoryRequirements,
@@ -8341,6 +8439,7 @@ impl<'a> core::ops::DerefMut for VkMemoryRequirementsBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkMappedMemoryRangeBuilder<'a>
 {
     s: VkMappedMemoryRange,
@@ -8418,6 +8517,7 @@ impl<'a> core::ops::DerefMut for VkMappedMemoryRangeBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkMemoryAllocateInfoBuilder<'a>
 {
     s: VkMemoryAllocateInfo,
@@ -8489,6 +8589,7 @@ impl<'a> core::ops::DerefMut for VkMemoryAllocateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkSubmitInfoBuilder<'a>
 {
     s: VkSubmitInfo,
@@ -8594,6 +8695,7 @@ impl<'a> core::ops::DerefMut for VkSubmitInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkLayerPropertiesBuilder<'a>
 {
     s: VkLayerProperties,
@@ -8658,6 +8760,7 @@ impl<'a> core::ops::DerefMut for VkLayerPropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkExtensionPropertiesBuilder<'a>
 {
     s: VkExtensionProperties,
@@ -8710,6 +8813,7 @@ impl<'a> core::ops::DerefMut for VkExtensionPropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDeviceCreateInfoBuilder<'a>
 {
     s: VkDeviceCreateInfo,
@@ -8836,6 +8940,7 @@ impl<'a> core::ops::DerefMut for VkDeviceCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPhysicalDeviceFeaturesBuilder<'a>
 {
     s: VkPhysicalDeviceFeatures,
@@ -9254,6 +9359,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDeviceFeaturesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkDeviceQueueCreateInfoBuilder<'a>
 {
     s: VkDeviceQueueCreateInfo,
@@ -9338,6 +9444,7 @@ impl<'a> core::ops::DerefMut for VkDeviceQueueCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPhysicalDeviceMemoryPropertiesBuilder<'a>
 {
     s: VkPhysicalDeviceMemoryProperties,
@@ -9408,6 +9515,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDeviceMemoryPropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkMemoryHeapBuilder<'a>
 {
     s: VkMemoryHeap,
@@ -9460,6 +9568,7 @@ impl<'a> core::ops::DerefMut for VkMemoryHeapBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkMemoryTypeBuilder<'a>
 {
     s: VkMemoryType,
@@ -9512,6 +9621,7 @@ impl<'a> core::ops::DerefMut for VkMemoryTypeBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkQueueFamilyPropertiesBuilder<'a>
 {
     s: VkQueueFamilyProperties,
@@ -9579,6 +9689,7 @@ impl<'a> core::ops::DerefMut for VkQueueFamilyPropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPhysicalDevicePropertiesBuilder<'a>
 {
     s: VkPhysicalDeviceProperties,
@@ -9680,6 +9791,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDevicePropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPhysicalDeviceSparsePropertiesBuilder<'a>
 {
     s: VkPhysicalDeviceSparseProperties,
@@ -9766,6 +9878,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDeviceSparsePropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkPhysicalDeviceLimitsBuilder<'a>
 {
     s: VkPhysicalDeviceLimits,
@@ -10596,6 +10709,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDeviceLimitsBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkImageFormatPropertiesBuilder<'a>
 {
     s: VkImageFormatProperties,
@@ -10667,6 +10781,7 @@ impl<'a> core::ops::DerefMut for VkImageFormatPropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkFormatPropertiesBuilder<'a>
 {
     s: VkFormatProperties,
@@ -10731,6 +10846,7 @@ impl<'a> core::ops::DerefMut for VkFormatPropertiesBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkInstanceCreateInfoBuilder<'a>
 {
     s: VkInstanceCreateInfo,
@@ -10841,6 +10957,7 @@ impl<'a> core::ops::DerefMut for VkInstanceCreateInfoBuilder<'a>
     }
 }
 
+#[derive(Clone)]
 pub struct VkApplicationInfoBuilder<'a>
 {
     s: VkApplicationInfo,
