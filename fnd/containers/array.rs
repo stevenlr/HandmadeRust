@@ -65,6 +65,13 @@ impl<T, A: Allocator> Array<T, A>
         self.resize_with(new_size, || value.clone());
     }
 
+    pub fn resize_default(&mut self, new_size: usize)
+    where
+        T: Default,
+    {
+        self.resize_with(new_size, || T::default());
+    }
+
     pub fn reserve(&mut self, new_capacity: usize)
     {
         self.buffer.reserve(new_capacity);
