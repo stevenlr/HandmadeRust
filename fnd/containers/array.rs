@@ -1,8 +1,8 @@
 use core::{
-    iter::FromIterator,
+    iter::{FromIterator, IntoIterator},
     mem::needs_drop,
     ops::{Deref, DerefMut},
-    ptr::drop_in_place,
+    ptr::{drop_in_place, read},
     slice,
 };
 
@@ -237,20 +237,94 @@ where
     }
 }
 
+pub struct IntoIter<T, A: Allocator>
+{
+    inner: Array<T, A>,
+    current: usize,
+    size: usize,
+}
+
+impl<T, A: Allocator> Iterator for IntoIter<T, A>
+{
+    type Item = T;
+
+    fn next(&mut self) -> Option<T>
+    {
+        if self.current >= self.size
+        {
+            None
+        }
+        else
+        {
+            unsafe {
+                let index = self.current;
+                self.current += 1;
+                Some(read(self.inner.buffer.ptr.offset(index as isize)))
+            }
+        }
+    }
+
+    fn size_hint(&self) -> (usize, Option<usize>)
+    {
+        let remaining = self.size - self.current;
+        (remaining, Some(remaining))
+    }
+}
+
+impl<T, A: Allocator> Drop for IntoIter<T, A>
+{
+    fn drop(&mut self)
+    {
+        // Drop the remaining elements if we didn't iter
+        // until the end.
+
+        if needs_drop::<T>()
+        {
+            unsafe {
+                for i in self.current..self.size
+                {
+                    drop_in_place(self.inner.buffer.ptr.offset(i as isize));
+                }
+            }
+        }
+    }
+}
+
+impl<T, A: Allocator> IntoIterator for Array<T, A>
+{
+    type Item = T;
+    type IntoIter = IntoIter<T, A>;
+
+    fn into_iter(mut self) -> Self::IntoIter
+    {
+        // We set the size to 0 so that when the array is dropped
+        // it won't also drop the contained elements.
+        let old_size = self.size;
+        self.size = 0;
+
+        IntoIter {
+            inner: self,
+            size: old_size,
+            current: 0,
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests
 {
     use super::*;
     use crate::alloc::SystemAllocator;
+    use core::cell::Cell;
 
     struct DropCheck<'a>
     {
-        pub dropped: &'a mut bool,
+        pub dropped: &'a Cell<bool>,
     }
 
     impl<'a> DropCheck<'a>
     {
-        fn new(b: &'a mut bool) -> Self
+        fn new(b: &'a Cell<bool>) -> Self
         {
             Self { dropped: b }
         }
@@ -260,7 +334,7 @@ mod tests
     {
         fn drop(&mut self)
         {
-            *self.dropped = true;
+            self.dropped.set(true);
         }
     }
 
@@ -303,14 +377,14 @@ mod tests
     fn drop()
     {
         let alloc = SystemAllocator::default();
-        let mut dropped = false;
+        let dropped = Cell::new(false);
 
         {
             let mut a = Array::new_with(&alloc);
-            a.push(DropCheck::new(&mut dropped));
+            a.push(DropCheck::new(&dropped));
         }
 
-        assert!(dropped);
+        assert!(dropped.get());
     }
 
     fn sum_slice(slice: &[i32]) -> i32
@@ -450,5 +524,77 @@ mod tests
 
         a.clear();
         assert!(a.len() == 0);
+    }
+
+    #[test]
+    fn into_iter_drain_all()
+    {
+        let alloc = SystemAllocator::default();
+        let dropped1 = Cell::new(false);
+        let dropped2 = Cell::new(false);
+        let dropped3 = Cell::new(false);
+
+        {
+            let mut a = Array::new_with(&alloc);
+            a.push(DropCheck::new(&dropped1));
+            a.push(DropCheck::new(&dropped2));
+            a.push(DropCheck::new(&dropped3));
+
+            let mut i = a.into_iter();
+            assert!(i.next().is_some());
+            assert!(i.next().is_some());
+            assert!(i.next().is_some());
+            assert!(i.next().is_none());
+        }
+
+        assert!(dropped1.get());
+        assert!(dropped2.get());
+        assert!(dropped3.get());
+    }
+
+    #[test]
+    fn into_iter_drain_some()
+    {
+        let alloc = SystemAllocator::default();
+        let dropped1 = Cell::new(false);
+        let dropped2 = Cell::new(false);
+        let dropped3 = Cell::new(false);
+
+        {
+            let mut a = Array::new_with(&alloc);
+            a.push(DropCheck::new(&dropped1));
+            a.push(DropCheck::new(&dropped2));
+            a.push(DropCheck::new(&dropped3));
+
+            let mut i = a.into_iter();
+            assert!(i.next().is_some());
+            assert!(i.next().is_some());
+        }
+
+        assert!(dropped1.get());
+        assert!(dropped2.get());
+        assert!(dropped3.get());
+    }
+
+    #[test]
+    fn into_iter_drain_none()
+    {
+        let alloc = SystemAllocator::default();
+        let dropped1 = Cell::new(false);
+        let dropped2 = Cell::new(false);
+        let dropped3 = Cell::new(false);
+
+        {
+            let mut a = Array::new_with(&alloc);
+            a.push(DropCheck::new(&dropped1));
+            a.push(DropCheck::new(&dropped2));
+            a.push(DropCheck::new(&dropped3));
+
+            a.into_iter();
+        }
+
+        assert!(dropped1.get());
+        assert!(dropped2.get());
+        assert!(dropped3.get());
     }
 }
