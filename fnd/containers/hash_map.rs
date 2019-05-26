@@ -232,6 +232,18 @@ where
             .map(|(_, y)| &y.as_ref().unwrap().key)
     }
 
+    pub fn keys_values(&self) -> impl Iterator<Item = (&K, &V)>
+    {
+        self.shortb
+            .iter()
+            .zip(self.buckets.iter())
+            .filter(|(x, _)| x.is_occupied())
+            .map(|(_, y)| {
+                let r = y.as_ref().unwrap();
+                (&r.key, &r.value)
+            })
+    }
+
     fn find_bucket<Q>(&self, key: &Q, hash: u64) -> FindResult
     where
         K: Borrow<Q>,
@@ -404,6 +416,12 @@ where
     pub fn keys(&self) -> impl Iterator<Item = &K>
     {
         self.inner.keys()
+    }
+
+    #[inline]
+    pub fn keys_values(&self) -> impl Iterator<Item = (&K, &V)>
+    {
+        self.inner.keys_values()
     }
 
     pub fn find<'a, Q>(&'a self, key: &Q) -> Option<&'a V>
@@ -581,6 +599,40 @@ mod tests
         let mut visited = [0, 0, 0, 0, 0, 0];
 
         set.keys().for_each(|i| visited[*i as usize] += 1);
+
+        assert_eq!(visited[0], 1);
+        assert_eq!(visited[1], 1);
+        assert_eq!(visited[2], 0);
+        assert_eq!(visited[3], 0);
+        assert_eq!(visited[4], 1);
+        assert_eq!(visited[5], 1);
+    }
+
+    #[test]
+    fn iter_keys_values()
+    {
+        let alloc = SystemAllocator::default();
+        let mut set = HashMap::new_with(&alloc);
+
+        set.insert(0, 7);
+        set.insert(1, 8);
+        set.insert(4, 9);
+        set.insert(5, 10);
+
+        let mut visited = [0, 0, 0, 0, 0, 0];
+
+        set.keys_values().for_each(|(i, j)|
+        {
+            visited[*i as usize] += 1;
+            match *i
+            {
+                0 => assert_eq!(*j, 7),
+                1 => assert_eq!(*j, 8),
+                4 => assert_eq!(*j, 9),
+                5 => assert_eq!(*j, 10),
+                _ => assert!(false),
+            }
+        });
 
         assert_eq!(visited[0], 1);
         assert_eq!(visited[1], 1);
