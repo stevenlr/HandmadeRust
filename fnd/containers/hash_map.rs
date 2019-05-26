@@ -621,8 +621,7 @@ mod tests
 
         let mut visited = [0, 0, 0, 0, 0, 0];
 
-        set.keys_values().for_each(|(i, j)|
-        {
+        set.keys_values().for_each(|(i, j)| {
             visited[*i as usize] += 1;
             match *i
             {
