@@ -277,7 +277,6 @@ impl<T, A: Allocator> Drop for IntoIter<T, A>
     {
         // Drop the remaining elements if we didn't iter
         // until the end.
-
         if needs_drop::<T>()
         {
             unsafe {
@@ -287,6 +286,9 @@ impl<T, A: Allocator> Drop for IntoIter<T, A>
                 }
             }
         }
+
+        // Set size of array to 0 so it doesn't drop anything else
+        self.inner.size = 0;
     }
 }
 
@@ -295,16 +297,11 @@ impl<T, A: Allocator> IntoIterator for Array<T, A>
     type Item = T;
     type IntoIter = IntoIter<T, A>;
 
-    fn into_iter(mut self) -> Self::IntoIter
+    fn into_iter(self) -> Self::IntoIter
     {
-        // We set the size to 0 so that when the array is dropped
-        // it won't also drop the contained elements.
-        let old_size = self.size;
-        self.size = 0;
-
         IntoIter {
+            size: self.size,
             inner: self,
-            size: old_size,
             current: 0,
         }
     }
@@ -319,12 +316,12 @@ mod tests
 
     struct DropCheck<'a>
     {
-        pub dropped: &'a Cell<bool>,
+        pub dropped: &'a Cell<i32>,
     }
 
     impl<'a> DropCheck<'a>
     {
-        fn new(b: &'a Cell<bool>) -> Self
+        fn new(b: &'a Cell<i32>) -> Self
         {
             Self { dropped: b }
         }
@@ -334,7 +331,7 @@ mod tests
     {
         fn drop(&mut self)
         {
-            self.dropped.set(true);
+            self.dropped.set(self.dropped.get() + 1);
         }
     }
 
@@ -377,14 +374,14 @@ mod tests
     fn drop()
     {
         let alloc = SystemAllocator::default();
-        let dropped = Cell::new(false);
+        let dropped = Cell::new(0);
 
         {
             let mut a = Array::new_with(&alloc);
             a.push(DropCheck::new(&dropped));
         }
 
-        assert!(dropped.get());
+        assert!(dropped.get() == 1);
     }
 
     fn sum_slice(slice: &[i32]) -> i32
@@ -530,9 +527,9 @@ mod tests
     fn into_iter_drain_all()
     {
         let alloc = SystemAllocator::default();
-        let dropped1 = Cell::new(false);
-        let dropped2 = Cell::new(false);
-        let dropped3 = Cell::new(false);
+        let dropped1 = Cell::new(0);
+        let dropped2 = Cell::new(0);
+        let dropped3 = Cell::new(0);
 
         {
             let mut a = Array::new_with(&alloc);
@@ -547,18 +544,18 @@ mod tests
             assert!(i.next().is_none());
         }
 
-        assert!(dropped1.get());
-        assert!(dropped2.get());
-        assert!(dropped3.get());
+        assert!(dropped1.get() == 1);
+        assert!(dropped2.get() == 1);
+        assert!(dropped3.get() == 1);
     }
 
     #[test]
     fn into_iter_drain_some()
     {
         let alloc = SystemAllocator::default();
-        let dropped1 = Cell::new(false);
-        let dropped2 = Cell::new(false);
-        let dropped3 = Cell::new(false);
+        let dropped1 = Cell::new(0);
+        let dropped2 = Cell::new(0);
+        let dropped3 = Cell::new(0);
 
         {
             let mut a = Array::new_with(&alloc);
@@ -571,18 +568,18 @@ mod tests
             assert!(i.next().is_some());
         }
 
-        assert!(dropped1.get());
-        assert!(dropped2.get());
-        assert!(dropped3.get());
+        assert!(dropped1.get() == 1);
+        assert!(dropped2.get() == 1);
+        assert!(dropped3.get() == 1);
     }
 
     #[test]
     fn into_iter_drain_none()
     {
         let alloc = SystemAllocator::default();
-        let dropped1 = Cell::new(false);
-        let dropped2 = Cell::new(false);
-        let dropped3 = Cell::new(false);
+        let dropped1 = Cell::new(0);
+        let dropped2 = Cell::new(0);
+        let dropped3 = Cell::new(0);
 
         {
             let mut a = Array::new_with(&alloc);
@@ -593,8 +590,8 @@ mod tests
             a.into_iter();
         }
 
-        assert!(dropped1.get());
-        assert!(dropped2.get());
-        assert!(dropped3.get());
+        assert!(dropped1.get() == 1);
+        assert!(dropped2.get() == 1);
+        assert!(dropped3.get() == 1);
     }
 }
