@@ -1,6 +1,7 @@
 [workspace]
 members = [
     "fnd",
+    "hash_macro",
     "main",
     "vk",
     "win32",

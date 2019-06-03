@@ -1,15 +1,11 @@
 [package]
-name = "main"
+name = "hash_macro"
 version = "0.1.0"
 authors = ["Steven Le Rouzic <steven.lerouzic@gmail.com>"]
 edition = "2018"
 
-[[bin]]
-name = "main"
-path = "main.rs"
+[lib]
+proc-macro = true
 
 [dependencies]
-vk = { path = "../vk" }
 fnd = { path = "../fnd" }
-win32 = { path = "../win32" }
-hash_macro = { path = "../hash_macro" }

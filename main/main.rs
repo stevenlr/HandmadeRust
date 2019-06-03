@@ -1,3 +1,5 @@
+#![feature(proc_macro_hygiene)]
+
 mod wsi;
 
 use core::mem::transmute;
@@ -496,6 +498,9 @@ impl DeviceBuilder
 
 fn main()
 {
+    let a = hash_macro::murmur3_32!("Hello world!");
+    println!("{}", a);
+
     init_global_allocator();
 
     let window = Window::new(1280, 720, "Handmade Rust").unwrap();

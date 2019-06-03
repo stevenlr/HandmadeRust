@@ -8,10 +8,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "hash_macro"
+version = "0.1.0"
+dependencies = [
+ "fnd 0.1.0",
+]
+
+[[package]]
 name = "main"
 version = "0.1.0"
 dependencies = [
  "fnd 0.1.0",
+ "hash_macro 0.1.0",
  "vk 0.1.0",
  "win32 0.1.0",
 ]
