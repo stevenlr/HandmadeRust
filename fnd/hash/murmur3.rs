@@ -67,3 +67,22 @@ pub fn murmur3_32(key: &impl AsRef<[u8]>) -> u32
     h1 = fmix32(h1);
     return h1;
 }
+
+#[cfg(test)]
+mod tests
+{
+    use super::*;
+
+    #[test]
+    fn zero()
+    {
+        assert_eq!(murmur3_32(&""), 0);
+    }
+
+    #[test]
+    fn easy_inputs()
+    {
+        assert_eq!(murmur3_32(&"Hello world!"), 1652231212u32);
+        assert_eq!(murmur3_32(&"My name is Jeff"), 205313238u32);
+    }
+}
