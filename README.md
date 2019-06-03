@@ -8,10 +8,11 @@ Right now it only targets Windows. This may change in this future.
 Crates
 ----------------
 
- - [`fnd`](fnd) : A standard library replacement with allocator-aware containers.
- - [`main`](main) : The main application.
- - [`vk`](vk) : Vulkan bindings, generated using [stevenlr/VkXml](https://github.com/stevenlr/VkXml).
- - [`win32`](win32) : Raw Win32 API bindings.
+ - [`fnd`](fnd): A standard library replacement with allocator-aware containers.
+ - [`hash_macro`](hash_macro): Compile-time string literal hashing. Requires `proc_macro_hygiene` at the moment.
+ - [`main`](main): The main application.
+ - [`vk`](vk): Vulkan bindings, generated using [stevenlr/VkXml](https://github.com/stevenlr/VkXml).
+ - [`win32`](win32): Raw Win32 API bindings.
 
 Blog series
 ----------------
