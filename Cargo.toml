@@ -3,6 +3,7 @@ members = [
     "fnd",
     "hash_macro",
     "main",
+    "sandbox",
     "vk",
     "win32",
 ]

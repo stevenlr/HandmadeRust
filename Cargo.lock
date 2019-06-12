@@ -25,6 +25,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "sandbox"
+version = "0.1.0"
+dependencies = [
+ "fnd 0.1.0",
+]
+
+[[package]]
 name = "vk"
 version = "0.1.0"
 dependencies = [
