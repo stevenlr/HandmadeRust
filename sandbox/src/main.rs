@@ -1,113 +1,26 @@
 use fnd::alloc::{set_global_allocator, SystemAllocator};
 
+use core::mem::transmute;
 use std::io::Write;
 
-trait Serializer
-{
-    type Ok;
-    type Err;
+mod impls;
+mod traits;
 
-    fn serialize_u8(self, value: u8) -> Result<Self::Ok, Self::Err>;
-    fn serialize_u16(self, value: u16) -> Result<Self::Ok, Self::Err>;
-    fn serialize_u32(self, value: u32) -> Result<Self::Ok, Self::Err>;
-    fn serialize_u64(self, value: u64) -> Result<Self::Ok, Self::Err>;
-    fn serialize_i8(self, value: i8) -> Result<Self::Ok, Self::Err>;
-    fn serialize_i16(self, value: i16) -> Result<Self::Ok, Self::Err>;
-    fn serialize_i32(self, value: i32) -> Result<Self::Ok, Self::Err>;
-    fn serialize_i64(self, value: i64) -> Result<Self::Ok, Self::Err>;
-    fn serialize_bytes(self, value: &[u8]) -> Result<Self::Ok, Self::Err>;
-    fn serialize_str(self, value: &str) -> Result<Self::Ok, Self::Err>;
+use traits::*;
+
+struct CborSerializer<W>
+{
+    write: W,
 }
 
-trait Serialize: Sized
+struct CborCompoundSerializer<'a, W>
 {
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>;
+    s: &'a mut CborSerializer<W>,
+    needs_break: bool,
 }
 
-impl Serialize for u8
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_u8(*self)
-    }
-}
-
-impl Serialize for u16
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_u16(*self)
-    }
-}
-
-impl Serialize for u32
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_u32(*self)
-    }
-}
-
-impl Serialize for u64
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_u64(*self)
-    }
-}
-
-impl Serialize for i8
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_i8(*self)
-    }
-}
-
-impl Serialize for i16
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_i16(*self)
-    }
-}
-
-impl Serialize for i32
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_i32(*self)
-    }
-}
-
-impl Serialize for i64
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_i64(*self)
-    }
-}
-
-impl Serialize for &[u8]
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_bytes(self)
-    }
-}
-
-impl Serialize for &str
-{
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_str(self)
-    }
-}
-
-struct CborSerializer<'a>
-{
-    write: &'a mut Write,
-}
+struct CborArraySerializer<'a, W>(CborCompoundSerializer<'a, W>);
+struct CborMapSerializer<'a, W>(CborCompoundSerializer<'a, W>);
 
 enum MajorType
 {
@@ -118,7 +31,15 @@ enum MajorType
     Array,
     Map,
     FloatingPoint,
+    Special,
 }
+
+const BREAK: u8 = 31;
+const TRUE: u8 = 21;
+const FALSE: u8 = 20;
+const NULL: u8 = 22;
+const F64: u8 = 27;
+const F32: u8 = 26;
 
 impl MajorType
 {
@@ -133,6 +54,7 @@ impl MajorType
             MajorType::Array => 4,
             MajorType::Map => 5,
             MajorType::FloatingPoint => 7,
+            MajorType::Special => 7,
         }
     }
 
@@ -144,7 +66,9 @@ impl MajorType
     }
 }
 
-impl<'a> CborSerializer<'a>
+impl<W> CborSerializer<W>
+where
+    W: Write,
 {
     fn write_header_with_value(&mut self, major_type: MajorType, value: u64) -> Result<(), ()>
     {
@@ -155,30 +79,22 @@ impl<'a> CborSerializer<'a>
         else if value <= core::u8::MAX as u64
         {
             self.write_u8(major_type.make_header(24))
-                .and_then(|_| {
-                    self.write_u8(value as u8)
-                })
+                .and_then(|_| self.write_u8(value as u8))
         }
         else if value <= core::u16::MAX as u64
         {
             self.write_u8(major_type.make_header(25))
-                .and_then(|_| {
-                    self.write_u16(value as u16)
-                })
+                .and_then(|_| self.write_u16(value as u16))
         }
         else if value <= core::u32::MAX as u64
         {
             self.write_u8(major_type.make_header(26))
-                .and_then(|_| {
-                    self.write_u32(value as u32)
-                })
+                .and_then(|_| self.write_u32(value as u32))
         }
         else if value <= core::u64::MAX as u64
         {
             self.write_u8(major_type.make_header(27))
-                .and_then(|_| {
-                    self.write_u64(value as u64)
-                })
+                .and_then(|_| self.write_u64(value as u64))
         }
         else
         {
@@ -213,17 +129,83 @@ impl<'a> CborSerializer<'a>
     #[inline]
     fn write_bytes(&mut self, data: &[u8]) -> Result<(), ()>
     {
-        self.write
-            .write_all(data)
-            .map(|_| ())
-            .map_err(|_| ())
+        self.write.write_all(data).map(|_| ()).map_err(|_| ())
+    }
+
+    #[inline]
+    fn write_f32(&mut self, data: f32) -> Result<(), ()>
+    {
+        self.write_u32(unsafe { transmute(data) })
+    }
+
+    #[inline]
+    fn write_f64(&mut self, data: f64) -> Result<(), ()>
+    {
+        self.write_u64(unsafe { transmute(data) })
     }
 }
 
-impl<'a> Serializer for &mut CborSerializer<'a>
+impl<'a, W> ArraySerializer for CborArraySerializer<'a, W>
+where
+    W: Write,
 {
     type Ok = ();
     type Err = ();
+
+    #[inline]
+    fn serialize_element<T: Serialize>(&mut self, elmt: T) -> Result<(), ()>
+    {
+        elmt.serialize(&mut *self.0.s)
+    }
+
+    fn end(self) -> Result<(), ()>
+    {
+        if self.0.needs_break
+        {
+            self.0.s.write_u8(MajorType::Special.make_header(BREAK))
+        }
+        else
+        {
+            Ok(())
+        }
+    }
+}
+
+impl<'a, W> MapSerializer for CborMapSerializer<'a, W>
+where
+    W: Write,
+{
+    type Ok = ();
+    type Err = ();
+
+    #[inline]
+    fn serialize_entry<K: Serialize, V: Serialize>(&mut self, k: K, v: V) -> Result<(), ()>
+    {
+        k.serialize(&mut *self.0.s)?;
+        v.serialize(&mut *self.0.s)
+    }
+
+    fn end(self) -> Result<(), ()>
+    {
+        if self.0.needs_break
+        {
+            self.0.s.write_u8(MajorType::Special.make_header(BREAK))
+        }
+        else
+        {
+            Ok(())
+        }
+    }
+}
+
+impl<'a, W> Serializer for &'a mut CborSerializer<W>
+where
+    W: Write,
+{
+    type Ok = ();
+    type Err = ();
+    type ArraySerializer = CborArraySerializer<'a, W>;
+    type MapSerializer = CborMapSerializer<'a, W>;
 
     fn serialize_u8(self, value: u8) -> Result<Self::Ok, Self::Err>
     {
@@ -296,17 +278,82 @@ impl<'a> Serializer for &mut CborSerializer<'a>
     fn serialize_bytes(self, value: &[u8]) -> Result<Self::Ok, Self::Err>
     {
         self.write_header_with_value(MajorType::ByteString, value.len() as u64)
-            .and_then(|_| {
-                self.write_bytes(value)
-            })
+            .and_then(|_| self.write_bytes(value))
     }
 
     fn serialize_str(self, value: &str) -> Result<Self::Ok, Self::Err>
     {
         self.write_header_with_value(MajorType::TextString, value.as_bytes().len() as u64)
-            .and_then(|_| {
-                self.write_bytes(value.as_bytes())
-            })
+            .and_then(|_| self.write_bytes(value.as_bytes()))
+    }
+
+    fn serialize_array(self, len: Option<usize>) -> Result<CborArraySerializer<'a, W>, Self::Err>
+    {
+        match len
+        {
+            Some(len) => self
+                .write_header_with_value(MajorType::Array, len as u64)
+                .and_then(move |_| {
+                    Ok(CborArraySerializer(CborCompoundSerializer {
+                        s: self,
+                        needs_break: false,
+                    }))
+                }),
+            None => self
+                .write_u8(MajorType::Array.make_header(0x1f))
+                .and_then(move |_| {
+                    Ok(CborArraySerializer(CborCompoundSerializer {
+                        s: self,
+                        needs_break: true,
+                    }))
+                }),
+        }
+    }
+
+    fn serialize_map(self, len: Option<usize>) -> Result<CborMapSerializer<'a, W>, Self::Err>
+    {
+        match len
+        {
+            Some(len) => self
+                .write_header_with_value(MajorType::Map, len as u64)
+                .and_then(move |_| {
+                    Ok(CborMapSerializer(CborCompoundSerializer {
+                        s: self,
+                        needs_break: false,
+                    }))
+                }),
+            None => self
+                .write_u8(MajorType::Map.make_header(0x1f))
+                .and_then(move |_| {
+                    Ok(CborMapSerializer(CborCompoundSerializer {
+                        s: self,
+                        needs_break: true,
+                    }))
+                }),
+        }
+    }
+
+    fn serialize_f32(self, value: f32) -> Result<Self::Ok, Self::Err>
+    {
+        self.write_u8(MajorType::Special.make_header(F32))?;
+        self.write_f32(value)
+    }
+
+    fn serialize_f64(self, value: f64) -> Result<Self::Ok, Self::Err>
+    {
+        self.write_u8(MajorType::Special.make_header(F64))?;
+        self.write_f64(value)
+    }
+
+    fn serialize_null(self) -> Result<Self::Ok, Self::Err>
+    {
+        self.write_u8(MajorType::Special.make_header(NULL))
+    }
+
+    fn serialize_bool(self, value: bool) -> Result<Self::Ok, Self::Err>
+    {
+        let value = if value { TRUE } else { FALSE };
+        self.write_u8(MajorType::Special.make_header(value))
     }
 }
 
@@ -353,13 +400,25 @@ fn main()
     (-1000i32).serialize(&mut serializer).unwrap();
     (0i64).serialize(&mut serializer).unwrap();
 
-    (&[1, 3, 4, 5][..]).serialize(&mut serializer).unwrap();
-    (&[][..]).serialize(&mut serializer).unwrap();
-
     "".serialize(&mut serializer).unwrap();
     "a".serialize(&mut serializer).unwrap();
     "IETF".serialize(&mut serializer).unwrap();
     "\u{20ac}¢".serialize(&mut serializer).unwrap();
+
+    ((&[] as &[u32])[..]).serialize(&mut serializer).unwrap();
+    (&[1, 2, 3][..]).serialize(&mut serializer).unwrap();
+
+    {
+        let mut map = serializer.serialize_map(None).unwrap();
+        map.serialize_entry(&"a", 1);
+        map.serialize_entry(2, &"hello");
+        map.end();
+    }
+
+    true.serialize(&mut serializer).unwrap();
+    false.serialize(&mut serializer).unwrap();
+    0.0f32.serialize(&mut serializer).unwrap();
+    1.0f64.serialize(&mut serializer).unwrap();
 
     file.flush().unwrap();
 }
