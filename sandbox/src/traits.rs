@@ -1,26 +1,29 @@
-pub trait Serializer
+pub trait Serializer<'se>
 {
     type Ok;
     type Err;
     type ArraySerializer: ArraySerializer<Ok = Self::Ok, Err = Self::Err>;
     type MapSerializer: MapSerializer<Ok = Self::Ok, Err = Self::Err>;
 
-    fn serialize_u8(self, value: u8) -> Result<Self::Ok, Self::Err>;
-    fn serialize_u16(self, value: u16) -> Result<Self::Ok, Self::Err>;
-    fn serialize_u32(self, value: u32) -> Result<Self::Ok, Self::Err>;
-    fn serialize_u64(self, value: u64) -> Result<Self::Ok, Self::Err>;
-    fn serialize_i8(self, value: i8) -> Result<Self::Ok, Self::Err>;
-    fn serialize_i16(self, value: i16) -> Result<Self::Ok, Self::Err>;
-    fn serialize_i32(self, value: i32) -> Result<Self::Ok, Self::Err>;
-    fn serialize_i64(self, value: i64) -> Result<Self::Ok, Self::Err>;
-    fn serialize_bytes(self, value: &[u8]) -> Result<Self::Ok, Self::Err>;
-    fn serialize_str(self, value: &str) -> Result<Self::Ok, Self::Err>;
-    fn serialize_array(self, len: Option<usize>) -> Result<Self::ArraySerializer, Self::Err>;
-    fn serialize_map(self, len: Option<usize>) -> Result<Self::MapSerializer, Self::Err>;
-    fn serialize_f32(self, value: f32) -> Result<Self::Ok, Self::Err>;
-    fn serialize_f64(self, value: f64) -> Result<Self::Ok, Self::Err>;
-    fn serialize_null(self) -> Result<Self::Ok, Self::Err>;
-    fn serialize_bool(self, value: bool) -> Result<Self::Ok, Self::Err>;
+    fn serialize_u8(&'se mut self, value: u8) -> Result<Self::Ok, Self::Err>;
+    fn serialize_u16(&'se mut self, value: u16) -> Result<Self::Ok, Self::Err>;
+    fn serialize_u32(&'se mut self, value: u32) -> Result<Self::Ok, Self::Err>;
+    fn serialize_u64(&'se mut self, value: u64) -> Result<Self::Ok, Self::Err>;
+    fn serialize_i8(&'se mut self, value: i8) -> Result<Self::Ok, Self::Err>;
+    fn serialize_i16(&'se mut self, value: i16) -> Result<Self::Ok, Self::Err>;
+    fn serialize_i32(&'se mut self, value: i32) -> Result<Self::Ok, Self::Err>;
+    fn serialize_i64(&'se mut self, value: i64) -> Result<Self::Ok, Self::Err>;
+    fn serialize_bytes(&'se mut self, value: &[u8]) -> Result<Self::Ok, Self::Err>;
+    fn serialize_str(&'se mut self, value: &str) -> Result<Self::Ok, Self::Err>;
+    fn serialize_array(
+        &'se mut self,
+        len: Option<usize>,
+    ) -> Result<Self::ArraySerializer, Self::Err>;
+    fn serialize_map(&'se mut self, len: Option<usize>) -> Result<Self::MapSerializer, Self::Err>;
+    fn serialize_f32(&'se mut self, value: f32) -> Result<Self::Ok, Self::Err>;
+    fn serialize_f64(&'se mut self, value: f64) -> Result<Self::Ok, Self::Err>;
+    fn serialize_null(&'se mut self) -> Result<Self::Ok, Self::Err>;
+    fn serialize_bool(&'se mut self, value: bool) -> Result<Self::Ok, Self::Err>;
 }
 
 pub trait ArraySerializer
@@ -47,5 +50,5 @@ pub trait MapSerializer
 
 pub trait Serialize
 {
-    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>;
+    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>;
 }
