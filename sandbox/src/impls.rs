@@ -1,100 +1,76 @@
 use crate::traits::*;
 
-impl Serialize for u8
+macro_rules! impl_primitive_ser {
+    ($type:ty, $method:ident) => {
+        impl Serialize for $type
+        {
+            fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
+            {
+                s.$method(*self)
+            }
+        }
+    };
+}
+
+pub struct PrimitiveVisitorError(VisitorType);
+
+impl VisitorError for PrimitiveVisitorError
 {
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
+    fn unexpected_type(t: VisitorType) -> Self
     {
-        s.serialize_u8(*self)
+        Self(t)
     }
 }
 
-impl Serialize for u16
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_u16(*self)
-    }
+macro_rules! impl_primitive_de {
+    ($type:ty, $method:ident, $accept:ident) => {
+        impl<'de> Deserialize<'de> for $type
+        {
+            fn deserialize<D: Deserializer<'de>>(d: &mut D) -> Result<$type, D::Err>
+            {
+                struct PrimVisitor;
+
+                impl<'de> Visitor<'de> for PrimVisitor
+                {
+                    type Value = $type;
+                    type Err = PrimitiveVisitorError;
+
+                    fn $accept(&mut self, value: $type) -> Result<Self::Value, Self::Err>
+                    {
+                        Ok(value)
+                    }
+                }
+
+                d.$method(&mut PrimVisitor)
+            }
+        }
+    };
 }
 
-impl Serialize for u32
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_u32(*self)
-    }
-}
+impl_primitive_ser!(u8, serialize_u8);
+impl_primitive_ser!(u16, serialize_u16);
+impl_primitive_ser!(u32, serialize_u32);
+impl_primitive_ser!(u64, serialize_u64);
+impl_primitive_ser!(i8, serialize_i8);
+impl_primitive_ser!(i16, serialize_i16);
+impl_primitive_ser!(i32, serialize_i32);
+impl_primitive_ser!(i64, serialize_i64);
+impl_primitive_ser!(f32, serialize_f32);
+impl_primitive_ser!(f64, serialize_f64);
+impl_primitive_ser!(&str, serialize_str);
+impl_primitive_ser!(bool, serialize_bool);
 
-impl Serialize for u64
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_u64(*self)
-    }
-}
-
-impl Serialize for i8
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_i8(*self)
-    }
-}
-
-impl Serialize for i16
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_i16(*self)
-    }
-}
-
-impl Serialize for i32
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_i32(*self)
-    }
-}
-
-impl Serialize for i64
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_i64(*self)
-    }
-}
-
-impl Serialize for f32
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_f32(*self)
-    }
-}
-
-impl Serialize for f64
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_f64(*self)
-    }
-}
-
-impl Serialize for &str
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_str(self)
-    }
-}
-
-impl Serialize for bool
-{
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
-    {
-        s.serialize_bool(*self)
-    }
-}
+impl_primitive_de!(u8, deserialize_u8, accept_u8);
+impl_primitive_de!(u16, deserialize_u16, accept_u16);
+impl_primitive_de!(u32, deserialize_u32, accept_u32);
+impl_primitive_de!(u64, deserialize_u64, accept_u64);
+impl_primitive_de!(i8, deserialize_i8, accept_i8);
+impl_primitive_de!(i16, deserialize_i16, accept_i16);
+impl_primitive_de!(i32, deserialize_i32, accept_i32);
+impl_primitive_de!(i64, deserialize_i64, accept_i64);
+impl_primitive_de!(f32, deserialize_f32, accept_f32);
+impl_primitive_de!(f64, deserialize_f64, accept_f64);
+impl_primitive_de!(bool, deserialize_bool, accept_bool);
 
 impl<'a, T> Serialize for &'a T
 where
@@ -130,5 +106,26 @@ where
         }
 
         array_serializer.end()
+    }
+}
+
+impl<'de> Deserialize<'de> for &'de str
+{
+    fn deserialize<D: Deserializer<'de>>(d: &mut D) -> Result<&'de str, D::Err>
+    {
+        struct PrimVisitor;
+
+        impl<'de> Visitor<'de> for PrimVisitor
+        {
+            type Value = &'de str;
+            type Err = PrimitiveVisitorError;
+
+            fn accept_borrowed_str(&mut self, value: &'de str) -> Result<Self::Value, Self::Err>
+            {
+                Ok(value)
+            }
+        }
+
+        d.deserialize_str(&mut PrimVisitor)
     }
 }
