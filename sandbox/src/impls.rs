@@ -4,7 +4,7 @@ macro_rules! impl_primitive_ser {
     ($type:ty, $method:ident) => {
         impl Serialize for $type
         {
-            fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
+            fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
             {
                 s.$method(*self)
             }
@@ -26,7 +26,7 @@ macro_rules! impl_primitive_de {
     ($type:ty, $method:ident, $accept:ident) => {
         impl<'de> Deserialize<'de> for $type
         {
-            fn deserialize<D: Deserializer<'de>>(d: &mut D) -> Result<$type, D::Err>
+            fn deserialize<D: Deserializer<'de>>(d: D) -> Result<$type, D::Err>
             {
                 struct PrimVisitor;
 
@@ -35,7 +35,7 @@ macro_rules! impl_primitive_de {
                     type Value = $type;
                     type Err = PrimitiveVisitorError;
 
-                    fn $accept(&mut self, value: $type) -> Result<Self::Value, Self::Err>
+                    fn $accept(self, value: $type) -> Result<Self::Value, Self::Err>
                     {
                         Ok(value)
                     }
@@ -76,7 +76,7 @@ impl<'a, T> Serialize for &'a T
 where
     T: Serialize,
 {
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
+    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
     {
         (**self).serialize(s)
     }
@@ -86,7 +86,7 @@ impl<'a, T> Serialize for &'a mut T
 where
     T: Serialize,
 {
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
+    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
     {
         (**self).serialize(s)
     }
@@ -96,7 +96,7 @@ impl<T> Serialize for [T]
 where
     T: Serialize,
 {
-    fn serialize<'se, S: Serializer<'se>>(&self, s: &'se mut S) -> Result<S::Ok, S::Err>
+    fn serialize<S: Serializer>(&self, s: S) -> Result<S::Ok, S::Err>
     {
         let mut array_serializer = s.serialize_array(Some(self.len()))?;
 
@@ -111,7 +111,7 @@ where
 
 impl<'de> Deserialize<'de> for &'de str
 {
-    fn deserialize<D: Deserializer<'de>>(d: &mut D) -> Result<&'de str, D::Err>
+    fn deserialize<D: Deserializer<'de>>(d: D) -> Result<&'de str, D::Err>
     {
         struct PrimVisitor;
 
@@ -120,7 +120,7 @@ impl<'de> Deserialize<'de> for &'de str
             type Value = &'de str;
             type Err = PrimitiveVisitorError;
 
-            fn accept_borrowed_str(&mut self, value: &'de str) -> Result<Self::Value, Self::Err>
+            fn accept_borrowed_str(self, value: &'de str) -> Result<Self::Value, Self::Err>
             {
                 Ok(value)
             }

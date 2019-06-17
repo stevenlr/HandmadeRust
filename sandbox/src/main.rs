@@ -198,21 +198,21 @@ where
     }
 }
 
-impl<'se, W: 'se> Serializer<'se> for CborSerializer<W>
+impl<'a, W> Serializer for &'a mut CborSerializer<W>
 where
     W: Write,
 {
     type Ok = ();
     type Err = ();
-    type ArraySerializer = CborArraySerializer<'se, W>;
-    type MapSerializer = CborMapSerializer<'se, W>;
+    type ArraySerializer = CborArraySerializer<'a, W>;
+    type MapSerializer = CborMapSerializer<'a, W>;
 
-    fn serialize_u8(&'se mut self, value: u8) -> Result<Self::Ok, Self::Err>
+    fn serialize_u8(self, value: u8) -> Result<Self::Ok, Self::Err>
     {
         self.write_header_with_value(MajorType::UnsignedInteger, value as u64)
     }
 
-    fn serialize_i8(&'se mut self, value: i8) -> Result<Self::Ok, Self::Err>
+    fn serialize_i8(self, value: i8) -> Result<Self::Ok, Self::Err>
     {
         if value >= 0
         {
@@ -224,12 +224,12 @@ where
         }
     }
 
-    fn serialize_u16(&'se mut self, value: u16) -> Result<Self::Ok, Self::Err>
+    fn serialize_u16(self, value: u16) -> Result<Self::Ok, Self::Err>
     {
         self.write_header_with_value(MajorType::UnsignedInteger, value as u64)
     }
 
-    fn serialize_i16(&'se mut self, value: i16) -> Result<Self::Ok, Self::Err>
+    fn serialize_i16(self, value: i16) -> Result<Self::Ok, Self::Err>
     {
         if value >= 0
         {
@@ -241,12 +241,12 @@ where
         }
     }
 
-    fn serialize_u32(&'se mut self, value: u32) -> Result<Self::Ok, Self::Err>
+    fn serialize_u32(self, value: u32) -> Result<Self::Ok, Self::Err>
     {
         self.write_header_with_value(MajorType::UnsignedInteger, value as u64)
     }
 
-    fn serialize_i32(&'se mut self, value: i32) -> Result<Self::Ok, Self::Err>
+    fn serialize_i32(self, value: i32) -> Result<Self::Ok, Self::Err>
     {
         if value >= 0
         {
@@ -258,12 +258,12 @@ where
         }
     }
 
-    fn serialize_u64(&'se mut self, value: u64) -> Result<Self::Ok, Self::Err>
+    fn serialize_u64(self, value: u64) -> Result<Self::Ok, Self::Err>
     {
         self.write_header_with_value(MajorType::UnsignedInteger, value)
     }
 
-    fn serialize_i64(&'se mut self, value: i64) -> Result<Self::Ok, Self::Err>
+    fn serialize_i64(self, value: i64) -> Result<Self::Ok, Self::Err>
     {
         if value >= 0
         {
@@ -275,22 +275,19 @@ where
         }
     }
 
-    fn serialize_bytes(&'se mut self, value: &[u8]) -> Result<Self::Ok, Self::Err>
+    fn serialize_bytes(self, value: &[u8]) -> Result<Self::Ok, Self::Err>
     {
         self.write_header_with_value(MajorType::ByteString, value.len() as u64)
             .and_then(|_| self.write_bytes(value))
     }
 
-    fn serialize_str(&'se mut self, value: &str) -> Result<Self::Ok, Self::Err>
+    fn serialize_str(self, value: &str) -> Result<Self::Ok, Self::Err>
     {
         self.write_header_with_value(MajorType::TextString, value.as_bytes().len() as u64)
             .and_then(|_| self.write_bytes(value.as_bytes()))
     }
 
-    fn serialize_array(
-        &'se mut self,
-        len: Option<usize>,
-    ) -> Result<CborArraySerializer<'se, W>, Self::Err>
+    fn serialize_array(self, len: Option<usize>) -> Result<CborArraySerializer<'a, W>, Self::Err>
     {
         match len
         {
@@ -313,10 +310,7 @@ where
         }
     }
 
-    fn serialize_map(
-        &'se mut self,
-        len: Option<usize>,
-    ) -> Result<CborMapSerializer<'se, W>, Self::Err>
+    fn serialize_map(self, len: Option<usize>) -> Result<CborMapSerializer<'a, W>, Self::Err>
     {
         match len
         {
@@ -339,24 +333,24 @@ where
         }
     }
 
-    fn serialize_f32(&'se mut self, value: f32) -> Result<Self::Ok, Self::Err>
+    fn serialize_f32(self, value: f32) -> Result<Self::Ok, Self::Err>
     {
         self.write_u8(MajorType::FloatingPoint.make_header(F32))?;
         self.write_f32(value)
     }
 
-    fn serialize_f64(&'se mut self, value: f64) -> Result<Self::Ok, Self::Err>
+    fn serialize_f64(self, value: f64) -> Result<Self::Ok, Self::Err>
     {
         self.write_u8(MajorType::FloatingPoint.make_header(F64))?;
         self.write_f64(value)
     }
 
-    fn serialize_null(&'se mut self) -> Result<Self::Ok, Self::Err>
+    fn serialize_null(self) -> Result<Self::Ok, Self::Err>
     {
         self.write_u8(MajorType::Special.make_header(NULL))
     }
 
-    fn serialize_bool(&'se mut self, value: bool) -> Result<Self::Ok, Self::Err>
+    fn serialize_bool(self, value: bool) -> Result<Self::Ok, Self::Err>
     {
         let value = if value { TRUE } else { FALSE };
         self.write_u8(MajorType::Special.make_header(value))
