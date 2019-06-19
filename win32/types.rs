@@ -4,6 +4,7 @@ use core::ffi::c_void;
 
 pub type PVOID = *mut c_void;
 pub type LPVOID = *mut c_void;
+pub type LPCVOID = *const c_void;
 pub type HANDLE = PVOID;
 pub type HMODULE = HANDLE;
 pub type HICON = HANDLE;
@@ -13,10 +14,12 @@ pub type HINSTANCE = HANDLE;
 pub type HWND = HANDLE;
 pub type HMENU = HANDLE;
 pub type LPCSTR = *const u8;
+pub type LPCWSTR = *const u16;
 pub type FARPROC = *const c_void;
 pub type BOOL = i32;
 pub type DWORD = u32;
 pub type SIZE_T = usize;
+pub type ULONG_PTR = usize;
 pub type UINT = u32;
 pub type LPARAM = isize;
 pub type WPARAM = usize;
@@ -26,11 +29,14 @@ pub type ATOM = WORD;
 pub type LONG = i32;
 pub type LPMSG = *mut MSG;
 pub type LONG_PTR = isize;
+pub type LARGE_INTEGER = i64;
 
 pub type WNDPROC =
     unsafe extern "system" fn(hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;
 
 pub type ThreadProc = unsafe extern "system" fn(lpParameter: LPVOID) -> DWORD;
+
+pub const INVALID_HANDLE_VALUE: HANDLE = !0u64 as _;
 
 pub const CS_BYTEALIGNCLIENT: UINT = 0x1000;
 pub const CS_BYTEALIGNWINDOW: UINT = 0x2000;
@@ -384,6 +390,50 @@ pub const GWLP_WNDPROC: i32 = -4;
 
 pub const INFINITE: DWORD = 0xffffffff;
 
+pub const FILE_SHARE_DELETE: DWORD = 0x00000004;
+pub const FILE_SHARE_READ: DWORD = 0x00000001;
+pub const FILE_SHARE_WRITE: DWORD = 0x00000002;
+
+pub const GENERIC_ALL: DWORD = 1 << 28;
+pub const GENERIC_EXECUTE: DWORD = 1 << 29;
+pub const GENERIC_WRITE: DWORD = 1 << 30;
+pub const GENERIC_READ: DWORD = 1 << 31;
+
+pub const CREATE_ALWAYS: DWORD = 2;
+pub const CREATE_NEW: DWORD = 1;
+pub const OPEN_ALWAYS: DWORD = 4;
+pub const OPEN_EXISTING: DWORD = 3;
+pub const TRUNCATE_EXISTING: DWORD = 5;
+
+pub const ERROR_ALREADY_EXISTS: DWORD = 183;
+pub const ERROR_FILE_EXISTS: DWORD = 80;
+pub const ERROR_FILE_NOT_FOUND: DWORD = 2;
+
+pub const FILE_ATTRIBUTE_ARCHIVE: DWORD = 32;
+pub const FILE_ATTRIBUTE_ENCRYPTED: DWORD = 16384;
+pub const FILE_ATTRIBUTE_HIDDEN: DWORD = 2;
+pub const FILE_ATTRIBUTE_NORMAL: DWORD = 128;
+pub const FILE_ATTRIBUTE_OFFLINE: DWORD = 4096;
+pub const FILE_ATTRIBUTE_READONLY: DWORD = 1;
+pub const FILE_ATTRIBUTE_SYSTEM: DWORD = 4;
+pub const FILE_ATTRIBUTE_TEMPORARY: DWORD = 256;
+
+pub const FILE_FLAG_BACKUP_SEMANTICS: DWORD = 0x02000000;
+pub const FILE_FLAG_DELETE_ON_CLOSE: DWORD = 0x04000000;
+pub const FILE_FLAG_NO_BUFFERING: DWORD = 0x20000000;
+pub const FILE_FLAG_OPEN_NO_RECALL: DWORD = 0x00100000;
+pub const FILE_FLAG_OPEN_REPARSE_POINT: DWORD = 0x00200000;
+pub const FILE_FLAG_OVERLAPPED: DWORD = 0x40000000;
+pub const FILE_FLAG_POSIX_SEMANTICS: DWORD = 0x0100000;
+pub const FILE_FLAG_RANDOM_ACCESS: DWORD = 0x10000000;
+pub const FILE_FLAG_SESSION_AWARE: DWORD = 0x00800000;
+pub const FILE_FLAG_SEQUENTIAL_SCAN: DWORD = 0x08000000;
+pub const FILE_FLAG_WRITE_THROUGH: DWORD = 0x80000000;
+
+pub const FILE_BEGIN: DWORD = 0;
+pub const FILE_CURRENT: DWORD = 1;
+pub const FILE_END: DWORD = 2;
+
 #[repr(C)]
 pub struct WNDCLASSA
 {
@@ -424,4 +474,28 @@ pub struct SECURITY_ATTRIBUTES
     nLength: DWORD,
     lpSecurityDescriptor: LPVOID,
     bInheritHandle: BOOL,
+}
+
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct OVERLAPPED_INNER_INNER
+{
+    Offset: DWORD,
+    OffsetHigh: DWORD,
+}
+
+#[repr(C)]
+pub union OVERLAPPED_INNER
+{
+    Offset: OVERLAPPED_INNER_INNER,
+    Pointer: PVOID,
+}
+
+#[repr(C)]
+pub struct OVERLAPPED
+{
+    Internal: ULONG_PTR,
+    InternalHigh: ULONG_PTR,
+    union: OVERLAPPED_INNER,
+    hEvent: HANDLE,
 }

@@ -2,7 +2,9 @@
 
 pub mod alloc;
 pub mod containers;
+pub mod fs;
 pub mod hash;
+pub mod io;
 mod shared;
 pub mod str;
 mod unique;
