@@ -329,7 +329,7 @@ impl DeviceBuilder
         return index;
     }
 
-    pub fn build_device(self, queue_configs: &[QueueConfig])
+    pub fn build_device(self, queue_configs: &[QueueConfig]) -> VulkanContext
     {
         assert!(queue_configs.len() <= MAX_QUEUES);
 
@@ -353,16 +353,18 @@ impl DeviceBuilder
             panic!("Not all queue families were found");
         }
 
+        let queue_families: Array<_> = queue_families.iter().map(|q| q.unwrap()).collect();
+
         let mut queues_grouped = HashMap::<u32, usize>::new();
-        for q in queue_families
+        for q in queue_families.iter()
         {
-            let group = queues_grouped.find_mut(&q.unwrap());
+            let group = queues_grouped.find_mut(&q);
             match group
             {
                 Some(g) => *g += 1,
                 None =>
                 {
-                    queues_grouped.insert(q.unwrap(), 1);
+                    queues_grouped.insert(*q, 1);
                 }
             }
         }
@@ -398,6 +400,286 @@ impl DeviceBuilder
 
         let vk_device = vk::Device::new(vk_device, &self.vk_instance);
 
-        // @Todo Return all the necessary informations
+        let mut queues = Array::new();
+        queues.reserve(queue_families.len());
+
+        let mut queues_family_count = HashMap::<u32, usize>::new();
+
+        for q in queue_families.iter()
+        {
+            let group = queues_family_count.find_mut(&q);
+            let index = match group
+            {
+                Some(g) =>
+                {
+                    *g += 1;
+                    *g - 1
+                }
+                None =>
+                {
+                    queues_family_count.insert(*q, 1);
+                    0
+                }
+            };
+
+            queues.push(vk_device.get_device_queue(*q, index as u32));
+        }
+
+        VulkanContext {
+            entry: self.vk_entry,
+            instance: self.vk_instance,
+            debug_messenger: self.debug_messenger,
+            surface: self.surface,
+            gpu: self.gpu,
+            device: vk_device,
+            queue_families,
+            queues,
+            swapchain: None,
+        }
+    }
+}
+
+pub struct Swapchain
+{
+    swapchain: VkSwapchainKHR,
+    format: VkFormat,
+    images: Array<VkImage>,
+    image_views: Array<VkImageView>,
+}
+
+pub struct VulkanContext
+{
+    entry: vk::EntryPoint,
+    instance: vk::Instance,
+    debug_messenger: Option<VkDebugUtilsMessengerEXT>,
+    surface: Option<VkSurfaceKHR>,
+    gpu: VkPhysicalDevice,
+    device: vk::Device,
+    queue_families: Array<u32>,
+    queues: Array<VkQueue>,
+    swapchain: Option<Swapchain>,
+}
+
+pub struct SwapchainParams
+{
+    pub queue_index: usize,
+    pub image_count: usize,
+    pub format: VkFormat,
+    pub color_space: VkColorSpaceKHR,
+    pub present_mode: VkPresentModeKHR,
+}
+
+impl VulkanContext
+{
+    fn find_best_image_count(&self, preferred_count: u32) -> Result<u32, VkResult>
+    {
+        let surface_prps = self
+            .instance
+            .get_physical_device_surface_capabilities_khr(self.gpu, self.surface.unwrap())?
+            .1;
+
+        return Ok(surface_prps
+            .min_image_count
+            .max(surface_prps.max_image_count.min(preferred_count)));
+    }
+
+    fn find_best_surface_format(
+        &self,
+        preferred_format: VkFormat,
+        preferred_color_space: VkColorSpaceKHR,
+    ) -> Result<(VkFormat, VkColorSpaceKHR), VkResult>
+    {
+        let format_count = self
+            .instance
+            .get_physical_device_surface_formats_khr_count(self.gpu, self.surface.unwrap())?
+            .1;
+
+        let mut formats = Array::new();
+        formats.resize_default(format_count);
+
+        self.instance.get_physical_device_surface_formats_khr(
+            self.gpu,
+            self.surface.unwrap(),
+            &mut formats,
+        )?;
+
+        return if format_count == 1 && formats[0].format == VkFormat::UNDEFINED
+        {
+            Ok((preferred_format, preferred_color_space))
+        }
+        else
+        {
+            Ok(formats
+                .iter()
+                .filter(|f| f.format == preferred_format && f.color_space == preferred_color_space)
+                .nth(0)
+                .map(|f| (f.format, f.color_space))
+                .unwrap_or((
+                    VkFormat::B8G8R8A8_UNORM,
+                    VkColorSpaceKHR::SRGB_NONLINEAR_KHR,
+                )))
+        };
+    }
+
+    fn find_best_present_mode(
+        &self,
+        preferred_present_mode: VkPresentModeKHR,
+    ) -> Result<VkPresentModeKHR, VkResult>
+    {
+        let present_mode_count = self
+            .instance
+            .get_physical_device_surface_present_modes_khr_count(self.gpu, self.surface.unwrap())?
+            .1;
+
+        let mut present_modes = Array::new();
+        present_modes.resize_default(present_mode_count);
+
+        self.instance
+            .get_physical_device_surface_present_modes_khr(
+                self.gpu,
+                self.surface.unwrap(),
+                &mut present_modes,
+            )?;
+
+        return Ok(present_modes
+            .iter()
+            .copied()
+            .filter(|p| *p == preferred_present_mode)
+            .nth(0)
+            .unwrap_or(VkPresentModeKHR::FIFO_KHR));
+    }
+
+    pub fn init_swapchain(&mut self, params: &SwapchainParams)
+    {
+        assert!(self.surface.is_some());
+
+        let queue_families = &[self.queue_families[params.queue_index]];
+
+        let image_count = self
+            .find_best_image_count(params.image_count as u32)
+            .unwrap();
+
+        let (format, color_space) = self
+            .find_best_surface_format(params.format, params.color_space)
+            .unwrap();
+
+        let present_mode = self.find_best_present_mode(params.present_mode).unwrap();
+
+        let extent = self
+            .instance
+            .get_physical_device_surface_capabilities_khr(self.gpu, self.surface.unwrap())
+            .unwrap()
+            .1
+            .current_extent;
+
+        let create_info = VkSwapchainCreateInfoKHRBuilder::new()
+            .surface(self.surface.unwrap())
+            .min_image_count(image_count)
+            .image_format(format)
+            .image_color_space(color_space)
+            .image_extent(extent)
+            .image_array_layers(1)
+            .image_usage(VkImageUsageFlagBits::COLOR_ATTACHMENT_BIT)
+            .image_sharing_mode(VkSharingMode::EXCLUSIVE)
+            .p_queue_family_indices(queue_families)
+            .pre_transform(VkSurfaceTransformFlagBitsKHR::IDENTITY_BIT_KHR)
+            .composite_alpha(VkCompositeAlphaFlagBitsKHR::OPAQUE_BIT_KHR)
+            .present_mode(present_mode)
+            .clipped(true)
+            .old_swapchain(VkSwapchainKHR::null());
+
+        let swapchain = self
+            .device
+            .create_swapchain_khr(&create_info, None)
+            .unwrap()
+            .1;
+
+        let image_count = self
+            .device
+            .get_swapchain_images_khr_count(swapchain)
+            .unwrap()
+            .1;
+
+        let mut images = Array::new();
+        images.resize_default(image_count);
+
+        self.device
+            .get_swapchain_images_khr(swapchain, &mut images)
+            .unwrap();
+
+        let create_info = VkImageViewCreateInfoBuilder::new()
+            .view_type(VkImageViewType::K_2D)
+            .format(format)
+            .components(
+                VkComponentMappingBuilder::new()
+                    .r(VkComponentSwizzle::R)
+                    .g(VkComponentSwizzle::G)
+                    .b(VkComponentSwizzle::B)
+                    .a(VkComponentSwizzle::A)
+                    .build(),
+            )
+            .subresource_range(
+                VkImageSubresourceRangeBuilder::new()
+                    .aspect_mask(VkImageAspectFlags::COLOR_BIT)
+                    .base_mip_level(0)
+                    .base_array_layer(0)
+                    .level_count(1)
+                    .layer_count(1)
+                    .build(),
+            );
+
+        let image_views: Array<VkImageView> = images
+            .iter()
+            .map(|img| {
+                let create_info = create_info.clone().image(*img);
+                return self.device.create_image_view(&create_info, None).unwrap().1;
+            })
+            .collect();
+
+        let swapchain = Swapchain {
+            swapchain,
+            images,
+            image_views,
+            format,
+        };
+
+        self.swapchain = Some(swapchain);
+    }
+}
+
+impl Drop for VulkanContext
+{
+    fn drop(&mut self)
+    {
+        for queue in self.queues.iter()
+        {
+            self.device.queue_wait_idle(*queue).unwrap();
+        }
+
+        self.device.device_wait_idle().unwrap();
+
+        if let Some(swapchain) = &self.swapchain
+        {
+            swapchain.image_views.iter().for_each(|view| {
+                self.device.destroy_image_view(*view, None);
+            });
+
+            self.device.destroy_swapchain_khr(swapchain.swapchain, None);
+        }
+
+        self.device.destroy_device(None);
+
+        if let Some(surface) = self.surface
+        {
+            self.instance.destroy_surface_khr(surface, None);
+        }
+
+        if let Some(debug_messenger) = self.debug_messenger
+        {
+            self.instance
+                .destroy_debug_utils_messenger_ext(debug_messenger, None);
+        }
+
+        self.instance.destroy_instance(None);
     }
 }
