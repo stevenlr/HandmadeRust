@@ -50,4 +50,5 @@ extern "system" {
         lpNumberOfBytesRead: *mut DWORD,
         lpOverlapped: *mut OVERLAPPED,
     ) -> BOOL;
+    pub fn FlushFileBuffers(hFile: HANDLE) -> BOOL;
 }

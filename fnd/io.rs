@@ -1,6 +1,13 @@
+#[derive(Debug)]
 pub enum Error
 {
     InvalidOpenOptions,
+    CannotOpen,
+    CannotSeek,
+    CannotRead,
+    CannotWrite,
+    CannotFlush,
+    BufferTooLarge,
 }
 
 pub type Result<T> = core::result::Result<T, Error>;
@@ -13,7 +20,7 @@ pub trait Read
 pub trait Write
 {
     fn write(&mut self, buf: &[u8]) -> Result<usize>;
-    fn flush(&mut self);
+    fn flush(&mut self) -> Result<()>;
 }
 
 pub enum SeekOrigin

@@ -1,9 +1,11 @@
-use super::io::*;
+use super::{alloc::Allocator, containers::Array, io};
 
 use win32::{
-    kernel32::{CloseHandle, CreateFileW, ReadFile, SetFilePointerEx, WriteFile},
+    kernel32::{CloseHandle, CreateFileW, FlushFileBuffers, ReadFile, SetFilePointerEx, WriteFile},
     *,
 };
+
+use core::ptr::null_mut;
 
 mod private
 {
@@ -12,7 +14,7 @@ mod private
     }
 }
 
-#[derive(Default)]
+#[derive(Default, Clone)]
 pub struct OpenOptions
 {
     read: bool,
@@ -21,9 +23,9 @@ pub struct OpenOptions
     create: bool,
 }
 
-pub trait AsOpenOptions: private::Sealed
+pub trait ToOpenOptions: private::Sealed
 {
-    fn as_open_options(&self) -> &OpenOptions;
+    fn to_open_options(&self) -> OpenOptions;
 }
 
 pub struct ReadOptions(OpenOptions);
@@ -59,12 +61,12 @@ impl ReadOptions
 }
 
 impl private::Sealed for ReadOptions {}
-impl AsOpenOptions for ReadOptions
+impl ToOpenOptions for ReadOptions
 {
     #[inline]
-    fn as_open_options(&self) -> &OpenOptions
+    fn to_open_options(&self) -> OpenOptions
     {
-        &self.0
+        self.0.clone()
     }
 }
 
@@ -93,12 +95,12 @@ impl WriteOptions
 }
 
 impl private::Sealed for WriteOptions {}
-impl AsOpenOptions for WriteOptions
+impl ToOpenOptions for WriteOptions
 {
     #[inline]
-    fn as_open_options(&self) -> &OpenOptions
+    fn to_open_options(&self) -> OpenOptions
     {
-        &self.0
+        self.0.clone()
     }
 }
 
@@ -109,9 +111,161 @@ pub struct File
 
 impl File
 {
-    // @Todo Switch this to AsRef<Path> when, it's done
-    pub fn open(path: &str, options: impl AsOpenOptions)
+    // @Todo Switch this to AsRef<Path> when it's done
+    pub fn open<A: Allocator>(
+        path: &str,
+        options: impl ToOpenOptions,
+        alloc: A,
+    ) -> Result<File, io::Error>
     {
-        let options = options.as_open_options();
+        let mut path_utf16: Array<u16, A> = Array::new_with(alloc);
+        path_utf16.extend(path.encode_utf16());
+        path_utf16.push(0);
+
+        let options = options.to_open_options();
+
+        let (desired_access, share_mode) = match (options.read, options.write)
+        {
+            (true, false) => (GENERIC_READ, FILE_SHARE_READ),
+            (false, true) => (GENERIC_WRITE, 0),
+            (true, true) => (GENERIC_READ | GENERIC_WRITE, 0),
+            _ => return Err(io::Error::InvalidOpenOptions),
+        };
+
+        let creation_disposition = match (
+            options.read,
+            options.write,
+            options.create,
+            options.truncate,
+        )
+        {
+            (true, false, _, _) => OPEN_EXISTING,
+            (_, true, false, false) => OPEN_EXISTING,
+            (_, true, true, false) => OPEN_ALWAYS,
+            (_, true, false, true) => TRUNCATE_EXISTING,
+            (_, true, true, true) => CREATE_ALWAYS,
+            _ => return Err(io::Error::InvalidOpenOptions),
+        };
+
+        let handle = unsafe {
+            CreateFileW(
+                path_utf16.as_ptr(),
+                desired_access,
+                share_mode,
+                null_mut(),
+                creation_disposition,
+                FILE_ATTRIBUTE_NORMAL,
+                null_mut(),
+            )
+        };
+
+        match handle
+        {
+            INVALID_HANDLE_VALUE => Err(io::Error::CannotOpen),
+            _ => Ok(File { handle }),
+        }
+    }
+}
+
+impl Drop for File
+{
+    fn drop(&mut self)
+    {
+        unsafe {
+            CloseHandle(self.handle);
+        }
+    }
+}
+
+impl io::Seek for File
+{
+    fn seek(&mut self, pos: io::SeekOrigin) -> io::Result<usize>
+    {
+        let (method, distance) = match pos
+        {
+            io::SeekOrigin::Start(distance) => (FILE_BEGIN, distance),
+            io::SeekOrigin::End(distance) => (FILE_END, distance),
+            io::SeekOrigin::Current(distance) => (FILE_CURRENT, distance),
+        };
+
+        let mut new_file_ptr = 0;
+
+        let success =
+            unsafe { SetFilePointerEx(self.handle, distance as _, &mut new_file_ptr, method) != 0 };
+
+        match success
+        {
+            false => Err(io::Error::CannotSeek),
+            true => Ok(new_file_ptr as _),
+        }
+    }
+}
+
+impl io::Read for File
+{
+    fn read(&mut self, buf: &mut [u8]) -> io::Result<usize>
+    {
+        if buf.len() > core::u32::MAX as usize
+        {
+            return Err(io::Error::BufferTooLarge);
+        }
+
+        let mut bytes_read = 0;
+
+        let success = unsafe {
+            ReadFile(
+                self.handle,
+                buf.as_mut_ptr() as _,
+                buf.len() as _,
+                &mut bytes_read,
+                null_mut(),
+            ) != 0
+        };
+
+        match success
+        {
+            true => Ok(bytes_read as _),
+            false => Err(io::Error::CannotRead),
+        }
+    }
+}
+
+impl io::Write for File
+{
+    fn write(&mut self, buf: &[u8]) -> io::Result<usize>
+    {
+        if buf.len() > core::u32::MAX as usize
+        {
+            return Err(io::Error::BufferTooLarge);
+        }
+
+        let mut bytes_written = 0;
+
+        let success = unsafe {
+            WriteFile(
+                self.handle,
+                buf.as_ptr() as _,
+                buf.len() as _,
+                &mut bytes_written,
+                null_mut(),
+            ) != 0
+        };
+
+        match success
+        {
+            true => Ok(bytes_written as _),
+            false => Err(io::Error::CannotWrite),
+        }
+    }
+
+    fn flush(&mut self) -> io::Result<()>
+    {
+        let success = unsafe { FlushFileBuffers(self.handle) != 0 };
+
+        match success
+        {
+            true => Ok(()),
+            false => Err(io::Error::CannotFlush),
+        }
     }
 }
