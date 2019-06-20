@@ -131,17 +131,13 @@ impl<A: Allocator> hash::Hash for String<A>
 mod tests
 {
     use super::*;
-    use crate::{
-        alloc::SystemAllocator,
-        containers::{HashMap, HashSet},
-    };
+    use crate::containers::{HashMap, HashSet};
 
     #[test]
     fn str()
     {
-        let alloc = SystemAllocator::default();
-        let hello = String::from_str_with("hello", &alloc);
-        let mut world = String::from_str_with("world", &alloc);
+        let hello = String::from_str("hello");
+        let mut world = String::from_str("world");
         world.make_ascii_uppercase();
 
         assert!(hello.as_str() == "hello");
@@ -153,12 +149,11 @@ mod tests
     #[test]
     fn set()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashSet::new_with(&alloc);
+        let mut set = HashSet::new();
 
-        assert!(set.insert(String::from_str_with("hello", &alloc)));
-        assert!(set.insert(String::from_str_with("HELLO", &alloc)));
-        assert!(!set.insert(String::from_str_with("hello", &alloc)));
+        assert!(set.insert(String::from_str("hello")));
+        assert!(set.insert(String::from_str("HELLO")));
+        assert!(!set.insert(String::from_str("hello")));
         assert!(set.len() == 2);
         assert!(set.contains("hello"));
         assert!(!set.contains("world"));
@@ -167,10 +162,9 @@ mod tests
     #[test]
     fn map()
     {
-        let alloc = SystemAllocator::default();
-        let mut map = HashMap::new_with(&alloc);
+        let mut map = HashMap::new();
 
-        map.insert(String::from_str_with("Hello", &alloc), 42);
+        map.insert(String::from_str("Hello"), 42);
 
         assert!(map.find("Hello") == Some(&42));
         assert!(map.find("world") == None);

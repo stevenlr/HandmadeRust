@@ -1,17 +1,14 @@
-use super::{Allocator, Layout};
+use super::{Allocator, Layout, SystemAllocator};
 
-use core::{ffi::c_void, ptr::NonNull};
+use core::{cell::UnsafeCell, ffi::c_void, ptr::NonNull};
 
-static mut GLOBAL_ALLOCATOR: Option<&'static mut Allocator> = None;
+static mut GLOBAL_SYSTEM_ALLOCATOR: UnsafeCell<SystemAllocator> =
+    UnsafeCell::new(SystemAllocator {});
+static mut GLOBAL_ALLOCATOR: *mut Allocator = unsafe { GLOBAL_SYSTEM_ALLOCATOR.get() };
 
 pub unsafe fn set_global_allocator(alloc: &'static mut Allocator)
 {
-    if GLOBAL_ALLOCATOR.is_some()
-    {
-        panic!("Cannot set the global allocator twice");
-    }
-
-    GLOBAL_ALLOCATOR = Some(alloc);
+    GLOBAL_ALLOCATOR = alloc;
 }
 
 pub struct GlobalAllocator;
@@ -38,17 +35,11 @@ impl Allocator for GlobalAllocator
 {
     unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>
     {
-        GLOBAL_ALLOCATOR
-            .as_mut()
-            .expect("No global allocator defined")
-            .alloc(layout)
+        (*GLOBAL_ALLOCATOR).alloc(layout)
     }
 
     unsafe fn dealloc(&mut self, ptr: *mut c_void)
     {
-        GLOBAL_ALLOCATOR
-            .as_mut()
-            .expect("No global allocator defined")
-            .dealloc(ptr)
+        (*GLOBAL_ALLOCATOR).dealloc(ptr)
     }
 }

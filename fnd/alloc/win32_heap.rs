@@ -1,28 +1,16 @@
 use super::{Allocator, Layout};
 use core::{ffi::c_void, ptr::NonNull};
 
-use win32::{kernel32, HANDLE};
+use win32::kernel32;
 
-pub struct Win32HeapAllocator
-{
-    heap: HANDLE,
-}
+#[derive(Clone, Copy, Default)]
+pub struct Win32HeapAllocator;
 
-impl Default for Win32HeapAllocator
-{
-    fn default() -> Self
-    {
-        Self {
-            heap: unsafe { kernel32::GetProcessHeap() },
-        }
-    }
-}
-
-impl Allocator for &Win32HeapAllocator
+impl Allocator for Win32HeapAllocator
 {
     unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>
     {
-        let ptr = kernel32::HeapAlloc(self.heap, 0, layout.size);
+        let ptr = kernel32::HeapAlloc(kernel32::GetProcessHeap(), 0, layout.size);
 
         if ptr.is_null()
         {
@@ -36,7 +24,7 @@ impl Allocator for &Win32HeapAllocator
 
     unsafe fn dealloc(&mut self, ptr: *mut c_void)
     {
-        kernel32::HeapFree(self.heap, 0, ptr);
+        kernel32::HeapFree(kernel32::GetProcessHeap(), 0, ptr);
     }
 }
 
@@ -49,11 +37,10 @@ mod tests
     fn allocator()
     {
         unsafe {
-            let alloc = Win32HeapAllocator::default();
-            let mut alloc_ref = &alloc;
-            let ptr = alloc_ref.alloc(Layout::new(128));
+            let mut alloc = Win32HeapAllocator::default();
+            let ptr = alloc.alloc(Layout::new(128));
             assert!(ptr.is_some());
-            alloc_ref.dealloc(ptr.unwrap().as_ptr());
+            alloc.dealloc(ptr.unwrap().as_ptr());
         }
     }
 
@@ -81,8 +68,8 @@ mod tests
     fn multiple_refs()
     {
         let alloc = Win32HeapAllocator::default();
-        let mut c1 = Container::new(&alloc);
-        let mut c2 = Container::new(&alloc);
+        let mut c1 = Container::new(alloc);
+        let mut c2 = Container::new(alloc);
 
         c1.do_alloc(128);
         c2.do_alloc(64);

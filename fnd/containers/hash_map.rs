@@ -458,13 +458,11 @@ where
 mod tests
 {
     use super::*;
-    use crate::alloc::SystemAllocator;
 
     #[test]
     fn contains()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashMap::new_with(&alloc);
+        let mut set = HashMap::new();
         assert!(!set.contains(&5));
         assert!(set.insert(5, 4));
         assert!(set.insert(4, 4));
@@ -480,8 +478,7 @@ mod tests
     #[test]
     fn insert()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashMap::new_with(&alloc);
+        let mut set = HashMap::new();
 
         assert!(set.insert(5, 1));
         assert!(set.insert(4, 2));
@@ -494,8 +491,7 @@ mod tests
     #[test]
     fn len()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashMap::new_with(&alloc);
+        let mut set = HashMap::new();
 
         assert!(set.len() == 0);
         set.insert(3, 0);
@@ -509,8 +505,7 @@ mod tests
     #[test]
     fn remove()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashMap::new_with(&alloc);
+        let mut set = HashMap::new();
 
         set.insert(1, 0);
         set.insert(2, 0);
@@ -544,8 +539,7 @@ mod tests
     #[test]
     fn zst()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashMap::new_with(&alloc);
+        let mut set = HashMap::new();
 
         assert!(!set.contains(&()));
         assert!(!set.remove(&()));
@@ -563,8 +557,7 @@ mod tests
     #[test]
     fn find()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashMap::new_with(&alloc);
+        let mut set = HashMap::new();
 
         set.insert(0, 0);
         set.insert(1, 1);
@@ -588,8 +581,7 @@ mod tests
     #[test]
     fn iter_keys()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashMap::new_with(&alloc);
+        let mut set = HashMap::new();
 
         set.insert(0, 0);
         set.insert(1, 1);
@@ -611,8 +603,7 @@ mod tests
     #[test]
     fn iter_keys_values()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashMap::new_with(&alloc);
+        let mut set = HashMap::new();
 
         set.insert(0, 7);
         set.insert(1, 8);

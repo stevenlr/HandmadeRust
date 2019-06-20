@@ -234,7 +234,6 @@ where
 mod tests
 {
     use super::*;
-    use crate::alloc::SystemAllocator;
     use core::cell::Cell;
 
     struct Droppable<'a>
@@ -253,8 +252,7 @@ mod tests
     #[test]
     fn simple()
     {
-        let alloc = SystemAllocator::default();
-        let mut q = Queue::new_with(&alloc);
+        let mut q = Queue::new();
 
         assert!(q.is_empty());
         assert!(q.len() == 0);
@@ -297,8 +295,7 @@ mod tests
     #[test]
     fn wrap_around()
     {
-        let alloc = SystemAllocator::default();
-        let mut q = Queue::new_with(&alloc);
+        let mut q = Queue::new();
 
         q.reserve(3);
         q.push(1);
@@ -330,8 +327,7 @@ mod tests
     #[test]
     fn clear()
     {
-        let alloc = SystemAllocator::default();
-        let mut q = Queue::new_with(&alloc);
+        let mut q = Queue::new();
 
         q.reserve(3);
         q.push(1);
@@ -349,13 +345,11 @@ mod tests
     #[test]
     fn drop()
     {
-        let alloc = SystemAllocator::default();
-
         let d1 = Cell::new(false);
         let d2 = Cell::new(false);
         let d3 = Cell::new(false);
 
-        let mut q = Queue::new_with(&alloc);
+        let mut q = Queue::new();
 
         q.push(Droppable { dropped: &d1 });
         q.push(Droppable { dropped: &d2 });
@@ -381,8 +375,7 @@ mod tests
     #[test]
     fn reserve_normal()
     {
-        let alloc = SystemAllocator::default();
-        let mut q = Queue::new_with(&alloc);
+        let mut q = Queue::new();
 
         q.reserve(3);
         q.push(1);
@@ -401,8 +394,7 @@ mod tests
     #[test]
     fn reserve_wrap()
     {
-        let alloc = SystemAllocator::default();
-        let mut q = Queue::new_with(&alloc);
+        let mut q = Queue::new();
 
         q.reserve(3);
         q.push(1);
@@ -423,8 +415,7 @@ mod tests
     #[test]
     fn zst()
     {
-        let alloc = SystemAllocator::default();
-        let mut q = Queue::new_with(&alloc);
+        let mut q = Queue::new();
 
         q.push(());
         q.push(());

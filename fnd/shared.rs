@@ -288,7 +288,6 @@ impl<T: ?Sized, A: Allocator> Borrow<T> for Shared<T, A>
 mod tests
 {
     use super::*;
-    use crate::alloc::SystemAllocator;
     use core::{cell::RefCell, mem::drop};
 
     struct MyObject<'a>
@@ -324,19 +323,15 @@ mod tests
     #[test]
     fn simple()
     {
-        let alloc = SystemAllocator::default();
         let dropped = Cell::new(false);
 
         {
-            let p = Shared::new_with(
-                RefCell::new(MyObject {
-                    x: 1,
-                    y: 2,
-                    s: "hello",
-                    dropped: &dropped,
-                }),
-                &alloc,
-            );
+            let p = Shared::new(RefCell::new(MyObject {
+                x: 1,
+                y: 2,
+                s: "hello",
+                dropped: &dropped,
+            }));
 
             assert!(p.as_ref().borrow().x == 1);
             assert!(p.as_ref().borrow().y == 2);
@@ -363,18 +358,14 @@ mod tests
     #[test]
     fn multiple_references()
     {
-        let alloc = SystemAllocator::default();
         let dropped = Cell::new(false);
 
-        let p = Shared::new_with(
-            RefCell::new(MyObject {
-                x: 1,
-                y: 2,
-                s: "hello",
-                dropped: &dropped,
-            }),
-            &alloc,
-        );
+        let p = Shared::new(RefCell::new(MyObject {
+            x: 1,
+            y: 2,
+            s: "hello",
+            dropped: &dropped,
+        }));
 
         assert!(!dropped.get());
 
@@ -392,18 +383,14 @@ mod tests
     #[test]
     fn multiple_references_weak()
     {
-        let alloc = SystemAllocator::default();
         let dropped = Cell::new(false);
 
-        let p = Shared::new_with(
-            RefCell::new(MyObject {
-                x: 1,
-                y: 2,
-                s: "hello",
-                dropped: &dropped,
-            }),
-            &alloc,
-        );
+        let p = Shared::new(RefCell::new(MyObject {
+            x: 1,
+            y: 2,
+            s: "hello",
+            dropped: &dropped,
+        }));
 
         assert!(!dropped.get());
 
@@ -454,29 +441,27 @@ mod tests
         }
     }
 
-    fn create_dst<A: Allocator>(x: i32, alloc: A) -> Shared<dyn MyTrait, A>
+    fn create_dst(x: i32) -> Shared<dyn MyTrait>
     {
-        Shared::new_with(MyObject2 { x }, alloc)
+        Shared::new(MyObject2 { x })
     }
 
     #[test]
     fn dst()
     {
-        let alloc = SystemAllocator::default();
-        let my_dst = create_dst(42, &alloc);
+        let my_dst = create_dst(42);
         assert!(my_dst.do_something() == 42);
     }
 
-    fn create_closure<A: Allocator>(y: i32, alloc: A) -> Shared<Fn(i32) -> i32, A>
+    fn create_closure(y: i32) -> Shared<Fn(i32) -> i32>
     {
-        Shared::new_with(move |x| x + y, alloc)
+        Shared::new(move |x| x + y)
     }
 
     #[test]
     fn closure()
     {
-        let alloc = SystemAllocator::default();
-        let closure = create_closure(5, &alloc);
+        let closure = create_closure(5);
 
         assert!(closure(5) == 10);
         assert!(closure(6) == 11);

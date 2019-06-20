@@ -1,5 +1,3 @@
-use fnd::alloc::{set_global_allocator, SystemAllocator};
-
 use core::mem::transmute;
 use std::io::Write;
 
@@ -357,22 +355,8 @@ where
     }
 }
 
-fn init_global_allocator()
-{
-    static mut ALLOCATOR: Option<SystemAllocator> = None;
-    static mut ALLOCATOR_REF: Option<&SystemAllocator> = None;
-
-    unsafe {
-        ALLOCATOR = Some(SystemAllocator::default());
-        ALLOCATOR_REF = Some(ALLOCATOR.as_ref().unwrap());
-        set_global_allocator(ALLOCATOR_REF.as_mut().unwrap());
-    }
-}
-
 fn main()
 {
-    init_global_allocator();
-
     let mut file = std::fs::OpenOptions::new()
         .write(true)
         .create(true)

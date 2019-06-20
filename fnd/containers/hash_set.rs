@@ -66,13 +66,11 @@ where
 mod tests
 {
     use super::*;
-    use crate::alloc::SystemAllocator;
 
     #[test]
     fn contains()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashSet::new_with(&alloc);
+        let mut set = HashSet::new();
         assert!(!set.contains(&5));
         assert!(set.insert(5));
         assert!(set.insert(4));
@@ -88,8 +86,7 @@ mod tests
     #[test]
     fn insert()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashSet::new_with(&alloc);
+        let mut set = HashSet::new();
 
         assert!(set.insert(5));
         assert!(set.insert(4));
@@ -102,8 +99,7 @@ mod tests
     #[test]
     fn len()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashSet::new_with(&alloc);
+        let mut set = HashSet::new();
 
         assert!(set.len() == 0);
         set.insert(3);
@@ -117,8 +113,7 @@ mod tests
     #[test]
     fn remove()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashSet::new_with(&alloc);
+        let mut set = HashSet::new();
 
         set.insert(1);
         set.insert(2);
@@ -152,8 +147,7 @@ mod tests
     #[test]
     fn zst()
     {
-        let alloc = SystemAllocator::default();
-        let mut set = HashSet::new_with(&alloc);
+        let mut set = HashSet::new();
 
         assert!(!set.contains(&()));
         assert!(!set.remove(&()));

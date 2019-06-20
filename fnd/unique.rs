@@ -138,7 +138,6 @@ impl<T: ?Sized, A: Allocator> Unpin for Unq<T, A> {}
 mod tests
 {
     use super::*;
-    use crate::alloc::{set_global_allocator, SystemAllocator};
 
     struct MyObject<'a>
     {
@@ -173,19 +172,15 @@ mod tests
     #[test]
     fn simple()
     {
-        let alloc = SystemAllocator::default();
         let mut dropped = false;
 
         {
-            let mut p = Unq::new_with(
-                MyObject {
-                    x: 1,
-                    y: 2,
-                    s: "hello",
-                    dropped: &mut dropped,
-                },
-                &alloc,
-            );
+            let mut p = Unq::new(MyObject {
+                x: 1,
+                y: 2,
+                s: "hello",
+                dropped: &mut dropped,
+            });
 
             assert!(p.x == 1);
             assert!(p.y == 2);
@@ -227,29 +222,27 @@ mod tests
         }
     }
 
-    fn create_dst<A: Allocator>(x: i32, alloc: A) -> Unq<dyn MyTrait, A>
+    fn create_dst(x: i32) -> Unq<dyn MyTrait>
     {
-        Unq::new_with(MyObject2 { x }, alloc)
+        Unq::new(MyObject2 { x })
     }
 
     #[test]
     fn dst()
     {
-        let alloc = SystemAllocator::default();
-        let my_dst = create_dst(42, &alloc);
+        let my_dst = create_dst(42);
         assert!(my_dst.do_something() == 42);
     }
 
-    fn create_closure<A: Allocator>(y: i32, alloc: A) -> Unq<Fn(i32) -> i32, A>
+    fn create_closure(y: i32) -> Unq<Fn(i32) -> i32>
     {
-        Unq::new_with(move |x| x + y, alloc)
+        Unq::new(move |x| x + y)
     }
 
     #[test]
     fn closure()
     {
-        let alloc = SystemAllocator::default();
-        let closure = create_closure(5, &alloc);
+        let closure = create_closure(5);
 
         assert!(closure(5) == 10);
         assert!(closure(6) == 11);
@@ -258,8 +251,7 @@ mod tests
     #[test]
     fn leak()
     {
-        let alloc = SystemAllocator::default();
-        let int = Unq::new_with(45, &alloc);
+        let int = Unq::new(45);
         let int = Unq::leak(int);
         assert_eq!(45, *int);
     }
@@ -269,13 +261,6 @@ mod tests
     #[test]
     fn with_global()
     {
-        let alloc = SystemAllocator::default();
-        let mut alloc_ref = &alloc;
-
-        unsafe {
-            set_global_allocator(core::mem::transmute(&mut alloc_ref as &mut Allocator));
-        }
-
         let b = Unq::new(32);
         assert_eq!(32, *b);
         let b = Unq::leak(b);

@@ -311,7 +311,6 @@ impl<T, A: Allocator> IntoIterator for Array<T, A>
 mod tests
 {
     use super::*;
-    use crate::alloc::SystemAllocator;
     use core::cell::Cell;
 
     struct DropCheck<'a>
@@ -338,8 +337,7 @@ mod tests
     #[test]
     fn push_pop()
     {
-        let alloc = SystemAllocator::default();
-        let mut a = Array::new_with(&alloc);
+        let mut a = Array::new();
 
         a.push(1);
         a.push(2);
@@ -373,11 +371,10 @@ mod tests
     #[test]
     fn drop()
     {
-        let alloc = SystemAllocator::default();
         let dropped = Cell::new(0);
 
         {
-            let mut a = Array::new_with(&alloc);
+            let mut a = Array::new();
             a.push(DropCheck::new(&dropped));
         }
 
@@ -397,8 +394,7 @@ mod tests
     #[test]
     fn slice()
     {
-        let alloc = SystemAllocator::default();
-        let mut a = Array::new_with(&alloc);
+        let mut a = Array::new();
 
         a.push(1);
         a.push(2);
@@ -419,8 +415,7 @@ mod tests
     #[test]
     fn subslice()
     {
-        let alloc = SystemAllocator::default();
-        let mut a = Array::new_with(&alloc);
+        let mut a = Array::new();
 
         a.push(1);
         a.push(2);
@@ -451,8 +446,7 @@ mod tests
     #[test]
     fn iter()
     {
-        let alloc = SystemAllocator::default();
-        let mut a = Array::new_with(&alloc);
+        let mut a = Array::new();
 
         a.push(1);
         a.push(2);
@@ -474,8 +468,7 @@ mod tests
     #[test]
     fn resize()
     {
-        let alloc = SystemAllocator::default();
-        let mut a = Array::new_with(&alloc);
+        let mut a = Array::new();
 
         a.push(1);
         a.resize(3, 7);
@@ -492,8 +485,7 @@ mod tests
     #[test]
     fn extend()
     {
-        let alloc = SystemAllocator::default();
-        let mut a = Array::new_with(&alloc);
+        let mut a = Array::new();
 
         a.push(1);
         a.extend([7, 8].iter());
@@ -509,8 +501,7 @@ mod tests
     #[test]
     fn zst()
     {
-        let alloc = SystemAllocator::default();
-        let mut a = Array::new_with(&alloc);
+        let mut a = Array::new();
 
         a.push(());
         a.push(());
@@ -526,13 +517,12 @@ mod tests
     #[test]
     fn into_iter_drain_all()
     {
-        let alloc = SystemAllocator::default();
         let dropped1 = Cell::new(0);
         let dropped2 = Cell::new(0);
         let dropped3 = Cell::new(0);
 
         {
-            let mut a = Array::new_with(&alloc);
+            let mut a = Array::new();
             a.push(DropCheck::new(&dropped1));
             a.push(DropCheck::new(&dropped2));
             a.push(DropCheck::new(&dropped3));
@@ -552,13 +542,12 @@ mod tests
     #[test]
     fn into_iter_drain_some()
     {
-        let alloc = SystemAllocator::default();
         let dropped1 = Cell::new(0);
         let dropped2 = Cell::new(0);
         let dropped3 = Cell::new(0);
 
         {
-            let mut a = Array::new_with(&alloc);
+            let mut a = Array::new();
             a.push(DropCheck::new(&dropped1));
             a.push(DropCheck::new(&dropped2));
             a.push(DropCheck::new(&dropped3));
@@ -576,13 +565,12 @@ mod tests
     #[test]
     fn into_iter_drain_none()
     {
-        let alloc = SystemAllocator::default();
         let dropped1 = Cell::new(0);
         let dropped2 = Cell::new(0);
         let dropped3 = Cell::new(0);
 
         {
-            let mut a = Array::new_with(&alloc);
+            let mut a = Array::new();
             a.push(DropCheck::new(&dropped1));
             a.push(DropCheck::new(&dropped2));
             a.push(DropCheck::new(&dropped3));

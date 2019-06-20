@@ -4,29 +4,11 @@ mod vk_init;
 mod wsi;
 
 use core::mem::transmute;
-use fnd::{
-    alloc::{set_global_allocator, SystemAllocator},
-    containers::Array,
-    Unq,
-};
+use fnd::containers::Array;
 use vk::types::*;
 use vk_init::{init_vulkan, InstanceBuilder, QueueConfig};
 use win32::kernel32;
 use wsi::Window;
-
-static mut ALLOCATOR: Option<&SystemAllocator> = None;
-
-fn init_global_allocator()
-{
-    let allocator = SystemAllocator::default();
-    unsafe {
-        ALLOCATOR = Some(transmute(Unq::leak(Unq::new_with(
-            SystemAllocator::default(),
-            &allocator,
-        ))));
-        set_global_allocator(ALLOCATOR.as_mut().unwrap());
-    }
-}
 
 fn find_best_image_count(
     vk_instance: &vk::Instance,
@@ -108,8 +90,6 @@ fn find_best_present_mode(
 
 fn main()
 {
-    init_global_allocator();
-
     let window = Window::new(1280, 720, "Handmade Rust").unwrap();
 
     let vk_module = unsafe { kernel32::LoadLibraryA(b"vulkan-1.dll\0".as_ptr()) };

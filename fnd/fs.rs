@@ -1,4 +1,4 @@
-use super::{alloc::Allocator, containers::WString, io};
+use super::{containers::WString, io};
 
 use win32::{
     kernel32::{CloseHandle, CreateFileW, FlushFileBuffers, ReadFile, SetFilePointerEx, WriteFile},
@@ -112,13 +112,9 @@ pub struct File
 impl File
 {
     // @Todo Switch this to AsRef<Path> when it's done
-    pub fn open<A: Allocator>(
-        path: &str,
-        options: impl ToOpenOptions,
-        alloc: A,
-    ) -> Result<File, io::Error>
+    pub fn open(path: &str, options: impl ToOpenOptions) -> Result<File, io::Error>
     {
-        let mut path = WString::from_str_with(path, alloc);
+        let mut path = WString::from_str(path);
         path.push(0 as char);
 
         let options = options.to_open_options();
