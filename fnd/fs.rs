@@ -1,4 +1,4 @@
-use super::{alloc::Allocator, containers::Array, io};
+use super::{alloc::Allocator, containers::WString, io};
 
 use win32::{
     kernel32::{CloseHandle, CreateFileW, FlushFileBuffers, ReadFile, SetFilePointerEx, WriteFile},
@@ -118,9 +118,8 @@ impl File
         alloc: A,
     ) -> Result<File, io::Error>
     {
-        let mut path_utf16: Array<u16, A> = Array::new_with(alloc);
-        path_utf16.extend(path.encode_utf16());
-        path_utf16.push(0);
+        let mut path = WString::from_str_with(path, alloc);
+        path.push(0 as char);
 
         let options = options.to_open_options();
 
@@ -149,7 +148,7 @@ impl File
 
         let handle = unsafe {
             CreateFileW(
-                path_utf16.as_ptr(),
+                path.as_ptr(),
                 desired_access,
                 share_mode,
                 null_mut(),
