@@ -44,6 +44,13 @@ impl<A: Allocator> String<A>
     {
         self
     }
+
+    pub fn push(&mut self, c: char)
+    {
+        let mut bytes = [0u8; 4];
+        c.encode_utf8(&mut bytes);
+        self.buf.extend(bytes[0..c.len_utf8()].iter());
+    }
 }
 
 impl String<GlobalAllocator>
@@ -98,6 +105,14 @@ impl<A: Allocator> DerefMut for String<A>
 }
 
 impl<A: Allocator> fmt::Display for String<A>
+{
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
+    {
+        fmt::Display::fmt(self.as_str(), f)
+    }
+}
+
+impl<A: Allocator> fmt::Debug for String<A>
 {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result
     {
@@ -168,5 +183,15 @@ mod tests
 
         assert!(map.find("Hello") == Some(&42));
         assert!(map.find("world") == None);
+    }
+
+    #[test]
+    fn push()
+    {
+        let mut s = String::new();
+        s.push('a');
+        s.push('é');
+        s.push('漢');
+        assert_eq!(s, "aé漢");
     }
 }
