@@ -1,17 +1,32 @@
 #![feature(proc_macro_hygiene)]
+#![allow(unused)] // @Todo Remove this
 
+mod hal;
 mod vk_init;
 mod wsi;
 
-use core::mem::transmute;
+/*use core::mem::transmute;
 use fnd::dl::DynamicLibrary;
 use vk::types::*;
 use vk_init::{init_vulkan, InstanceBuilder, QueueConfig, SwapchainParams};
-use wsi::{Event, Window};
+use wsi::{Event, Window};*/
+
+use hal::Instance;
 
 fn main()
 {
-    let window = Window::new(1280, 720, "Handmade Rust").expect("Cannot create window");
+    let instance = hal::vulkan::Instance::create().unwrap();
+
+    let gpus = instance.enumerate_gpus();
+    for (index, gpu) in gpus.iter().enumerate()
+    {
+        println!("[{}] {}: {:?}", index, gpu.name, gpu.gpu_type);
+    }
+}
+
+fn main2()
+{
+    /*let window = Window::new(1280, 720, "Handmade Rust").expect("Cannot create window");
 
     let vk_module =
         DynamicLibrary::load("vulkan-1.dll").expect("Cannot load Vulkan dynamic library");
@@ -50,5 +65,5 @@ fn main()
     window.events_loop(|e| match *e
     {
         Event::DestroyWindow => false,
-    });
+    });*/
 }
