@@ -9,7 +9,8 @@ extern "system" {
     pub fn GetProcessHeap() -> HANDLE;
     pub fn HeapAlloc(heap: HANDLE, flags: DWORD, byte: SIZE_T) -> LPVOID;
     pub fn HeapFree(heap: HANDLE, flags: DWORD, mem: LPVOID) -> BOOL;
-    pub fn LoadLibraryA(lib_name: LPCSTR) -> HMODULE;
+    pub fn LoadLibraryW(lib_name: LPCWSTR) -> HMODULE;
+    pub fn FreeLibrary(hLibModule: HMODULE);
     pub fn CreateThread(
         lpThreadAttributes: *mut SECURITY_ATTRIBUTES,
         dwStackSize: SIZE_T,
