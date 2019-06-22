@@ -2,6 +2,7 @@
 
 pub mod alloc;
 pub mod containers;
+pub mod dl;
 pub mod fs;
 pub mod hash;
 pub mod io;

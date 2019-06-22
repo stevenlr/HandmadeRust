@@ -4,18 +4,22 @@ mod vk_init;
 mod wsi;
 
 use core::mem::transmute;
+use fnd::dl::DynamicLibrary;
 use vk::types::*;
 use vk_init::{init_vulkan, InstanceBuilder, QueueConfig, SwapchainParams};
-use win32::kernel32;
 use wsi::{Event, Window};
 
 fn main()
 {
-    let window = Window::new(1280, 720, "Handmade Rust").unwrap();
+    let window = Window::new(1280, 720, "Handmade Rust").expect("Cannot create window");
 
-    let vk_module = unsafe { kernel32::LoadLibraryA(b"vulkan-1.dll\0".as_ptr()) };
+    let vk_module =
+        DynamicLibrary::load("vulkan-1.dll").expect("Cannot load Vulkan dynamic library");
+
     let vk_entry = vk::EntryPoint::new(|fn_name| unsafe {
-        transmute(kernel32::GetProcAddress(vk_module, fn_name.as_ptr()))
+        vk_module
+            .get_symbol_from_bytes_null_terminated(fn_name)
+            .map(|f: *mut ()| transmute(f))
     });
 
     let queue_configs = [QueueConfig {
