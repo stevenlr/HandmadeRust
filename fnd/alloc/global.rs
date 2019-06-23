@@ -4,9 +4,9 @@ use core::{cell::UnsafeCell, ffi::c_void, ptr::NonNull};
 
 static mut GLOBAL_SYSTEM_ALLOCATOR: UnsafeCell<SystemAllocator> =
     UnsafeCell::new(SystemAllocator {});
-static mut GLOBAL_ALLOCATOR: *mut Allocator = unsafe { GLOBAL_SYSTEM_ALLOCATOR.get() };
+static mut GLOBAL_ALLOCATOR: *mut dyn Allocator = unsafe { GLOBAL_SYSTEM_ALLOCATOR.get() };
 
-pub unsafe fn set_global_allocator(alloc: &'static mut Allocator)
+pub unsafe fn set_global_allocator(alloc: &'static mut dyn Allocator)
 {
     GLOBAL_ALLOCATOR = alloc;
 }

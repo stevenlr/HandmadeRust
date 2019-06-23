@@ -72,9 +72,9 @@ fn parse_string_literal(mut s: &str) -> String
                         {
                             let hex_digit = match byte(&s, 0)
                             {
-                                b @ b'0'...b'9' => (b - b'0') as u32,
-                                b @ b'a'...b'f' => (b - b'a') as u32 + 10,
-                                b @ b'A'...b'F' => (b - b'A') as u32 + 10,
+                                b @ b'0'..=b'9' => (b - b'0') as u32,
+                                b @ b'a'..=b'f' => (b - b'a') as u32 + 10,
+                                b @ b'A'..=b'F' => (b - b'A') as u32 + 10,
                                 b'}' => break,
                                 _ => panic!("Invalid escaped literal"),
                             };
