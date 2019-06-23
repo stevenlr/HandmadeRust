@@ -27,13 +27,33 @@ impl From<VkPhysicalDeviceType> for hal::GpuType
     }
 }
 
+impl From<VkQueueFlags> for hal::QueueType
+{
+    fn from(vk_flags: VkQueueFlags) -> hal::QueueType
+    {
+        let has_graphics = vk_flags.contains(VkQueueFlags::GRAPHICS_BIT);
+        let has_compute = vk_flags.contains(VkQueueFlags::COMPUTE_BIT);
+        let has_transfer = vk_flags.contains(VkQueueFlags::TRANSFER_BIT);
+
+        match (has_graphics, has_compute, has_transfer)
+        {
+            (true, true, _) => hal::QueueType::General,
+            (true, false, _) => hal::QueueType::Graphics,
+            (false, true, _) => hal::QueueType::Compute,
+            (false, false, true) => hal::QueueType::Transfer,
+            _ => unreachable!(),
+        }
+    }
+}
+
 pub struct Backend;
 
 impl hal::Backend for Backend
 {
+    type Error = Error;
     type Instance = Instance;
     type PhysicalDevice = VkPhysicalDevice;
-    type Error = Error;
+    type QueueFamily = QueueFamily;
 }
 
 pub struct RawInstance
@@ -174,8 +194,10 @@ impl Instance
 
 impl hal::Instance<Backend> for Instance
 {
-    fn enumerate_gpus_with<A: Allocator>(&self, a: A)
-        -> Result<Array<hal::Gpu<Backend>, A>, Error>
+    fn enumerate_gpus_with<A: Allocator + Clone>(
+        &self,
+        a: A,
+    ) -> Result<Array<hal::Gpu<Backend, A>, A>, Error>
     {
         let gpu_count = self
             .raw
@@ -192,7 +214,7 @@ impl hal::Instance<Backend> for Instance
             .enumerate_physical_devices(&mut gpus)
             .map_err(|e| Error::VulkanError(e))?;
 
-        let mut result_gpus = Array::new_with(a);
+        let mut result_gpus = Array::new_with(a.clone());
         result_gpus.reserve(gpu_count);
 
         for gpu in gpus
@@ -207,15 +229,64 @@ impl hal::Instance<Backend> for Instance
             );
             let gpu_type = prps.device_type.into();
 
+            let queue_count = self
+                .raw
+                .instance
+                .get_physical_device_queue_family_properties_count(gpu);
+
+            let mut queues = Array::new();
+            queues.resize_default(queue_count);
+
+            self.raw
+                .instance
+                .get_physical_device_queue_family_properties(gpu, &mut queues);
+
+            let mut queue_families = Array::new_with(a.clone());
+            queue_families.reserve(queue_count);
+            queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamily {
+                queue_type: q.queue_flags.into(),
+                id,
+                count: q.queue_count,
+            }));
+
             let gpu_desc = hal::Gpu {
                 name,
                 gpu_type,
                 physical_device: gpu,
+                queue_families,
             };
 
             result_gpus.push(gpu_desc);
         }
 
         return Ok(result_gpus);
+    }
+}
+
+pub struct QueueFamily
+{
+    queue_type: hal::QueueType,
+    id: usize,
+    count: u32,
+}
+
+impl hal::QueueFamily for QueueFamily
+{
+    #[inline]
+    fn queue_type(&self) -> hal::QueueType
+    {
+        self.queue_type
+    }
+
+    #[inline]
+    fn id(&self) -> usize
+    {
+        self.id
+    }
+
+    #[inline]
+    fn count(&self) -> usize
+    {
+        self.count as usize
     }
 }
