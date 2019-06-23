@@ -1,4 +1,7 @@
-use fnd::containers::String;
+use fnd::{
+    alloc::{Allocator, GlobalAllocator},
+    containers::{Array, String},
+};
 
 pub mod vulkan;
 
@@ -6,6 +9,7 @@ pub trait Backend: Sized
 {
     type Instance: Instance<Self>;
     type PhysicalDevice;
+    type Error: core::fmt::Debug;
 }
 
 #[derive(Debug)]
@@ -27,5 +31,10 @@ pub struct Gpu<B: Backend>
 
 pub trait Instance<B: Backend>
 {
-    fn enumerate_gpus(&self) -> &[Gpu<B>];
+    fn enumerate_gpus_with<A: Allocator>(&self, a: A) -> Result<Array<Gpu<B>, A>, B::Error>;
+
+    fn enumerate_gpus(&self) -> Result<Array<Gpu<B>, GlobalAllocator>, B::Error>
+    {
+        self.enumerate_gpus_with(GlobalAllocator)
+    }
 }

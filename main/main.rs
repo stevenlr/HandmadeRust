@@ -5,6 +5,7 @@ mod hal;
 mod vk_init;
 mod wsi;
 
+use fnd::alloc::GlobalAllocator;
 /*use core::mem::transmute;
 use fnd::dl::DynamicLibrary;
 use vk::types::*;
@@ -17,7 +18,7 @@ fn main()
 {
     let instance = hal::vulkan::Instance::create().unwrap();
 
-    let gpus = instance.enumerate_gpus();
+    let gpus = instance.enumerate_gpus().unwrap();
     for (index, gpu) in gpus.iter().enumerate()
     {
         println!("[{}] {}: {:?}", index, gpu.name, gpu.gpu_type);
