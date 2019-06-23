@@ -54,6 +54,7 @@ impl hal::Backend for Backend
     type Instance = Instance;
     type PhysicalDevice = VkPhysicalDevice;
     type QueueFamily = QueueFamily;
+    type Queue = VkQueue;
     type Device = Device;
 }
 
@@ -268,7 +269,7 @@ impl hal::Instance<Backend> for Instance
         &self,
         gpu: VkPhysicalDevice,
         queues: &[(&QueueFamily, &[f32])],
-    ) -> Result<Device, Error>
+    ) -> Result<hal::CreatedDevice<Backend>, Error>
     {
         let mut queue_create_infos = Array::new();
         queue_create_infos.reserve(queues.len());
@@ -295,9 +296,29 @@ impl hal::Instance<Backend> for Instance
 
         let vk_device = vk::Device::new(vk_device, &self.raw.instance);
 
-        Ok(Device {
+        let mut created_queues = Array::new();
+
+        for (family, priorities) in queues
+        {
+            for index in 0..priorities.len()
+            {
+                let queue = vk_device.get_device_queue(family.id as u32, index as u32);
+
+                created_queues.push(hal::CreatedQueue {
+                    queue_type: family.queue_type,
+                    queue: Some(queue),
+                });
+            }
+        }
+
+        let device = Device {
             raw: Shared::new(RawDevice { device: vk_device }),
             instance: self.raw.clone(),
+        };
+
+        Ok(hal::CreatedDevice {
+            device: Some(device),
+            queues: created_queues,
         })
     }
 }

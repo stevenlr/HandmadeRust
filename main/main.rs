@@ -25,8 +25,13 @@ fn main()
     }
 
     let gpu = &gpus[0];
-    let device = instance
+    let mut created_device = instance
         .create_device(gpus[0].physical_device, &[(&gpu.queue_families[0], &[1.0])])
+        .unwrap();
+
+    let device = created_device.retrieve_device().unwrap();
+    let queue = created_device
+        .retrieve_queue::<hal::capabilities::General>(0)
         .unwrap();
 }
 

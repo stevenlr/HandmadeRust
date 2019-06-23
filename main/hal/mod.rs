@@ -11,6 +11,7 @@ pub trait Backend: Sized
     type Instance: Instance<Self>;
     type PhysicalDevice;
     type QueueFamily: QueueFamily;
+    type Queue;
     type Device: Device;
 }
 
@@ -30,7 +31,7 @@ pub trait Instance<B: Backend>
         &self,
         gpu: B::PhysicalDevice,
         queues: &[(&B::QueueFamily, &[f32])],
-    ) -> Result<B::Device, B::Error>;
+    ) -> Result<CreatedDevice<B>, B::Error>;
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -58,6 +59,90 @@ pub enum QueueType
     Compute,
     Transfer,
     General,
+}
+
+pub mod capabilities
+{
+    use super::QueueType;
+
+    pub trait Capability
+    {
+        fn supported_by(queue_type: QueueType) -> bool;
+    }
+
+    pub trait Supports<T: Capability>
+    {
+    }
+
+    pub struct Compute;
+    pub struct Graphics;
+    pub struct Transfer;
+    pub struct General;
+
+    impl Capability for Compute
+    {
+        #[inline]
+        fn supported_by(queue_type: QueueType) -> bool
+        {
+            match queue_type
+            {
+                QueueType::Compute => true,
+                QueueType::General => true,
+                _ => false,
+            }
+        }
+    }
+
+    impl Capability for Graphics
+    {
+        #[inline]
+        fn supported_by(queue_type: QueueType) -> bool
+        {
+            match queue_type
+            {
+                QueueType::General => true,
+                QueueType::Graphics => true,
+                _ => false,
+            }
+        }
+    }
+
+    impl Capability for Transfer
+    {
+        #[inline]
+        fn supported_by(queue_type: QueueType) -> bool
+        {
+            match queue_type
+            {
+                QueueType::Compute => true,
+                QueueType::General => true,
+                QueueType::Graphics => true,
+                QueueType::Transfer => true,
+            }
+        }
+    }
+
+    impl Capability for General
+    {
+        #[inline]
+        fn supported_by(queue_type: QueueType) -> bool
+        {
+            match queue_type
+            {
+                QueueType::General => true,
+                _ => false,
+            }
+        }
+    }
+
+    impl<T: Capability> Supports<T> for T {}
+
+    impl Supports<Transfer> for General {}
+    impl Supports<Compute> for General {}
+    impl Supports<Graphics> for General {}
+
+    impl Supports<Transfer> for Graphics {}
+    impl Supports<Transfer> for Compute {}
 }
 
 pub trait QueueFamily
@@ -92,6 +177,61 @@ pub trait QueueFamily
             {
                 true
             }
+        }
+    }
+}
+
+pub struct CreatedQueue<B: Backend>
+{
+    queue_type: QueueType,
+    queue: Option<B::Queue>,
+}
+
+pub struct CreatedDevice<B: Backend>
+{
+    device: Option<B::Device>,
+    queues: Array<CreatedQueue<B>>,
+}
+
+#[derive(Debug)]
+pub enum QueueRetrievalError
+{
+    QueueIndexOutOfBounds,
+    AlreadyRetrieved,
+    IncompatibleCapabilities,
+}
+
+impl<B: Backend> CreatedDevice<B>
+{
+    pub fn retrieve_device(&mut self) -> Result<B::Device, QueueRetrievalError>
+    {
+        core::mem::replace(&mut self.device, None).ok_or(QueueRetrievalError::AlreadyRetrieved)
+    }
+
+    pub fn retrieve_queue<C>(&mut self, index: usize) -> Result<B::Queue, QueueRetrievalError>
+    where
+        C: capabilities::Capability,
+    {
+        if index >= self.queues.len()
+        {
+            return Err(QueueRetrievalError::QueueIndexOutOfBounds);
+        }
+
+        if self.queues[index].queue.is_some()
+        {
+            if C::supported_by(self.queues[index].queue_type)
+            {
+                core::mem::replace(&mut self.queues[index].queue, None)
+                    .ok_or(QueueRetrievalError::AlreadyRetrieved)
+            }
+            else
+            {
+                Err(QueueRetrievalError::IncompatibleCapabilities)
+            }
+        }
+        else
+        {
+            Err(QueueRetrievalError::AlreadyRetrieved)
         }
     }
 }
