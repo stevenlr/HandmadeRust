@@ -54,6 +54,7 @@ impl hal::Backend for Backend
     type Instance = Instance;
     type PhysicalDevice = VkPhysicalDevice;
     type QueueFamily = QueueFamily;
+    type Device = Device;
 }
 
 pub struct RawInstance
@@ -110,6 +111,7 @@ pub enum InstanceError
 {
     CannotLoadLibrary,
     CreationError(VkResult),
+    DeviceCreationError(VkResult),
     InvalidPhysicalDeviceName,
 }
 
@@ -246,7 +248,7 @@ impl hal::Instance<Backend> for Instance
             queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamily {
                 queue_type: q.queue_flags.into(),
                 id,
-                count: q.queue_count,
+                count: q.queue_count as usize,
             }));
 
             let gpu_desc = hal::Gpu {
@@ -261,13 +263,50 @@ impl hal::Instance<Backend> for Instance
 
         return Ok(result_gpus);
     }
+
+    fn create_device(
+        &self,
+        gpu: VkPhysicalDevice,
+        queues: &[(&QueueFamily, &[f32])],
+    ) -> Result<Device, Error>
+    {
+        let mut queue_create_infos = Array::new();
+        queue_create_infos.reserve(queues.len());
+
+        for (family, priorities) in queues
+        {
+            let create_info = VkDeviceQueueCreateInfoBuilder::new()
+                .queue_family_index(family.id as u32)
+                .queue_count(priorities.len() as u32)
+                .p_queue_priorities(priorities);
+
+            queue_create_infos.push(create_info.build());
+        }
+
+        let create_info =
+            VkDeviceCreateInfoBuilder::new().p_queue_create_infos(&queue_create_infos);
+
+        let vk_device = self
+            .raw
+            .instance
+            .create_device(gpu, &create_info, None)
+            .map(|(_, device)| device)
+            .map_err(|e| Error::Instance(InstanceError::DeviceCreationError(e)))?;
+
+        let vk_device = vk::Device::new(vk_device, &self.raw.instance);
+
+        Ok(Device {
+            raw: Shared::new(RawDevice { device: vk_device }),
+            instance: self.raw.clone(),
+        })
+    }
 }
 
 pub struct QueueFamily
 {
     queue_type: hal::QueueType,
     id: usize,
-    count: u32,
+    count: usize,
 }
 
 impl hal::QueueFamily for QueueFamily
@@ -287,6 +326,27 @@ impl hal::QueueFamily for QueueFamily
     #[inline]
     fn count(&self) -> usize
     {
-        self.count as usize
+        self.count
     }
 }
+
+struct RawDevice
+{
+    device: vk::Device,
+}
+
+impl Drop for RawDevice
+{
+    fn drop(&mut self)
+    {
+        self.device.destroy_device(None);
+    }
+}
+
+pub struct Device
+{
+    raw: Shared<RawDevice>,
+    instance: Shared<RawInstance>,
+}
+
+impl hal::Device for Device {}

@@ -23,6 +23,11 @@ fn main()
     {
         println!("[{}] {}: {:?}", index, gpu.name, gpu.gpu_type);
     }
+
+    let gpu = &gpus[0];
+    let device = instance
+        .create_device(gpus[0].physical_device, &[(&gpu.queue_families[0], &[1.0])])
+        .unwrap();
 }
 
 fn main2()

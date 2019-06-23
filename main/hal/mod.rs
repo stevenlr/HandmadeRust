@@ -11,6 +11,7 @@ pub trait Backend: Sized
     type Instance: Instance<Self>;
     type PhysicalDevice;
     type QueueFamily: QueueFamily;
+    type Device: Device;
 }
 
 pub trait Instance<B: Backend>
@@ -24,6 +25,12 @@ pub trait Instance<B: Backend>
     {
         self.enumerate_gpus_with(GlobalAllocator)
     }
+
+    fn create_device(
+        &self,
+        gpu: B::PhysicalDevice,
+        queues: &[(&B::QueueFamily, &[f32])],
+    ) -> Result<B::Device, B::Error>;
 }
 
 #[derive(Clone, Copy, Debug)]
@@ -87,4 +94,8 @@ pub trait QueueFamily
             }
         }
     }
+}
+
+pub trait Device
+{
 }
