@@ -1,7 +1,6 @@
 #![feature(proc_macro_hygiene)]
 #![allow(unused)] // @Todo Remove this
 
-mod hal;
 mod vk_init;
 mod wsi;
 
@@ -12,11 +11,12 @@ use vk::types::*;
 use vk_init::{init_vulkan, InstanceBuilder, QueueConfig, SwapchainParams};
 use wsi::{Event, Window};*/
 
-use hal::Instance;
+use gfx_hal::{self, Instance};
+use gfx_vulkan_backend as gfx_vk;
 
 fn main()
 {
-    let instance = hal::vulkan::Instance::create().unwrap();
+    let instance = gfx_vk::Instance::create().unwrap();
 
     let gpus = instance.enumerate_gpus().unwrap();
     for (index, gpu) in gpus.iter().enumerate()
@@ -31,7 +31,7 @@ fn main()
 
     let device = created_device.retrieve_device().unwrap();
     let queue = created_device
-        .retrieve_queue::<hal::capabilities::General>(0)
+        .retrieve_queue::<gfx_hal::capabilities::General>(0)
         .unwrap();
 }
 

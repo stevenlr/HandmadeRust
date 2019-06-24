@@ -9,7 +9,8 @@ name = "main"
 path = "main.rs"
 
 [dependencies]
-vk = { path = "../vk" }
+vk = { path = "../vk" } # @Todo Remove this eventually
 fnd = { path = "../fnd" }
-win32 = { path = "../win32" }
-hash_macro = { path = "../hash_macro" }
+win32 = { path = "../win32" } # @Todo Remove this eventually
+gfx_hal = { path = "../gfx/hal" }
+gfx_vulkan_backend = { path = "../gfx/vulkan_backend" }

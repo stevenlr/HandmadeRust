@@ -1,0 +1,10 @@
+[package]
+name = "gfx_vulkan_backend"
+version = "0.1.0"
+authors = ["Steven Le Rouzic <steven.lerouzic@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+vk = { path = "../../vk" }
+fnd = { path = "../../fnd" }
+gfx_hal = { path = "../hal" }

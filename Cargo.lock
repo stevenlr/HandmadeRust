@@ -8,6 +8,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "gfx_hal"
+version = "0.1.0"
+dependencies = [
+ "fnd 0.1.0",
+]
+
+[[package]]
+name = "gfx_vulkan_backend"
+version = "0.1.0"
+dependencies = [
+ "fnd 0.1.0",
+ "gfx_hal 0.1.0",
+ "vk 0.1.0",
+]
+
+[[package]]
 name = "hash_macro"
 version = "0.1.0"
 dependencies = [
@@ -19,7 +35,8 @@ name = "main"
 version = "0.1.0"
 dependencies = [
  "fnd 0.1.0",
- "hash_macro 0.1.0",
+ "gfx_hal 0.1.0",
+ "gfx_vulkan_backend 0.1.0",
  "vk 0.1.0",
  "win32 0.1.0",
 ]

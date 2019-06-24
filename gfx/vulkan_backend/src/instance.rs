@@ -1,5 +1,6 @@
-use vk::{self, builders::*, types::*};
+use super::hal;
 
+use core::{ffi::c_void, mem::transmute};
 use fnd::{
     alloc::Allocator,
     containers::{Array, String},
@@ -7,61 +8,15 @@ use fnd::{
     str::CStr,
     Shared,
 };
+use vk::{self, builders::*, types::*};
 
-use core::{ffi::c_void, mem::transmute};
+use super::*;
+use crate::conv::*;
 
-use crate::hal;
-
-impl From<VkPhysicalDeviceType> for hal::GpuType
+pub(crate) struct RawInstance
 {
-    fn from(vk_type: VkPhysicalDeviceType) -> hal::GpuType
-    {
-        match vk_type
-        {
-            VkPhysicalDeviceType::CPU => hal::GpuType::Cpu,
-            VkPhysicalDeviceType::DISCRETE_GPU => hal::GpuType::DiscreteGpu,
-            VkPhysicalDeviceType::INTEGRATED_GPU => hal::GpuType::IntegratedGpu,
-            VkPhysicalDeviceType::VIRTUAL_GPU => hal::GpuType::VirtualGpu,
-            _ => hal::GpuType::Unknown,
-        }
-    }
-}
-
-impl From<VkQueueFlags> for hal::QueueType
-{
-    fn from(vk_flags: VkQueueFlags) -> hal::QueueType
-    {
-        let has_graphics = vk_flags.contains(VkQueueFlags::GRAPHICS_BIT);
-        let has_compute = vk_flags.contains(VkQueueFlags::COMPUTE_BIT);
-        let has_transfer = vk_flags.contains(VkQueueFlags::TRANSFER_BIT);
-
-        match (has_graphics, has_compute, has_transfer)
-        {
-            (true, true, _) => hal::QueueType::General,
-            (true, false, _) => hal::QueueType::Graphics,
-            (false, true, _) => hal::QueueType::Compute,
-            (false, false, true) => hal::QueueType::Transfer,
-            _ => unreachable!(),
-        }
-    }
-}
-
-pub struct Backend;
-
-impl hal::Backend for Backend
-{
-    type Error = Error;
-    type Instance = Instance;
-    type PhysicalDevice = VkPhysicalDevice;
-    type QueueFamily = QueueFamily;
-    type Queue = VkQueue;
-    type Device = Device;
-}
-
-pub struct RawInstance
-{
-    dl: DynamicLibrary,
-    entry: vk::EntryPoint,
+    _dl: DynamicLibrary,
+    _entry: vk::EntryPoint,
     instance: vk::Instance,
     debug_utils_messenger: Option<VkDebugUtilsMessengerEXT>,
 }
@@ -78,13 +33,6 @@ impl Drop for RawInstance
 
         self.instance.destroy_instance(None);
     }
-}
-
-#[derive(Debug)]
-pub enum Error
-{
-    Instance(InstanceError),
-    VulkanError(VkResult),
 }
 
 extern "system" fn messenger_cb(
@@ -186,8 +134,8 @@ impl Instance
 
         Ok(Self {
             raw: Shared::new(RawInstance {
-                dl,
-                entry: vk_entry,
+                _dl: dl,
+                _entry: vk_entry,
                 instance: vk_instance,
                 debug_utils_messenger,
             }),
@@ -230,7 +178,7 @@ impl hal::Instance<Backend> for Instance
                     .as_str()
                     .map_err(|_| Error::Instance(InstanceError::InvalidPhysicalDeviceName))?,
             );
-            let gpu_type = prps.device_type.into();
+            let gpu_type = vk_to_hal_gpu_type(prps.device_type);
 
             let queue_count = self
                 .raw
@@ -247,7 +195,7 @@ impl hal::Instance<Backend> for Instance
             let mut queue_families = Array::new_with(a.clone());
             queue_families.reserve(queue_count);
             queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamily {
-                queue_type: q.queue_flags.into(),
+                queue_type: vk_to_hal_queue_type(q.queue_flags),
                 id,
                 count: q.queue_count as usize,
             }));
@@ -322,52 +270,3 @@ impl hal::Instance<Backend> for Instance
         })
     }
 }
-
-pub struct QueueFamily
-{
-    queue_type: hal::QueueType,
-    id: usize,
-    count: usize,
-}
-
-impl hal::QueueFamily for QueueFamily
-{
-    #[inline]
-    fn queue_type(&self) -> hal::QueueType
-    {
-        self.queue_type
-    }
-
-    #[inline]
-    fn id(&self) -> usize
-    {
-        self.id
-    }
-
-    #[inline]
-    fn count(&self) -> usize
-    {
-        self.count
-    }
-}
-
-struct RawDevice
-{
-    device: vk::Device,
-}
-
-impl Drop for RawDevice
-{
-    fn drop(&mut self)
-    {
-        self.device.destroy_device(None);
-    }
-}
-
-pub struct Device
-{
-    raw: Shared<RawDevice>,
-    instance: Shared<RawInstance>,
-}
-
-impl hal::Device for Device {}
