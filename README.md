@@ -9,6 +9,8 @@ Crates
 ----------------
 
  - [`fnd`](fnd): A standard library replacement with allocator-aware containers.
+ - [`gfx_hal`](gfx/hal): Hardware abstraction layer. Inspired by [`gfx-rs`](https://github.com/gfx-rs/gfx).
+ - [`gfx_vulkan_backend`](gfx/vulkan_backend): Vulkan implementation of `gfx_hal`.
  - [`hash_macro`](hash_macro): Compile-time string literal hashing. Requires `proc_macro_hygiene` at the moment.
  - [`main`](main): The main application.
  - [`vk`](vk): Vulkan bindings, generated using [stevenlr/VkXml](https://github.com/stevenlr/VkXml).
