@@ -6,6 +6,7 @@ members = [
     "sandbox",
     "vk",
     "win32",
+    "wsi",
     "gfx/hal",
     "gfx/vulkan_backend",
 ]

@@ -17,14 +17,14 @@ pub trait Instance<B: Backend>
         self.enumerate_gpus_with(GlobalAllocator)
     }
 
-    fn create_device(
+    fn create_device<A: Allocator>(
         &self,
-        gpu: B::PhysicalDevice,
+        gpu: &Gpu<B, A>,
         queues: &[(&B::QueueFamily, &[f32])],
     ) -> Result<CreatedDevice<B>, B::Error>;
 }
 
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub enum GpuType
 {
     DiscreteGpu,

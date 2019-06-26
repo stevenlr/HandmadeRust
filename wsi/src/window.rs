@@ -1,10 +1,9 @@
-use super::{Event, EventQueue};
+use crate::{Event, EventQueue};
 use core::{
     pin::Pin,
     ptr::{null, null_mut},
 };
 use fnd::{containers::Array, Unq};
-use vk::{builders::*, types::*};
 use win32::{self, kernel32, user32};
 
 fn queue_event(window: win32::HWND, event: Event)
@@ -112,15 +111,16 @@ impl Window
         }
     }
 
-    pub fn create_vk_surface(&self, vk_instance: &vk::Instance) -> Result<VkSurfaceKHR, VkResult>
+    #[inline]
+    pub fn win32_hwnd(&self) -> win32::HWND
     {
-        let create_info = VkWin32SurfaceCreateInfoKHRBuilder::new()
-            .hinstance(self.hinstance)
-            .hwnd(self.window);
+        self.window
+    }
 
-        vk_instance
-            .create_win_32_surface_khr(&create_info, None)
-            .map(|p| p.1)
+    #[inline]
+    pub fn win32_hinstance(&self) -> win32::HINSTANCE
+    {
+        self.hinstance
     }
 
     fn handle_events(&self)

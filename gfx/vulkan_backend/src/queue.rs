@@ -1,7 +1,10 @@
-use super::hal;
+use vk::types::VkPhysicalDevice;
+
+use gfx_hal as hal;
 
 pub struct QueueFamily
 {
+    pub(crate) physical_device: VkPhysicalDevice,
     pub(crate) queue_type: hal::QueueType,
     pub(crate) id: usize,
     pub(crate) count: usize,

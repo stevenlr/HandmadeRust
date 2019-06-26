@@ -1,0 +1,9 @@
+[package]
+name = "wsi"
+version = "0.1.0"
+authors = ["Steven Le Rouzic <steven.lerouzic@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+fnd = { path = "../fnd" }
+win32 = { path = "../win32" }

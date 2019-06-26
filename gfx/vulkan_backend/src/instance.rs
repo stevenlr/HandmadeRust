@@ -9,6 +9,7 @@ use fnd::{
     Shared,
 };
 use vk::{self, builders::*, types::*};
+use wsi;
 
 use super::*;
 use crate::conv::*;
@@ -17,7 +18,7 @@ pub(crate) struct RawInstance
 {
     _dl: DynamicLibrary,
     _entry: vk::EntryPoint,
-    instance: vk::Instance,
+    pub(crate) instance: vk::Instance,
     debug_utils_messenger: Option<VkDebugUtilsMessengerEXT>,
 }
 
@@ -90,7 +91,19 @@ impl Instance
             .map_err(|e| Error::VulkanError(e))
     }
 
+    #[inline]
+    pub fn create_headless() -> Result<Self, Error>
+    {
+        Self::create_inner(false)
+    }
+
+    #[inline]
     pub fn create() -> Result<Self, Error>
+    {
+        Self::create_inner(true)
+    }
+
+    fn create_inner(with_surface: bool) -> Result<Self, Error>
     {
         let dl = DynamicLibrary::load("vulkan-1.dll")
             .ok_or(Error::Instance(InstanceError::CannotLoadLibrary))?;
@@ -108,6 +121,12 @@ impl Instance
         {
             extensions.push(VK_EXT_DEBUG_UTILS_EXTENSION_NAME__C.as_ptr());
             layers.push(b"VK_LAYER_KHRONOS_validation\0".as_ptr());
+        }
+
+        if with_surface
+        {
+            extensions.push(VK_KHR_SURFACE_EXTENSION_NAME__C.as_ptr());
+            extensions.push(VK_KHR_WIN32_SURFACE_EXTENSION_NAME__C.as_ptr());
         }
 
         let app_info = VkApplicationInfoBuilder::new();
@@ -140,6 +159,11 @@ impl Instance
                 debug_utils_messenger,
             }),
         })
+    }
+
+    pub fn create_surface(&self, window: &wsi::Window) -> Result<Surface, Error>
+    {
+        Surface::create(self.raw.clone(), window)
     }
 }
 
@@ -195,6 +219,7 @@ impl hal::Instance<Backend> for Instance
             let mut queue_families = Array::new_with(a.clone());
             queue_families.reserve(queue_count);
             queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamily {
+                physical_device: gpu,
                 queue_type: vk_to_hal_queue_type(q.queue_flags),
                 id,
                 count: q.queue_count as usize,
@@ -213,9 +238,9 @@ impl hal::Instance<Backend> for Instance
         return Ok(result_gpus);
     }
 
-    fn create_device(
+    fn create_device<A: Allocator>(
         &self,
-        gpu: VkPhysicalDevice,
+        gpu: &hal::Gpu<Backend, A>,
         queues: &[(&QueueFamily, &[f32])],
     ) -> Result<hal::CreatedDevice<Backend>, Error>
     {
@@ -238,7 +263,7 @@ impl hal::Instance<Backend> for Instance
         let vk_device = self
             .raw
             .instance
-            .create_device(gpu, &create_info, None)
+            .create_device(gpu.physical_device, &create_info, None)
             .map(|(_, device)| device)
             .map_err(|e| Error::Instance(InstanceError::DeviceCreationError(e)))?;
 

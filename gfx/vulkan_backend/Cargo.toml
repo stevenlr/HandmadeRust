@@ -8,3 +8,4 @@ edition = "2018"
 vk = { path = "../../vk" }
 fnd = { path = "../../fnd" }
 gfx_hal = { path = "../hal" }
+wsi = { path = "../../wsi" }

@@ -1,22 +1,15 @@
 #![feature(proc_macro_hygiene)]
-#![allow(unused)] // @Todo Remove this
 
-mod vk_init;
-mod wsi;
-
-use fnd::alloc::GlobalAllocator;
-/*use core::mem::transmute;
-use fnd::dl::DynamicLibrary;
-use vk::types::*;
-use vk_init::{init_vulkan, InstanceBuilder, QueueConfig, SwapchainParams};
-use wsi::{Event, Window};*/
-
-use gfx_hal::{self, Instance};
+use gfx_hal as hal;
+use gfx_hal::{self, Instance, QueueFamily, Surface};
 use gfx_vulkan_backend as gfx_vk;
 
 fn main()
 {
+    let window = wsi::Window::new(1280, 720, "Handmade Rust").expect("Window creation");
+
     let instance = gfx_vk::Instance::create().unwrap();
+    let surface = instance.create_surface(&window).expect("Surface creation");
 
     let gpus = instance.enumerate_gpus().unwrap();
     for (index, gpu) in gpus.iter().enumerate()
@@ -24,57 +17,43 @@ fn main()
         println!("[{}] {}: {:?}", index, gpu.name, gpu.gpu_type);
     }
 
-    let gpu = &gpus[0];
+    let (gpu, queue_family) = gpus
+        .iter()
+        .filter(|gpu| gpu.gpu_type == hal::GpuType::DiscreteGpu)
+        .filter_map(|gpu| {
+            gpu.queue_families
+                .iter()
+                .filter(|q| q.supports_graphics())
+                .filter(|q| surface.supports_queue_family(q))
+                .map(|q| (gpu, q))
+                .nth(0)
+        })
+        .nth(0)
+        .expect("No suitable GPU found");
+
     let mut created_device = instance
-        .create_device(gpus[0].physical_device, &[(&gpu.queue_families[0], &[1.0])])
+        .create_device(gpu, &[(queue_family, &[1.0])])
         .unwrap();
 
-    let device = created_device.retrieve_device().unwrap();
-    let queue = created_device
+    let _device = created_device.retrieve_device().unwrap();
+    let _queue = created_device
         .retrieve_queue::<gfx_hal::capabilities::General>(0)
         .unwrap();
-}
 
-fn main2()
-{
-    /*let window = Window::new(1280, 720, "Handmade Rust").expect("Cannot create window");
-
-    let vk_module =
-        DynamicLibrary::load("vulkan-1.dll").expect("Cannot load Vulkan dynamic library");
-
-    let vk_entry = vk::EntryPoint::new(|fn_name| unsafe {
-        vk_module
-            .get_symbol_from_bytes_null_terminated(fn_name)
-            .map(|f: *mut ()| transmute(f))
-    });
-
-    let queue_configs = [QueueConfig {
-        flags: VkQueueFlags::GRAPHICS_BIT | VkQueueFlags::TRANSFER_BIT | VkQueueFlags::COMPUTE_BIT,
-        supports_present: true,
-    }];
-
-    let mut vk_ctx = init_vulkan(vk_entry)
-        .enable_debug()
-        .enable_wsi()
-        .build()
-        .build_surface(&window)
-        .choose_gpu(|_, prps: &VkPhysicalDeviceProperties| {
-            prps.device_type == VkPhysicalDeviceType::DISCRETE_GPU
-        })
-        .build_device(&queue_configs);
-
-    let swapchain_params = SwapchainParams {
-        queue_index: 0,
-        image_count: 3,
-        format: VkFormat::B8G8R8A8_UNORM,
-        color_space: VkColorSpaceKHR::SRGB_NONLINEAR_KHR,
-        present_mode: VkPresentModeKHR::MAILBOX_KHR,
-    };
-
-    vk_ctx.init_swapchain(&swapchain_params);
-
-    window.events_loop(|e| match *e
+    window.events_loop(|event| match *event
     {
-        Event::DestroyWindow => false,
-    });*/
+        wsi::Event::DestroyWindow => false,
+    });
 }
+
+/*
+let swapchain_params = SwapchainParams {
+    queue_index: 0,
+    image_count: 3,
+    format: VkFormat::B8G8R8A8_UNORM,
+    color_space: VkColorSpaceKHR::SRGB_NONLINEAR_KHR,
+    present_mode: VkPresentModeKHR::MAILBOX_KHR,
+};
+
+vk_ctx.init_swapchain(&swapchain_params);
+*/
