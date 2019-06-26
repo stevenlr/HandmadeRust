@@ -15,6 +15,7 @@ Crates
  - [`main`](main): The main application.
  - [`vk`](vk): Vulkan bindings, generated using [stevenlr/VkXml](https://github.com/stevenlr/VkXml).
  - [`win32`](win32): Raw Win32 API bindings.
+ - [`wsi`](wsi): Windowing system integration. Handles windows and events.
 
 Blog series
 ----------------
