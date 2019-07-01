@@ -453,7 +453,7 @@ mod tests
         assert!(my_dst.do_something() == 42);
     }
 
-    fn create_closure(y: i32) -> Shared<Fn(i32) -> i32>
+    fn create_closure(y: i32) -> Shared<dyn Fn(i32) -> i32>
     {
         Shared::new(move |x| x + y)
     }

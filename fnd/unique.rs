@@ -234,7 +234,7 @@ mod tests
         assert!(my_dst.do_something() == 42);
     }
 
-    fn create_closure(y: i32) -> Unq<Fn(i32) -> i32>
+    fn create_closure(y: i32) -> Unq<dyn Fn(i32) -> i32>
     {
         Unq::new(move |x| x + y)
     }
