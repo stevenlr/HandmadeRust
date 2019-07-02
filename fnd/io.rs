@@ -119,6 +119,11 @@ where
         self.buffer >>= bit_count;
         return value;
     }
+
+    pub fn skip_to_next_byte(&mut self)
+    {
+        self.consume(self.buffer_size % 8);
+    }
 }
 
 #[cfg(test)]
@@ -154,8 +159,9 @@ mod tests
         assert_eq!(bit_reader.peek(6), 0b01_0110);
         assert_eq!(bit_reader.peek(7), 0b001_0110);
         assert_eq!(bit_reader.peek(8), 0b1001_0110);
-        assert_eq!(bit_reader.consume(8), 0b1001_0110);
-        assert_eq!(bit_reader.consume(24), 0b1111_1100_1101_1010_1011_1000);
+        assert_eq!(bit_reader.consume(3), 0b110);
+        bit_reader.skip_to_next_byte();
+        assert_eq!(bit_reader.consume(28), 0b1111_1100_1101_1010_1011_1000_1001);
         assert_eq!(bit_reader.peek(8), 0b1110);
         assert_eq!(bit_reader.peek(4), 0b1110);
         assert_eq!(bit_reader.peek(32), 0b1110);

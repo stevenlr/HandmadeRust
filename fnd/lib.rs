@@ -9,6 +9,7 @@ pub mod io;
 mod shared;
 pub mod str;
 mod unique;
+pub mod zlib;
 
 pub use shared::Shared;
 pub use unique::Unq;
