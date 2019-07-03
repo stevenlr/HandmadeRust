@@ -639,7 +639,7 @@ class CmdReturnSingleGenerator(CmdGenerator):
             is_return_type_result = True
         else:
             fp.write(" -> %s {\n" % to_rust_type_deep(self.output.id.type.inner))
-        fp.write("        let mut ret_value = unsafe { core::mem::uninitialized() };\n")
+        fp.write("        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };\n")
         fp.write("        #[allow(unused)]\n")
         fp.write("        let ret = unsafe {\n")
         fp.write("            self.%s.%s(" % (self.cmd.type[0], inner_fn_name))

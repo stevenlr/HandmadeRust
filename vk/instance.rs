@@ -42,7 +42,7 @@ impl Instance
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkSurfaceKHR), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i.create_win_32_surface_khr(
@@ -167,7 +167,7 @@ impl Instance
         surface: VkSurfaceKHR,
     ) -> Result<(VkResult, VkSurfaceCapabilitiesKHR), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_surface_capabilities_khr(
@@ -190,7 +190,7 @@ impl Instance
         surface: VkSurfaceKHR,
     ) -> Result<(VkResult, bool), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_surface_support_khr(
@@ -273,7 +273,7 @@ impl Instance
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkDebugUtilsMessengerEXT), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i.create_debug_utils_messenger_ext(
@@ -551,7 +551,7 @@ impl Instance
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkDevice), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i.create_device(
@@ -588,7 +588,7 @@ impl Instance
         physical_device: VkPhysicalDevice,
     ) -> VkPhysicalDeviceMemoryProperties
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i
@@ -636,7 +636,7 @@ impl Instance
         physical_device: VkPhysicalDevice,
     ) -> VkPhysicalDeviceProperties
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i
@@ -655,7 +655,7 @@ impl Instance
         flags: VkImageCreateFlags,
     ) -> Result<(VkResult, VkImageFormatProperties), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i.get_physical_device_image_format_properties(
@@ -681,7 +681,7 @@ impl Instance
         format: VkFormat,
     ) -> VkFormatProperties
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i
@@ -695,7 +695,7 @@ impl Instance
         physical_device: VkPhysicalDevice,
     ) -> VkPhysicalDeviceFeatures
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.i

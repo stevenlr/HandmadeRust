@@ -134,7 +134,7 @@ impl EntryPoint
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkInstance), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::uninitialized() };
+        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
         #[allow(unused)]
         let ret = unsafe {
             self.e.create_instance(
