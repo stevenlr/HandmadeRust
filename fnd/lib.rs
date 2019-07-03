@@ -11,5 +11,5 @@ pub mod str;
 mod unique;
 pub mod zlib;
 
-pub use shared::Shared;
+pub use shared::{Shared, Weak};
 pub use unique::Unq;

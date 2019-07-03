@@ -1,3 +1,5 @@
+#![allow(unused)]
+
 use core::mem::transmute;
 use std::io::Write;
 

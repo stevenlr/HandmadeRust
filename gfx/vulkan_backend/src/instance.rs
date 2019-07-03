@@ -68,6 +68,7 @@ pub enum InstanceError
 pub struct Instance
 {
     raw: Shared<RawInstance>,
+    with_surface: bool,
 }
 
 impl Instance
@@ -158,6 +159,7 @@ impl Instance
                 instance: vk_instance,
                 debug_utils_messenger,
             }),
+            with_surface,
         })
     }
 
@@ -257,8 +259,15 @@ impl hal::Instance<Backend> for Instance
             queue_create_infos.push(create_info.build());
         }
 
-        let create_info =
-            VkDeviceCreateInfoBuilder::new().p_queue_create_infos(&queue_create_infos);
+        let mut extensions = Array::new();
+        if self.with_surface
+        {
+            extensions.push(VK_KHR_SWAPCHAIN_EXTENSION_NAME__C.as_ptr());
+        }
+
+        let create_info = VkDeviceCreateInfoBuilder::new()
+            .p_queue_create_infos(&queue_create_infos)
+            .pp_enabled_extension_names(&extensions);
 
         let vk_device = self
             .raw
@@ -286,6 +295,7 @@ impl hal::Instance<Backend> for Instance
 
         let device = Device {
             raw: Shared::new(RawDevice { device: vk_device }),
+            gpu: gpu.physical_device,
             instance: self.raw.clone(),
         };
 

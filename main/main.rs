@@ -1,7 +1,7 @@
 #![feature(proc_macro_hygiene)]
 
 use gfx_hal as hal;
-use gfx_hal::{self, Instance, QueueFamily, Surface};
+use gfx_hal::{self, Device, Instance, QueueFamily, Surface};
 use gfx_vulkan_backend as gfx_vk;
 
 fn main()
@@ -35,25 +35,27 @@ fn main()
         .create_device(gpu, &[(queue_family, &[1.0])])
         .unwrap();
 
-    let _device = created_device.retrieve_device().unwrap();
+    let device = created_device.retrieve_device().unwrap();
     let _queue = created_device
         .retrieve_queue::<gfx_hal::capabilities::General>(0)
+        .unwrap();
+
+    let swapchain = device
+        .create_swapchain(
+            &surface,
+            &hal::SwapchainConfig {
+                format: hal::Format::Bgr8Unorm,
+                image_count: 3,
+                present_mode: hal::PresentMode::Mailbox,
+                queue_family: queue_family,
+            },
+        )
         .unwrap();
 
     window.events_loop(|event| match *event
     {
         wsi::Event::DestroyWindow => false,
     });
+
+    device.destroy_swapchain(swapchain);
 }
-
-/*
-let swapchain_params = SwapchainParams {
-    queue_index: 0,
-    image_count: 3,
-    format: VkFormat::B8G8R8A8_UNORM,
-    color_space: VkColorSpaceKHR::SRGB_NONLINEAR_KHR,
-    present_mode: VkPresentModeKHR::MAILBOX_KHR,
-};
-
-vk_ctx.init_swapchain(&swapchain_params);
-*/

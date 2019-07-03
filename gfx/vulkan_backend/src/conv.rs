@@ -28,3 +28,33 @@ pub(crate) fn vk_to_hal_queue_type(vk_flags: VkQueueFlags) -> hal::QueueType
         _ => unreachable!(),
     }
 }
+
+pub(crate) fn hal_to_vk_format(format: hal::Format) -> VkFormat
+{
+    match format
+    {
+        hal::Format::Rgb8Unorm => VkFormat::R8G8B8_UNORM,
+        hal::Format::Rgb8Snorm => VkFormat::R8G8B8_SNORM,
+        hal::Format::Rgb8Srgb => VkFormat::R8G8B8_SRGB,
+        hal::Format::Bgr8Unorm => VkFormat::B8G8R8_UNORM,
+        hal::Format::Bgr8Snorm => VkFormat::B8G8R8_SNORM,
+        hal::Format::Bgr8Srgb => VkFormat::B8G8R8_SRGB,
+        hal::Format::Rgba8Unorm => VkFormat::R8G8B8A8_UNORM,
+        hal::Format::Rgba8Snorm => VkFormat::R8G8B8A8_SNORM,
+        hal::Format::Rgba8Srgb => VkFormat::R8G8B8A8_SRGB,
+        hal::Format::Bgra8Unorm => VkFormat::B8G8R8A8_UNORM,
+        hal::Format::Bgra8Snorm => VkFormat::B8G8R8A8_SNORM,
+        hal::Format::Bgra8Srgb => VkFormat::B8G8R8A8_SRGB,
+    }
+}
+
+pub(crate) fn hal_to_vk_present_mode(present_mode: hal::PresentMode) -> VkPresentModeKHR
+{
+    match present_mode
+    {
+        hal::PresentMode::Fifo => VkPresentModeKHR::FIFO_KHR,
+        hal::PresentMode::Immediate => VkPresentModeKHR::IMMEDIATE_KHR,
+        hal::PresentMode::Mailbox => VkPresentModeKHR::MAILBOX_KHR,
+        hal::PresentMode::Relaxed => VkPresentModeKHR::FIFO_RELAXED_KHR,
+    }
+}

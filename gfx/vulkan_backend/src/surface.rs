@@ -5,15 +5,15 @@ use wsi;
 
 use super::{Backend, Error, QueueFamily, RawInstance};
 
-struct RawSurface
+pub(crate) struct RawSurface
 {
-    surface: VkSurfaceKHR,
+    pub(crate) surface: VkSurfaceKHR,
     raw_instance: Shared<RawInstance>,
 }
 
 pub struct Surface
 {
-    raw: Shared<RawSurface>,
+    pub(crate) raw: Shared<RawSurface>,
 }
 
 impl Surface

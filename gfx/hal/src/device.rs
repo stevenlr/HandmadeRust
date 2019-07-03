@@ -1,4 +1,4 @@
-use super::{capabilities, Backend, QueueType};
+use super::{capabilities, Backend, QueueType, SwapchainConfig};
 
 use fnd::containers::Array;
 
@@ -57,6 +57,12 @@ impl<B: Backend> CreatedDevice<B>
     }
 }
 
-pub trait Device
+pub trait Device<B: Backend>
 {
+    fn create_swapchain(
+        &self,
+        surface: &B::Surface,
+        config: &SwapchainConfig<B>,
+    ) -> Result<B::Swapchain, B::Error>;
+    fn destroy_swapchain(&self, swapchain: B::Swapchain);
 }
