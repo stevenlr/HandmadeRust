@@ -12,7 +12,9 @@ impl DynamicLibrary
     {
         // @Todo Use small stack allocator when UTF-16 length is small.
         // Same thing in get_symbol.
-        let name = WString::from_str(name);
+        let mut name = WString::from_str(name);
+        name.push('\0');
+
         let module = unsafe { LoadLibraryW(name.as_ptr()) };
 
         if module.is_null()

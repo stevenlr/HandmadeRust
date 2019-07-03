@@ -256,11 +256,6 @@ pub fn inflate_with<A: Allocator>(input: &[u8], alloc: A) -> Result<Array<u8, A>
                 build_huffman_codes_in_place(&mut codes[0..nlit as usize]);
                 build_huffman_codes_in_place(&mut codes[nlit as usize..]);
 
-                unimplemented!();
-                // @Todo This is not actually unimplemented, but it's not
-                // tested yet so I want to be notified if anything goes through this code path
-                // before it has been properly tested.
-
                 (nlit as usize, ndist as usize)
             }
             else
@@ -360,7 +355,7 @@ fn build_huffman_decode_lookup<A: Allocator>(
 {
     decode_lookup.resize_default(1 << MAX_HUFFMAN_CODE_LEN);
 
-    for (code_index, code) in codes.iter().filter(|c| c.len > 0).enumerate()
+    for (code_index, code) in codes.iter().enumerate().filter(|(_, c)| c.len > 0)
     {
         let remaining_bits = MAX_HUFFMAN_CODE_LEN - code.len as usize;
         let fill_count = 1 << remaining_bits;
@@ -410,18 +405,20 @@ fn build_fixed_huffman_codes<A: Allocator>(codes: &mut Array<HuffmanCode, A>)
 pub(self) fn build_huffman_codes_in_place(codes: &mut [HuffmanCode])
 {
     // Count code of each length
-    let mut bl_count = [0; MAX_HUFFMAN_CODE_LEN];
+    let mut bl_count = [0; MAX_HUFFMAN_CODE_LEN + 1];
     codes
         .iter()
         .for_each(|code| bl_count[code.len as usize] += 1);
 
+    bl_count[0] = 0;
+
     // Compute first code of each bit length
-    let mut next_code = [0; MAX_HUFFMAN_CODE_LEN];
+    let mut next_code = [0; MAX_HUFFMAN_CODE_LEN + 1];
     let mut code = 0;
     for bits in 1..=MAX_HUFFMAN_CODE_LEN
     {
         code = (code + bl_count[bits - 1]) << 1;
-        next_code[bits - 1] = code;
+        next_code[bits] = code;
     }
 
     // Assign value to each code
@@ -429,8 +426,8 @@ pub(self) fn build_huffman_codes_in_place(codes: &mut [HuffmanCode])
     {
         if code.len > 0
         {
-            code.code = next_code[code.len as usize - 1];
-            next_code[code.len as usize - 1] += 1;
+            code.code = next_code[code.len as usize];
+            next_code[code.len as usize] += 1;
         }
     }
 }
@@ -483,13 +480,11 @@ mod tests
     #[test]
     fn compressed4()
     {
-        const COMPRESSED: &[u8] = include_bytes!("../text.txt");
+        const COMPRESSED: &[u8] = include_bytes!("test_data/lorem_ipsum_deflate.bin");
+        const DECOMPRESSED: &str = include_str!("test_data/lorem_ipsum.txt");
 
         let output = inflate(COMPRESSED).unwrap();
-        assert_eq!(
-            core::str::from_utf8(&output).unwrap(),
-            "aaaaaaaabbbbbbbbaaaaaaaa"
-        );
+        assert_eq!(core::str::from_utf8(&output).unwrap(), DECOMPRESSED);
     }
 
     #[test]
