@@ -639,7 +639,7 @@ class CmdReturnSingleGenerator(CmdGenerator):
             is_return_type_result = True
         else:
             fp.write(" -> %s {\n" % to_rust_type_deep(self.output.id.type.inner))
-        fp.write("        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };\n")
+        fp.write("        let mut ret_value = core::mem::MaybeUninit::uninit();\n")
         fp.write("        #[allow(unused)]\n")
         fp.write("        let ret = unsafe {\n")
         fp.write("            self.%s.%s(" % (self.cmd.type[0], inner_fn_name))
@@ -648,7 +648,7 @@ class CmdReturnSingleGenerator(CmdGenerator):
             if arg_name == "type":
                 arg_name = "kind"
             if a == self.output:
-                fp.write("\n                &mut ret_value,")
+                fp.write("\n                ret_value.as_mut_ptr(),")
             elif is_handle(a.id.type, handle_type):
                 fp.write("\n                self.handle,")
             elif is_optional_ptr(a):
@@ -657,6 +657,7 @@ class CmdReturnSingleGenerator(CmdGenerator):
                 fp.write("\n                %s," % arg_name)
         fp.write(")\n")
         fp.write("        };\n")
+        fp.write("        let ret_value = unsafe { ret_value.assume_init() };\n")
         if is_bool:
             fp.write("        #[allow(unused)]\n")
             fp.write("        let ret_value = ret_value == VK_TRUE;\n")

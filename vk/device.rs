@@ -44,7 +44,7 @@ impl Device
         fence: VkFence,
     ) -> Result<(VkResult, u32), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.acquire_next_image_khr(
@@ -53,9 +53,10 @@ impl Device
                 timeout,
                 semaphore,
                 fence,
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -139,7 +140,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkSwapchainKHR), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_swapchain_khr(
@@ -150,9 +151,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1078,7 +1080,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkCommandPool), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_command_pool(
@@ -1089,9 +1091,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1101,12 +1104,13 @@ impl Device
 
     pub fn get_render_area_granularity(&self, render_pass: VkRenderPass) -> VkExtent2D
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d
-                .get_render_area_granularity(self.handle, render_pass, &mut ret_value)
+                .get_render_area_granularity(self.handle, render_pass, ret_value.as_mut_ptr())
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return ret_value;
     }
 
@@ -1136,7 +1140,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkRenderPass), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_render_pass(
@@ -1147,9 +1151,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1183,7 +1188,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkFramebuffer), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_framebuffer(
@@ -1194,9 +1199,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1313,7 +1319,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkDescriptorPool), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_descriptor_pool(
@@ -1324,9 +1330,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1360,7 +1367,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkDescriptorSetLayout), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_descriptor_set_layout(
@@ -1371,9 +1378,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1403,7 +1411,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkSampler), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_sampler(
@@ -1414,9 +1422,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1450,7 +1459,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkPipelineLayout), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_pipeline_layout(
@@ -1461,9 +1470,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1651,7 +1661,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkPipelineCache), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_pipeline_cache(
@@ -1662,9 +1672,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1698,7 +1709,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkShaderModule), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_shader_module(
@@ -1709,9 +1720,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1745,7 +1757,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkImageView), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_image_view(
@@ -1756,9 +1768,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1772,12 +1785,17 @@ impl Device
         p_subresource: &VkImageSubresource,
     ) -> VkSubresourceLayout
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
-            self.d
-                .get_image_subresource_layout(self.handle, image, p_subresource, &mut ret_value)
+            self.d.get_image_subresource_layout(
+                self.handle,
+                image,
+                p_subresource,
+                ret_value.as_mut_ptr(),
+            )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return ret_value;
     }
 
@@ -1803,7 +1821,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkImage), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_image(
@@ -1814,9 +1832,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1850,7 +1869,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkBufferView), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_buffer_view(
@@ -1861,9 +1880,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1893,7 +1913,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkBuffer), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_buffer(
@@ -1904,9 +1924,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -1972,7 +1993,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkQueryPool), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_query_pool(
@@ -1983,9 +2004,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -2049,7 +2071,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkEvent), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_event(
@@ -2060,9 +2082,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -2096,7 +2119,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkSemaphore), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_semaphore(
@@ -2107,9 +2130,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -2195,7 +2219,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkFence), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.create_fence(
@@ -2206,9 +2230,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -2275,23 +2300,25 @@ impl Device
 
     pub fn get_image_memory_requirements(&self, image: VkImage) -> VkMemoryRequirements
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d
-                .get_image_memory_requirements(self.handle, image, &mut ret_value)
+                .get_image_memory_requirements(self.handle, image, ret_value.as_mut_ptr())
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return ret_value;
     }
 
     pub fn get_buffer_memory_requirements(&self, buffer: VkBuffer) -> VkMemoryRequirements
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d
-                .get_buffer_memory_requirements(self.handle, buffer, &mut ret_value)
+                .get_buffer_memory_requirements(self.handle, buffer, ret_value.as_mut_ptr())
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return ret_value;
     }
 
@@ -2335,12 +2362,13 @@ impl Device
 
     pub fn get_device_memory_commitment(&self, memory: VkDeviceMemory) -> VkDeviceSize
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d
-                .get_device_memory_commitment(self.handle, memory, &mut ret_value)
+                .get_device_memory_commitment(self.handle, memory, ret_value.as_mut_ptr())
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return ret_value;
     }
 
@@ -2400,12 +2428,19 @@ impl Device
         flags: VkMemoryMapFlags,
     ) -> Result<(VkResult, *mut core::ffi::c_void), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
-            self.d
-                .map_memory(self.handle, memory, offset, size, flags, &mut ret_value)
+            self.d.map_memory(
+                self.handle,
+                memory,
+                offset,
+                size,
+                flags,
+                ret_value.as_mut_ptr(),
+            )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -2435,7 +2470,7 @@ impl Device
         p_allocator: Option<&VkAllocationCallbacks>,
     ) -> Result<(VkResult, VkDeviceMemory), VkResult>
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
             self.d.allocate_memory(
@@ -2446,9 +2481,10 @@ impl Device
                     Some(r) => r,
                     None => core::ptr::null(),
                 },
-                &mut ret_value,
+                ret_value.as_mut_ptr(),
             )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return match ret
         {
             VkResult::SUCCESS => Ok((ret, ret_value)),
@@ -2504,12 +2540,17 @@ impl Device
 
     pub fn get_device_queue(&self, queue_family_index: u32, queue_index: u32) -> VkQueue
     {
-        let mut ret_value = unsafe { core::mem::MaybeUninit::uninit().assume_init() };
+        let mut ret_value = core::mem::MaybeUninit::uninit();
         #[allow(unused)]
         let ret = unsafe {
-            self.d
-                .get_device_queue(self.handle, queue_family_index, queue_index, &mut ret_value)
+            self.d.get_device_queue(
+                self.handle,
+                queue_family_index,
+                queue_index,
+                ret_value.as_mut_ptr(),
+            )
         };
+        let ret_value = unsafe { ret_value.assume_init() };
         return ret_value;
     }
 
