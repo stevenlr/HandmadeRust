@@ -102,6 +102,12 @@ impl<T, A: Allocator> Array<T, A>
         self.size
     }
 
+    #[inline]
+    pub fn capacity(&self) -> usize
+    {
+        self.buffer.capacity
+    }
+
     pub fn push(&mut self, value: T)
     {
         if self.size == self.buffer.capacity
