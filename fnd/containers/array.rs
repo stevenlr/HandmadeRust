@@ -216,7 +216,7 @@ impl<T, A: Allocator> Extend<T> for Array<T, A>
 
 impl<'a, T: 'a, A: Allocator> Extend<&'a T> for Array<T, A>
 where
-    T: Copy,
+    T: Clone,
 {
     fn extend<I>(&mut self, iter: I)
     where
@@ -224,7 +224,7 @@ where
     {
         for e in iter
         {
-            self.push(*e);
+            self.push(e.clone());
         }
     }
 }

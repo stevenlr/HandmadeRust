@@ -4,6 +4,7 @@ use crate::{
 };
 
 use core::{
+    borrow::Borrow,
     mem::{needs_drop, replace, ManuallyDrop, MaybeUninit},
     ops::{Deref, DerefMut},
     ptr, slice,
@@ -282,28 +283,284 @@ where
     }
 }
 
-impl<T> StackArray for [T; 1]
+impl<T, S, A: Allocator> Extend<T> for SmallArray<S, A>
+where
+    T: Borrow<S::Element>,
+    S: StackArray,
+    S::Element: Clone,
 {
-    type Element = T;
-
-    #[inline]
-    fn len(&self) -> usize
+    fn extend<I>(&mut self, iter: I)
+    where
+        I: IntoIterator<Item = T>,
     {
-        1
-    }
-
-    #[inline]
-    fn as_ptr(&self) -> *const Self::Element
-    {
-        (self as &[Self::Element]).as_ptr()
-    }
-
-    #[inline]
-    fn as_mut_ptr(&mut self) -> *mut Self::Element
-    {
-        (self as &mut [Self::Element]).as_mut_ptr()
+        for e in iter
+        {
+            self.push(e.borrow().clone());
+        }
     }
 }
 
-// @Todo Implement StackArray for a bunch of lengths (until const generics)
-// @Todo Test SmallArray
+macro_rules! impl_stack_array {
+    ($len:expr, $name:ident) => {
+        impl<T> StackArray for [T; $len]
+        {
+            type Element = T;
+
+            #[inline]
+            fn len(&self) -> usize
+            {
+                $len
+            }
+
+            #[inline]
+            fn as_ptr(&self) -> *const Self::Element
+            {
+                (self as &[Self::Element]).as_ptr()
+            }
+
+            #[inline]
+            fn as_mut_ptr(&mut self) -> *mut Self::Element
+            {
+                (self as &mut [Self::Element]).as_mut_ptr()
+            }
+        }
+
+        pub type $name<T, A> = SmallArray<[T; $len], A>;
+    };
+}
+
+// @Todo Re-do this when const generics
+impl_stack_array!(1, SmallArray1);
+impl_stack_array!(2, SmallArray2);
+impl_stack_array!(4, SmallArray4);
+impl_stack_array!(8, SmallArray8);
+impl_stack_array!(16, SmallArray16);
+impl_stack_array!(24, SmallArray24);
+impl_stack_array!(32, SmallArray32);
+impl_stack_array!(64, SmallArray64);
+impl_stack_array!(128, SmallArray128);
+
+#[cfg(test)]
+mod tests
+{
+    use super::*;
+    use core::cell::Cell;
+
+    struct DropCheck<'a>
+    {
+        pub dropped: &'a Cell<i32>,
+    }
+
+    impl<'a> DropCheck<'a>
+    {
+        fn new(b: &'a Cell<i32>) -> Self
+        {
+            Self { dropped: b }
+        }
+    }
+
+    impl<'a> Drop for DropCheck<'a>
+    {
+        fn drop(&mut self)
+        {
+            self.dropped.set(self.dropped.get() + 1);
+        }
+    }
+
+    macro_rules! test_size {
+        ($name:ident, $type:ty) => {
+            mod $name
+            {
+                use super::*;
+
+                #[test]
+                fn push_pop()
+                {
+                    let mut a = <$type>::new();
+
+                    a.push(1);
+                    a.push(2);
+                    a.push(3);
+                    a.push(4);
+                    a.push(5);
+
+                    assert!(a.len() == 5);
+                    assert!(a.pop() == Some(5));
+                    assert!(a.pop() == Some(4));
+                    assert!(a.pop() == Some(3));
+                    assert!(a.len() == 2);
+
+                    a.push(3);
+                    a.push(4);
+                    a.push(5);
+
+                    assert!(a.len() == 5);
+                    assert!(a.pop() == Some(5));
+                    assert!(a.pop() == Some(4));
+                    assert!(a.pop() == Some(3));
+                    assert!(a.pop() == Some(2));
+                    assert!(a.pop() == Some(1));
+                    assert!(a.pop() == None);
+                    assert!(a.pop() == None);
+                    assert!(a.pop() == None);
+                    assert!(a.pop() == None);
+                    assert!(a.len() == 0);
+                }
+
+                #[test]
+                fn drop()
+                {
+                    let dropped = Cell::new(0);
+
+                    {
+                        let mut a = <$type>::new();
+                        a.push(DropCheck::new(&dropped));
+                    }
+
+                    assert!(dropped.get() == 1);
+                }
+
+                fn sum_slice(slice: &[i32]) -> i32
+                {
+                    slice.iter().sum()
+                }
+
+                fn double_slice(slice: &mut [i32])
+                {
+                    slice.iter_mut().for_each(|x| *x = *x * 2);
+                }
+
+                #[test]
+                fn slice()
+                {
+                    let mut a = <$type>::new();
+
+                    a.push(1);
+                    a.push(2);
+                    a.push(3);
+                    a.push(4);
+                    a.push(5);
+
+                    assert!(sum_slice(&a) == 15);
+                    double_slice(&mut a);
+
+                    assert!(a[0] == 2);
+                    assert!(a[1] == 4);
+                    assert!(a[2] == 6);
+                    assert!(a[3] == 8);
+                    assert!(a[4] == 10);
+                }
+
+                #[test]
+                fn subslice()
+                {
+                    let mut a = <$type>::new();
+
+                    a.push(1);
+                    a.push(2);
+                    a.push(3);
+                    a.push(4);
+                    a.push(5);
+
+                    assert!(sum_slice(&a[1..3]) == 5);
+                    assert!(sum_slice(&a[1..=3]) == 9);
+
+                    double_slice(&mut a[1..3]);
+
+                    assert!(a[0] == 1);
+                    assert!(a[1] == 4);
+                    assert!(a[2] == 6);
+                    assert!(a[3] == 4);
+                    assert!(a[4] == 5);
+
+                    double_slice(&mut a[1..=3]);
+
+                    assert!(a[0] == 1);
+                    assert!(a[1] == 8);
+                    assert!(a[2] == 12);
+                    assert!(a[3] == 8);
+                    assert!(a[4] == 5);
+                }
+
+                #[test]
+                fn iter()
+                {
+                    let mut a = <$type>::new();
+
+                    a.push(1);
+                    a.push(2);
+                    a.push(3);
+                    a.push(4);
+                    a.push(5);
+
+                    for (i, value) in a.iter().enumerate()
+                    {
+                        assert!(i as i32 == value - 1);
+                    }
+
+                    for (i, value) in a.iter_mut().enumerate()
+                    {
+                        assert!(i as i32 == *value - 1);
+                    }
+                }
+
+                #[test]
+                fn resize()
+                {
+                    let mut a = <$type>::new();
+
+                    a.push(1);
+                    a.resize(3, 7);
+                    a.push(2);
+                    a.push(3);
+
+                    assert!(a[0] == 1);
+                    assert!(a[1] == 7);
+                    assert!(a[2] == 7);
+                    assert!(a[3] == 2);
+                    assert!(a[4] == 3);
+                }
+
+                #[test]
+                fn extend()
+                {
+                    let mut a = <$type>::new();
+
+                    a.push(1);
+                    a.extend([7, 8].into_iter());
+                    a.extend(&[2, 3]);
+                    a.extend(Some(10));
+
+                    assert!(a[0] == 1);
+                    assert!(a[1] == 7);
+                    assert!(a[2] == 8);
+                    assert!(a[3] == 2);
+                    assert!(a[4] == 3);
+                    assert!(a[5] == 10);
+                }
+
+                #[test]
+                fn zst()
+                {
+                    let mut a = <$type>::new();
+
+                    a.push(());
+                    a.push(());
+                    a.push(());
+                    assert!(a.len() == 3);
+
+                    assert!(a[1] == ());
+
+                    a.clear();
+                    assert!(a.len() == 0);
+                }
+            }
+        };
+    }
+
+    test_size!(size_1, SmallArray1<_, _>);
+    test_size!(size_2, SmallArray2<_, _>);
+    test_size!(size_4, SmallArray4<_, _>);
+    test_size!(size_8, SmallArray8<_, _>);
+    test_size!(size_16, SmallArray16<_, _>);
+}
