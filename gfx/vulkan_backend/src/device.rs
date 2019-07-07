@@ -3,7 +3,7 @@ use super::{
     Backend, Error, RawInstance, Surface, Swapchain,
 };
 
-use fnd::{containers::Array, Shared};
+use fnd::{containers::SmallArray8, Shared};
 use gfx_hal as hal;
 use vk::{self, builders::*, types::*};
 
@@ -61,7 +61,7 @@ impl Device
             .get_physical_device_surface_formats_khr_count(self.gpu, surface)?
             .1;
 
-        let mut formats = Array::new();
+        let mut formats = SmallArray8::new();
         formats.resize_default(format_count);
 
         self.instance
@@ -98,7 +98,7 @@ impl Device
             .get_physical_device_surface_present_modes_khr_count(self.gpu, surface)?
             .1;
 
-        let mut present_modes = Array::new();
+        let mut present_modes = SmallArray8::new();
         present_modes.resize_default(present_mode_count);
 
         self.instance
@@ -181,7 +181,7 @@ impl hal::Device<Backend> for Device
             .map_err(|e| Error::Swapchain(e))?
             .1;
 
-        let mut images = Array::new();
+        let mut images = SmallArray8::new();
         images.resize_default(image_count);
 
         self.raw
@@ -210,7 +210,7 @@ impl hal::Device<Backend> for Device
                     .build(),
             );
 
-        let mut image_views: Array<VkImageView> = Array::new();
+        let mut image_views: SmallArray8<VkImageView> = SmallArray8::new();
         for img in images.iter()
         {
             let create_info = create_info.clone().image(*img);

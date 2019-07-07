@@ -325,7 +325,7 @@ macro_rules! impl_stack_array {
             }
         }
 
-        pub type $name<T, A> = SmallArray<[T; $len], A>;
+        pub type $name<T, A = GlobalAllocator> = SmallArray<[T; $len], A>;
     };
 }
 

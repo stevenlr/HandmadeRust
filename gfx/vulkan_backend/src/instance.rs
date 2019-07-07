@@ -3,7 +3,7 @@ use super::hal;
 use core::{ffi::c_void, mem::transmute};
 use fnd::{
     alloc::Allocator,
-    containers::{Array, String},
+    containers::{SmallArray8, String},
     dl::DynamicLibrary,
     str::CStr,
     Shared,
@@ -114,9 +114,8 @@ impl Instance
                 .map(|f: *mut c_void| transmute(f))
         });
 
-        // @Todo Use SmallVec or something similar like a small allocator.
-        let mut layers = Array::new();
-        let mut extensions = Array::new();
+        let mut layers = SmallArray8::new();
+        let mut extensions = SmallArray8::new();
 
         if cfg!(debug_assertions)
         {
@@ -174,7 +173,7 @@ impl hal::Instance<Backend> for Instance
     fn enumerate_gpus_with<A: Allocator + Clone>(
         &self,
         a: A,
-    ) -> Result<Array<hal::Gpu<Backend, A>, A>, Error>
+    ) -> Result<SmallArray8<hal::Gpu<Backend, A>, A>, Error>
     {
         let gpu_count = self
             .raw
@@ -183,7 +182,7 @@ impl hal::Instance<Backend> for Instance
             .map_err(|e| Error::VulkanError(e))?
             .1;
 
-        let mut gpus = Array::new();
+        let mut gpus = SmallArray8::new();
         gpus.resize_default(gpu_count);
 
         self.raw
@@ -191,12 +190,12 @@ impl hal::Instance<Backend> for Instance
             .enumerate_physical_devices(&mut gpus)
             .map_err(|e| Error::VulkanError(e))?;
 
-        let mut result_gpus = Array::new_with(a.clone());
+        let mut result_gpus = SmallArray8::new_with(a.clone());
         result_gpus.reserve(gpu_count);
 
-        for gpu in gpus
+        for gpu in gpus.iter()
         {
-            let prps = self.raw.instance.get_physical_device_properties(gpu);
+            let prps = self.raw.instance.get_physical_device_properties(*gpu);
             let c_name =
                 unsafe { CStr::from_bytes_null_terminated_unchecked(prps.device_name.as_ptr()) };
             let name = String::from_str(
@@ -209,19 +208,19 @@ impl hal::Instance<Backend> for Instance
             let queue_count = self
                 .raw
                 .instance
-                .get_physical_device_queue_family_properties_count(gpu);
+                .get_physical_device_queue_family_properties_count(*gpu);
 
-            let mut queues = Array::new();
+            let mut queues = SmallArray8::new();
             queues.resize_default(queue_count);
 
             self.raw
                 .instance
-                .get_physical_device_queue_family_properties(gpu, &mut queues);
+                .get_physical_device_queue_family_properties(*gpu, &mut queues);
 
-            let mut queue_families = Array::new_with(a.clone());
+            let mut queue_families = SmallArray8::new_with(a.clone());
             queue_families.reserve(queue_count);
             queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamily {
-                physical_device: gpu,
+                physical_device: *gpu,
                 queue_type: vk_to_hal_queue_type(q.queue_flags),
                 id,
                 count: q.queue_count as usize,
@@ -230,7 +229,7 @@ impl hal::Instance<Backend> for Instance
             let gpu_desc = hal::Gpu {
                 name,
                 gpu_type,
-                physical_device: gpu,
+                physical_device: *gpu,
                 queue_families,
             };
 
@@ -246,7 +245,7 @@ impl hal::Instance<Backend> for Instance
         queues: &[(&QueueFamily, &[f32])],
     ) -> Result<hal::CreatedDevice<Backend>, Error>
     {
-        let mut queue_create_infos = Array::new();
+        let mut queue_create_infos = SmallArray8::new();
         queue_create_infos.reserve(queues.len());
 
         for (family, priorities) in queues
@@ -259,7 +258,7 @@ impl hal::Instance<Backend> for Instance
             queue_create_infos.push(create_info.build());
         }
 
-        let mut extensions = Array::new();
+        let mut extensions = SmallArray8::new();
         if self.with_surface
         {
             extensions.push(VK_KHR_SWAPCHAIN_EXTENSION_NAME__C.as_ptr());
@@ -278,7 +277,7 @@ impl hal::Instance<Backend> for Instance
 
         let vk_device = vk::Device::new(vk_device, &self.raw.instance);
 
-        let mut created_queues = Array::new();
+        let mut created_queues = SmallArray8::new();
 
         for (family, priorities) in queues
         {

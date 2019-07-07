@@ -1,6 +1,6 @@
 use super::{capabilities, Backend, QueueType, SwapchainConfig};
 
-use fnd::containers::Array;
+use fnd::containers::SmallArray8;
 
 pub struct CreatedQueue<B: Backend>
 {
@@ -11,7 +11,7 @@ pub struct CreatedQueue<B: Backend>
 pub struct CreatedDevice<B: Backend>
 {
     pub device: Option<B::Device>,
-    pub queues: Array<CreatedQueue<B>>,
+    pub queues: SmallArray8<CreatedQueue<B>>,
 }
 
 #[derive(Debug)]

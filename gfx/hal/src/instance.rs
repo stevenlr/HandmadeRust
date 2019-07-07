@@ -1,6 +1,6 @@
 use fnd::{
     alloc::{Allocator, GlobalAllocator},
-    containers::{Array, String},
+    containers::{SmallArray8, String},
 };
 
 use super::{Backend, CreatedDevice};
@@ -10,9 +10,9 @@ pub trait Instance<B: Backend>
     fn enumerate_gpus_with<A: Allocator + Clone>(
         &self,
         a: A,
-    ) -> Result<Array<Gpu<B, A>, A>, B::Error>;
+    ) -> Result<SmallArray8<Gpu<B, A>, A>, B::Error>;
 
-    fn enumerate_gpus(&self) -> Result<Array<Gpu<B>>, B::Error>
+    fn enumerate_gpus(&self) -> Result<SmallArray8<Gpu<B>>, B::Error>
     {
         self.enumerate_gpus_with(GlobalAllocator)
     }
@@ -39,5 +39,5 @@ pub struct Gpu<B: Backend, A: Allocator = GlobalAllocator>
     pub name: String,
     pub gpu_type: GpuType,
     pub physical_device: B::PhysicalDevice,
-    pub queue_families: Array<B::QueueFamily, A>,
+    pub queue_families: SmallArray8<B::QueueFamily, A>,
 }

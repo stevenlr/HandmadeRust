@@ -2,6 +2,7 @@ use vk::types::VkPhysicalDevice;
 
 use gfx_hal as hal;
 
+#[derive(Clone, Copy)]
 pub struct QueueFamily
 {
     pub(crate) physical_device: VkPhysicalDevice,
