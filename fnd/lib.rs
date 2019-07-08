@@ -7,6 +7,8 @@ pub mod dl;
 pub mod fs;
 pub mod hash;
 pub mod io;
+pub mod linalg;
+pub mod num;
 mod shared;
 pub mod str;
 mod unique;
