@@ -58,3 +58,28 @@ pub(crate) fn hal_to_vk_present_mode(present_mode: hal::PresentMode) -> VkPresen
         hal::PresentMode::Relaxed => VkPresentModeKHR::FIFO_RELAXED_KHR,
     }
 }
+
+macro_rules! hal_to_vk_flags {
+    ($name:ident, $from_type:ty, $to_type:ty, $($from:ident => $to:ident,)+) =>
+    {
+        pub(crate) fn $name(src: $from_type) -> $to_type
+        {
+            let mut result = <$to_type>::default();
+
+            $(
+                if src.contains(<$from_type>::$from)
+                {
+                    result |= <$to_type>::$to;
+                }
+            )+
+
+            return result;
+        }
+    };
+}
+
+#[rustfmt::skip]
+hal_to_vk_flags!(hal_to_vk_command_pool_flags, hal::CommandPoolFlags, VkCommandPoolCreateFlags, 
+    TRANSIENT => TRANSIENT_BIT,
+    RESET_COMMAND_BUFFER => RESET_COMMAND_BUFFER_BIT,
+);

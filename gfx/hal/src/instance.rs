@@ -20,7 +20,7 @@ pub trait Instance<B: Backend>
     fn create_device<A: Allocator>(
         &self,
         gpu: &Gpu<B, A>,
-        queues: &[(&B::QueueFamily, &[f32])],
+        queues: &[(&B::QueueFamilyGroup, &[f32])],
     ) -> Result<CreatedDevice<B>, B::Error>;
 }
 
@@ -39,5 +39,5 @@ pub struct Gpu<B: Backend, A: Allocator = GlobalAllocator>
     pub name: String,
     pub gpu_type: GpuType,
     pub physical_device: B::PhysicalDevice,
-    pub queue_families: SmallArray8<B::QueueFamily, A>,
+    pub queue_families: SmallArray8<B::QueueFamilyGroup, A>,
 }

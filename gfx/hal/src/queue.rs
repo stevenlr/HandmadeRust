@@ -1,3 +1,7 @@
+use crate::{capabilities::Capability, Backend};
+
+use core::marker::PhantomData;
+
 #[derive(Clone, Copy, Debug)]
 pub enum QueueType
 {
@@ -11,7 +15,6 @@ pub trait QueueFamily
 {
     fn queue_type(&self) -> QueueType;
     fn id(&self) -> usize;
-    fn count(&self) -> usize;
 
     fn supports_graphics(&self) -> bool
     {
@@ -40,5 +43,31 @@ pub trait QueueFamily
                 true
             }
         }
+    }
+}
+
+pub trait QueueFamilyGroup: QueueFamily
+{
+    fn count(&self) -> usize;
+}
+
+pub struct Queue<B: Backend, C: Capability>
+{
+    pub(crate) inner: B::InnerQueue,
+    pub(crate) _capability: PhantomData<C>,
+}
+
+impl<B: Backend, C: Capability> QueueFamily for Queue<B, C>
+{
+    #[inline]
+    fn queue_type(&self) -> QueueType
+    {
+        self.inner.queue_type()
+    }
+
+    #[inline]
+    fn id(&self) -> usize
+    {
+        self.inner.id()
     }
 }

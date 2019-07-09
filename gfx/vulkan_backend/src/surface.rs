@@ -3,7 +3,7 @@ use gfx_hal as hal;
 use vk::{builders::*, types::*};
 use wsi;
 
-use super::{Backend, Error, QueueFamily, RawInstance};
+use super::{Backend, Error, QueueFamilyGroup, RawInstance};
 
 pub(crate) struct RawSurface
 {
@@ -44,7 +44,7 @@ impl Surface
 
 impl hal::Surface<Backend> for Surface
 {
-    fn supports_queue_family(&self, queue_family: &QueueFamily) -> bool
+    fn supports_queue_family(&self, queue_family: &QueueFamilyGroup) -> bool
     {
         self.raw
             .raw_instance

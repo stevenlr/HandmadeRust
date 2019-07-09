@@ -17,10 +17,11 @@ pub trait Backend: Sized
     type Instance: Instance<Self>;
     type Surface: Surface<Self>;
     type PhysicalDevice;
-    type QueueFamily: QueueFamily;
-    type Queue;
+    type QueueFamilyGroup: QueueFamilyGroup;
+    type InnerQueue: QueueFamily;
     type Device: Device<Self>;
     type Swapchain;
+    type CommandPool;
 }
 
 #[derive(Copy, Clone)]

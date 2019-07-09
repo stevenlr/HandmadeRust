@@ -36,7 +36,7 @@ fn main()
         .unwrap();
 
     let device = created_device.retrieve_device().unwrap();
-    let _queue = created_device
+    let queue = created_device
         .retrieve_queue::<gfx_hal::capabilities::General>(0)
         .unwrap();
 
@@ -52,10 +52,16 @@ fn main()
         )
         .unwrap();
 
+    let command_pool = device
+        .create_command_pool(&queue, hal::CommandPoolFlags::default())
+        .unwrap();
+
     window.events_loop(|event| match *event
     {
         wsi::Event::DestroyWindow => false,
     });
 
+    device.wait_idle();
+    device.destroy_command_pool(command_pool);
     device.destroy_swapchain(swapchain);
 }

@@ -5,7 +5,7 @@ use crate::{
 
 use core::{
     borrow::Borrow,
-    mem::{needs_drop, replace, ManuallyDrop, MaybeUninit},
+    mem::{needs_drop, ManuallyDrop, MaybeUninit},
     ops::{Deref, DerefMut},
     ptr, slice,
 };
@@ -65,7 +65,7 @@ where
         {
             if new_cap > array.len()
             {
-                let alloc = replace(&mut self.alloc, None).unwrap();
+                let alloc = self.alloc.take().unwrap();
                 let mut new_array = Array::new_with(alloc);
                 new_array.reserve(new_cap);
 
@@ -75,7 +75,7 @@ where
                     new_array.push(unsafe { ptr::read(ptr.offset(i as isize)) });
                 }
 
-                replace(&mut self.data, SmallArrayData::Heap(new_array));
+                self.data = SmallArrayData::Heap(new_array);
             }
         }
 

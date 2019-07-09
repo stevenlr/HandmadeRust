@@ -1,7 +1,4 @@
-use super::{
-    conv::{hal_to_vk_format, hal_to_vk_present_mode},
-    Backend, Error, RawInstance, Surface, Swapchain,
-};
+use super::{conv::*, Backend, Error, RawInstance, Surface, Swapchain};
 
 use fnd::{containers::SmallArray8, Shared};
 use gfx_hal as hal;
@@ -239,5 +236,36 @@ impl hal::Device<Backend> for Device
         }
 
         self.raw.device.destroy_swapchain_khr(swapchain.raw, None);
+    }
+
+    fn create_command_pool<C>(
+        &self,
+        queue: &hal::Queue<Backend, C>,
+        flags: hal::CommandPoolFlags,
+    ) -> Result<VkCommandPool, Error>
+    where
+        C: hal::capabilities::Capability,
+    {
+        let flags = hal_to_vk_command_pool_flags(flags);
+
+        let create_info = VkCommandPoolCreateInfoBuilder::new()
+            .flags(flags)
+            .queue_family_index(queue.id() as u32);
+
+        self.raw
+            .device
+            .create_command_pool(&create_info, None)
+            .map_err(|r| Error::CommandPool(r))
+            .map(|(_, p)| p)
+    }
+
+    fn destroy_command_pool(&self, pool: VkCommandPool)
+    {
+        self.raw.device.destroy_command_pool(pool, None);
+    }
+
+    fn wait_idle(&self)
+    {
+        core::mem::drop(self.raw.device.device_wait_idle());
     }
 }

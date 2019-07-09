@@ -1,17 +1,12 @@
-use super::{capabilities, Backend, QueueType, SwapchainConfig};
+use super::{capabilities, Backend, Queue, QueueFamily, SwapchainConfig};
 
-use fnd::containers::SmallArray8;
-
-pub struct CreatedQueue<B: Backend>
-{
-    pub queue_type: QueueType,
-    pub queue: Option<B::Queue>,
-}
+use core::marker::PhantomData;
+use fnd::{bitflags, containers::SmallArray8};
 
 pub struct CreatedDevice<B: Backend>
 {
     pub device: Option<B::Device>,
-    pub queues: SmallArray8<CreatedQueue<B>>,
+    pub queues: SmallArray8<Option<B::InnerQueue>>,
 }
 
 #[derive(Debug)]
@@ -26,10 +21,12 @@ impl<B: Backend> CreatedDevice<B>
 {
     pub fn retrieve_device(&mut self) -> Result<B::Device, QueueRetrievalError>
     {
-        core::mem::replace(&mut self.device, None).ok_or(QueueRetrievalError::AlreadyRetrieved)
+        self.device
+            .take()
+            .ok_or(QueueRetrievalError::AlreadyRetrieved)
     }
 
-    pub fn retrieve_queue<C>(&mut self, index: usize) -> Result<B::Queue, QueueRetrievalError>
+    pub fn retrieve_queue<C>(&mut self, index: usize) -> Result<Queue<B, C>, QueueRetrievalError>
     where
         C: capabilities::Capability,
     {
@@ -38,11 +35,17 @@ impl<B: Backend> CreatedDevice<B>
             return Err(QueueRetrievalError::QueueIndexOutOfBounds);
         }
 
-        if self.queues[index].queue.is_some()
+        let queue_slot = &mut self.queues[index];
+        if queue_slot.is_some()
         {
-            if C::supported_by(self.queues[index].queue_type)
+            if C::supported_by(queue_slot.as_ref().unwrap().queue_type())
             {
-                core::mem::replace(&mut self.queues[index].queue, None)
+                queue_slot
+                    .take()
+                    .map(|q| Queue {
+                        inner: q,
+                        _capability: PhantomData,
+                    })
                     .ok_or(QueueRetrievalError::AlreadyRetrieved)
             }
             else
@@ -57,6 +60,13 @@ impl<B: Backend> CreatedDevice<B>
     }
 }
 
+bitflags! {
+    pub enum CommandPoolFlags: u8 {
+        TRANSIENT = 1,
+        RESET_COMMAND_BUFFER = 2,
+    }
+}
+
 pub trait Device<B: Backend>
 {
     fn create_swapchain(
@@ -64,5 +74,16 @@ pub trait Device<B: Backend>
         surface: &B::Surface,
         config: &SwapchainConfig<B>,
     ) -> Result<B::Swapchain, B::Error>;
+
     fn destroy_swapchain(&self, swapchain: B::Swapchain);
+
+    fn create_command_pool<C: capabilities::Capability>(
+        &self,
+        queue: &Queue<B, C>,
+        flags: CommandPoolFlags,
+    ) -> Result<B::CommandPool, B::Error>;
+
+    fn destroy_command_pool(&self, pool: B::CommandPool);
+
+    fn wait_idle(&self);
 }

@@ -73,6 +73,14 @@ macro_rules! bitflags {
             }
         }
 
+        impl Default for $name
+        {
+            fn default() -> $name
+            {
+                $name { bits: 0 }
+            }
+        }
+
         impl core::convert::TryFrom<$type> for $name
         {
             type Error = ();

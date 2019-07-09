@@ -23,10 +23,11 @@ impl hal::Backend for Backend
     type Instance = Instance;
     type Surface = Surface;
     type PhysicalDevice = VkPhysicalDevice;
-    type QueueFamily = QueueFamily;
-    type Queue = VkQueue;
+    type QueueFamilyGroup = QueueFamilyGroup;
+    type InnerQueue = Queue;
     type Device = Device;
     type Swapchain = Swapchain;
+    type CommandPool = VkCommandPool;
 }
 
 #[derive(Debug)]
@@ -36,4 +37,5 @@ pub enum Error
     VulkanError(VkResult),
     Surface(VkResult),
     Swapchain(VkResult),
+    CommandPool(VkResult),
 }

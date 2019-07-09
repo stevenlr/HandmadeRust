@@ -219,7 +219,7 @@ impl hal::Instance<Backend> for Instance
 
             let mut queue_families = SmallArray8::new_with(a.clone());
             queue_families.reserve(queue_count);
-            queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamily {
+            queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamilyGroup {
                 physical_device: *gpu,
                 queue_type: vk_to_hal_queue_type(q.queue_flags),
                 id,
@@ -242,7 +242,7 @@ impl hal::Instance<Backend> for Instance
     fn create_device<A: Allocator>(
         &self,
         gpu: &hal::Gpu<Backend, A>,
-        queues: &[(&QueueFamily, &[f32])],
+        queues: &[(&QueueFamilyGroup, &[f32])],
     ) -> Result<hal::CreatedDevice<Backend>, Error>
     {
         let mut queue_create_infos = SmallArray8::new();
@@ -285,10 +285,11 @@ impl hal::Instance<Backend> for Instance
             {
                 let queue = vk_device.get_device_queue(family.id as u32, index as u32);
 
-                created_queues.push(hal::CreatedQueue {
+                created_queues.push(Some(Queue {
+                    family_index: family.id,
                     queue_type: family.queue_type,
-                    queue: Some(queue),
-                });
+                    queue: queue,
+                }));
             }
         }
 
