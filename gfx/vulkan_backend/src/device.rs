@@ -1,4 +1,4 @@
-use super::{conv::*, Backend, Error, RawInstance, Surface, Swapchain};
+use super::{conv::*, Backend, CommandPool, Error, RawInstance, Surface, Swapchain};
 
 use fnd::{containers::SmallArray8, Shared};
 use gfx_hal as hal;
@@ -242,7 +242,7 @@ impl hal::Device<Backend> for Device
         &self,
         queue: &hal::Queue<Backend, C>,
         flags: hal::CommandPoolFlags,
-    ) -> Result<VkCommandPool, Error>
+    ) -> Result<hal::CommandPool<Backend, C>, Error>
     where
         C: hal::capabilities::Capability,
     {
@@ -256,12 +256,19 @@ impl hal::Device<Backend> for Device
             .device
             .create_command_pool(&create_info, None)
             .map_err(|r| Error::CommandPool(r))
-            .map(|(_, p)| p)
+            .map(|(_, p)| {
+                hal::CommandPool::new(CommandPool {
+                    raw: p,
+                    device: self.raw.clone(),
+                })
+            })
     }
 
-    fn destroy_command_pool(&self, pool: VkCommandPool)
+    fn destroy_command_pool<C>(&self, pool: hal::CommandPool<Backend, C>)
     {
-        self.raw.device.destroy_command_pool(pool, None);
+        self.raw
+            .device
+            .destroy_command_pool(pool.into_inner().raw, None);
     }
 
     fn wait_idle(&self)

@@ -1,4 +1,4 @@
-use super::{capabilities, Backend, Queue, QueueFamily, SwapchainConfig};
+use super::{capabilities, Backend, CommandPool, Queue, QueueFamily, SwapchainConfig};
 
 use core::marker::PhantomData;
 use fnd::{bitflags, containers::SmallArray8};
@@ -81,9 +81,9 @@ pub trait Device<B: Backend>
         &self,
         queue: &Queue<B, C>,
         flags: CommandPoolFlags,
-    ) -> Result<B::CommandPool, B::Error>;
+    ) -> Result<CommandPool<B, C>, B::Error>;
 
-    fn destroy_command_pool(&self, pool: B::CommandPool);
+    fn destroy_command_pool<C>(&self, pool: CommandPool<B, C>);
 
     fn wait_idle(&self);
 }

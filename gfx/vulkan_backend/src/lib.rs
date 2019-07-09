@@ -1,3 +1,4 @@
+mod command_pool;
 mod conv;
 mod device;
 mod instance;
@@ -7,6 +8,7 @@ mod swapchain;
 
 use gfx_hal as hal;
 
+pub use command_pool::*;
 pub use device::*;
 pub use instance::*;
 pub use queue::*;
@@ -27,7 +29,7 @@ impl hal::Backend for Backend
     type InnerQueue = Queue;
     type Device = Device;
     type Swapchain = Swapchain;
-    type CommandPool = VkCommandPool;
+    type InnerCommandPool = CommandPool;
 }
 
 #[derive(Debug)]

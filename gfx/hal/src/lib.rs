@@ -1,10 +1,12 @@
 pub mod capabilities;
+mod command_pool;
 mod device;
 mod instance;
 mod queue;
 mod surface;
 mod swapchain;
 
+pub use command_pool::*;
 pub use device::*;
 pub use instance::*;
 pub use queue::*;
@@ -21,7 +23,7 @@ pub trait Backend: Sized
     type InnerQueue: QueueFamily;
     type Device: Device<Self>;
     type Swapchain;
-    type CommandPool;
+    type InnerCommandPool: InnerCommandPool;
 }
 
 #[derive(Copy, Clone)]
