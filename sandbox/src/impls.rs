@@ -41,7 +41,7 @@ macro_rules! impl_primitive_de {
                     }
                 }
 
-                d.$method(&mut PrimVisitor)
+                d.$method(PrimVisitor)
             }
         }
     };
@@ -109,7 +109,7 @@ where
     }
 }
 
-impl<'de> Deserialize<'de> for &'de str
+impl<'de: 'a, 'a> Deserialize<'de> for &'a str
 {
     fn deserialize<D: Deserializer<'de>>(d: D) -> Result<&'de str, D::Err>
     {
@@ -126,6 +126,6 @@ impl<'de> Deserialize<'de> for &'de str
             }
         }
 
-        d.deserialize_str(&mut PrimVisitor)
+        d.deserialize_str(PrimVisitor)
     }
 }

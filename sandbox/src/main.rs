@@ -1,7 +1,10 @@
 #![allow(unused)]
 
 use core::mem::transmute;
-use std::io::Write;
+use std::{
+    io::{Bytes, Cursor, Read, Write},
+    vec::Vec,
+};
 
 mod impls;
 mod traits;
@@ -43,6 +46,29 @@ const F32: u8 = 26;
 
 impl MajorType
 {
+    fn from_raw(raw: u8) -> Option<(MajorType, u8)>
+    {
+        let major_type_raw = raw >> 5;
+        let payload = raw & 0x1f;
+
+        match major_type_raw
+        {
+            0 => Some((MajorType::UnsignedInteger, payload)),
+            1 => Some((MajorType::NegativeInteger, payload)),
+            2 => Some((MajorType::ByteString, payload)),
+            3 => Some((MajorType::TextString, payload)),
+            4 => Some((MajorType::Array, payload)),
+            5 => Some((MajorType::Map, payload)),
+            7 => match payload
+            {
+                F32 | F64 => Some((MajorType::FloatingPoint, payload)),
+                BREAK | TRUE | FALSE | NULL => Some((MajorType::Special, payload)),
+                _ => None,
+            },
+            _ => None,
+        }
+    }
+
     fn as_int(self) -> u8
     {
         match self
@@ -357,54 +383,481 @@ where
     }
 }
 
-fn main()
+#[derive(Debug)]
+enum CborDeserializeError
 {
-    let mut file = std::fs::OpenOptions::new()
-        .write(true)
-        .create(true)
-        .truncate(true)
-        .open("test.bin")
-        .unwrap();
+    UnexpectedEof,
+    ReadError,
+    CorruptedHeader,
+    UnexpectedType,
+    IntegerOverflow,
+    VisitorError,
+}
 
-    let mut serializer = CborSerializer { write: &mut file };
+struct CborDeserializer<R>
+{
+    r: Bytes<R>,
+}
 
-    0u32.serialize(&mut serializer).unwrap();
-    1u32.serialize(&mut serializer).unwrap();
-    10u32.serialize(&mut serializer).unwrap();
-    23u32.serialize(&mut serializer).unwrap();
-    24u32.serialize(&mut serializer).unwrap();
-    25u32.serialize(&mut serializer).unwrap();
-    100u32.serialize(&mut serializer).unwrap();
-    1000u32.serialize(&mut serializer).unwrap();
-    1000000u32.serialize(&mut serializer).unwrap();
-    1000000000000u64.serialize(&mut serializer).unwrap();
-    18446744073709551615u64.serialize(&mut serializer).unwrap();
-    (-543514321i64).serialize(&mut serializer).unwrap();
-    (-1i8).serialize(&mut serializer).unwrap();
-    (-10i8).serialize(&mut serializer).unwrap();
-    (-100i8).serialize(&mut serializer).unwrap();
-    (-1000i32).serialize(&mut serializer).unwrap();
-    (0i64).serialize(&mut serializer).unwrap();
+impl<R: Read> CborDeserializer<R>
+{
+    #[inline]
+    fn read_byte(&mut self) -> Result<u8, CborDeserializeError>
+    {
+        self.r
+            .next()
+            .ok_or(CborDeserializeError::UnexpectedEof)?
+            .map_err(|_| CborDeserializeError::ReadError)
+    }
 
-    "".serialize(&mut serializer).unwrap();
-    "a".serialize(&mut serializer).unwrap();
-    "IETF".serialize(&mut serializer).unwrap();
-    "\u{20ac}¢".serialize(&mut serializer).unwrap();
+    #[inline]
+    fn read_bytes(&mut self, bytes: &mut [u8]) -> Result<(), CborDeserializeError>
+    {
+        for b in bytes.iter_mut()
+        {
+            *b = self.read_byte()?;
+        }
 
-    ((&[] as &[u32])[..]).serialize(&mut serializer).unwrap();
-    (&[1, 2, 3][..]).serialize(&mut serializer).unwrap();
+        Ok(())
+    }
+
+    fn read_integer_from_stream(&mut self, count: usize) -> Result<u64, CborDeserializeError>
+    {
+        assert!(count <= 8);
+
+        let mut value = 0u64;
+
+        for _ in 0..count
+        {
+            let byte = self.read_byte()? as u64;
+            value = (value << 8) + byte;
+        }
+
+        return Ok(value);
+    }
+
+    fn read_integer(&mut self) -> Result<(bool, u64), CborDeserializeError>
+    {
+        let header = self.read_byte()?;
+
+        let (major_type, payload) =
+            MajorType::from_raw(header).ok_or(CborDeserializeError::CorruptedHeader)?;
+
+        let is_negative = match major_type
+        {
+            MajorType::UnsignedInteger => false,
+            MajorType::NegativeInteger => true,
+            _ => return Err(CborDeserializeError::UnexpectedType),
+        };
+
+        let value = if payload <= 23
+        {
+            payload as u64
+        }
+        else if payload == 24
+        {
+            self.read_integer_from_stream(1)?
+        }
+        else if payload == 25
+        {
+            self.read_integer_from_stream(2)?
+        }
+        else if payload == 26
+        {
+            self.read_integer_from_stream(4)?
+        }
+        else if payload == 27
+        {
+            self.read_integer_from_stream(8)?
+        }
+        else
+        {
+            return Err(CborDeserializeError::CorruptedHeader);
+        };
+
+        return Ok((is_negative, value));
+    }
+
+    fn read_float(&mut self) -> Result<f64, CborDeserializeError>
+    {
+        let header = self.read_byte()?;
+
+        let (major_type, payload) =
+            MajorType::from_raw(header).ok_or(CborDeserializeError::CorruptedHeader)?;
+
+        match (major_type, payload)
+        {
+            (MajorType::FloatingPoint, F32) =>
+            {
+                let mut bytes = [0u8; 4];
+                self.read_bytes(&mut bytes[..])?;
+                Ok(unsafe { transmute::<u32, f32>(u32::from_be_bytes(bytes)) } as f64)
+            }
+            (MajorType::FloatingPoint, F64) =>
+            {
+                let mut bytes = [0u8; 8];
+                self.read_bytes(&mut bytes[..])?;
+                Ok(unsafe { transmute::<u64, f64>(u64::from_be_bytes(bytes)) } as f64)
+            }
+            _ => Err(CborDeserializeError::UnexpectedType),
+        }
+    }
+
+    fn read_bool(&mut self) -> Result<bool, CborDeserializeError>
+    {
+        let header = self.read_byte()?;
+
+        let (major_type, payload) =
+            MajorType::from_raw(header).ok_or(CborDeserializeError::CorruptedHeader)?;
+
+        match (major_type, payload)
+        {
+            (MajorType::Special, TRUE) => Ok(true),
+            (MajorType::Special, FALSE) => Ok(false),
+            _ => Err(CborDeserializeError::UnexpectedType),
+        }
+    }
+
+    fn read_null(&mut self) -> Result<(), CborDeserializeError>
+    {
+        let header = self.read_byte()?;
+
+        let (major_type, payload) =
+            MajorType::from_raw(header).ok_or(CborDeserializeError::CorruptedHeader)?;
+
+        match (major_type, payload)
+        {
+            (MajorType::Special, NULL) => Ok(()),
+            _ => Err(CborDeserializeError::UnexpectedType),
+        }
+    }
+}
+
+impl<'de, R: Read> Deserializer<'de> for &mut CborDeserializer<R>
+{
+    type Err = CborDeserializeError;
+
+    fn deserialize_any<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        unimplemented!();
+    }
+
+    fn deserialize_u8<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let (neg, value) = self.read_integer()?;
+
+        if neg || value > core::u8::MAX as u64
+        {
+            return Err(CborDeserializeError::IntegerOverflow);
+        }
+
+        v.accept_u8(value as u8)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_u16<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let (neg, value) = self.read_integer()?;
+
+        if neg || value > core::u16::MAX as u64
+        {
+            return Err(CborDeserializeError::IntegerOverflow);
+        }
+
+        v.accept_u16(value as u16)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_u32<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let (neg, value) = self.read_integer()?;
+
+        if neg || value > core::u32::MAX as u64
+        {
+            return Err(CborDeserializeError::IntegerOverflow);
+        }
+
+        v.accept_u32(value as u32)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_u64<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let (neg, value) = self.read_integer()?;
+
+        if neg || value > core::u64::MAX
+        {
+            return Err(CborDeserializeError::IntegerOverflow);
+        }
+
+        v.accept_u64(value)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_i8<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let (neg, value) = self.read_integer()?;
+        if value > core::i8::MAX as u64
+        {
+            return Err(CborDeserializeError::IntegerOverflow);
+        }
+
+        let value = match neg
+        {
+            false => value as i64,
+            true => -1 - value as i64,
+        };
+
+        v.accept_i8(value as i8)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_i16<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let (neg, value) = self.read_integer()?;
+        if value > core::i16::MAX as u64
+        {
+            return Err(CborDeserializeError::IntegerOverflow);
+        }
+
+        let value = match neg
+        {
+            false => value as i64,
+            true => -1 - value as i64,
+        };
+
+        v.accept_i16(value as i16)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_i32<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let (neg, value) = self.read_integer()?;
+        if value > core::i32::MAX as u64
+        {
+            return Err(CborDeserializeError::IntegerOverflow);
+        }
+
+        let value = match neg
+        {
+            false => value as i64,
+            true => -1 - value as i64,
+        };
+
+        v.accept_i32(value as i32)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_i64<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let (neg, value) = self.read_integer()?;
+        if value > core::i64::MAX as u64
+        {
+            return Err(CborDeserializeError::IntegerOverflow);
+        }
+
+        let value = match neg
+        {
+            false => value as i64,
+            true => -1 - value as i64,
+        };
+
+        v.accept_i64(value)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_f32<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let value = self.read_float()?;
+        v.accept_f32(value as f32)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_f64<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let value = self.read_float()?;
+        v.accept_f64(value as f64)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_bool<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        let value = self.read_bool()?;
+        v.accept_bool(value)
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_str<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        unimplemented!();
+    }
+
+    fn deserialize_string<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        unimplemented!();
+    }
+
+    fn deserialize_bytes<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        unimplemented!();
+    }
+
+    fn deserialize_bytes_array<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        unimplemented!();
+    }
+
+    fn deserialize_null<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        self.read_null()?;
+        v.accept_null()
+            .map_err(|_| CborDeserializeError::VisitorError)
+    }
+
+    fn deserialize_array<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        unimplemented!();
+    }
+
+    fn deserialize_map<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
+    {
+        unimplemented!();
+    }
+}
+
+#[test]
+fn deserialize()
+{
+    macro_rules! check_value {
+        ($value:expr, $type:ident, $serialized:expr) => {
+            let mut de = CborDeserializer {
+                r: $serialized.bytes(),
+            };
+            let value = $type::deserialize(&mut de).unwrap();
+            assert_eq!(value, $value);
+        };
+    }
+
+    check_value!(0u32, u32, [0x00]);
+    check_value!(0u8, u8, [0x00]);
+    check_value!(0i8, i8, [0x00]);
+    check_value!(1u32, u32, [0x01]);
+    check_value!(10u32, u32, [0x0a]);
+    check_value!(23i32, i32, [0x17]);
+    check_value!(24i32, i32, [0x18, 0x18]);
+    check_value!(25u32, u32, [0x18, 0x19]);
+    check_value!(100u32, u32, [0x18, 0x64]);
+    check_value!(1000i64, i64, [0x19, 0x03, 0xe8]);
+    check_value!(1000000u32, u32, [0x1a, 0x00, 0x0f, 0x42, 0x40]);
+    check_value!(
+        1000000000000u64,
+        u64,
+        [0x1b, 0x00, 0x00, 0x00, 0xe8, 0xd4, 0xa5, 0x10, 0x00]
+    );
+    check_value!(
+        18446744073709551615u64,
+        u64,
+        [0x1b, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]
+    );
+    check_value!(-1i8, i8, [0x20]);
+    check_value!(-10i8, i8, [0x29]);
+    check_value!(-100i8, i8, [0x38, 0x63]);
+    check_value!(-1000i32, i32, [0x39, 0x03, 0xe7]);
+    check_value!(-543514321i64, i64, [0x3A, 0x20, 0x65, 0x5E, 0xD0]);
+    check_value!(true, bool, [0xf5]);
+    check_value!(false, bool, [0xf4]);
+    check_value!(0.0f32, f32, [250, 0, 0, 0, 0]);
+    check_value!(1.0f64, f64, [251, 63, 240, 0, 0, 0, 0, 0, 0]);
+
+    /*
+    check_value!("", &[0x60]);
+    check_value!("a", &[0x61, 0x61]);
+    check_value!("IETF", &[0x64, 0x49, 0x45, 0x54, 0x46]);
+    check_value!("\u{20ac}¢", &[101, 226, 130, 172, 194, 162]);
+    check_value!((&[] as &[u32])[..], &[0x80]);
+    check_value!(&[1, 2, 3][..], &[131, 1, 2, 3]);
 
     {
-        let mut map = serializer.serialize_map(None).unwrap();
+        v.clear();
+
+        let cursor = Cursor::new(&mut v);
+        let mut ser = CborSerializer { write: cursor };
+
+        let mut map = ser.serialize_map(None).unwrap();
         map.serialize_entry(&"a", 1).unwrap();
         map.serialize_entry(2, &"hello").unwrap();
         map.end().unwrap();
+
+        assert_eq!(v, &[191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255]);
+    }
+    */
+}
+
+#[test]
+fn serialize()
+{
+    let mut v = Vec::<u8>::new();
+
+    macro_rules! check_value {
+        ($value:expr, $expected:expr) => {
+            v.clear();
+
+            let cursor = Cursor::new(&mut v);
+            let mut serializer = CborSerializer { write: cursor };
+
+            $value.serialize(&mut serializer).unwrap();
+            assert_eq!(v, $expected);
+        };
     }
 
-    true.serialize(&mut serializer).unwrap();
-    false.serialize(&mut serializer).unwrap();
-    0.0f32.serialize(&mut serializer).unwrap();
-    1.0f64.serialize(&mut serializer).unwrap();
+    check_value!(0u32, &[0x00]);
+    check_value!(0u8, &[0x00]);
+    check_value!(0i8, &[0x00]);
+    check_value!(1u32, &[0x01]);
+    check_value!(10u32, &[0x0a]);
+    check_value!(23u32, &[0x17]);
+    check_value!(24u32, &[0x18, 0x18]);
+    check_value!(25u32, &[0x18, 0x19]);
+    check_value!(100u32, &[0x18, 0x64]);
+    check_value!(1000u32, &[0x19, 0x03, 0xe8]);
+    check_value!(1000000u32, &[0x1a, 0x00, 0x0f, 0x42, 0x40]);
+    check_value!(
+        1000000000000u64,
+        &[0x1b, 0x00, 0x00, 0x00, 0xe8, 0xd4, 0xa5, 0x10, 0x00]
+    );
+    check_value!(
+        18446744073709551615u64,
+        &[0x1b, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]
+    );
+    check_value!(-1i8, &[0x20]);
+    check_value!(-10i8, &[0x29]);
+    check_value!(-100i8, &[0x38, 0x63]);
+    check_value!(-1000i32, &[0x39, 0x03, 0xe7]);
+    check_value!(-543514321i64, &[0x3A, 0x20, 0x65, 0x5E, 0xD0]);
+    check_value!("", &[0x60]);
+    check_value!("a", &[0x61, 0x61]);
+    check_value!("IETF", &[0x64, 0x49, 0x45, 0x54, 0x46]);
+    check_value!("\u{20ac}¢", &[101, 226, 130, 172, 194, 162]);
+    check_value!((&[] as &[u32])[..], &[0x80]);
+    check_value!(&[1, 2, 3][..], &[131, 1, 2, 3]);
+    check_value!(true, &[0xf5]);
+    check_value!(false, &[0xf4]);
+    check_value!(0.0f32, &[250, 0, 0, 0, 0]);
+    check_value!(1.0f64, &[251, 63, 240, 0, 0, 0, 0, 0, 0]);
 
-    file.flush().unwrap();
+    {
+        v.clear();
+
+        let cursor = Cursor::new(&mut v);
+        let mut ser = CborSerializer { write: cursor };
+
+        let mut map = ser.serialize_map(None).unwrap();
+        map.serialize_entry(&"a", 1).unwrap();
+        map.serialize_entry(2, &"hello").unwrap();
+        map.end().unwrap();
+
+        assert_eq!(v, &[191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255]);
+    }
 }
+
+fn main() {}

@@ -211,25 +211,25 @@ pub trait Deserializer<'de>
 {
     type Err;
 
-    fn deserialize_any<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_u8<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_u16<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_u32<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_u64<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_i8<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_i16<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_i32<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_i64<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_f32<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_f64<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_bool<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_str<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_string<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_bytes<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_bytes_array<V: Visitor<'de>>(self, v: &mut V) -> Result<V::Value, Self::Err>;
-    fn deserialize_null<V: Visitor<'de>>(self) -> Result<V::Value, Self::Err>;
-    fn deserialize_array<V: Visitor<'de>>(self) -> Result<V::Value, Self::Err>;
-    fn deserialize_map<V: Visitor<'de>>(self) -> Result<V::Value, Self::Err>;
+    fn deserialize_any<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_u8<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_u16<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_u32<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_u64<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_i8<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_i16<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_i32<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_i64<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_f32<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_f64<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_bool<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_str<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_string<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_bytes<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_bytes_array<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_null<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_array<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
+    fn deserialize_map<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
 }
 
 pub trait Deserialize<'de>: Sized
