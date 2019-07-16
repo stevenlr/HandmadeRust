@@ -858,6 +858,26 @@ fn serialize()
 
         assert_eq!(v, &[191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255]);
     }
+
+    {
+        v.clear();
+
+        let cursor = Cursor::new(&mut v);
+        let mut ser = CborSerializer { write: cursor };
+
+        let mut map = ser.serialize_null().unwrap();
+        assert_eq!(v, &[0xf6]);
+    }
+
+    {
+        v.clear();
+
+        let cursor = Cursor::new(&mut v);
+        let mut ser = CborSerializer { write: cursor };
+
+        let mut map = ser.serialize_bytes(&[1, 5, 10, 16, 7]).unwrap();
+        assert_eq!(v, &[69, 1, 5, 10, 16, 7]);
+    }
 }
 
 fn main() {}
