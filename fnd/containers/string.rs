@@ -53,6 +53,17 @@ impl<A: Allocator> String<A>
     }
 }
 
+impl<A: Allocator> core::convert::TryFrom<Array<u8, A>> for String<A>
+{
+    type Error = core::str::Utf8Error;
+
+    fn try_from(array: Array<u8, A>) -> Result<Self, Self::Error>
+    {
+        str::from_utf8(&array)?;
+        Ok(Self { buf: array })
+    }
+}
+
 impl String<GlobalAllocator>
 {
     pub fn new() -> Self
@@ -147,6 +158,7 @@ mod tests
 {
     use super::*;
     use crate::containers::{HashMap, HashSet};
+    use core::convert::TryInto;
 
     #[test]
     fn str()
@@ -193,5 +205,15 @@ mod tests
         s.push('é');
         s.push('漢');
         assert_eq!(s, "aé漢");
+    }
+
+    #[test]
+    fn from_array()
+    {
+        let mut array = Array::new();
+        array.extend("abé漢".bytes());
+
+        let string: String = array.try_into().unwrap();
+        assert_eq!(string, "abé漢");
     }
 }
