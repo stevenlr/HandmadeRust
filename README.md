@@ -8,6 +8,7 @@ Right now it only targets Windows. This may change in this future.
 Crates
 ----------------
 
+ - [`cbor`](cbor): Implements [CBOR](https://cbor.io/) serialization and deserialization.
  - [`fnd`](fnd): A standard library replacement with allocator-aware containers.
  - [`gfx_hal`](gfx/hal): Hardware abstraction layer. Inspired by [`gfx-rs`](https://github.com/gfx-rs/gfx).
  - [`gfx_vulkan_backend`](gfx/vulkan_backend): Vulkan implementation of `gfx_hal`.

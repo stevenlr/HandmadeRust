@@ -103,6 +103,19 @@ impl Read for &[u8]
     }
 }
 
+impl<A: Allocator> Write for &mut Array<u8, A>
+{
+    fn write(&mut self, buf: &[u8]) -> Result<usize>
+    {
+        (*self).write(buf)
+    }
+
+    fn flush(&mut self) -> Result<()>
+    {
+        (*self).flush()
+    }
+}
+
 impl<A: Allocator> Write for Array<u8, A>
 {
     fn write(&mut self, buf: &[u8]) -> Result<usize>

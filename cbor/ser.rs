@@ -1,5 +1,9 @@
 use super::*;
 
+use core::mem::transmute;
+
+use fnd::{io::Write, serde::*};
+
 pub struct CborSerializer<W>
 {
     write: W,

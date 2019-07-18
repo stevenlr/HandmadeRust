@@ -1,13 +1,16 @@
 use super::*;
 
-use std::io::Cursor;
+use fnd::{
+    containers::{Array, String},
+    serde::*,
+};
 
 #[test]
 fn deserialize()
 {
     macro_rules! check_value {
         ($value:expr, $type:ident, $serialized:expr) => {
-            let mut de = CborDeserializer::new(Cursor::new($serialized));
+            let mut de = CborDeserializer::new(&$serialized[..]);
             let value = $type::deserialize(&mut de).unwrap();
             assert_eq!(value, $value);
         };
@@ -68,7 +71,7 @@ fn deserialize()
             }
         }
 
-        let mut de = CborDeserializer::new(Cursor::new(&[69, 1, 5, 10, 16, 7]));
+        let mut de = CborDeserializer::new(&[69, 1, 5, 10, 16, 7][..]);
         de.deserialize_bytes(BytesCheck).unwrap();
     }
 
@@ -88,15 +91,15 @@ fn deserialize()
                 }
             }
 
-            let mut de = CborDeserializer::new(Cursor::new($bytes));
+            let mut de = CborDeserializer::new(&$bytes[..]);
             de.deserialize_string(StringCheck).unwrap();
         }};
     }
 
-    check_string!("", &[0x60]);
-    check_string!("a", &[0x61, 0x61]);
-    check_string!("IETF", &[0x64, 0x49, 0x45, 0x54, 0x46]);
-    check_string!("\u{20ac}¢", &[101, 226, 130, 172, 194, 162]);
+    check_string!("", [0x60]);
+    check_string!("a", [0x61, 0x61]);
+    check_string!("IETF", [0x64, 0x49, 0x45, 0x54, 0x46]);
+    check_string!("\u{20ac}¢", [101, 226, 130, 172, 194, 162]);
 
     {
         struct NullCheck
@@ -116,7 +119,7 @@ fn deserialize()
             }
         }
 
-        let mut de = CborDeserializer::new(Cursor::new(&[0xf6]));
+        let mut de = CborDeserializer::new(&[0xf6][..]);
 
         let mut checker = NullCheck { found: false };
         de.deserialize_null(&mut checker).unwrap();
@@ -147,15 +150,15 @@ fn deserialize()
                 }
             }
 
-            let mut de = CborDeserializer::new(Cursor::new($bytes));
+            let mut de = CborDeserializer::new(&$bytes[..]);
             let result = de.deserialize_array(ArrayVisitor).unwrap();
             assert_eq!(&*result, $reference);
         }};
     }
 
-    check_array!((&[] as &[u32]), &[0x80, 8, 9, 7]);
-    check_array!((&[1u32, 2u32, 3u32] as &[u32]), &[131, 1, 2, 3, 4, 5]);
-    check_array!((&[1u32, 2u32, 3u32] as &[u32]), &[159, 1, 2, 3, 255, 4, 5]);
+    check_array!((&[] as &[u32]), [0x80, 8, 9, 7]);
+    check_array!((&[1u32, 2u32, 3u32] as &[u32]), [131, 1, 2, 3, 4, 5]);
+    check_array!((&[1u32, 2u32, 3u32] as &[u32]), [159, 1, 2, 3, 255, 4, 5]);
 
     {
         struct MapVisitor;
@@ -189,9 +192,11 @@ fn deserialize()
             }
         }
 
-        let mut de = CborDeserializer::new(Cursor::new(&[
-            191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255, 1, 1, 1,
-        ]));
+        let mut de = CborDeserializer::new(
+            &[
+                191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255, 1, 1, 1,
+            ][..],
+        );
 
         de.deserialize_map(MapVisitor).unwrap();
     }
@@ -200,17 +205,16 @@ fn deserialize()
 #[test]
 fn serialize()
 {
-    let mut v = Vec::<u8>::new();
+    let mut v = Array::<u8>::new();
 
     macro_rules! check_value {
         ($value:expr, $expected:expr) => {
             v.clear();
 
-            let cursor = Cursor::new(&mut v);
-            let mut serializer = CborSerializer::new(cursor);
+            let mut serializer = CborSerializer::new(&mut v);
 
             $value.serialize(&mut serializer).unwrap();
-            assert_eq!(v, $expected);
+            assert_eq!(&v[..], $expected);
         };
     }
 
@@ -252,8 +256,7 @@ fn serialize()
     {
         v.clear();
 
-        let cursor = Cursor::new(&mut v);
-        let mut serializer = CborSerializer::new(cursor);
+        let mut serializer = CborSerializer::new(&mut v);
 
         let mut array_ser = serializer.serialize_array(None).unwrap();
         array_ser.serialize_element(1u32).unwrap();
@@ -261,40 +264,40 @@ fn serialize()
         array_ser.serialize_element(3u32).unwrap();
         array_ser.end().unwrap();
 
-        assert_eq!(v, &[159, 1, 2, 3, 255]);
+        assert_eq!(&v[..], &[159, 1, 2, 3, 255]);
     }
 
     {
         v.clear();
 
-        let cursor = Cursor::new(&mut v);
-        let mut ser = CborSerializer::new(cursor);
+        let mut ser = CborSerializer::new(&mut v);
 
         let mut map = ser.serialize_map(None).unwrap();
         map.serialize_entry(&"a", 1).unwrap();
         map.serialize_entry(2, &"hello").unwrap();
         map.end().unwrap();
 
-        assert_eq!(v, &[191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255]);
+        assert_eq!(
+            &v[..],
+            &[191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255]
+        );
     }
 
     {
         v.clear();
 
-        let cursor = Cursor::new(&mut v);
-        let mut ser = CborSerializer::new(cursor);
+        let mut ser = CborSerializer::new(&mut v);
 
         let mut _map = ser.serialize_null().unwrap();
-        assert_eq!(v, &[0xf6]);
+        assert_eq!(&v[..], &[0xf6]);
     }
 
     {
         v.clear();
 
-        let cursor = Cursor::new(&mut v);
-        let mut ser = CborSerializer::new(cursor);
+        let mut ser = CborSerializer::new(&mut v);
 
         let mut _map = ser.serialize_bytes(&[1, 5, 10, 16, 7]).unwrap();
-        assert_eq!(v, &[69, 1, 5, 10, 16, 7]);
+        assert_eq!(&v[..], &[69, 1, 5, 10, 16, 7]);
     }
 }

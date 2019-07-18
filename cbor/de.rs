@@ -1,5 +1,14 @@
 use super::*;
 
+use core::{convert::TryInto, mem::transmute};
+
+use fnd::{
+    alloc::{Allocator, GlobalAllocator},
+    containers::{Array, String},
+    io::{PeekOne, Read},
+    serde::*,
+};
+
 #[derive(Debug)]
 pub enum CborDeserializeError
 {
@@ -14,16 +23,14 @@ pub enum CborDeserializeError
 
 pub struct CborDeserializer<R>
 {
-    r: PeekOneReader<R>,
+    r: PeekOne<R>,
 }
 
 impl<R: Read> CborDeserializer<R>
 {
     pub fn new(r: R) -> Self
     {
-        Self {
-            r: PeekOneReader::new(r),
-        }
+        Self { r: PeekOne::new(r) }
     }
 
     #[inline]
@@ -37,23 +44,19 @@ impl<R: Read> CborDeserializer<R>
     #[inline]
     fn peek_byte(&mut self) -> Result<u8, CborDeserializeError>
     {
-        self.r
-            .peek_one()
-            .as_ref()
-            .map(|r| *r)
-            .map_err(|e| match e.kind()
-            {
-                std::io::ErrorKind::UnexpectedEof => CborDeserializeError::UnexpectedEof,
-                _ => CborDeserializeError::ReadError,
-            })
+        self.r.peek_one().as_ref().map(|r| *r).map_err(|e| match e
+        {
+            fnd::io::Error::UnexpectedEof => CborDeserializeError::UnexpectedEof,
+            _ => CborDeserializeError::ReadError,
+        })
     }
 
     #[inline]
     fn read_bytes(&mut self, bytes: &mut [u8]) -> Result<(), CborDeserializeError>
     {
-        self.r.read_exact(bytes).map_err(|e| match e.kind()
+        self.r.read_exact(bytes).map_err(|e| match e
         {
-            std::io::ErrorKind::UnexpectedEof => CborDeserializeError::UnexpectedEof,
+            fnd::io::Error::UnexpectedEof => CborDeserializeError::UnexpectedEof,
             _ => CborDeserializeError::ReadError,
         })
     }
