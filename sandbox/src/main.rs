@@ -4,16 +4,12 @@ use core::{convert::TryInto, mem::transmute};
 use fnd::{
     alloc::{Allocator, GlobalAllocator},
     containers::{Array, String},
+    serde::*,
 };
 use std::{
     io::{Bytes, Cursor, Read, Write},
     vec::Vec,
 };
-
-mod impls;
-mod traits;
-
-use traits::*;
 
 struct PeekOneReader<R>
 {

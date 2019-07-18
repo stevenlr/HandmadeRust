@@ -1,6 +1,5 @@
-use crate::traits::*;
-
-use fnd::{alloc::Allocator, containers::String};
+use super::*;
+use crate::{alloc::Allocator, containers::String};
 
 macro_rules! impl_primitive_ser {
     ($type:ty, $method:ident) => {

@@ -1,4 +1,4 @@
-use fnd::{
+use crate::{
     alloc::Allocator,
     containers::{Array, String},
 };

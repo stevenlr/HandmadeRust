@@ -9,6 +9,7 @@ pub mod hash;
 pub mod io;
 pub mod linalg;
 pub mod num;
+pub mod serde;
 mod shared;
 pub mod str;
 mod unique;
