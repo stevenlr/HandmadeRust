@@ -699,6 +699,21 @@ impl<R: Read> CborDeserializer<R>
         }
     }
 
+    fn read_map_length(&mut self) -> Result<Option<usize>, CborDeserializeError>
+    {
+        let header = self.read_byte()?;
+
+        let (major_type, payload) =
+            MajorType::from_raw(header).ok_or(CborDeserializeError::CorruptedHeader)?;
+
+        match (major_type, payload)
+        {
+            (MajorType::Map, 0x1f) => Ok(None),
+            (MajorType::Map, _) => Ok(Some(self.read_integer_value(payload)? as usize)),
+            _ => Err(CborDeserializeError::UnexpectedType),
+        }
+    }
+
     fn read_break_maybe(&mut self) -> Result<bool, CborDeserializeError>
     {
         let header = self.peek_byte()?;
@@ -724,11 +739,6 @@ impl<R: Read> CborDeserializer<R>
 impl<'de, R: Read> Deserializer<'de> for &mut CborDeserializer<R>
 {
     type Err = CborDeserializeError;
-
-    fn deserialize_any<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
-    {
-        unimplemented!();
-    }
 
     fn deserialize_u8<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
     {
@@ -918,7 +928,7 @@ impl<'de, R: Read> Deserializer<'de> for &mut CborDeserializer<R>
     {
         let array_len = self.read_array_length()?;
 
-        let mut accessor = CborDeserializerArrayAccessor {
+        let mut accessor = CborDeserializerCompoundAccessor {
             de: self,
             size: array_len,
         };
@@ -929,17 +939,25 @@ impl<'de, R: Read> Deserializer<'de> for &mut CborDeserializer<R>
 
     fn deserialize_map<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
     {
-        unimplemented!();
+        let map_len = self.read_map_length()?;
+
+        let mut accessor = CborDeserializerCompoundAccessor {
+            de: self,
+            size: map_len,
+        };
+
+        v.accept_map(accessor)
+            .map_err(|_| CborDeserializeError::VisitorError)
     }
 }
 
-struct CborDeserializerArrayAccessor<'a, R>
+struct CborDeserializerCompoundAccessor<'a, R>
 {
     de: &'a mut CborDeserializer<R>,
     size: Option<usize>,
 }
 
-impl<'a, 'de, R: Read> ArrayAccessor<'de> for CborDeserializerArrayAccessor<'a, R>
+impl<'a, 'de, R: Read> ArrayAccessor<'de> for CborDeserializerCompoundAccessor<'a, R>
 {
     type Err = CborDeserializeError;
 
@@ -970,6 +988,50 @@ impl<'a, 'de, R: Read> ArrayAccessor<'de> for CborDeserializerArrayAccessor<'a, 
             {
                 true => Ok(None),
                 false => T::deserialize(&mut *self.de).map(|x| Some(x)),
+            }
+        }
+    }
+}
+
+impl<'a, 'de, R: Read> MapAccessor<'de> for CborDeserializerCompoundAccessor<'a, R>
+{
+    type Err = CborDeserializeError;
+
+    fn size_hint(&self) -> Option<usize>
+    {
+        self.size
+    }
+
+    fn next_entry<K, V>(&mut self) -> Result<Option<(K, V)>, Self::Err>
+    where
+        K: Deserialize<'de>,
+        V: Deserialize<'de>,
+    {
+        if self.size.is_some()
+        {
+            if self.size.unwrap() > 0
+            {
+                self.size.replace(self.size.unwrap() - 1);
+                let key = K::deserialize(&mut *self.de)?;
+                let value = V::deserialize(&mut *self.de)?;
+                Ok(Some((key, value)))
+            }
+            else
+            {
+                Ok(None)
+            }
+        }
+        else
+        {
+            match self.de.read_break_maybe()?
+            {
+                true => Ok(None),
+                false =>
+                {
+                    let key = K::deserialize(&mut *self.de)?;
+                    let value = V::deserialize(&mut *self.de)?;
+                    Ok(Some((key, value)))
+                }
             }
         }
     }
@@ -1143,22 +1205,46 @@ fn deserialize()
     check_array!((&[1u32, 2u32, 3u32] as &[u32]), &[131, 1, 2, 3, 4, 5]);
     check_array!((&[1u32, 2u32, 3u32] as &[u32]), &[159, 1, 2, 3, 255, 4, 5]);
 
-    /*
-
     {
-        v.clear();
+        struct MapVisitor;
 
-        let cursor = Cursor::new(&mut v);
-        let mut ser = CborSerializer { write: cursor };
+        impl<'de> Visitor<'de> for MapVisitor
+        {
+            type Value = ();
+            type Err = MyVisitorError;
 
-        let mut map = ser.serialize_map(None).unwrap();
-        map.serialize_entry(&"a", 1).unwrap();
-        map.serialize_entry(2, &"hello").unwrap();
-        map.end().unwrap();
+            fn accept_map<A>(self, mut accessor: A) -> Result<Self::Value, Self::Err>
+            where
+                A: MapAccessor<'de>,
+            {
+                let (key, value) = accessor
+                    .next_entry::<String, i32>()
+                    .map_err(|_| MyVisitorError)?
+                    .unwrap();
+                assert_eq!(key, "a");
+                assert_eq!(value, 1);
+                let (key, value) = accessor
+                    .next_entry::<i32, String>()
+                    .map_err(|_| MyVisitorError)?
+                    .unwrap();
+                assert_eq!(key, 2);
+                assert_eq!(value, "hello");
+                assert!(accessor
+                    .next_entry::<u32, u32>()
+                    .map_err(|_| MyVisitorError)?
+                    .is_none());
+                return Ok(());
+            }
+        }
 
-        assert_eq!(v, &[191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255]);
+        let mut de = CborDeserializer {
+            r: PeekOneReader::new(Cursor::new(&[
+                191, 97, 97, 1, 2, 101, 104, 101, 108, 108, 111, 255, 1, 1, 1,
+            ])),
+        };
+
+        de.deserialize_map(MapVisitor).unwrap();
     }
-    */
 }
 
 #[test]

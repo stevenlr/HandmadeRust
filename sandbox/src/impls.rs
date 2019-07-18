@@ -1,5 +1,7 @@
 use crate::traits::*;
 
+use fnd::{alloc::Allocator, containers::String};
+
 macro_rules! impl_primitive_ser {
     ($type:ty, $method:ident) => {
         impl Serialize for $type
@@ -127,5 +129,38 @@ impl<'de: 'a, 'a> Deserialize<'de> for &'a str
         }
 
         d.deserialize_str(PrimVisitor)
+    }
+}
+
+struct StringPrimVisitor<A>
+{
+    alloc: A,
+    _p: core::marker::PhantomData<A>,
+}
+
+impl<'de, A: Allocator + Clone> Visitor<'de> for StringPrimVisitor<A>
+{
+    type Value = String<A>;
+    type Err = PrimitiveVisitorError;
+
+    fn accept_str(self, value: &str) -> Result<Self::Value, Self::Err>
+    {
+        Ok(String::from_str_with(value, self.alloc.clone()))
+    }
+
+    fn accept_string<A2: Allocator>(self, value: String<A2>) -> Result<Self::Value, Self::Err>
+    {
+        Ok(String::from_str_with(&value, self.alloc.clone()))
+    }
+}
+
+impl<'de: 'a, 'a, A: Allocator + Default + Clone> Deserialize<'de> for String<A>
+{
+    fn deserialize<D: Deserializer<'de>>(d: D) -> Result<String<A>, D::Err>
+    {
+        d.deserialize_str(StringPrimVisitor {
+            alloc: A::default(),
+            _p: core::marker::PhantomData,
+        })
     }
 }

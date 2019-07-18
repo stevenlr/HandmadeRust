@@ -211,7 +211,6 @@ pub trait Deserializer<'de>
 {
     type Err;
 
-    fn deserialize_any<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
     fn deserialize_u8<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
     fn deserialize_u16<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
     fn deserialize_u32<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>;
