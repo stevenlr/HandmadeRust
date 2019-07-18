@@ -1,4 +1,5 @@
-#[derive(Debug, PartialEq)]
+use crate::{alloc::Allocator, containers::Array};
+
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Error
 {
@@ -99,6 +100,24 @@ impl Read for &[u8]
 
         *self = remaining;
         Ok(count)
+    }
+}
+
+impl<A: Allocator> Write for Array<u8, A>
+{
+    fn write(&mut self, buf: &[u8]) -> Result<usize>
+    {
+        let old_len = self.len();
+
+        self.resize(self.len() + buf.len(), 0);
+        (&mut self[old_len..]).copy_from_slice(buf);
+
+        Ok(buf.len())
+    }
+
+    fn flush(&mut self) -> Result<()>
+    {
+        Ok(())
     }
 }
 
@@ -279,6 +298,14 @@ mod tests
         assert_eq!(output[0], 5);
 
         assert_eq!(data.read(output), Ok(0));
+    }
+
+    #[test]
+    fn write_u8_array()
+    {
+        let mut array = Array::<u8>::new();
+        array.write_all(&[1, 2, 3, 4, 5, 6]).unwrap();
+        assert_eq!(&array[..], &[1, 2, 3, 4, 5, 6]);
     }
 
     #[test]
