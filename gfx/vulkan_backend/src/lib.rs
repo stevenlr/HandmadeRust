@@ -1,3 +1,5 @@
+#![no_std]
+
 mod command_pool;
 mod conv;
 mod device;

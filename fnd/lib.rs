@@ -1,4 +1,5 @@
 #![feature(unsize, coerce_unsized, optin_builtin_traits)]
+#![no_std]
 
 pub mod alloc;
 mod bitflags;

@@ -47,7 +47,9 @@ extern "system" fn messenger_cb(
         let callback_data: &VkDebugUtilsMessengerCallbackDataEXT = &*p_callback_data;
         match CStr::from_bytes_null_terminated_unchecked(callback_data.p_message).as_str()
         {
-            Ok(s) => println!("{}", s),
+            // @Todo Do stdout!
+            Ok(_s) =>
+            {} // println!("{}", s),
             _ =>
             {}
         }

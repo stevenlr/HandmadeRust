@@ -1,3 +1,5 @@
+#![no_std]
+
 pub mod capabilities;
 mod command_pool;
 mod device;
