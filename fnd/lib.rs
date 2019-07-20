@@ -2,6 +2,7 @@
 #![no_std]
 
 pub mod alloc;
+mod ashared;
 mod bitflags;
 pub mod containers;
 pub mod dl;
@@ -16,6 +17,7 @@ pub mod str;
 mod unique;
 pub mod zlib;
 
+pub use ashared::{AShared, AWeak};
 pub use bitflags::*;
 pub use shared::{Shared, Weak};
 pub use unique::Unq;
