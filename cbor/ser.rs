@@ -1,7 +1,5 @@
 use super::*;
 
-use core::mem::transmute;
-
 use fnd::{io::Write, serde::*};
 
 pub struct CborSerializer<W>
@@ -95,13 +93,13 @@ where
     #[inline]
     fn write_f32(&mut self, data: f32) -> Result<(), ()>
     {
-        self.write_u32(unsafe { transmute(data) })
+        self.write_u32(data.to_bits())
     }
 
     #[inline]
     fn write_f64(&mut self, data: f64) -> Result<(), ()>
     {
-        self.write_u64(unsafe { transmute(data) })
+        self.write_u64(data.to_bits())
     }
 }
 

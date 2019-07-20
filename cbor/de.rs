@@ -1,6 +1,6 @@
 use super::*;
 
-use core::{convert::TryInto, mem::transmute};
+use core::convert::TryInto;
 
 use fnd::{
     alloc::{Allocator, GlobalAllocator},
@@ -170,7 +170,7 @@ impl<R: Read> CborDeserializer<R>
         return Ok((is_negative, value));
     }
 
-    fn read_float(&mut self) -> Result<f64, CborDeserializeError>
+    fn read_f32(&mut self) -> Result<f32, CborDeserializeError>
     {
         let header = self.read_byte()?;
 
@@ -181,14 +181,32 @@ impl<R: Read> CborDeserializer<R>
         {
             (MajorType::FloatingPoint, F32) =>
             {
-                Ok(
-                    unsafe { transmute::<u32, f32>(self.read_integer_from_stream(4)? as u32) }
-                        as f64,
-                )
+                Ok(f32::from_bits(self.read_integer_from_stream(4)? as u32))
             }
             (MajorType::FloatingPoint, F64) =>
             {
-                Ok(unsafe { transmute::<u64, f64>(self.read_integer_from_stream(8)?) })
+                Ok(f64::from_bits(self.read_integer_from_stream(8)?) as f32)
+            }
+            _ => Err(CborDeserializeError::UnexpectedType),
+        }
+    }
+
+    fn read_f64(&mut self) -> Result<f64, CborDeserializeError>
+    {
+        let header = self.read_byte()?;
+
+        let (major_type, payload) =
+            MajorType::from_raw(header).ok_or(CborDeserializeError::CorruptedHeader)?;
+
+        match (major_type, payload)
+        {
+            (MajorType::FloatingPoint, F32) =>
+            {
+                Ok(f32::from_bits(self.read_integer_from_stream(4)? as u32) as f64)
+            }
+            (MajorType::FloatingPoint, F64) =>
+            {
+                Ok(f64::from_bits(self.read_integer_from_stream(8)?))
             }
             _ => Err(CborDeserializeError::UnexpectedType),
         }
@@ -405,15 +423,15 @@ impl<'de, R: Read> Deserializer<'de> for &mut CborDeserializer<R>
 
     fn deserialize_f32<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
     {
-        let value = self.read_float()?;
-        v.accept_f32(value as f32)
+        let value = self.read_f32()?;
+        v.accept_f32(value)
             .map_err(|_| CborDeserializeError::VisitorError)
     }
 
     fn deserialize_f64<V: Visitor<'de>>(self, v: V) -> Result<V::Value, Self::Err>
     {
-        let value = self.read_float()?;
-        v.accept_f64(value as f64)
+        let value = self.read_f64()?;
+        v.accept_f64(value)
             .map_err(|_| CborDeserializeError::VisitorError)
     }
 

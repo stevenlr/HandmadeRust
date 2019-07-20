@@ -11,15 +11,7 @@ impl Allocator for Win32HeapAllocator
     unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>
     {
         let ptr = kernel32::HeapAlloc(kernel32::GetProcessHeap(), 0, layout.size);
-
-        if ptr.is_null()
-        {
-            None
-        }
-        else
-        {
-            Some(NonNull::new_unchecked(ptr))
-        }
+        NonNull::new(ptr)
     }
 
     unsafe fn dealloc(&mut self, ptr: *mut c_void)
