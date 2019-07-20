@@ -30,6 +30,8 @@ pub type LONG = i32;
 pub type LPMSG = *mut MSG;
 pub type LONG_PTR = isize;
 pub type LARGE_INTEGER = i64;
+pub type SRWLOCK = usize;
+pub type PSRWLOCK = *mut SRWLOCK;
 
 pub type WNDPROC =
     unsafe extern "system" fn(hwnd: HWND, uMsg: UINT, wParam: WPARAM, lParam: LPARAM) -> LRESULT;

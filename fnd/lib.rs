@@ -14,6 +14,7 @@ pub mod num;
 pub mod serde;
 mod shared;
 pub mod str;
+pub mod sync;
 pub mod thread;
 mod unique;
 pub mod zlib;

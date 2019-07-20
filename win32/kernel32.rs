@@ -52,4 +52,7 @@ extern "system" {
         lpOverlapped: *mut OVERLAPPED,
     ) -> BOOL;
     pub fn FlushFileBuffers(hFile: HANDLE) -> BOOL;
+    pub fn InitializeSRWLock(SRWLock: PSRWLOCK);
+    pub fn AcquireSRWLockExclusive(SRWLock: PSRWLOCK);
+    pub fn ReleaseSRWLockExclusive(SRWLock: PSRWLOCK);
 }
