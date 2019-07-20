@@ -40,6 +40,15 @@ impl<T, A: Allocator> Unq<T, A>
 
 impl<T: ?Sized, A: Allocator> Unq<T, A>
 {
+    pub unsafe fn from_raw_with(ptr: NonNull<T>, a: A) -> Self
+    {
+        Self {
+            ptr,
+            alloc: a,
+            _phantom: PhantomData,
+        }
+    }
+
     pub fn leak<'a>(unq: Unq<T, A>) -> &'a mut T
     where
         A: 'a,
@@ -47,6 +56,14 @@ impl<T: ?Sized, A: Allocator> Unq<T, A>
         let reference = unsafe { &mut *unq.ptr.as_ptr() };
         core::mem::forget(unq);
         return reference;
+    }
+
+    #[inline]
+    pub fn into_raw(unq: Self) -> *mut T
+    {
+        let ptr = unq.ptr.as_ptr();
+        core::mem::forget(unq);
+        return ptr;
     }
 }
 
@@ -60,6 +77,14 @@ impl<T> Unq<T, GlobalAllocator>
     pub fn pin(value: T) -> Pin<Self>
     {
         Self::pin_with(value, GlobalAllocator)
+    }
+}
+
+impl<T: ?Sized> Unq<T, GlobalAllocator>
+{
+    pub unsafe fn from_raw(ptr: NonNull<T>) -> Self
+    {
+        Self::from_raw_with(ptr, GlobalAllocator)
     }
 }
 

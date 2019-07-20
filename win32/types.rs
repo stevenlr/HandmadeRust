@@ -434,6 +434,9 @@ pub const FILE_BEGIN: DWORD = 0;
 pub const FILE_CURRENT: DWORD = 1;
 pub const FILE_END: DWORD = 2;
 
+pub const CREATE_SUSPENDED: DWORD = 0x00000004;
+pub const STACK_SIZE_PARAM_IS_A_RESERVATION: DWORD = 0x00010000;
+
 #[repr(C)]
 pub struct WNDCLASSA
 {
