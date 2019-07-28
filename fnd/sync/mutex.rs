@@ -1,12 +1,15 @@
 use core::{
     cell::UnsafeCell,
-    mem::MaybeUninit,
+    marker::Unpin,
     ops::{Deref, DerefMut},
+    pin::Pin,
 };
 
+use crate::Unq;
+
 use win32::{
-    kernel32::{AcquireSRWLockExclusive, InitializeSRWLock, ReleaseSRWLockExclusive},
-    SRWLOCK,
+    kernel32::{AcquireSRWLockExclusive, ReleaseSRWLockExclusive},
+    SRWLOCK, SRWLOCK_INIT,
 };
 
 pub struct LockGuard<'a, T>
@@ -14,9 +17,40 @@ pub struct LockGuard<'a, T>
     mutex: &'a Mutex<T>,
 }
 
-pub struct Mutex<T>
+struct NativeMutex
 {
     handle: UnsafeCell<SRWLOCK>,
+}
+
+impl Unpin for NativeMutex {}
+
+impl NativeMutex
+{
+    fn new() -> Self
+    {
+        Self {
+            handle: UnsafeCell::new(SRWLOCK_INIT),
+        }
+    }
+
+    fn lock(&self)
+    {
+        unsafe {
+            AcquireSRWLockExclusive(self.handle.get());
+        }
+    }
+
+    fn unlock(&self)
+    {
+        unsafe {
+            ReleaseSRWLockExclusive(self.handle.get());
+        }
+    }
+}
+
+pub struct Mutex<T>
+{
+    native: Pin<Unq<NativeMutex>>,
     value: UnsafeCell<T>,
 }
 
@@ -24,24 +58,15 @@ impl<T> Mutex<T>
 {
     pub fn new(value: T) -> Self
     {
-        let mut handle = MaybeUninit::uninit();
-
-        unsafe {
-            InitializeSRWLock(handle.as_mut_ptr());
-        }
-
         Self {
-            handle: UnsafeCell::new(unsafe { handle.assume_init() }),
+            native: Unq::pin(NativeMutex::new()),
             value: UnsafeCell::new(value),
         }
     }
 
     pub fn lock<'a>(&'a self) -> LockGuard<'a, T>
     {
-        unsafe {
-            AcquireSRWLockExclusive(self.handle.get());
-        }
-
+        self.native.lock();
         LockGuard { mutex: &self }
     }
 }
@@ -53,9 +78,7 @@ impl<'a, T> Drop for LockGuard<'a, T>
 {
     fn drop(&mut self)
     {
-        unsafe {
-            ReleaseSRWLockExclusive(self.mutex.handle.get());
-        }
+        self.mutex.native.unlock();
     }
 }
 

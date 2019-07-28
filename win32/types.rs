@@ -40,6 +40,8 @@ pub type ThreadProc = unsafe extern "system" fn(lpParameter: LPVOID) -> DWORD;
 
 pub const INVALID_HANDLE_VALUE: HANDLE = !0u64 as _;
 
+pub const SRWLOCK_INIT: SRWLOCK = 0;
+
 pub const CS_BYTEALIGNCLIENT: UINT = 0x1000;
 pub const CS_BYTEALIGNWINDOW: UINT = 0x2000;
 pub const CS_CLASSDC: UINT = 0x0040;
