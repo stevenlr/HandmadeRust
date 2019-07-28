@@ -55,4 +55,5 @@ extern "system" {
     pub fn InitializeSRWLock(SRWLock: PSRWLOCK);
     pub fn AcquireSRWLockExclusive(SRWLock: PSRWLOCK);
     pub fn ReleaseSRWLockExclusive(SRWLock: PSRWLOCK);
+    pub fn GetStdHandle(nStdHandle: DWORD) -> HANDLE;
 }

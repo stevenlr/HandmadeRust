@@ -441,6 +441,10 @@ pub const FILE_END: DWORD = 2;
 pub const CREATE_SUSPENDED: DWORD = 0x00000004;
 pub const STACK_SIZE_PARAM_IS_A_RESERVATION: DWORD = 0x00010000;
 
+pub const STD_INPUT_HANDLE: DWORD = 0xffffffff - 9;
+pub const STD_OUTPUT_HANDLE: DWORD = 0xffffffff - 10;
+pub const STD_ERROR_HANDLE: DWORD = 0xffffffff - 11;
+
 #[repr(C)]
 pub struct WNDCLASSA
 {
