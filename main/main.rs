@@ -1,8 +1,21 @@
-#![feature(proc_macro_hygiene)]
+#![feature(proc_macro_hygiene, start, lang_items)]
+#![no_std]
+
+#[cfg(target_env = "msvc")]
+mod msvc;
 
 use gfx_hal as hal;
 use gfx_hal::{self, Device, Instance, QueueFamily, Surface};
 use gfx_vulkan_backend as gfx_vk;
+
+use fnd::*;
+
+#[start]
+fn start(_argc: isize, _argv: *const *const u8) -> isize
+{
+    main();
+    return 0;
+}
 
 fn main()
 {
