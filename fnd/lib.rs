@@ -1,4 +1,10 @@
-#![feature(unsize, coerce_unsized, optin_builtin_traits)]
+#![feature(
+    unsize,
+    coerce_unsized,
+    optin_builtin_traits,
+    format_args_nl,
+    allow_internal_unstable
+)]
 #![no_std]
 
 pub mod alloc;
@@ -6,6 +12,7 @@ mod ashared;
 mod bitflags;
 pub mod containers;
 pub mod dl;
+pub mod fmt;
 pub mod fs;
 pub mod hash;
 pub mod io;

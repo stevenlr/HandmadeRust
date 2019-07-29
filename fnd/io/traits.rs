@@ -1,3 +1,5 @@
+use core::fmt;
+
 #[derive(Debug, PartialEq, Clone, Copy)]
 pub enum Error
 {
@@ -58,6 +60,35 @@ pub trait Write
         }
 
         Ok(())
+    }
+
+    fn write_fmt(&mut self, f: fmt::Arguments<'_>) -> Result<()>
+    {
+        struct FmtWrite<'a, W: ?Sized + 'a>
+        {
+            inner: &'a mut W,
+            error: Result<()>,
+        }
+
+        impl<W: Write + ?Sized> fmt::Write for FmtWrite<'_, W>
+        {
+            fn write_str(&mut self, s: &str) -> core::result::Result<(), fmt::Error>
+            {
+                self.error = self.inner.write_all(s.as_bytes());
+                self.error.map_err(|_| fmt::Error)
+            }
+        }
+
+        let mut fmt_write = FmtWrite {
+            inner: self,
+            error: Ok(()),
+        };
+
+        match fmt::write(&mut fmt_write, f)
+        {
+            Ok(_) => Ok(()),
+            Err(_) => fmt_write.error,
+        }
     }
 }
 

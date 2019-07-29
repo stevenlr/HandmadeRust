@@ -4,12 +4,8 @@ use gfx_hal as hal;
 use gfx_hal::{self, Device, Instance, QueueFamily, Surface};
 use gfx_vulkan_backend as gfx_vk;
 
-use fnd::io::{stdout, Write};
-
 fn main()
 {
-    stdout().write(b"Hello\n").unwrap();
-
     let window = wsi::Window::new(1280, 720, "Handmade Rust").expect("Window creation");
 
     let instance = gfx_vk::Instance::create().unwrap();
