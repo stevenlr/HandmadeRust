@@ -3,6 +3,7 @@ members = [
     "fnd",
     "hash_macro",
     "main",
+    "tlsf",
     "vk",
     "win32",
     "wsi",

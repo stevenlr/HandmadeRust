@@ -14,6 +14,7 @@ Crates
  - [`gfx_vulkan_backend`](gfx/vulkan_backend): Vulkan implementation of `gfx_hal`.
  - [`hash_macro`](hash_macro): Compile-time string literal hashing. Requires `proc_macro_hygiene` at the moment.
  - [`main`](main): The main application.
+ - [`tlsf`](tlsf): A [TLSF](http://www.gii.upv.es/tlsf/) allocator implementation.
  - [`vk`](vk): Vulkan bindings, generated using [stevenlr/VkXml](https://github.com/stevenlr/VkXml).
  - [`win32`](win32): Raw Win32 API bindings.
  - [`wsi`](wsi): Windowing system integration. Handles windows and events.
