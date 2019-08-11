@@ -1,7 +1,7 @@
 use fnd::*;
 
 #[cfg(target_env = "msvc")]
-#[link(name = "msvcrt")]
+#[link(name = "libcmt")]
 extern "C" {
     fn exit(status: i32) -> !;
 }
