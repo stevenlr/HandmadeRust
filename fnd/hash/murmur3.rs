@@ -1,3 +1,5 @@
+// @Todo Update this to use Wrapping instead of all the wrapping_* functions
+
 pub fn murmur3_32(key: &impl AsRef<[u8]>) -> u32
 {
     #[inline]

@@ -1,3 +1,5 @@
+// @Todo Update this to use Wrapping instead of all the wrapping_* functions
+
 use core::{cmp, hash::Hasher, mem::transmute, ptr::copy_nonoverlapping};
 
 const C: i32 = 2;
