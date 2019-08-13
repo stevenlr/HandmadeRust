@@ -1,6 +1,4 @@
-// @Todo Update this to use Wrapping instead of all the wrapping_* functions
-
-use core::{cmp, hash::Hasher, mem::transmute, ptr::copy_nonoverlapping};
+use core::{cmp, hash::Hasher, mem::transmute, num::Wrapping, ptr::copy_nonoverlapping};
 
 const C: i32 = 2;
 const D: i32 = 4;
@@ -14,23 +12,29 @@ pub struct SipHash
 }
 
 #[inline]
-fn round(mut v0: u64, mut v1: u64, mut v2: u64, mut v3: u64) -> (u64, u64, u64, u64)
+fn round(v0: u64, v1: u64, v2: u64, v3: u64) -> (u64, u64, u64, u64)
 {
-    v0 = v0.wrapping_add(v1);
-    v2 = v2.wrapping_add(v3);
+    let mut v0 = Wrapping(v0);
+    let mut v1 = Wrapping(v1);
+    let mut v2 = Wrapping(v2);
+    let mut v3 = Wrapping(v3);
+
+    v0 += v1;
+    v2 += v3;
     v1 = v1.rotate_left(13);
     v3 = v3.rotate_left(16);
     v1 ^= v0;
     v3 ^= v2;
     v0 = v0.rotate_left(32);
-    v2 = v2.wrapping_add(v1);
-    v0 = v0.wrapping_add(v3);
+    v2 += v1;
+    v0 += v3;
     v1 = v1.rotate_left(17);
     v3 = v3.rotate_left(21);
     v1 ^= v2;
     v3 ^= v0;
     v2 = v2.rotate_left(32);
-    return (v0, v1, v2, v3);
+
+    return (v0.0, v1.0, v2.0, v3.0);
 }
 
 impl Default for SipHash

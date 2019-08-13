@@ -3,7 +3,8 @@
     coerce_unsized,
     optin_builtin_traits,
     format_args_nl,
-    allow_internal_unstable
+    allow_internal_unstable,
+    wrapping_int_impl
 )]
 #![no_std]
 
