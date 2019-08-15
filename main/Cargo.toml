@@ -12,4 +12,5 @@ path = "main.rs"
 fnd = { path = "../fnd" }
 gfx_hal = { path = "../gfx/hal" }
 gfx_vulkan_backend = { path = "../gfx/vulkan_backend" }
+tlsf = { path = "../tlsf" }
 wsi = { path = "../wsi" }

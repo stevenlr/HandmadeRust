@@ -8,7 +8,9 @@ use gfx_hal as hal;
 use gfx_hal::{self, Device, Instance, QueueFamily, Surface};
 use gfx_vulkan_backend as gfx_vk;
 
-use fnd::*;
+use fnd::{sync::Mutex, *};
+
+use tlsf::Tlsf;
 
 #[start]
 fn start(_argc: isize, _argv: *const *const u8) -> isize
@@ -17,8 +19,20 @@ fn start(_argc: isize, _argv: *const *const u8) -> isize
     return 0;
 }
 
+static mut ALLOC: Option<Mutex<Tlsf>> = None;
+
+unsafe fn init_global_allocator()
+{
+    ALLOC = Some(Mutex::new(Tlsf::new()));
+    fnd::alloc::set_global_allocator(ALLOC.as_mut().unwrap());
+}
+
 fn main()
 {
+    unsafe {
+        init_global_allocator();
+    }
+
     let window = wsi::Window::new(1280, 720, "Handmade Rust").expect("Window creation");
 
     let instance = gfx_vk::Instance::create().unwrap();

@@ -1,5 +1,4 @@
 #![no_std]
-#![allow(unused)] // @Todo Remove this
 
 use core::{
     ffi::c_void,
@@ -38,6 +37,8 @@ pub struct Tlsf<A: Allocator = SystemAllocator>
     allocated: Array<NonNull<c_void>, A>,
     alloc: A,
 }
+
+unsafe impl<A: Allocator> Send for Tlsf<A> {}
 
 #[derive(Clone, Copy)]
 struct Bucket
@@ -214,11 +215,6 @@ impl BlockHeader
         mapping_insert(self.size())
     }
 
-    fn set_prev_phys(&mut self, ptr: Option<NonNull<BlockHeader>>)
-    {
-        self.prev_phys_block = ptr;
-    }
-
     fn next_phys(&self) -> Option<NonNull<BlockHeader>>
     {
         if self.is_last()
@@ -313,7 +309,7 @@ impl<A: Allocator + Clone> Tlsf<A>
 
     fn add_new_physical_block(&mut self, min_size: usize) -> Option<()>
     {
-        let size = min_size.min(PHYS_BLOCK_SIZE);
+        let size = min_size.max(PHYS_BLOCK_SIZE);
 
         let mut layout = Layout::from_type::<BlockHeader>();
         layout.size = size;
@@ -392,7 +388,7 @@ impl<A: Allocator + Clone> Tlsf<A>
         let fl = bucket.fl - MIN_FL;
         let sl = bucket.sl;
 
-        let tmp_bitmap = self.sl_bitmap[fl] & ((!0usize) >> sl);
+        let tmp_bitmap = self.sl_bitmap[fl] & ((!0usize) << sl);
 
         let (fl, sl) = if tmp_bitmap != 0
         {
@@ -400,18 +396,26 @@ impl<A: Allocator + Clone> Tlsf<A>
         }
         else
         {
-            let tmp_bitmap = self.fl_bitmap & ((!0usize) >> (fl + 1));
+            let tmp_bitmap = self.fl_bitmap & ((!0usize) << (fl + 1));
             let fl = find_first_set(tmp_bitmap)?;
             (fl, find_first_set(self.sl_bitmap[fl])?)
         };
 
-        let bucket = Bucket { fl, sl };
+        let bucket = Bucket {
+            fl: fl + MIN_FL,
+            sl,
+        };
         return self.bucket_list_head(bucket).next_free;
     }
 
-    fn alloc(&mut self, src_size: usize) -> Option<NonNull<u8>>
+    fn alloc_inner(&mut self, src_size: usize) -> Option<NonNull<u8>>
     {
+        const SIZE_ALIGN: usize = size_of::<FreeBlockHeader>();
+
         let size = (src_size + size_of::<BlockHeader>()).max(MIN_SIZE);
+        let size = (size + SIZE_ALIGN - 1) & !(SIZE_ALIGN - 1);
+
+        debug_assert!(size % SIZE_ALIGN == 0);
 
         if size > MAX_SIZE
         {
@@ -434,17 +438,19 @@ impl<A: Allocator + Clone> Tlsf<A>
         else
         {
             self.add_new_physical_block(size * 2)?;
-            return self.alloc(src_size);
+            return self.alloc_inner(src_size);
         }
     }
 
-    fn dealloc(&mut self, ptr: NonNull<u8>)
+    fn dealloc_inner(&mut self, ptr: NonNull<u8>)
     {
         let mut ptr: NonNull<FreeBlockHeader> =
             unsafe { NonNull::new_unchecked(ptr.cast::<BlockHeader>().as_ptr().offset(-1)) }
                 .cast::<FreeBlockHeader>();
 
         let block = unsafe { ptr.as_mut() };
+        block.set_free(true);
+
         self.insert_free(block.into(), block.bucket().unwrap());
         self.maybe_merge_with_neighbors_phys(block.into());
     }
@@ -536,6 +542,23 @@ impl<A: Allocator + Clone> Tlsf<A>
     }
 }
 
+impl<A: Allocator + Clone> Allocator for Tlsf<A>
+{
+    unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>
+    {
+        self.alloc_inner(layout.size)
+            .map(|ptr| ptr.cast::<c_void>())
+    }
+
+    unsafe fn dealloc(&mut self, ptr: *mut c_void)
+    {
+        if let Some(ptr) = NonNull::new(ptr)
+        {
+            self.dealloc_inner(ptr.cast::<u8>());
+        }
+    }
+}
+
 impl<A: Allocator> Drop for Tlsf<A>
 {
     fn drop(&mut self)
@@ -553,6 +576,8 @@ impl<A: Allocator> Drop for Tlsf<A>
 mod tests
 {
     use super::*;
+    use core::cell::RefCell;
+    use fnd::Unq;
 
     #[test]
     fn headers_layout()
@@ -561,5 +586,23 @@ mod tests
         assert_eq!(align_of::<BlockHeader>(), size_of::<usize>());
         assert_eq!(size_of::<FreeBlockHeader>(), size_of::<usize>() * 4);
         assert_eq!(align_of::<FreeBlockHeader>(), size_of::<usize>());
+    }
+
+    #[test]
+    fn allocation()
+    {
+        let tlsf = RefCell::new(Tlsf::new());
+        let mut a = Array::new_with(&tlsf);
+
+        for i in 0..768
+        {
+            let _ = Unq::new_with(45, &tlsf);
+            a.push(i);
+        }
+
+        for i in 0..768
+        {
+            assert_eq!(i, a[i]);
+        }
     }
 }

@@ -1,5 +1,6 @@
 use super::Layout;
-use core::{ffi::c_void, mem::size_of, ptr::NonNull};
+use crate::sync::Mutex;
+use core::{cell::RefCell, ffi::c_void, mem::size_of, ptr::NonNull};
 
 pub trait Allocator
 {
@@ -44,4 +45,30 @@ pub unsafe fn alloc_array<T>(alloc: &mut dyn Allocator, size: usize) -> Option<N
     alloc
         .alloc_aligned(Layout::from_type_array::<T>(size))
         .map(|ptr| ptr.cast::<T>())
+}
+
+impl<A: Allocator> Allocator for &RefCell<A>
+{
+    unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>
+    {
+        self.borrow_mut().alloc(layout)
+    }
+
+    unsafe fn dealloc(&mut self, ptr: *mut c_void)
+    {
+        self.borrow_mut().dealloc(ptr);
+    }
+}
+
+impl<A: Allocator> Allocator for Mutex<A>
+{
+    unsafe fn alloc(&mut self, layout: Layout) -> Option<NonNull<c_void>>
+    {
+        self.lock().alloc(layout)
+    }
+
+    unsafe fn dealloc(&mut self, ptr: *mut c_void)
+    {
+        self.lock().dealloc(ptr);
+    }
 }

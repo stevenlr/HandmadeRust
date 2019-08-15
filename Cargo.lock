@@ -45,6 +45,7 @@ dependencies = [
  "fnd 0.1.0",
  "gfx_hal 0.1.0",
  "gfx_vulkan_backend 0.1.0",
+ "tlsf 0.1.0",
  "wsi 0.1.0",
 ]
 

@@ -6,9 +6,11 @@ static mut GLOBAL_SYSTEM_ALLOCATOR: UnsafeCell<SystemAllocator> =
     UnsafeCell::new(SystemAllocator {});
 static mut GLOBAL_ALLOCATOR: *mut dyn Allocator = unsafe { GLOBAL_SYSTEM_ALLOCATOR.get() };
 
-pub unsafe fn set_global_allocator(alloc: &'static mut dyn Allocator)
+pub unsafe fn set_global_allocator<A>(alloc: &'static mut A)
+where
+    A: Allocator + Sync,
 {
-    GLOBAL_ALLOCATOR = alloc;
+    GLOBAL_ALLOCATOR = alloc
 }
 
 pub struct GlobalAllocator;
