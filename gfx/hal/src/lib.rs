@@ -26,7 +26,9 @@ pub trait Backend: Sized
     type QueueFamilyGroup: QueueFamilyGroup;
     type InnerQueue: QueueFamily;
     type Device: Device<Self>;
-    type Swapchain;
+    type Semaphore: Copy;
+    type Fence: Copy;
+    type Swapchain: Swapchain<Self>;
     type InnerCommandPool: InnerCommandPool<Self>;
     type InnerCommandBuffer: InnerCommandBuffer<Self>;
 }

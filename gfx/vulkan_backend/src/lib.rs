@@ -32,6 +32,8 @@ impl hal::Backend for Backend
     type QueueFamilyGroup = QueueFamilyGroup;
     type InnerQueue = Queue;
     type Device = Device;
+    type Fence = VkFence;
+    type Semaphore = VkSemaphore;
     type Swapchain = Swapchain;
     type InnerCommandPool = CommandPool;
     type InnerCommandBuffer = CommandBuffer;

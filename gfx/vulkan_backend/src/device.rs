@@ -221,6 +221,7 @@ impl hal::Device<Backend> for Device
         }
 
         Ok(Swapchain {
+            device: self.raw.clone(),
             raw: swapchain,
             images,
             image_views,
@@ -275,6 +276,38 @@ impl hal::Device<Backend> for Device
 
     fn wait_idle(&self)
     {
-        core::mem::drop(self.raw.device.device_wait_idle());
+        drop(self.raw.device.device_wait_idle());
+    }
+
+    fn create_fence(&self) -> Result<VkFence, Error>
+    {
+        let create_info = VkFenceCreateInfoBuilder::new();
+
+        self.raw
+            .device
+            .create_fence(&create_info, None)
+            .map(|(_, f)| f)
+            .map_err(|e| Error::VulkanError(e))
+    }
+
+    fn destroy_fence(&self, fence: VkFence)
+    {
+        self.raw.device.destroy_fence(fence, None);
+    }
+
+    fn create_semaphore(&self) -> Result<VkSemaphore, Error>
+    {
+        let create_info = VkSemaphoreCreateInfoBuilder::new();
+
+        self.raw
+            .device
+            .create_semaphore(&create_info, None)
+            .map(|(_, f)| f)
+            .map_err(|e| Error::VulkanError(e))
+    }
+
+    fn destroy_semaphore(&self, sem: VkSemaphore)
+    {
+        self.raw.device.destroy_semaphore(sem, None);
     }
 }

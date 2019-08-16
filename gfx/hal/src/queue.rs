@@ -57,6 +57,14 @@ pub struct Queue<B: Backend, C: Capability>
     pub(crate) _capability: PhantomData<C>,
 }
 
+impl<B: Backend, C: Capability> Queue<B, C>
+{
+    pub fn inner(&self) -> &B::InnerQueue
+    {
+        &self.inner
+    }
+}
+
 impl<B: Backend, C: Capability> QueueFamily for Queue<B, C>
 {
     #[inline]

@@ -85,5 +85,11 @@ pub trait Device<B: Backend>
 
     fn destroy_command_pool<C: capabilities::Capability>(&self, pool: CommandPool<B, C>);
 
+    fn create_fence(&self) -> Result<B::Fence, B::Error>;
+    fn destroy_fence(&self, fence: B::Fence);
+
+    fn create_semaphore(&self) -> Result<B::Semaphore, B::Error>;
+    fn destroy_semaphore(&self, sem: B::Semaphore);
+
     fn wait_idle(&self);
 }

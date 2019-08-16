@@ -1,4 +1,4 @@
-use super::{Backend, Format};
+use super::{capabilities, Backend, Format, Queue};
 
 #[derive(Copy, Clone)]
 pub enum PresentMode
@@ -15,4 +15,22 @@ pub struct SwapchainConfig<'a, B: Backend>
     pub image_count: usize,
     pub format: Format,
     pub present_mode: PresentMode,
+}
+
+pub trait Swapchain<B: Backend>
+{
+    fn acquire_image(
+        &mut self,
+        fence: Option<B::Fence>,
+        sem: Option<B::Semaphore>,
+    ) -> Result<u32, B::Error>;
+
+    fn present<C>(
+        &mut self,
+        queue: &Queue<B, C>,
+        index: u32,
+        wait_sems: &[B::Semaphore],
+    ) -> Result<(), B::Error>
+    where
+        C: capabilities::Capability;
 }
