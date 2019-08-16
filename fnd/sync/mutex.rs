@@ -51,7 +51,7 @@ impl NativeMutex
 pub struct Mutex<T>
 {
     native: Pin<Unq<NativeMutex>>,
-    value: UnsafeCell<T>,
+    value:  UnsafeCell<T>,
 }
 
 impl<T> Mutex<T>
@@ -60,7 +60,7 @@ impl<T> Mutex<T>
     {
         Self {
             native: Unq::pin(NativeMutex::new()),
-            value: UnsafeCell::new(value),
+            value:  UnsafeCell::new(value),
         }
     }
 

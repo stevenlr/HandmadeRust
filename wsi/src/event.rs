@@ -21,7 +21,7 @@ impl EventQueue
     {
         Self {
             queue: RefCell::new(Queue::new()),
-            _pin: PhantomPinned,
+            _pin:  PhantomPinned,
         }
     }
 

@@ -8,7 +8,7 @@ use super::{Backend, Error, QueueFamilyGroup, RawInstance};
 pub(crate) struct RawSurface
 {
     pub(crate) surface: VkSurfaceKHR,
-    raw_instance: Shared<RawInstance>,
+    raw_instance:       Shared<RawInstance>,
 }
 
 pub struct Surface

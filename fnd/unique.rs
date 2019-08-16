@@ -10,8 +10,8 @@ use core::{
 
 pub struct Unq<T: ?Sized, A: Allocator = GlobalAllocator>
 {
-    ptr: NonNull<T>,
-    alloc: A,
+    ptr:      NonNull<T>,
+    alloc:    A,
     _phantom: PhantomData<T>,
 }
 
@@ -166,9 +166,9 @@ mod tests
 
     struct MyObject<'a>
     {
-        x: i32,
-        y: i32,
-        s: &'static str,
+        x:       i32,
+        y:       i32,
+        s:       &'static str,
         dropped: &'a mut bool,
     }
 
@@ -201,9 +201,9 @@ mod tests
 
         {
             let mut p = Unq::new(MyObject {
-                x: 1,
-                y: 2,
-                s: "hello",
+                x:       1,
+                y:       2,
+                s:       "hello",
                 dropped: &mut dropped,
             });
 

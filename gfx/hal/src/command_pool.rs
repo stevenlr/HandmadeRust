@@ -20,7 +20,7 @@ pub trait InnerCommandPool<B: Backend>
 
 pub struct CommandPool<B: Backend, C>
 {
-    inner: B::InnerCommandPool,
+    inner:       B::InnerCommandPool,
     _capability: PhantomData<C>,
 }
 
@@ -53,7 +53,7 @@ where
         self.inner
             .alloc_command_buffer(InnerCommandBufferLevel::Primary)
             .map(|b| CommandBuffer {
-                inner: b,
+                inner:    b,
                 _phantom: PhantomData,
             })
     }
@@ -65,7 +65,7 @@ where
         self.inner
             .alloc_command_buffer(InnerCommandBufferLevel::Secondary)
             .map(|b| CommandBuffer {
-                inner: b,
+                inner:    b,
                 _phantom: PhantomData,
             })
     }

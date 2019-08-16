@@ -89,7 +89,7 @@ fn main()
                 format: hal::Format::Bgr8Unorm,
                 image_count: 3,
                 present_mode: hal::PresentMode::Mailbox,
-                queue_family: queue_family,
+                queue_family,
             },
         )
         .unwrap();
@@ -120,11 +120,11 @@ fn main()
                     access: hal::AccessMask::default()..hal::AccessMask::TRANSFER_WRITE,
                     layout: hal::ImageLayout::Undefined..hal::ImageLayout::General,
                     queues: None,
-                    image: img,
-                    range: hal::ImageSubresourceRange {
-                        aspects: hal::ImageAspectMask::COLOR,
+                    image:  img,
+                    range:  hal::ImageSubresourceRange {
+                        aspects:    hal::ImageAspectMask::COLOR,
                         mip_levels: 0..0,
-                        layers: 0..0,
+                        layers:     0..0,
                     },
                 }],
             );
@@ -136,9 +136,9 @@ fn main()
                 hal::ImageLayout::General,
                 hal::ClearColor::Float([r, g, b, 1.0]),
                 hal::ImageSubresourceRange {
-                    aspects: hal::ImageAspectMask::COLOR,
+                    aspects:    hal::ImageAspectMask::COLOR,
                     mip_levels: 0..0,
-                    layers: 0..0,
+                    layers:     0..0,
                 },
             );
 
@@ -148,11 +148,11 @@ fn main()
                     access: hal::AccessMask::TRANSFER_WRITE..hal::AccessMask::MEMORY_READ,
                     layout: hal::ImageLayout::General..hal::ImageLayout::PresentSrc,
                     queues: None,
-                    image: img,
-                    range: hal::ImageSubresourceRange {
-                        aspects: hal::ImageAspectMask::COLOR,
+                    image:  img,
+                    range:  hal::ImageSubresourceRange {
+                        aspects:    hal::ImageAspectMask::COLOR,
                         mip_levels: 0..0,
-                        layers: 0..0,
+                        layers:     0..0,
                     },
                 }],
             );

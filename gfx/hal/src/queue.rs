@@ -53,7 +53,7 @@ pub trait QueueFamilyGroup: QueueFamily
 
 pub struct Queue<B: Backend, C>
 {
-    pub(crate) inner: B::InnerQueue,
+    pub(crate) inner:       B::InnerQueue,
     pub(crate) _capability: PhantomData<C>,
 }
 

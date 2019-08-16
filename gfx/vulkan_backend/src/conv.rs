@@ -110,11 +110,11 @@ pub(crate) fn hal_to_vk_image_subresource_range(
 ) -> VkImageSubresourceRange
 {
     VkImageSubresourceRange {
-        aspect_mask: hal_to_vk_image_aspect_flags(range.aspects),
-        base_mip_level: range.mip_levels.start,
-        level_count: range.mip_levels.end - range.mip_levels.start + 1,
+        aspect_mask:      hal_to_vk_image_aspect_flags(range.aspects),
+        base_mip_level:   range.mip_levels.start,
+        level_count:      range.mip_levels.end - range.mip_levels.start + 1,
         base_array_layer: range.layers.start,
-        layer_count: range.layers.end - range.layers.start + 1,
+        layer_count:      range.layers.end - range.layers.start + 1,
     }
 }
 

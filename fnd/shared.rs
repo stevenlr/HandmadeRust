@@ -11,8 +11,8 @@ use core::{
 struct SharedInner<T: ?Sized>
 {
     strong_count: Cell<usize>,
-    weak_count: Cell<usize>,
-    value: T,
+    weak_count:   Cell<usize>,
+    value:        T,
 }
 
 impl<T: ?Sized> SharedInner<T>
@@ -56,14 +56,14 @@ impl<T: ?Sized> SharedInner<T>
 
 pub struct Shared<T: ?Sized, A: Allocator = GlobalAllocator>
 {
-    ptr: NonNull<SharedInner<T>>,
-    alloc: A,
+    ptr:      NonNull<SharedInner<T>>,
+    alloc:    A,
     _phantom: PhantomData<T>,
 }
 
 pub struct Weak<T: ?Sized, A: Allocator>
 {
-    ptr: NonNull<SharedInner<T>>,
+    ptr:   NonNull<SharedInner<T>>,
     alloc: A,
 }
 
@@ -109,7 +109,7 @@ where
                 SharedInner {
                     strong_count: Cell::new(1),
                     weak_count: Cell::new(1),
-                    value: value,
+                    value,
                 },
             );
         }
@@ -132,7 +132,7 @@ where
         inner.inc_weak();
 
         Weak {
-            ptr: this.ptr,
+            ptr:   this.ptr,
             alloc: this.alloc.clone(),
         }
     }
@@ -154,8 +154,8 @@ where
         {
             inner.inc_strong();
             return Some(Shared {
-                ptr: self.ptr,
-                alloc: self.alloc.clone(),
+                ptr:      self.ptr,
+                alloc:    self.alloc.clone(),
                 _phantom: PhantomData,
             });
         }
@@ -181,8 +181,8 @@ where
         inner.inc_strong();
 
         Self {
-            ptr: self.ptr,
-            alloc: self.alloc.clone(),
+            ptr:      self.ptr,
+            alloc:    self.alloc.clone(),
             _phantom: PhantomData,
         }
     }
@@ -199,7 +199,7 @@ where
         inner.inc_weak();
 
         Self {
-            ptr: self.ptr,
+            ptr:   self.ptr,
             alloc: self.alloc.clone(),
         }
     }
@@ -292,9 +292,9 @@ mod tests
 
     struct MyObject<'a>
     {
-        x: i32,
-        y: i32,
-        s: &'static str,
+        x:       i32,
+        y:       i32,
+        s:       &'static str,
         dropped: &'a Cell<bool>,
     }
 
@@ -327,9 +327,9 @@ mod tests
 
         {
             let p = Shared::new(RefCell::new(MyObject {
-                x: 1,
-                y: 2,
-                s: "hello",
+                x:       1,
+                y:       2,
+                s:       "hello",
                 dropped: &dropped,
             }));
 
@@ -361,9 +361,9 @@ mod tests
         let dropped = Cell::new(false);
 
         let p = Shared::new(RefCell::new(MyObject {
-            x: 1,
-            y: 2,
-            s: "hello",
+            x:       1,
+            y:       2,
+            s:       "hello",
             dropped: &dropped,
         }));
 
@@ -386,9 +386,9 @@ mod tests
         let dropped = Cell::new(false);
 
         let p = Shared::new(RefCell::new(MyObject {
-            x: 1,
-            y: 2,
-            s: "hello",
+            x:       1,
+            y:       2,
+            s:       "hello",
             dropped: &dropped,
         }));
 

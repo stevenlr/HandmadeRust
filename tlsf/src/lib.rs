@@ -33,9 +33,9 @@ pub struct Tlsf<A: Allocator = SystemAllocator>
 {
     fl_bitmap: usize,
     sl_bitmap: [usize; FL_COUNT],
-    buckets: Pin<Unq<[FreeBlockHeader; BUCKET_COUNT], A>>,
+    buckets:   Pin<Unq<[FreeBlockHeader; BUCKET_COUNT], A>>,
     allocated: Array<NonNull<c_void>, A>,
-    alloc: A,
+    alloc:     A,
 }
 
 unsafe impl<A: Allocator> Send for Tlsf<A> {}
@@ -96,15 +96,15 @@ fn mapping_search(mut r: usize) -> Option<(usize, Bucket)>
 struct FreeBlockHeader
 {
     used_header: BlockHeader,
-    next_free: Option<NonNull<FreeBlockHeader>>,
-    prev_free: Option<NonNull<FreeBlockHeader>>,
+    next_free:   Option<NonNull<FreeBlockHeader>>,
+    prev_free:   Option<NonNull<FreeBlockHeader>>,
 }
 
 #[repr(C)]
 #[derive(Clone, Copy)]
 struct BlockHeader
 {
-    size_flags: usize,
+    size_flags:      usize,
     prev_phys_block: Option<NonNull<BlockHeader>>,
 }
 
@@ -118,8 +118,8 @@ impl Default for FreeBlockHeader
     {
         FreeBlockHeader {
             used_header: BlockHeader::default(),
-            next_free: None,
-            prev_free: None,
+            next_free:   None,
+            prev_free:   None,
         }
     }
 }
@@ -129,7 +129,7 @@ impl Default for BlockHeader
     fn default() -> Self
     {
         BlockHeader {
-            size_flags: 0,
+            size_flags:      0,
             prev_phys_block: None,
         }
     }

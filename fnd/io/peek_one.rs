@@ -2,7 +2,7 @@ use super::{Read, Result};
 
 pub struct PeekOne<R>
 {
-    r: R,
+    r:    R,
     peek: Option<Result<u8>>,
 }
 

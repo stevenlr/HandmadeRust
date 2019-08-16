@@ -17,9 +17,9 @@ use crate::conv::*;
 
 pub(crate) struct RawInstance
 {
-    _dl: DynamicLibrary,
-    _entry: vk::EntryPoint,
-    pub(crate) instance: vk::Instance,
+    _dl:                   DynamicLibrary,
+    _entry:                vk::EntryPoint,
+    pub(crate) instance:   vk::Instance,
     debug_utils_messenger: Option<VkDebugUtilsMessengerEXT>,
 }
 
@@ -71,7 +71,7 @@ pub enum InstanceError
 
 pub struct Instance
 {
-    raw: Shared<RawInstance>,
+    raw:          Shared<RawInstance>,
     with_surface: bool,
 }
 
@@ -297,14 +297,14 @@ impl hal::Instance<Backend> for Instance
                     device: device.clone(),
                     family_index: family.id,
                     queue_type: family.queue_type,
-                    queue: queue,
+                    queue,
                 }));
             }
         }
 
         let device = Device {
-            raw: device,
-            gpu: gpu.physical_device,
+            raw:      device,
+            gpu:      gpu.physical_device,
             instance: self.raw.clone(),
         };
 

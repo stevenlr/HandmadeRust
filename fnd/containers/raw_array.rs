@@ -4,10 +4,10 @@ use crate::alloc::{alloc_array, Allocator};
 
 pub(crate) struct RawArray<T, A: Allocator>
 {
-    pub(crate) ptr: *mut T,
+    pub(crate) ptr:      *mut T,
     pub(crate) capacity: usize,
-    pub(crate) alloc: A,
-    _phantom: PhantomData<T>,
+    pub(crate) alloc:    A,
+    _phantom:            PhantomData<T>,
 }
 
 impl<T, A: Allocator> RawArray<T, A>

@@ -448,15 +448,15 @@ pub const STD_ERROR_HANDLE: DWORD = 0xffffffff - 11;
 #[repr(C)]
 pub struct WNDCLASSA
 {
-    pub style: UINT,
-    pub lpfnWndProc: WNDPROC,
-    pub cbClsExtra: i32,
-    pub cbWndExtra: i32,
-    pub hInstance: HINSTANCE,
-    pub hIcon: HICON,
-    pub hCursor: HCURSOR,
+    pub style:         UINT,
+    pub lpfnWndProc:   WNDPROC,
+    pub cbClsExtra:    i32,
+    pub cbWndExtra:    i32,
+    pub hInstance:     HINSTANCE,
+    pub hIcon:         HICON,
+    pub hCursor:       HCURSOR,
     pub hbrBackground: HBRUSH,
-    pub lpszMenuName: LPCSTR,
+    pub lpszMenuName:  LPCSTR,
     pub lpszClassName: LPCSTR,
 }
 
@@ -470,43 +470,43 @@ pub struct POINT
 #[repr(C)]
 pub struct MSG
 {
-    hwnd: HWND,
-    message: UINT,
-    wParam: WPARAM,
-    lParam: LPARAM,
-    time: DWORD,
-    pt: POINT,
+    hwnd:     HWND,
+    message:  UINT,
+    wParam:   WPARAM,
+    lParam:   LPARAM,
+    time:     DWORD,
+    pt:       POINT,
     lPrivate: DWORD,
 }
 
 #[repr(C)]
 pub struct SECURITY_ATTRIBUTES
 {
-    nLength: DWORD,
+    nLength:              DWORD,
     lpSecurityDescriptor: LPVOID,
-    bInheritHandle: BOOL,
+    bInheritHandle:       BOOL,
 }
 
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct OVERLAPPED_INNER_INNER
 {
-    Offset: DWORD,
+    Offset:     DWORD,
     OffsetHigh: DWORD,
 }
 
 #[repr(C)]
 pub union OVERLAPPED_INNER
 {
-    Offset: OVERLAPPED_INNER_INNER,
+    Offset:  OVERLAPPED_INNER_INNER,
     Pointer: PVOID,
 }
 
 #[repr(C)]
 pub struct OVERLAPPED
 {
-    Internal: ULONG_PTR,
+    Internal:     ULONG_PTR,
     InternalHigh: ULONG_PTR,
-    union: OVERLAPPED_INNER,
-    hEvent: HANDLE,
+    union:        OVERLAPPED_INNER,
+    hEvent:       HANDLE,
 }

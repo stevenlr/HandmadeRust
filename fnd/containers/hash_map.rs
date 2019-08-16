@@ -17,8 +17,8 @@ where
     K: Sized + Eq + Hash,
     V: Sized,
 {
-    hash: u64,
-    key: K,
+    hash:  u64,
+    key:   K,
     value: V,
 }
 
@@ -89,7 +89,7 @@ where
     V: Sized,
     A: Allocator + Clone,
 {
-    shortb: Array<ShortBucket, A>,
+    shortb:  Array<ShortBucket, A>,
     buckets: Array<Option<Bucket<K, V>>, A>,
 }
 
@@ -102,7 +102,7 @@ where
     fn new_with(alloc: A) -> Self
     {
         Self {
-            shortb: Array::new_with(alloc.clone()),
+            shortb:  Array::new_with(alloc.clone()),
             buckets: Array::new_with(alloc.clone()),
         }
     }
@@ -311,7 +311,7 @@ where
     A: Allocator + Clone,
 {
     alloc: A,
-    hash: BuildHasherDefault<SipHash>,
+    hash:  BuildHasherDefault<SipHash>,
     inner: HashMapInner<K, V, A>,
 }
 
@@ -325,7 +325,7 @@ where
     {
         Self {
             alloc: alloc.clone(),
-            hash: BuildHasherDefault::default(),
+            hash:  BuildHasherDefault::default(),
             inner: HashMapInner::new_with(alloc.clone()),
         }
     }

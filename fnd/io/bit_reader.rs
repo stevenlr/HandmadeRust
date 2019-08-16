@@ -2,8 +2,8 @@ use super::Read;
 
 pub struct BitReader<R>
 {
-    r: R,
-    buffer: u64,
+    r:           R,
+    buffer:      u64,
     buffer_size: usize,
 }
 

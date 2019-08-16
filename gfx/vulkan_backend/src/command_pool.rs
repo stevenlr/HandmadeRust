@@ -8,7 +8,7 @@ use crate::conv::*;
 
 pub struct CommandPool
 {
-    pub(crate) raw: VkCommandPool,
+    pub(crate) raw:    VkCommandPool,
     pub(crate) device: Shared<RawDevice>,
 }
 
@@ -47,7 +47,7 @@ impl hal::InnerCommandPool<Backend> for CommandPool
 
         return Ok(CommandBuffer {
             device: self.device.clone(),
-            raw: cmd_buffer[0],
+            raw:    cmd_buffer[0],
         });
     }
 

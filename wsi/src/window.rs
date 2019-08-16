@@ -39,8 +39,8 @@ unsafe extern "system" fn wnd_proc(
 pub struct Window
 {
     hinstance: win32::HINSTANCE,
-    window: win32::HWND,
-    queue: Pin<Unq<EventQueue>>,
+    window:    win32::HWND,
+    queue:     Pin<Unq<EventQueue>>,
 }
 
 impl Window
@@ -52,15 +52,15 @@ impl Window
         let wnd_class_name = b"HandmadeRustClass\0".as_ptr();
 
         let wnd_class = win32::WNDCLASSA {
-            style: win32::CS_VREDRAW | win32::CS_HREDRAW,
-            lpfnWndProc: wnd_proc,
-            cbClsExtra: 0,
-            cbWndExtra: 0,
-            hInstance: hinstance,
-            hIcon: null_mut(),
-            hCursor: null_mut(),
+            style:         win32::CS_VREDRAW | win32::CS_HREDRAW,
+            lpfnWndProc:   wnd_proc,
+            cbClsExtra:    0,
+            cbWndExtra:    0,
+            hInstance:     hinstance,
+            hIcon:         null_mut(),
+            hCursor:       null_mut(),
             hbrBackground: null_mut(),
-            lpszMenuName: null(),
+            lpszMenuName:  null(),
             lpszClassName: wnd_class_name,
         };
 

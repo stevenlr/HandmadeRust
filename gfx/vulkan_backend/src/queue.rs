@@ -8,9 +8,9 @@ use crate::{conv::*, Backend, Error, RawDevice};
 pub struct QueueFamilyGroup
 {
     pub(crate) physical_device: VkPhysicalDevice,
-    pub(crate) queue_type: hal::QueueType,
-    pub(crate) id: usize,
-    pub(crate) count: usize,
+    pub(crate) queue_type:      hal::QueueType,
+    pub(crate) id:              usize,
+    pub(crate) count:           usize,
 }
 
 impl hal::QueueFamily for QueueFamilyGroup
@@ -39,10 +39,10 @@ impl hal::QueueFamilyGroup for QueueFamilyGroup
 
 pub struct Queue
 {
-    pub(crate) device: Shared<RawDevice>,
+    pub(crate) device:       Shared<RawDevice>,
     pub(crate) family_index: usize,
-    pub(crate) queue_type: hal::QueueType,
-    pub(crate) queue: VkQueue,
+    pub(crate) queue_type:   hal::QueueType,
+    pub(crate) queue:        VkQueue,
 }
 
 impl hal::QueueFamily for Queue

@@ -4,7 +4,7 @@ use crate::{commands::InstanceCommands, entry_point::EntryPoint, types::*};
 pub struct Instance
 {
     pub(crate) handle: VkInstance,
-    pub(crate) i: InstanceCommands,
+    pub(crate) i:      InstanceCommands,
 }
 
 impl Instance
@@ -16,7 +16,7 @@ impl Instance
         });
         Self {
             handle: instance,
-            i: commands,
+            i:      commands,
         }
     }
 

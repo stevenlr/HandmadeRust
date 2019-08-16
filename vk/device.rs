@@ -4,7 +4,7 @@ use crate::{commands::DeviceCommands, instance::Instance, types::*};
 pub struct Device
 {
     handle: VkDevice,
-    d: DeviceCommands,
+    d:      DeviceCommands,
 }
 
 impl Device
@@ -16,7 +16,7 @@ impl Device
         });
         Self {
             handle: device,
-            d: commands,
+            d:      commands,
         }
     }
 

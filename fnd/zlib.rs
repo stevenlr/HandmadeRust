@@ -247,7 +247,7 @@ pub fn inflate_with<A: Allocator>(input: &[u8], alloc: A) -> Result<Array<u8, A>
 
                     codes.extend((0..count).map(|_| HuffmanCode {
                         code: 0,
-                        len: value,
+                        len:  value,
                     }));
 
                     code_index += count;
@@ -332,7 +332,7 @@ const MAX_HUFFMAN_CODE_LEN: usize = 16;
 struct HuffmanCode
 {
     code: u16,
-    len: u16,
+    len:  u16,
 }
 
 fn decode_huffman<'a, R: Read>(
@@ -385,7 +385,7 @@ fn build_fixed_huffman_codes<A: Allocator>(codes: &mut Array<HuffmanCode, A>)
         {
             codes.push(HuffmanCode {
                 code: 0,
-                len: *code_len as u16,
+                len:  *code_len as u16,
             })
         }
     }
@@ -394,7 +394,7 @@ fn build_fixed_huffman_codes<A: Allocator>(codes: &mut Array<HuffmanCode, A>)
     {
         codes.push(HuffmanCode {
             code: 0,
-            len: DIST_LENGTH as u16,
+            len:  DIST_LENGTH as u16,
         })
     }
 
@@ -504,7 +504,7 @@ mod tests
         let mut codes = Array::new_with(alloc);
         codes.extend(lengths.iter().map(|len| HuffmanCode {
             code: 0,
-            len: *len as u16,
+            len:  *len as u16,
         }));
         build_huffman_codes_in_place(&mut codes);
         return codes;

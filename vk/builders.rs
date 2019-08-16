@@ -4,7 +4,7 @@ use win32::{HINSTANCE, HWND};
 #[derive(Clone)]
 pub struct VkAllocationCallbacksBuilder<'a>
 {
-    s: VkAllocationCallbacks,
+    s:  VkAllocationCallbacks,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -13,7 +13,7 @@ impl<'a> VkAllocationCallbacksBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkAllocationCallbacks::default(),
+            s:  VkAllocationCallbacks::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -101,7 +101,7 @@ impl<'a> core::ops::DerefMut for VkAllocationCallbacksBuilder<'a>
 #[derive(Clone)]
 pub struct VkWin32SurfaceCreateInfoKHRBuilder<'a>
 {
-    s: VkWin32SurfaceCreateInfoKHR,
+    s:  VkWin32SurfaceCreateInfoKHR,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -110,7 +110,7 @@ impl<'a> VkWin32SurfaceCreateInfoKHRBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkWin32SurfaceCreateInfoKHR::default(),
+            s:  VkWin32SurfaceCreateInfoKHR::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -182,7 +182,7 @@ impl<'a> core::ops::DerefMut for VkWin32SurfaceCreateInfoKHRBuilder<'a>
 #[derive(Clone)]
 pub struct VkSurfaceFormatKHRBuilder<'a>
 {
-    s: VkSurfaceFormatKHR,
+    s:  VkSurfaceFormatKHR,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -191,7 +191,7 @@ impl<'a> VkSurfaceFormatKHRBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSurfaceFormatKHR::default(),
+            s:  VkSurfaceFormatKHR::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -235,7 +235,7 @@ impl<'a> core::ops::DerefMut for VkSurfaceFormatKHRBuilder<'a>
 #[derive(Clone)]
 pub struct VkSurfaceCapabilitiesKHRBuilder<'a>
 {
-    s: VkSurfaceCapabilitiesKHR,
+    s:  VkSurfaceCapabilitiesKHR,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -244,7 +244,7 @@ impl<'a> VkSurfaceCapabilitiesKHRBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSurfaceCapabilitiesKHR::default(),
+            s:  VkSurfaceCapabilitiesKHR::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -348,7 +348,7 @@ impl<'a> core::ops::DerefMut for VkSurfaceCapabilitiesKHRBuilder<'a>
 #[derive(Clone)]
 pub struct VkExtent2DBuilder<'a>
 {
-    s: VkExtent2D,
+    s:  VkExtent2D,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -357,7 +357,7 @@ impl<'a> VkExtent2DBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkExtent2D::default(),
+            s:  VkExtent2D::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -401,7 +401,7 @@ impl<'a> core::ops::DerefMut for VkExtent2DBuilder<'a>
 #[derive(Clone)]
 pub struct VkPresentInfoKHRBuilder<'a>
 {
-    s: VkPresentInfoKHR,
+    s:  VkPresentInfoKHR,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -410,7 +410,7 @@ impl<'a> VkPresentInfoKHRBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPresentInfoKHR::default(),
+            s:  VkPresentInfoKHR::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -501,7 +501,7 @@ impl<'a> core::ops::DerefMut for VkPresentInfoKHRBuilder<'a>
 #[derive(Clone)]
 pub struct VkSwapchainCreateInfoKHRBuilder<'a>
 {
-    s: VkSwapchainCreateInfoKHR,
+    s:  VkSwapchainCreateInfoKHR,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -510,7 +510,7 @@ impl<'a> VkSwapchainCreateInfoKHRBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSwapchainCreateInfoKHR::default(),
+            s:  VkSwapchainCreateInfoKHR::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -672,7 +672,7 @@ impl<'a> core::ops::DerefMut for VkSwapchainCreateInfoKHRBuilder<'a>
 #[derive(Clone)]
 pub struct VkDebugUtilsMessengerCallbackDataEXTBuilder<'a>
 {
-    s: VkDebugUtilsMessengerCallbackDataEXT,
+    s:  VkDebugUtilsMessengerCallbackDataEXT,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -681,7 +681,7 @@ impl<'a> VkDebugUtilsMessengerCallbackDataEXTBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDebugUtilsMessengerCallbackDataEXT::default(),
+            s:  VkDebugUtilsMessengerCallbackDataEXT::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -823,7 +823,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsMessengerCallbackDataEXTBuilder<'a>
 #[derive(Clone)]
 pub struct VkDebugUtilsObjectNameInfoEXTBuilder<'a>
 {
-    s: VkDebugUtilsObjectNameInfoEXT,
+    s:  VkDebugUtilsObjectNameInfoEXT,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -832,7 +832,7 @@ impl<'a> VkDebugUtilsObjectNameInfoEXTBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDebugUtilsObjectNameInfoEXT::default(),
+            s:  VkDebugUtilsObjectNameInfoEXT::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -901,7 +901,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsObjectNameInfoEXTBuilder<'a>
 #[derive(Clone)]
 pub struct VkDebugUtilsLabelEXTBuilder<'a>
 {
-    s: VkDebugUtilsLabelEXT,
+    s:  VkDebugUtilsLabelEXT,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -910,7 +910,7 @@ impl<'a> VkDebugUtilsLabelEXTBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDebugUtilsLabelEXT::default(),
+            s:  VkDebugUtilsLabelEXT::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -973,7 +973,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsLabelEXTBuilder<'a>
 #[derive(Clone)]
 pub struct VkDebugUtilsMessengerCreateInfoEXTBuilder<'a>
 {
-    s: VkDebugUtilsMessengerCreateInfoEXT,
+    s:  VkDebugUtilsMessengerCreateInfoEXT,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -982,7 +982,7 @@ impl<'a> VkDebugUtilsMessengerCreateInfoEXTBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDebugUtilsMessengerCreateInfoEXT::default(),
+            s:  VkDebugUtilsMessengerCreateInfoEXT::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1083,7 +1083,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsMessengerCreateInfoEXTBuilder<'a>
 #[derive(Clone)]
 pub struct VkDebugUtilsObjectTagInfoEXTBuilder<'a>
 {
-    s: VkDebugUtilsObjectTagInfoEXT,
+    s:  VkDebugUtilsObjectTagInfoEXT,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1092,7 +1092,7 @@ impl<'a> VkDebugUtilsObjectTagInfoEXTBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDebugUtilsObjectTagInfoEXT::default(),
+            s:  VkDebugUtilsObjectTagInfoEXT::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1177,7 +1177,7 @@ impl<'a> core::ops::DerefMut for VkDebugUtilsObjectTagInfoEXTBuilder<'a>
 #[derive(Clone)]
 pub struct VkBaseInStructureBuilder<'a>
 {
-    s: VkBaseInStructure,
+    s:  VkBaseInStructure,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1186,7 +1186,7 @@ impl<'a> VkBaseInStructureBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkBaseInStructure::default(),
+            s:  VkBaseInStructure::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1237,7 +1237,7 @@ impl<'a> core::ops::DerefMut for VkBaseInStructureBuilder<'a>
 #[derive(Clone)]
 pub struct VkBaseOutStructureBuilder<'a>
 {
-    s: VkBaseOutStructure,
+    s:  VkBaseOutStructure,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1246,7 +1246,7 @@ impl<'a> VkBaseOutStructureBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkBaseOutStructure::default(),
+            s:  VkBaseOutStructure::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1297,7 +1297,7 @@ impl<'a> core::ops::DerefMut for VkBaseOutStructureBuilder<'a>
 #[derive(Clone)]
 pub struct VkMemoryBarrierBuilder<'a>
 {
-    s: VkMemoryBarrier,
+    s:  VkMemoryBarrier,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1306,7 +1306,7 @@ impl<'a> VkMemoryBarrierBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkMemoryBarrier::default(),
+            s:  VkMemoryBarrier::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1369,7 +1369,7 @@ impl<'a> core::ops::DerefMut for VkMemoryBarrierBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageMemoryBarrierBuilder<'a>
 {
-    s: VkImageMemoryBarrier,
+    s:  VkImageMemoryBarrier,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1378,7 +1378,7 @@ impl<'a> VkImageMemoryBarrierBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageMemoryBarrier::default(),
+            s:  VkImageMemoryBarrier::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1480,7 +1480,7 @@ impl<'a> core::ops::DerefMut for VkImageMemoryBarrierBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageSubresourceRangeBuilder<'a>
 {
-    s: VkImageSubresourceRange,
+    s:  VkImageSubresourceRange,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1489,7 +1489,7 @@ impl<'a> VkImageSubresourceRangeBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageSubresourceRange::default(),
+            s:  VkImageSubresourceRange::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1551,7 +1551,7 @@ impl<'a> core::ops::DerefMut for VkImageSubresourceRangeBuilder<'a>
 #[derive(Clone)]
 pub struct VkDrawIndirectCommandBuilder<'a>
 {
-    s: VkDrawIndirectCommand,
+    s:  VkDrawIndirectCommand,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1560,7 +1560,7 @@ impl<'a> VkDrawIndirectCommandBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDrawIndirectCommand::default(),
+            s:  VkDrawIndirectCommand::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1616,7 +1616,7 @@ impl<'a> core::ops::DerefMut for VkDrawIndirectCommandBuilder<'a>
 #[derive(Clone)]
 pub struct VkDrawIndexedIndirectCommandBuilder<'a>
 {
-    s: VkDrawIndexedIndirectCommand,
+    s:  VkDrawIndexedIndirectCommand,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1625,7 +1625,7 @@ impl<'a> VkDrawIndexedIndirectCommandBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDrawIndexedIndirectCommand::default(),
+            s:  VkDrawIndexedIndirectCommand::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1687,7 +1687,7 @@ impl<'a> core::ops::DerefMut for VkDrawIndexedIndirectCommandBuilder<'a>
 #[derive(Clone)]
 pub struct VkDispatchIndirectCommandBuilder<'a>
 {
-    s: VkDispatchIndirectCommand,
+    s:  VkDispatchIndirectCommand,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1696,7 +1696,7 @@ impl<'a> VkDispatchIndirectCommandBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDispatchIndirectCommand::default(),
+            s:  VkDispatchIndirectCommand::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1746,7 +1746,7 @@ impl<'a> core::ops::DerefMut for VkDispatchIndirectCommandBuilder<'a>
 #[derive(Clone)]
 pub struct VkBufferMemoryBarrierBuilder<'a>
 {
-    s: VkBufferMemoryBarrier,
+    s:  VkBufferMemoryBarrier,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1755,7 +1755,7 @@ impl<'a> VkBufferMemoryBarrierBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkBufferMemoryBarrier::default(),
+            s:  VkBufferMemoryBarrier::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1848,7 +1848,7 @@ impl<'a> core::ops::DerefMut for VkBufferMemoryBarrierBuilder<'a>
 #[derive(Clone)]
 pub struct VkRenderPassBeginInfoBuilder<'a>
 {
-    s: VkRenderPassBeginInfo,
+    s:  VkRenderPassBeginInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1857,7 +1857,7 @@ impl<'a> VkRenderPassBeginInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkRenderPassBeginInfo::default(),
+            s:  VkRenderPassBeginInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1940,7 +1940,7 @@ impl<'a> core::ops::DerefMut for VkRenderPassBeginInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkClearDepthStencilValueBuilder<'a>
 {
-    s: VkClearDepthStencilValue,
+    s:  VkClearDepthStencilValue,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -1949,7 +1949,7 @@ impl<'a> VkClearDepthStencilValueBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkClearDepthStencilValue::default(),
+            s:  VkClearDepthStencilValue::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -1993,7 +1993,7 @@ impl<'a> core::ops::DerefMut for VkClearDepthStencilValueBuilder<'a>
 #[derive(Clone)]
 pub struct VkRect2DBuilder<'a>
 {
-    s: VkRect2D,
+    s:  VkRect2D,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2002,7 +2002,7 @@ impl<'a> VkRect2DBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkRect2D::default(),
+            s:  VkRect2D::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2046,7 +2046,7 @@ impl<'a> core::ops::DerefMut for VkRect2DBuilder<'a>
 #[derive(Clone)]
 pub struct VkOffset2DBuilder<'a>
 {
-    s: VkOffset2D,
+    s:  VkOffset2D,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2055,7 +2055,7 @@ impl<'a> VkOffset2DBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkOffset2D::default(),
+            s:  VkOffset2D::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2099,7 +2099,7 @@ impl<'a> core::ops::DerefMut for VkOffset2DBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageResolveBuilder<'a>
 {
-    s: VkImageResolve,
+    s:  VkImageResolve,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2108,7 +2108,7 @@ impl<'a> VkImageResolveBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageResolve::default(),
+            s:  VkImageResolve::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2170,7 +2170,7 @@ impl<'a> core::ops::DerefMut for VkImageResolveBuilder<'a>
 #[derive(Clone)]
 pub struct VkExtent3DBuilder<'a>
 {
-    s: VkExtent3D,
+    s:  VkExtent3D,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2179,7 +2179,7 @@ impl<'a> VkExtent3DBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkExtent3D::default(),
+            s:  VkExtent3D::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2229,7 +2229,7 @@ impl<'a> core::ops::DerefMut for VkExtent3DBuilder<'a>
 #[derive(Clone)]
 pub struct VkOffset3DBuilder<'a>
 {
-    s: VkOffset3D,
+    s:  VkOffset3D,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2238,7 +2238,7 @@ impl<'a> VkOffset3DBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkOffset3D::default(),
+            s:  VkOffset3D::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2288,7 +2288,7 @@ impl<'a> core::ops::DerefMut for VkOffset3DBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageSubresourceLayersBuilder<'a>
 {
-    s: VkImageSubresourceLayers,
+    s:  VkImageSubresourceLayers,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2297,7 +2297,7 @@ impl<'a> VkImageSubresourceLayersBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageSubresourceLayers::default(),
+            s:  VkImageSubresourceLayers::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2353,7 +2353,7 @@ impl<'a> core::ops::DerefMut for VkImageSubresourceLayersBuilder<'a>
 #[derive(Clone)]
 pub struct VkClearRectBuilder<'a>
 {
-    s: VkClearRect,
+    s:  VkClearRect,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2362,7 +2362,7 @@ impl<'a> VkClearRectBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkClearRect::default(),
+            s:  VkClearRect::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2412,7 +2412,7 @@ impl<'a> core::ops::DerefMut for VkClearRectBuilder<'a>
 #[derive(Clone)]
 pub struct VkClearAttachmentBuilder<'a>
 {
-    s: VkClearAttachment,
+    s:  VkClearAttachment,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2421,7 +2421,7 @@ impl<'a> VkClearAttachmentBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkClearAttachment::default(),
+            s:  VkClearAttachment::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2471,7 +2471,7 @@ impl<'a> core::ops::DerefMut for VkClearAttachmentBuilder<'a>
 #[derive(Clone)]
 pub struct VkBufferImageCopyBuilder<'a>
 {
-    s: VkBufferImageCopy,
+    s:  VkBufferImageCopy,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2480,7 +2480,7 @@ impl<'a> VkBufferImageCopyBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkBufferImageCopy::default(),
+            s:  VkBufferImageCopy::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2551,7 +2551,7 @@ impl<'a> core::ops::DerefMut for VkBufferImageCopyBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageBlitBuilder<'a>
 {
-    s: VkImageBlit,
+    s:  VkImageBlit,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2560,7 +2560,7 @@ impl<'a> VkImageBlitBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageBlit::default(),
+            s:  VkImageBlit::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2616,7 +2616,7 @@ impl<'a> core::ops::DerefMut for VkImageBlitBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageCopyBuilder<'a>
 {
-    s: VkImageCopy,
+    s:  VkImageCopy,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2625,7 +2625,7 @@ impl<'a> VkImageCopyBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageCopy::default(),
+            s:  VkImageCopy::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2687,7 +2687,7 @@ impl<'a> core::ops::DerefMut for VkImageCopyBuilder<'a>
 #[derive(Clone)]
 pub struct VkBufferCopyBuilder<'a>
 {
-    s: VkBufferCopy,
+    s:  VkBufferCopy,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2696,7 +2696,7 @@ impl<'a> VkBufferCopyBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkBufferCopy::default(),
+            s:  VkBufferCopy::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2746,7 +2746,7 @@ impl<'a> core::ops::DerefMut for VkBufferCopyBuilder<'a>
 #[derive(Clone)]
 pub struct VkViewportBuilder<'a>
 {
-    s: VkViewport,
+    s:  VkViewport,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2755,7 +2755,7 @@ impl<'a> VkViewportBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkViewport::default(),
+            s:  VkViewport::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2823,7 +2823,7 @@ impl<'a> core::ops::DerefMut for VkViewportBuilder<'a>
 #[derive(Clone)]
 pub struct VkCommandBufferBeginInfoBuilder<'a>
 {
-    s: VkCommandBufferBeginInfo,
+    s:  VkCommandBufferBeginInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2832,7 +2832,7 @@ impl<'a> VkCommandBufferBeginInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkCommandBufferBeginInfo::default(),
+            s:  VkCommandBufferBeginInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -2903,7 +2903,7 @@ impl<'a> core::ops::DerefMut for VkCommandBufferBeginInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkCommandBufferInheritanceInfoBuilder<'a>
 {
-    s: VkCommandBufferInheritanceInfo,
+    s:  VkCommandBufferInheritanceInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -2912,7 +2912,7 @@ impl<'a> VkCommandBufferInheritanceInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkCommandBufferInheritanceInfo::default(),
+            s:  VkCommandBufferInheritanceInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3009,7 +3009,7 @@ impl<'a> core::ops::DerefMut for VkCommandBufferInheritanceInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkCommandBufferAllocateInfoBuilder<'a>
 {
-    s: VkCommandBufferAllocateInfo,
+    s:  VkCommandBufferAllocateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3018,7 +3018,7 @@ impl<'a> VkCommandBufferAllocateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkCommandBufferAllocateInfo::default(),
+            s:  VkCommandBufferAllocateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3087,7 +3087,7 @@ impl<'a> core::ops::DerefMut for VkCommandBufferAllocateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkCommandPoolCreateInfoBuilder<'a>
 {
-    s: VkCommandPoolCreateInfo,
+    s:  VkCommandPoolCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3096,7 +3096,7 @@ impl<'a> VkCommandPoolCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkCommandPoolCreateInfo::default(),
+            s:  VkCommandPoolCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3159,7 +3159,7 @@ impl<'a> core::ops::DerefMut for VkCommandPoolCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkRenderPassCreateInfoBuilder<'a>
 {
-    s: VkRenderPassCreateInfo,
+    s:  VkRenderPassCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3168,7 +3168,7 @@ impl<'a> VkRenderPassCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkRenderPassCreateInfo::default(),
+            s:  VkRenderPassCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3273,7 +3273,7 @@ impl<'a> core::ops::DerefMut for VkRenderPassCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSubpassDependencyBuilder<'a>
 {
-    s: VkSubpassDependency,
+    s:  VkSubpassDependency,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3282,7 +3282,7 @@ impl<'a> VkSubpassDependencyBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSubpassDependency::default(),
+            s:  VkSubpassDependency::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3356,7 +3356,7 @@ impl<'a> core::ops::DerefMut for VkSubpassDependencyBuilder<'a>
 #[derive(Clone)]
 pub struct VkSubpassDescriptionBuilder<'a>
 {
-    s: VkSubpassDescription,
+    s:  VkSubpassDescription,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3365,7 +3365,7 @@ impl<'a> VkSubpassDescriptionBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSubpassDescription::default(),
+            s:  VkSubpassDescription::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3480,7 +3480,7 @@ impl<'a> core::ops::DerefMut for VkSubpassDescriptionBuilder<'a>
 #[derive(Clone)]
 pub struct VkAttachmentReferenceBuilder<'a>
 {
-    s: VkAttachmentReference,
+    s:  VkAttachmentReference,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3489,7 +3489,7 @@ impl<'a> VkAttachmentReferenceBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkAttachmentReference::default(),
+            s:  VkAttachmentReference::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3533,7 +3533,7 @@ impl<'a> core::ops::DerefMut for VkAttachmentReferenceBuilder<'a>
 #[derive(Clone)]
 pub struct VkAttachmentDescriptionBuilder<'a>
 {
-    s: VkAttachmentDescription,
+    s:  VkAttachmentDescription,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3542,7 +3542,7 @@ impl<'a> VkAttachmentDescriptionBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkAttachmentDescription::default(),
+            s:  VkAttachmentDescription::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3637,7 +3637,7 @@ impl<'a> core::ops::DerefMut for VkAttachmentDescriptionBuilder<'a>
 #[derive(Clone)]
 pub struct VkFramebufferCreateInfoBuilder<'a>
 {
-    s: VkFramebufferCreateInfo,
+    s:  VkFramebufferCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3646,7 +3646,7 @@ impl<'a> VkFramebufferCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkFramebufferCreateInfo::default(),
+            s:  VkFramebufferCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3741,7 +3741,7 @@ impl<'a> core::ops::DerefMut for VkFramebufferCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkCopyDescriptorSetBuilder<'a>
 {
-    s: VkCopyDescriptorSet,
+    s:  VkCopyDescriptorSet,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3750,7 +3750,7 @@ impl<'a> VkCopyDescriptorSetBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkCopyDescriptorSet::default(),
+            s:  VkCopyDescriptorSet::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3843,7 +3843,7 @@ impl<'a> core::ops::DerefMut for VkCopyDescriptorSetBuilder<'a>
 #[derive(Clone)]
 pub struct VkWriteDescriptorSetBuilder<'a>
 {
-    s: VkWriteDescriptorSet,
+    s:  VkWriteDescriptorSet,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3852,7 +3852,7 @@ impl<'a> VkWriteDescriptorSetBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkWriteDescriptorSet::default(),
+            s:  VkWriteDescriptorSet::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -3963,7 +3963,7 @@ impl<'a> core::ops::DerefMut for VkWriteDescriptorSetBuilder<'a>
 #[derive(Clone)]
 pub struct VkDescriptorBufferInfoBuilder<'a>
 {
-    s: VkDescriptorBufferInfo,
+    s:  VkDescriptorBufferInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -3972,7 +3972,7 @@ impl<'a> VkDescriptorBufferInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDescriptorBufferInfo::default(),
+            s:  VkDescriptorBufferInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4022,7 +4022,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorBufferInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkDescriptorImageInfoBuilder<'a>
 {
-    s: VkDescriptorImageInfo,
+    s:  VkDescriptorImageInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4031,7 +4031,7 @@ impl<'a> VkDescriptorImageInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDescriptorImageInfo::default(),
+            s:  VkDescriptorImageInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4081,7 +4081,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorImageInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkDescriptorSetAllocateInfoBuilder<'a>
 {
-    s: VkDescriptorSetAllocateInfo,
+    s:  VkDescriptorSetAllocateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4090,7 +4090,7 @@ impl<'a> VkDescriptorSetAllocateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDescriptorSetAllocateInfo::default(),
+            s:  VkDescriptorSetAllocateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4166,7 +4166,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorSetAllocateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkDescriptorPoolCreateInfoBuilder<'a>
 {
-    s: VkDescriptorPoolCreateInfo,
+    s:  VkDescriptorPoolCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4175,7 +4175,7 @@ impl<'a> VkDescriptorPoolCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDescriptorPoolCreateInfo::default(),
+            s:  VkDescriptorPoolCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4257,7 +4257,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorPoolCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkDescriptorPoolSizeBuilder<'a>
 {
-    s: VkDescriptorPoolSize,
+    s:  VkDescriptorPoolSize,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4266,7 +4266,7 @@ impl<'a> VkDescriptorPoolSizeBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDescriptorPoolSize::default(),
+            s:  VkDescriptorPoolSize::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4310,7 +4310,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorPoolSizeBuilder<'a>
 #[derive(Clone)]
 pub struct VkDescriptorSetLayoutCreateInfoBuilder<'a>
 {
-    s: VkDescriptorSetLayoutCreateInfo,
+    s:  VkDescriptorSetLayoutCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4319,7 +4319,7 @@ impl<'a> VkDescriptorSetLayoutCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDescriptorSetLayoutCreateInfo::default(),
+            s:  VkDescriptorSetLayoutCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4395,7 +4395,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorSetLayoutCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkDescriptorSetLayoutBindingBuilder<'a>
 {
-    s: VkDescriptorSetLayoutBinding,
+    s:  VkDescriptorSetLayoutBinding,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4404,7 +4404,7 @@ impl<'a> VkDescriptorSetLayoutBindingBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDescriptorSetLayoutBinding::default(),
+            s:  VkDescriptorSetLayoutBinding::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4476,7 +4476,7 @@ impl<'a> core::ops::DerefMut for VkDescriptorSetLayoutBindingBuilder<'a>
 #[derive(Clone)]
 pub struct VkSamplerCreateInfoBuilder<'a>
 {
-    s: VkSamplerCreateInfo,
+    s:  VkSamplerCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4485,7 +4485,7 @@ impl<'a> VkSamplerCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSamplerCreateInfo::default(),
+            s:  VkSamplerCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4632,7 +4632,7 @@ impl<'a> core::ops::DerefMut for VkSamplerCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineLayoutCreateInfoBuilder<'a>
 {
-    s: VkPipelineLayoutCreateInfo,
+    s:  VkPipelineLayoutCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4641,7 +4641,7 @@ impl<'a> VkPipelineLayoutCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineLayoutCreateInfo::default(),
+            s:  VkPipelineLayoutCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4734,7 +4734,7 @@ impl<'a> core::ops::DerefMut for VkPipelineLayoutCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPushConstantRangeBuilder<'a>
 {
-    s: VkPushConstantRange,
+    s:  VkPushConstantRange,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4743,7 +4743,7 @@ impl<'a> VkPushConstantRangeBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPushConstantRange::default(),
+            s:  VkPushConstantRange::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4793,7 +4793,7 @@ impl<'a> core::ops::DerefMut for VkPushConstantRangeBuilder<'a>
 #[derive(Clone)]
 pub struct VkComputePipelineCreateInfoBuilder<'a>
 {
-    s: VkComputePipelineCreateInfo,
+    s:  VkComputePipelineCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4802,7 +4802,7 @@ impl<'a> VkComputePipelineCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkComputePipelineCreateInfo::default(),
+            s:  VkComputePipelineCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4889,7 +4889,7 @@ impl<'a> core::ops::DerefMut for VkComputePipelineCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineShaderStageCreateInfoBuilder<'a>
 {
-    s: VkPipelineShaderStageCreateInfo,
+    s:  VkPipelineShaderStageCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -4898,7 +4898,7 @@ impl<'a> VkPipelineShaderStageCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineShaderStageCreateInfo::default(),
+            s:  VkPipelineShaderStageCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -4992,7 +4992,7 @@ impl<'a> core::ops::DerefMut for VkPipelineShaderStageCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSpecializationInfoBuilder<'a>
 {
-    s: VkSpecializationInfo,
+    s:  VkSpecializationInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5001,7 +5001,7 @@ impl<'a> VkSpecializationInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSpecializationInfo::default(),
+            s:  VkSpecializationInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -5062,7 +5062,7 @@ impl<'a> core::ops::DerefMut for VkSpecializationInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSpecializationMapEntryBuilder<'a>
 {
-    s: VkSpecializationMapEntry,
+    s:  VkSpecializationMapEntry,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5071,7 +5071,7 @@ impl<'a> VkSpecializationMapEntryBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSpecializationMapEntry::default(),
+            s:  VkSpecializationMapEntry::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -5121,7 +5121,7 @@ impl<'a> core::ops::DerefMut for VkSpecializationMapEntryBuilder<'a>
 #[derive(Clone)]
 pub struct VkGraphicsPipelineCreateInfoBuilder<'a>
 {
-    s: VkGraphicsPipelineCreateInfo,
+    s:  VkGraphicsPipelineCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5130,7 +5130,7 @@ impl<'a> VkGraphicsPipelineCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkGraphicsPipelineCreateInfo::default(),
+            s:  VkGraphicsPipelineCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -5350,7 +5350,7 @@ impl<'a> core::ops::DerefMut for VkGraphicsPipelineCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineDynamicStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineDynamicStateCreateInfo,
+    s:  VkPipelineDynamicStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5359,7 +5359,7 @@ impl<'a> VkPipelineDynamicStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineDynamicStateCreateInfo::default(),
+            s:  VkPipelineDynamicStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -5436,7 +5436,7 @@ impl<'a> core::ops::DerefMut for VkPipelineDynamicStateCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineColorBlendStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineColorBlendStateCreateInfo,
+    s:  VkPipelineColorBlendStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5445,7 +5445,7 @@ impl<'a> VkPipelineColorBlendStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineColorBlendStateCreateInfo::default(),
+            s:  VkPipelineColorBlendStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -5547,7 +5547,7 @@ impl<'a> core::ops::DerefMut for VkPipelineColorBlendStateCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineColorBlendAttachmentStateBuilder<'a>
 {
-    s: VkPipelineColorBlendAttachmentState,
+    s:  VkPipelineColorBlendAttachmentState,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5556,7 +5556,7 @@ impl<'a> VkPipelineColorBlendAttachmentStateBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineColorBlendAttachmentState::default(),
+            s:  VkPipelineColorBlendAttachmentState::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -5657,7 +5657,7 @@ impl<'a> core::ops::DerefMut for VkPipelineColorBlendAttachmentStateBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineDepthStencilStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineDepthStencilStateCreateInfo,
+    s:  VkPipelineDepthStencilStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5666,7 +5666,7 @@ impl<'a> VkPipelineDepthStencilStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineDepthStencilStateCreateInfo::default(),
+            s:  VkPipelineDepthStencilStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -5810,7 +5810,7 @@ impl<'a> core::ops::DerefMut for VkPipelineDepthStencilStateCreateInfoBuilder<'a
 #[derive(Clone)]
 pub struct VkStencilOpStateBuilder<'a>
 {
-    s: VkStencilOpState,
+    s:  VkStencilOpState,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5819,7 +5819,7 @@ impl<'a> VkStencilOpStateBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkStencilOpState::default(),
+            s:  VkStencilOpState::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -5893,7 +5893,7 @@ impl<'a> core::ops::DerefMut for VkStencilOpStateBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineMultisampleStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineMultisampleStateCreateInfo,
+    s:  VkPipelineMultisampleStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -5902,7 +5902,7 @@ impl<'a> VkPipelineMultisampleStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineMultisampleStateCreateInfo::default(),
+            s:  VkPipelineMultisampleStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6019,7 +6019,7 @@ impl<'a> core::ops::DerefMut for VkPipelineMultisampleStateCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineRasterizationStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineRasterizationStateCreateInfo,
+    s:  VkPipelineRasterizationStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6028,7 +6028,7 @@ impl<'a> VkPipelineRasterizationStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineRasterizationStateCreateInfo::default(),
+            s:  VkPipelineRasterizationStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6178,7 +6178,7 @@ impl<'a> core::ops::DerefMut for VkPipelineRasterizationStateCreateInfoBuilder<'
 #[derive(Clone)]
 pub struct VkPipelineViewportStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineViewportStateCreateInfo,
+    s:  VkPipelineViewportStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6187,7 +6187,7 @@ impl<'a> VkPipelineViewportStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineViewportStateCreateInfo::default(),
+            s:  VkPipelineViewportStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6280,7 +6280,7 @@ impl<'a> core::ops::DerefMut for VkPipelineViewportStateCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineTessellationStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineTessellationStateCreateInfo,
+    s:  VkPipelineTessellationStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6289,7 +6289,7 @@ impl<'a> VkPipelineTessellationStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineTessellationStateCreateInfo::default(),
+            s:  VkPipelineTessellationStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6361,7 +6361,7 @@ impl<'a> core::ops::DerefMut for VkPipelineTessellationStateCreateInfoBuilder<'a
 #[derive(Clone)]
 pub struct VkPipelineInputAssemblyStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineInputAssemblyStateCreateInfo,
+    s:  VkPipelineInputAssemblyStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6370,7 +6370,7 @@ impl<'a> VkPipelineInputAssemblyStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineInputAssemblyStateCreateInfo::default(),
+            s:  VkPipelineInputAssemblyStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6451,7 +6451,7 @@ impl<'a> core::ops::DerefMut for VkPipelineInputAssemblyStateCreateInfoBuilder<'
 #[derive(Clone)]
 pub struct VkPipelineVertexInputStateCreateInfoBuilder<'a>
 {
-    s: VkPipelineVertexInputStateCreateInfo,
+    s:  VkPipelineVertexInputStateCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6460,7 +6460,7 @@ impl<'a> VkPipelineVertexInputStateCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineVertexInputStateCreateInfo::default(),
+            s:  VkPipelineVertexInputStateCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6561,7 +6561,7 @@ impl<'a> core::ops::DerefMut for VkPipelineVertexInputStateCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkVertexInputAttributeDescriptionBuilder<'a>
 {
-    s: VkVertexInputAttributeDescription,
+    s:  VkVertexInputAttributeDescription,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6570,7 +6570,7 @@ impl<'a> VkVertexInputAttributeDescriptionBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkVertexInputAttributeDescription::default(),
+            s:  VkVertexInputAttributeDescription::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6626,7 +6626,7 @@ impl<'a> core::ops::DerefMut for VkVertexInputAttributeDescriptionBuilder<'a>
 #[derive(Clone)]
 pub struct VkVertexInputBindingDescriptionBuilder<'a>
 {
-    s: VkVertexInputBindingDescription,
+    s:  VkVertexInputBindingDescription,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6635,7 +6635,7 @@ impl<'a> VkVertexInputBindingDescriptionBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkVertexInputBindingDescription::default(),
+            s:  VkVertexInputBindingDescription::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6688,7 +6688,7 @@ impl<'a> core::ops::DerefMut for VkVertexInputBindingDescriptionBuilder<'a>
 #[derive(Clone)]
 pub struct VkPipelineCacheCreateInfoBuilder<'a>
 {
-    s: VkPipelineCacheCreateInfo,
+    s:  VkPipelineCacheCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6697,7 +6697,7 @@ impl<'a> VkPipelineCacheCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPipelineCacheCreateInfo::default(),
+            s:  VkPipelineCacheCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6773,7 +6773,7 @@ impl<'a> core::ops::DerefMut for VkPipelineCacheCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkShaderModuleCreateInfoBuilder<'a>
 {
-    s: VkShaderModuleCreateInfo,
+    s:  VkShaderModuleCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6782,7 +6782,7 @@ impl<'a> VkShaderModuleCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkShaderModuleCreateInfo::default(),
+            s:  VkShaderModuleCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6853,7 +6853,7 @@ impl<'a> core::ops::DerefMut for VkShaderModuleCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageViewCreateInfoBuilder<'a>
 {
-    s: VkImageViewCreateInfo,
+    s:  VkImageViewCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6862,7 +6862,7 @@ impl<'a> VkImageViewCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageViewCreateInfo::default(),
+            s:  VkImageViewCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -6952,7 +6952,7 @@ impl<'a> core::ops::DerefMut for VkImageViewCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkComponentMappingBuilder<'a>
 {
-    s: VkComponentMapping,
+    s:  VkComponentMapping,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -6961,7 +6961,7 @@ impl<'a> VkComponentMappingBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkComponentMapping::default(),
+            s:  VkComponentMapping::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7017,7 +7017,7 @@ impl<'a> core::ops::DerefMut for VkComponentMappingBuilder<'a>
 #[derive(Clone)]
 pub struct VkSubresourceLayoutBuilder<'a>
 {
-    s: VkSubresourceLayout,
+    s:  VkSubresourceLayout,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7026,7 +7026,7 @@ impl<'a> VkSubresourceLayoutBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSubresourceLayout::default(),
+            s:  VkSubresourceLayout::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7088,7 +7088,7 @@ impl<'a> core::ops::DerefMut for VkSubresourceLayoutBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageSubresourceBuilder<'a>
 {
-    s: VkImageSubresource,
+    s:  VkImageSubresource,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7097,7 +7097,7 @@ impl<'a> VkImageSubresourceBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageSubresource::default(),
+            s:  VkImageSubresource::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7147,7 +7147,7 @@ impl<'a> core::ops::DerefMut for VkImageSubresourceBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageCreateInfoBuilder<'a>
 {
-    s: VkImageCreateInfo,
+    s:  VkImageCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7156,7 +7156,7 @@ impl<'a> VkImageCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageCreateInfo::default(),
+            s:  VkImageCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7286,7 +7286,7 @@ impl<'a> core::ops::DerefMut for VkImageCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkBufferViewCreateInfoBuilder<'a>
 {
-    s: VkBufferViewCreateInfo,
+    s:  VkBufferViewCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7295,7 +7295,7 @@ impl<'a> VkBufferViewCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkBufferViewCreateInfo::default(),
+            s:  VkBufferViewCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7376,7 +7376,7 @@ impl<'a> core::ops::DerefMut for VkBufferViewCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkBufferCreateInfoBuilder<'a>
 {
-    s: VkBufferCreateInfo,
+    s:  VkBufferCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7385,7 +7385,7 @@ impl<'a> VkBufferCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkBufferCreateInfo::default(),
+            s:  VkBufferCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7473,7 +7473,7 @@ impl<'a> core::ops::DerefMut for VkBufferCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkQueryPoolCreateInfoBuilder<'a>
 {
-    s: VkQueryPoolCreateInfo,
+    s:  VkQueryPoolCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7482,7 +7482,7 @@ impl<'a> VkQueryPoolCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkQueryPoolCreateInfo::default(),
+            s:  VkQueryPoolCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7560,7 +7560,7 @@ impl<'a> core::ops::DerefMut for VkQueryPoolCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkEventCreateInfoBuilder<'a>
 {
-    s: VkEventCreateInfo,
+    s:  VkEventCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7569,7 +7569,7 @@ impl<'a> VkEventCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkEventCreateInfo::default(),
+            s:  VkEventCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7626,7 +7626,7 @@ impl<'a> core::ops::DerefMut for VkEventCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSemaphoreCreateInfoBuilder<'a>
 {
-    s: VkSemaphoreCreateInfo,
+    s:  VkSemaphoreCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7635,7 +7635,7 @@ impl<'a> VkSemaphoreCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSemaphoreCreateInfo::default(),
+            s:  VkSemaphoreCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7692,7 +7692,7 @@ impl<'a> core::ops::DerefMut for VkSemaphoreCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkFenceCreateInfoBuilder<'a>
 {
-    s: VkFenceCreateInfo,
+    s:  VkFenceCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7701,7 +7701,7 @@ impl<'a> VkFenceCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkFenceCreateInfo::default(),
+            s:  VkFenceCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7758,7 +7758,7 @@ impl<'a> core::ops::DerefMut for VkFenceCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkBindSparseInfoBuilder<'a>
 {
-    s: VkBindSparseInfo,
+    s:  VkBindSparseInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7767,7 +7767,7 @@ impl<'a> VkBindSparseInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkBindSparseInfo::default(),
+            s:  VkBindSparseInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7892,7 +7892,7 @@ impl<'a> core::ops::DerefMut for VkBindSparseInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSparseImageMemoryBindInfoBuilder<'a>
 {
-    s: VkSparseImageMemoryBindInfo,
+    s:  VkSparseImageMemoryBindInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7901,7 +7901,7 @@ impl<'a> VkSparseImageMemoryBindInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSparseImageMemoryBindInfo::default(),
+            s:  VkSparseImageMemoryBindInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -7955,7 +7955,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageMemoryBindInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSparseImageMemoryBindBuilder<'a>
 {
-    s: VkSparseImageMemoryBind,
+    s:  VkSparseImageMemoryBind,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -7964,7 +7964,7 @@ impl<'a> VkSparseImageMemoryBindBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSparseImageMemoryBind::default(),
+            s:  VkSparseImageMemoryBind::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8032,7 +8032,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageMemoryBindBuilder<'a>
 #[derive(Clone)]
 pub struct VkSparseImageOpaqueMemoryBindInfoBuilder<'a>
 {
-    s: VkSparseImageOpaqueMemoryBindInfo,
+    s:  VkSparseImageOpaqueMemoryBindInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8041,7 +8041,7 @@ impl<'a> VkSparseImageOpaqueMemoryBindInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSparseImageOpaqueMemoryBindInfo::default(),
+            s:  VkSparseImageOpaqueMemoryBindInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8095,7 +8095,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageOpaqueMemoryBindInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSparseMemoryBindBuilder<'a>
 {
-    s: VkSparseMemoryBind,
+    s:  VkSparseMemoryBind,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8104,7 +8104,7 @@ impl<'a> VkSparseMemoryBindBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSparseMemoryBind::default(),
+            s:  VkSparseMemoryBind::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8166,7 +8166,7 @@ impl<'a> core::ops::DerefMut for VkSparseMemoryBindBuilder<'a>
 #[derive(Clone)]
 pub struct VkSparseBufferMemoryBindInfoBuilder<'a>
 {
-    s: VkSparseBufferMemoryBindInfo,
+    s:  VkSparseBufferMemoryBindInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8175,7 +8175,7 @@ impl<'a> VkSparseBufferMemoryBindInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSparseBufferMemoryBindInfo::default(),
+            s:  VkSparseBufferMemoryBindInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8229,7 +8229,7 @@ impl<'a> core::ops::DerefMut for VkSparseBufferMemoryBindInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSparseImageFormatPropertiesBuilder<'a>
 {
-    s: VkSparseImageFormatProperties,
+    s:  VkSparseImageFormatProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8238,7 +8238,7 @@ impl<'a> VkSparseImageFormatPropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSparseImageFormatProperties::default(),
+            s:  VkSparseImageFormatProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8297,7 +8297,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageFormatPropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkSparseImageMemoryRequirementsBuilder<'a>
 {
-    s: VkSparseImageMemoryRequirements,
+    s:  VkSparseImageMemoryRequirements,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8306,7 +8306,7 @@ impl<'a> VkSparseImageMemoryRequirementsBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSparseImageMemoryRequirements::default(),
+            s:  VkSparseImageMemoryRequirements::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8383,7 +8383,7 @@ impl<'a> core::ops::DerefMut for VkSparseImageMemoryRequirementsBuilder<'a>
 #[derive(Clone)]
 pub struct VkMemoryRequirementsBuilder<'a>
 {
-    s: VkMemoryRequirements,
+    s:  VkMemoryRequirements,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8392,7 +8392,7 @@ impl<'a> VkMemoryRequirementsBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkMemoryRequirements::default(),
+            s:  VkMemoryRequirements::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8442,7 +8442,7 @@ impl<'a> core::ops::DerefMut for VkMemoryRequirementsBuilder<'a>
 #[derive(Clone)]
 pub struct VkMappedMemoryRangeBuilder<'a>
 {
-    s: VkMappedMemoryRange,
+    s:  VkMappedMemoryRange,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8451,7 +8451,7 @@ impl<'a> VkMappedMemoryRangeBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkMappedMemoryRange::default(),
+            s:  VkMappedMemoryRange::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8520,7 +8520,7 @@ impl<'a> core::ops::DerefMut for VkMappedMemoryRangeBuilder<'a>
 #[derive(Clone)]
 pub struct VkMemoryAllocateInfoBuilder<'a>
 {
-    s: VkMemoryAllocateInfo,
+    s:  VkMemoryAllocateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8529,7 +8529,7 @@ impl<'a> VkMemoryAllocateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkMemoryAllocateInfo::default(),
+            s:  VkMemoryAllocateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8592,7 +8592,7 @@ impl<'a> core::ops::DerefMut for VkMemoryAllocateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkSubmitInfoBuilder<'a>
 {
-    s: VkSubmitInfo,
+    s:  VkSubmitInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8601,7 +8601,7 @@ impl<'a> VkSubmitInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkSubmitInfo::default(),
+            s:  VkSubmitInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8698,7 +8698,7 @@ impl<'a> core::ops::DerefMut for VkSubmitInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkLayerPropertiesBuilder<'a>
 {
-    s: VkLayerProperties,
+    s:  VkLayerProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8707,7 +8707,7 @@ impl<'a> VkLayerPropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkLayerProperties::default(),
+            s:  VkLayerProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8763,7 +8763,7 @@ impl<'a> core::ops::DerefMut for VkLayerPropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkExtensionPropertiesBuilder<'a>
 {
-    s: VkExtensionProperties,
+    s:  VkExtensionProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8772,7 +8772,7 @@ impl<'a> VkExtensionPropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkExtensionProperties::default(),
+            s:  VkExtensionProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8816,7 +8816,7 @@ impl<'a> core::ops::DerefMut for VkExtensionPropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkDeviceCreateInfoBuilder<'a>
 {
-    s: VkDeviceCreateInfo,
+    s:  VkDeviceCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8825,7 +8825,7 @@ impl<'a> VkDeviceCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDeviceCreateInfo::default(),
+            s:  VkDeviceCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -8943,7 +8943,7 @@ impl<'a> core::ops::DerefMut for VkDeviceCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPhysicalDeviceFeaturesBuilder<'a>
 {
-    s: VkPhysicalDeviceFeatures,
+    s:  VkPhysicalDeviceFeatures,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -8952,7 +8952,7 @@ impl<'a> VkPhysicalDeviceFeaturesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPhysicalDeviceFeatures::default(),
+            s:  VkPhysicalDeviceFeatures::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -9362,7 +9362,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDeviceFeaturesBuilder<'a>
 #[derive(Clone)]
 pub struct VkDeviceQueueCreateInfoBuilder<'a>
 {
-    s: VkDeviceQueueCreateInfo,
+    s:  VkDeviceQueueCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -9371,7 +9371,7 @@ impl<'a> VkDeviceQueueCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkDeviceQueueCreateInfo::default(),
+            s:  VkDeviceQueueCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -9447,7 +9447,7 @@ impl<'a> core::ops::DerefMut for VkDeviceQueueCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkPhysicalDeviceMemoryPropertiesBuilder<'a>
 {
-    s: VkPhysicalDeviceMemoryProperties,
+    s:  VkPhysicalDeviceMemoryProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -9456,7 +9456,7 @@ impl<'a> VkPhysicalDeviceMemoryPropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPhysicalDeviceMemoryProperties::default(),
+            s:  VkPhysicalDeviceMemoryProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -9518,7 +9518,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDeviceMemoryPropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkMemoryHeapBuilder<'a>
 {
-    s: VkMemoryHeap,
+    s:  VkMemoryHeap,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -9527,7 +9527,7 @@ impl<'a> VkMemoryHeapBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkMemoryHeap::default(),
+            s:  VkMemoryHeap::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -9571,7 +9571,7 @@ impl<'a> core::ops::DerefMut for VkMemoryHeapBuilder<'a>
 #[derive(Clone)]
 pub struct VkMemoryTypeBuilder<'a>
 {
-    s: VkMemoryType,
+    s:  VkMemoryType,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -9580,7 +9580,7 @@ impl<'a> VkMemoryTypeBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkMemoryType::default(),
+            s:  VkMemoryType::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -9624,7 +9624,7 @@ impl<'a> core::ops::DerefMut for VkMemoryTypeBuilder<'a>
 #[derive(Clone)]
 pub struct VkQueueFamilyPropertiesBuilder<'a>
 {
-    s: VkQueueFamilyProperties,
+    s:  VkQueueFamilyProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -9633,7 +9633,7 @@ impl<'a> VkQueueFamilyPropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkQueueFamilyProperties::default(),
+            s:  VkQueueFamilyProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -9692,7 +9692,7 @@ impl<'a> core::ops::DerefMut for VkQueueFamilyPropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkPhysicalDevicePropertiesBuilder<'a>
 {
-    s: VkPhysicalDeviceProperties,
+    s:  VkPhysicalDeviceProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -9701,7 +9701,7 @@ impl<'a> VkPhysicalDevicePropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPhysicalDeviceProperties::default(),
+            s:  VkPhysicalDeviceProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -9794,7 +9794,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDevicePropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkPhysicalDeviceSparsePropertiesBuilder<'a>
 {
-    s: VkPhysicalDeviceSparseProperties,
+    s:  VkPhysicalDeviceSparseProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -9803,7 +9803,7 @@ impl<'a> VkPhysicalDeviceSparsePropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPhysicalDeviceSparseProperties::default(),
+            s:  VkPhysicalDeviceSparseProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -9881,7 +9881,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDeviceSparsePropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkPhysicalDeviceLimitsBuilder<'a>
 {
-    s: VkPhysicalDeviceLimits,
+    s:  VkPhysicalDeviceLimits,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -9890,7 +9890,7 @@ impl<'a> VkPhysicalDeviceLimitsBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkPhysicalDeviceLimits::default(),
+            s:  VkPhysicalDeviceLimits::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -10712,7 +10712,7 @@ impl<'a> core::ops::DerefMut for VkPhysicalDeviceLimitsBuilder<'a>
 #[derive(Clone)]
 pub struct VkImageFormatPropertiesBuilder<'a>
 {
-    s: VkImageFormatProperties,
+    s:  VkImageFormatProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -10721,7 +10721,7 @@ impl<'a> VkImageFormatPropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkImageFormatProperties::default(),
+            s:  VkImageFormatProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -10784,7 +10784,7 @@ impl<'a> core::ops::DerefMut for VkImageFormatPropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkFormatPropertiesBuilder<'a>
 {
-    s: VkFormatProperties,
+    s:  VkFormatProperties,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -10793,7 +10793,7 @@ impl<'a> VkFormatPropertiesBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkFormatProperties::default(),
+            s:  VkFormatProperties::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -10849,7 +10849,7 @@ impl<'a> core::ops::DerefMut for VkFormatPropertiesBuilder<'a>
 #[derive(Clone)]
 pub struct VkInstanceCreateInfoBuilder<'a>
 {
-    s: VkInstanceCreateInfo,
+    s:  VkInstanceCreateInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -10858,7 +10858,7 @@ impl<'a> VkInstanceCreateInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkInstanceCreateInfo::default(),
+            s:  VkInstanceCreateInfo::default(),
             _p: core::marker::PhantomData,
         }
     }
@@ -10960,7 +10960,7 @@ impl<'a> core::ops::DerefMut for VkInstanceCreateInfoBuilder<'a>
 #[derive(Clone)]
 pub struct VkApplicationInfoBuilder<'a>
 {
-    s: VkApplicationInfo,
+    s:  VkApplicationInfo,
     _p: core::marker::PhantomData<&'a ()>,
 }
 
@@ -10969,7 +10969,7 @@ impl<'a> VkApplicationInfoBuilder<'a>
     pub fn new() -> Self
     {
         Self {
-            s: VkApplicationInfo::default(),
+            s:  VkApplicationInfo::default(),
             _p: core::marker::PhantomData,
         }
     }

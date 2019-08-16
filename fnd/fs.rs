@@ -17,10 +17,10 @@ mod private
 #[derive(Default, Clone)]
 pub struct OpenOptions
 {
-    read: bool,
-    write: bool,
+    read:     bool,
+    write:    bool,
     truncate: bool,
-    create: bool,
+    create:   bool,
 }
 
 pub trait ToOpenOptions: private::Sealed

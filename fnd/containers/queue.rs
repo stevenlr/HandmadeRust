@@ -8,9 +8,9 @@ use crate::{
 pub struct Queue<T, A: Allocator + Clone = GlobalAllocator>
 {
     buffer: RawArray<T, A>,
-    head: usize,
-    tail: usize,
-    full: bool,
+    head:   usize,
+    tail:   usize,
+    full:   bool,
 }
 
 impl<T, A> Queue<T, A>
@@ -21,9 +21,9 @@ where
     {
         Self {
             buffer: RawArray::new(alloc),
-            head: 0,
-            tail: 0,
-            full: false,
+            head:   0,
+            tail:   0,
+            full:   false,
         }
     }
 

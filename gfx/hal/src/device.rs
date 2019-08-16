@@ -43,7 +43,7 @@ impl<B: Backend> CreatedDevice<B>
                 queue_slot
                     .take()
                     .map(|q| Queue {
-                        inner: q,
+                        inner:       q,
                         _capability: PhantomData,
                     })
                     .ok_or(QueueRetrievalError::AlreadyRetrieved)

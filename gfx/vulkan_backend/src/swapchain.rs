@@ -6,11 +6,11 @@ use vk::{builders::*, types::*};
 
 pub struct Swapchain
 {
-    pub(crate) device: Shared<RawDevice>,
-    pub(crate) raw: VkSwapchainKHR,
-    pub(crate) images: SmallArray8<VkImage>,
+    pub(crate) device:      Shared<RawDevice>,
+    pub(crate) raw:         VkSwapchainKHR,
+    pub(crate) images:      SmallArray8<VkImage>,
     pub(crate) image_views: SmallArray8<VkImageView>,
-    pub(crate) format: VkFormat,
+    pub(crate) format:      VkFormat,
 }
 
 impl hal::Swapchain<Backend> for Swapchain

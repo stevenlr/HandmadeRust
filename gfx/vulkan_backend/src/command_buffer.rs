@@ -8,7 +8,7 @@ use super::{conv::*, Backend, Error, RawDevice};
 pub struct CommandBuffer
 {
     pub(crate) device: Shared<RawDevice>,
-    pub(crate) raw: VkCommandBuffer,
+    pub(crate) raw:    VkCommandBuffer,
 }
 
 impl hal::InnerCommandBuffer<Backend> for CommandBuffer

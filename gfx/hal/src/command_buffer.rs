@@ -30,7 +30,7 @@ where
     C: capabilities::QueueType,
     L: capabilities::Level,
 {
-    pub(crate) inner: B::InnerCommandBuffer,
+    pub(crate) inner:    B::InnerCommandBuffer,
     pub(crate) _phantom: PhantomData<(C, L)>,
 }
 

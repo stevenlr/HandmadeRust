@@ -17,7 +17,7 @@ impl<W> CborSerializer<W>
 
 struct CborCompoundSerializer<'a, W>
 {
-    s: &'a mut CborSerializer<W>,
+    s:           &'a mut CborSerializer<W>,
     needs_break: bool,
 }
 
@@ -253,7 +253,7 @@ where
                 .write_header_with_value(MajorType::Array, len as u64)
                 .and_then(move |_| {
                     Ok(CborArraySerializer(CborCompoundSerializer {
-                        s: self,
+                        s:           self,
                         needs_break: false,
                     }))
                 }),
@@ -261,7 +261,7 @@ where
                 .write_u8(MajorType::Array.make_header(0x1f))
                 .and_then(move |_| {
                     Ok(CborArraySerializer(CborCompoundSerializer {
-                        s: self,
+                        s:           self,
                         needs_break: true,
                     }))
                 }),
@@ -276,7 +276,7 @@ where
                 .write_header_with_value(MajorType::Map, len as u64)
                 .and_then(move |_| {
                     Ok(CborMapSerializer(CborCompoundSerializer {
-                        s: self,
+                        s:           self,
                         needs_break: false,
                     }))
                 }),
@@ -284,7 +284,7 @@ where
                 .write_u8(MajorType::Map.make_header(0x1f))
                 .and_then(move |_| {
                     Ok(CborMapSerializer(CborCompoundSerializer {
-                        s: self,
+                        s:           self,
                         needs_break: true,
                     }))
                 }),

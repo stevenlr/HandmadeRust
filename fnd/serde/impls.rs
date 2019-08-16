@@ -134,7 +134,7 @@ impl<'de: 'a, 'a> Deserialize<'de> for &'a str
 struct StringPrimVisitor<A>
 {
     alloc: A,
-    _p: core::marker::PhantomData<A>,
+    _p:    core::marker::PhantomData<A>,
 }
 
 impl<'de, A: Allocator + Clone> Visitor<'de> for StringPrimVisitor<A>
@@ -159,7 +159,7 @@ impl<'de: 'a, 'a, A: Allocator + Default + Clone> Deserialize<'de> for String<A>
     {
         d.deserialize_str(StringPrimVisitor {
             alloc: A::default(),
-            _p: core::marker::PhantomData,
+            _p:    core::marker::PhantomData,
         })
     }
 }

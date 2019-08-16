@@ -21,9 +21,9 @@ impl Drop for RawDevice
 
 pub struct Device
 {
-    pub(crate) raw: Shared<RawDevice>,
+    pub(crate) raw:      Shared<RawDevice>,
     pub(crate) instance: Shared<RawInstance>,
-    pub(crate) gpu: VkPhysicalDevice,
+    pub(crate) gpu:      VkPhysicalDevice,
 }
 
 impl Device
@@ -261,7 +261,7 @@ impl hal::Device<Backend> for Device
             .map_err(|r| Error::CommandPool(r))
             .map(|(_, p)| {
                 hal::CommandPool::new(CommandPool {
-                    raw: p,
+                    raw:    p,
                     device: self.raw.clone(),
                 })
             })

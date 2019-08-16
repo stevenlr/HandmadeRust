@@ -13,7 +13,7 @@ use crate::{
 
 pub struct Array<T, A: Allocator = GlobalAllocator>
 {
-    size: usize,
+    size:   usize,
     buffer: RawArray<T, A>,
 }
 
@@ -23,7 +23,7 @@ impl<T, A: Allocator> Array<T, A>
     {
         Self {
             buffer: RawArray::new(alloc),
-            size: 0,
+            size:   0,
         }
     }
 
@@ -245,9 +245,9 @@ where
 
 pub struct IntoIter<T, A: Allocator>
 {
-    inner: Array<T, A>,
+    inner:   Array<T, A>,
     current: usize,
-    size: usize,
+    size:    usize,
 }
 
 impl<T, A: Allocator> Iterator for IntoIter<T, A>
@@ -306,8 +306,8 @@ impl<T, A: Allocator> IntoIterator for Array<T, A>
     fn into_iter(self) -> Self::IntoIter
     {
         IntoIter {
-            size: self.size,
-            inner: self,
+            size:    self.size,
+            inner:   self,
             current: 0,
         }
     }

@@ -7584,12 +7584,12 @@ impl core::fmt::Debug for VkFormatFeatureFlagBits
 #[derive(Copy, Clone)]
 pub struct VkAllocationCallbacks
 {
-    pub p_user_data: *mut core::ffi::c_void,
-    pub pfn_allocation: Option<PfnVkAllocationFunction>,
-    pub pfn_reallocation: Option<PfnVkReallocationFunction>,
-    pub pfn_free: Option<PfnVkFreeFunction>,
+    pub p_user_data:             *mut core::ffi::c_void,
+    pub pfn_allocation:          Option<PfnVkAllocationFunction>,
+    pub pfn_reallocation:        Option<PfnVkReallocationFunction>,
+    pub pfn_free:                Option<PfnVkFreeFunction>,
     pub pfn_internal_allocation: Option<PfnVkInternalAllocationNotification>,
-    pub pfn_internal_free: Option<PfnVkInternalFreeNotification>,
+    pub pfn_internal_free:       Option<PfnVkInternalFreeNotification>,
 }
 
 pub trait ExtendsAllocationCallbacks
@@ -7601,12 +7601,12 @@ impl Default for VkAllocationCallbacks
     fn default() -> Self
     {
         Self {
-            p_user_data: core::ptr::null_mut(),
-            pfn_allocation: unsafe { core::mem::zeroed() },
-            pfn_reallocation: unsafe { core::mem::zeroed() },
-            pfn_free: unsafe { core::mem::zeroed() },
+            p_user_data:             core::ptr::null_mut(),
+            pfn_allocation:          unsafe { core::mem::zeroed() },
+            pfn_reallocation:        unsafe { core::mem::zeroed() },
+            pfn_free:                unsafe { core::mem::zeroed() },
             pfn_internal_allocation: unsafe { core::mem::zeroed() },
-            pfn_internal_free: unsafe { core::mem::zeroed() },
+            pfn_internal_free:       unsafe { core::mem::zeroed() },
         }
     }
 }
@@ -7615,11 +7615,11 @@ impl Default for VkAllocationCallbacks
 #[derive(Copy, Clone)]
 pub struct VkWin32SurfaceCreateInfoKHR
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkWin32SurfaceCreateFlagsKHR,
+    pub s_type:    VkStructureType,
+    pub p_next:    *const core::ffi::c_void,
+    pub flags:     VkWin32SurfaceCreateFlagsKHR,
     pub hinstance: HINSTANCE,
-    pub hwnd: HWND,
+    pub hwnd:      HWND,
 }
 
 pub trait ExtendsWin32SurfaceCreateInfoKHR
@@ -7631,11 +7631,11 @@ impl Default for VkWin32SurfaceCreateInfoKHR
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::WIN32_SURFACE_CREATE_INFO_KHR,
-            p_next: core::ptr::null(),
-            flags: VkWin32SurfaceCreateFlagsKHR::default(),
+            s_type:    VkStructureType::WIN32_SURFACE_CREATE_INFO_KHR,
+            p_next:    core::ptr::null(),
+            flags:     VkWin32SurfaceCreateFlagsKHR::default(),
             hinstance: core::ptr::null_mut(),
-            hwnd: core::ptr::null_mut(),
+            hwnd:      core::ptr::null_mut(),
         }
     }
 }
@@ -7644,7 +7644,7 @@ impl Default for VkWin32SurfaceCreateInfoKHR
 #[derive(Copy, Clone)]
 pub struct VkSurfaceFormatKHR
 {
-    pub format: VkFormat,
+    pub format:      VkFormat,
     pub color_space: VkColorSpaceKHR,
 }
 
@@ -7657,7 +7657,7 @@ impl Default for VkSurfaceFormatKHR
     fn default() -> Self
     {
         Self {
-            format: VkFormat::default(),
+            format:      VkFormat::default(),
             color_space: VkColorSpaceKHR::default(),
         }
     }
@@ -7667,16 +7667,16 @@ impl Default for VkSurfaceFormatKHR
 #[derive(Copy, Clone)]
 pub struct VkSurfaceCapabilitiesKHR
 {
-    pub min_image_count: u32,
-    pub max_image_count: u32,
-    pub current_extent: VkExtent2D,
-    pub min_image_extent: VkExtent2D,
-    pub max_image_extent: VkExtent2D,
-    pub max_image_array_layers: u32,
-    pub supported_transforms: VkSurfaceTransformFlagsKHR,
-    pub current_transform: VkSurfaceTransformFlagBitsKHR,
+    pub min_image_count:           u32,
+    pub max_image_count:           u32,
+    pub current_extent:            VkExtent2D,
+    pub min_image_extent:          VkExtent2D,
+    pub max_image_extent:          VkExtent2D,
+    pub max_image_array_layers:    u32,
+    pub supported_transforms:      VkSurfaceTransformFlagsKHR,
+    pub current_transform:         VkSurfaceTransformFlagBitsKHR,
     pub supported_composite_alpha: VkCompositeAlphaFlagsKHR,
-    pub supported_usage_flags: VkImageUsageFlags,
+    pub supported_usage_flags:     VkImageUsageFlags,
 }
 
 pub trait ExtendsSurfaceCapabilitiesKHR
@@ -7688,16 +7688,16 @@ impl Default for VkSurfaceCapabilitiesKHR
     fn default() -> Self
     {
         Self {
-            min_image_count: 0,
-            max_image_count: 0,
-            current_extent: VkExtent2D::default(),
-            min_image_extent: VkExtent2D::default(),
-            max_image_extent: VkExtent2D::default(),
-            max_image_array_layers: 0,
-            supported_transforms: VkSurfaceTransformFlagsKHR::default(),
-            current_transform: VkSurfaceTransformFlagBitsKHR::default(),
+            min_image_count:           0,
+            max_image_count:           0,
+            current_extent:            VkExtent2D::default(),
+            min_image_extent:          VkExtent2D::default(),
+            max_image_extent:          VkExtent2D::default(),
+            max_image_array_layers:    0,
+            supported_transforms:      VkSurfaceTransformFlagsKHR::default(),
+            current_transform:         VkSurfaceTransformFlagBitsKHR::default(),
             supported_composite_alpha: VkCompositeAlphaFlagsKHR::default(),
-            supported_usage_flags: VkImageUsageFlags::default(),
+            supported_usage_flags:     VkImageUsageFlags::default(),
         }
     }
 }
@@ -7706,7 +7706,7 @@ impl Default for VkSurfaceCapabilitiesKHR
 #[derive(Copy, Clone)]
 pub struct VkExtent2D
 {
-    pub width: u32,
+    pub width:  u32,
     pub height: u32,
 }
 
@@ -7719,7 +7719,7 @@ impl Default for VkExtent2D
     fn default() -> Self
     {
         Self {
-            width: 0,
+            width:  0,
             height: 0,
         }
     }
@@ -7729,14 +7729,14 @@ impl Default for VkExtent2D
 #[derive(Copy, Clone)]
 pub struct VkPresentInfoKHR
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
+    pub s_type:               VkStructureType,
+    pub p_next:               *const core::ffi::c_void,
     pub wait_semaphore_count: u32,
-    pub p_wait_semaphores: *const VkSemaphore,
-    pub swapchain_count: u32,
-    pub p_swapchains: *const VkSwapchainKHR,
-    pub p_image_indices: *const u32,
-    pub p_results: *mut VkResult,
+    pub p_wait_semaphores:    *const VkSemaphore,
+    pub swapchain_count:      u32,
+    pub p_swapchains:         *const VkSwapchainKHR,
+    pub p_image_indices:      *const u32,
+    pub p_results:            *mut VkResult,
 }
 
 pub trait ExtendsPresentInfoKHR
@@ -7748,14 +7748,14 @@ impl Default for VkPresentInfoKHR
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PRESENT_INFO_KHR,
-            p_next: core::ptr::null(),
+            s_type:               VkStructureType::PRESENT_INFO_KHR,
+            p_next:               core::ptr::null(),
             wait_semaphore_count: 0,
-            p_wait_semaphores: core::ptr::null(),
-            swapchain_count: 0,
-            p_swapchains: core::ptr::null(),
-            p_image_indices: core::ptr::null(),
-            p_results: core::ptr::null_mut(),
+            p_wait_semaphores:    core::ptr::null(),
+            swapchain_count:      0,
+            p_swapchains:         core::ptr::null(),
+            p_image_indices:      core::ptr::null(),
+            p_results:            core::ptr::null_mut(),
         }
     }
 }
@@ -7764,24 +7764,24 @@ impl Default for VkPresentInfoKHR
 #[derive(Copy, Clone)]
 pub struct VkSwapchainCreateInfoKHR
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkSwapchainCreateFlagsKHR,
-    pub surface: VkSurfaceKHR,
-    pub min_image_count: u32,
-    pub image_format: VkFormat,
-    pub image_color_space: VkColorSpaceKHR,
-    pub image_extent: VkExtent2D,
-    pub image_array_layers: u32,
-    pub image_usage: VkImageUsageFlags,
-    pub image_sharing_mode: VkSharingMode,
+    pub s_type:                   VkStructureType,
+    pub p_next:                   *const core::ffi::c_void,
+    pub flags:                    VkSwapchainCreateFlagsKHR,
+    pub surface:                  VkSurfaceKHR,
+    pub min_image_count:          u32,
+    pub image_format:             VkFormat,
+    pub image_color_space:        VkColorSpaceKHR,
+    pub image_extent:             VkExtent2D,
+    pub image_array_layers:       u32,
+    pub image_usage:              VkImageUsageFlags,
+    pub image_sharing_mode:       VkSharingMode,
     pub queue_family_index_count: u32,
-    pub p_queue_family_indices: *const u32,
-    pub pre_transform: VkSurfaceTransformFlagBitsKHR,
-    pub composite_alpha: VkCompositeAlphaFlagBitsKHR,
-    pub present_mode: VkPresentModeKHR,
-    pub clipped: VkBool32,
-    pub old_swapchain: VkSwapchainKHR,
+    pub p_queue_family_indices:   *const u32,
+    pub pre_transform:            VkSurfaceTransformFlagBitsKHR,
+    pub composite_alpha:          VkCompositeAlphaFlagBitsKHR,
+    pub present_mode:             VkPresentModeKHR,
+    pub clipped:                  VkBool32,
+    pub old_swapchain:            VkSwapchainKHR,
 }
 
 pub trait ExtendsSwapchainCreateInfoKHR
@@ -7793,24 +7793,24 @@ impl Default for VkSwapchainCreateInfoKHR
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::SWAPCHAIN_CREATE_INFO_KHR,
-            p_next: core::ptr::null(),
-            flags: VkSwapchainCreateFlagsKHR::default(),
-            surface: VkSurfaceKHR::default(),
-            min_image_count: 0,
-            image_format: VkFormat::default(),
-            image_color_space: VkColorSpaceKHR::default(),
-            image_extent: VkExtent2D::default(),
-            image_array_layers: 0,
-            image_usage: VkImageUsageFlags::default(),
-            image_sharing_mode: VkSharingMode::default(),
+            s_type:                   VkStructureType::SWAPCHAIN_CREATE_INFO_KHR,
+            p_next:                   core::ptr::null(),
+            flags:                    VkSwapchainCreateFlagsKHR::default(),
+            surface:                  VkSurfaceKHR::default(),
+            min_image_count:          0,
+            image_format:             VkFormat::default(),
+            image_color_space:        VkColorSpaceKHR::default(),
+            image_extent:             VkExtent2D::default(),
+            image_array_layers:       0,
+            image_usage:              VkImageUsageFlags::default(),
+            image_sharing_mode:       VkSharingMode::default(),
             queue_family_index_count: 0,
-            p_queue_family_indices: core::ptr::null(),
-            pre_transform: VkSurfaceTransformFlagBitsKHR::default(),
-            composite_alpha: VkCompositeAlphaFlagBitsKHR::default(),
-            present_mode: VkPresentModeKHR::default(),
-            clipped: VkBool32::default(),
-            old_swapchain: VkSwapchainKHR::default(),
+            p_queue_family_indices:   core::ptr::null(),
+            pre_transform:            VkSurfaceTransformFlagBitsKHR::default(),
+            composite_alpha:          VkCompositeAlphaFlagBitsKHR::default(),
+            present_mode:             VkPresentModeKHR::default(),
+            clipped:                  VkBool32::default(),
+            old_swapchain:            VkSwapchainKHR::default(),
         }
     }
 }
@@ -7819,18 +7819,18 @@ impl Default for VkSwapchainCreateInfoKHR
 #[derive(Copy, Clone)]
 pub struct VkDebugUtilsMessengerCallbackDataEXT
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkDebugUtilsMessengerCallbackDataFlagsEXT,
-    pub p_message_id_name: *const u8,
-    pub message_id_number: i32,
-    pub p_message: *const u8,
-    pub queue_label_count: u32,
-    pub p_queue_labels: *const VkDebugUtilsLabelEXT,
+    pub s_type:              VkStructureType,
+    pub p_next:              *const core::ffi::c_void,
+    pub flags:               VkDebugUtilsMessengerCallbackDataFlagsEXT,
+    pub p_message_id_name:   *const u8,
+    pub message_id_number:   i32,
+    pub p_message:           *const u8,
+    pub queue_label_count:   u32,
+    pub p_queue_labels:      *const VkDebugUtilsLabelEXT,
     pub cmd_buf_label_count: u32,
-    pub p_cmd_buf_labels: *const VkDebugUtilsLabelEXT,
-    pub object_count: u32,
-    pub p_objects: *const VkDebugUtilsObjectNameInfoEXT,
+    pub p_cmd_buf_labels:    *const VkDebugUtilsLabelEXT,
+    pub object_count:        u32,
+    pub p_objects:           *const VkDebugUtilsObjectNameInfoEXT,
 }
 
 pub trait ExtendsDebugUtilsMessengerCallbackDataEXT
@@ -7842,18 +7842,18 @@ impl Default for VkDebugUtilsMessengerCallbackDataEXT
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT,
-            p_next: core::ptr::null(),
-            flags: VkDebugUtilsMessengerCallbackDataFlagsEXT::default(),
-            p_message_id_name: core::ptr::null(),
-            message_id_number: 0,
-            p_message: core::ptr::null(),
-            queue_label_count: 0,
-            p_queue_labels: core::ptr::null(),
+            s_type:              VkStructureType::DEBUG_UTILS_MESSENGER_CALLBACK_DATA_EXT,
+            p_next:              core::ptr::null(),
+            flags:               VkDebugUtilsMessengerCallbackDataFlagsEXT::default(),
+            p_message_id_name:   core::ptr::null(),
+            message_id_number:   0,
+            p_message:           core::ptr::null(),
+            queue_label_count:   0,
+            p_queue_labels:      core::ptr::null(),
             cmd_buf_label_count: 0,
-            p_cmd_buf_labels: core::ptr::null(),
-            object_count: 0,
-            p_objects: core::ptr::null(),
+            p_cmd_buf_labels:    core::ptr::null(),
+            object_count:        0,
+            p_objects:           core::ptr::null(),
         }
     }
 }
@@ -7862,9 +7862,9 @@ impl Default for VkDebugUtilsMessengerCallbackDataEXT
 #[derive(Copy, Clone)]
 pub struct VkDebugUtilsObjectNameInfoEXT
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub object_type: VkObjectType,
+    pub s_type:        VkStructureType,
+    pub p_next:        *const core::ffi::c_void,
+    pub object_type:   VkObjectType,
     pub object_handle: u64,
     pub p_object_name: *const u8,
 }
@@ -7878,9 +7878,9 @@ impl Default for VkDebugUtilsObjectNameInfoEXT
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DEBUG_UTILS_OBJECT_NAME_INFO_EXT,
-            p_next: core::ptr::null(),
-            object_type: VkObjectType::default(),
+            s_type:        VkStructureType::DEBUG_UTILS_OBJECT_NAME_INFO_EXT,
+            p_next:        core::ptr::null(),
+            object_type:   VkObjectType::default(),
             object_handle: 0,
             p_object_name: core::ptr::null(),
         }
@@ -7891,10 +7891,10 @@ impl Default for VkDebugUtilsObjectNameInfoEXT
 #[derive(Copy, Clone)]
 pub struct VkDebugUtilsLabelEXT
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
+    pub s_type:       VkStructureType,
+    pub p_next:       *const core::ffi::c_void,
     pub p_label_name: *const u8,
-    pub color: [f32; 4],
+    pub color:        [f32; 4],
 }
 
 pub trait ExtendsDebugUtilsLabelEXT
@@ -7906,10 +7906,10 @@ impl Default for VkDebugUtilsLabelEXT
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DEBUG_UTILS_LABEL_EXT,
-            p_next: core::ptr::null(),
+            s_type:       VkStructureType::DEBUG_UTILS_LABEL_EXT,
+            p_next:       core::ptr::null(),
             p_label_name: core::ptr::null(),
-            color: [0.0, 0.0, 0.0, 0.0],
+            color:        [0.0, 0.0, 0.0, 0.0],
         }
     }
 }
@@ -7918,13 +7918,13 @@ impl Default for VkDebugUtilsLabelEXT
 #[derive(Copy, Clone)]
 pub struct VkDebugUtilsMessengerCreateInfoEXT
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkDebugUtilsMessengerCreateFlagsEXT,
-    pub message_severity: VkDebugUtilsMessageSeverityFlagsEXT,
-    pub message_type: VkDebugUtilsMessageTypeFlagsEXT,
+    pub s_type:            VkStructureType,
+    pub p_next:            *const core::ffi::c_void,
+    pub flags:             VkDebugUtilsMessengerCreateFlagsEXT,
+    pub message_severity:  VkDebugUtilsMessageSeverityFlagsEXT,
+    pub message_type:      VkDebugUtilsMessageTypeFlagsEXT,
     pub pfn_user_callback: Option<PfnVkDebugUtilsMessengerCallbackEXT>,
-    pub p_user_data: *mut core::ffi::c_void,
+    pub p_user_data:       *mut core::ffi::c_void,
 }
 
 pub trait ExtendsDebugUtilsMessengerCreateInfoEXT
@@ -7937,13 +7937,13 @@ impl Default for VkDebugUtilsMessengerCreateInfoEXT
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
-            p_next: core::ptr::null(),
-            flags: VkDebugUtilsMessengerCreateFlagsEXT::default(),
-            message_severity: VkDebugUtilsMessageSeverityFlagsEXT::default(),
-            message_type: VkDebugUtilsMessageTypeFlagsEXT::default(),
+            s_type:            VkStructureType::DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
+            p_next:            core::ptr::null(),
+            flags:             VkDebugUtilsMessengerCreateFlagsEXT::default(),
+            message_severity:  VkDebugUtilsMessageSeverityFlagsEXT::default(),
+            message_type:      VkDebugUtilsMessageTypeFlagsEXT::default(),
             pfn_user_callback: unsafe { core::mem::zeroed() },
-            p_user_data: core::ptr::null_mut(),
+            p_user_data:       core::ptr::null_mut(),
         }
     }
 }
@@ -7952,13 +7952,13 @@ impl Default for VkDebugUtilsMessengerCreateInfoEXT
 #[derive(Copy, Clone)]
 pub struct VkDebugUtilsObjectTagInfoEXT
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub object_type: VkObjectType,
+    pub s_type:        VkStructureType,
+    pub p_next:        *const core::ffi::c_void,
+    pub object_type:   VkObjectType,
     pub object_handle: u64,
-    pub tag_name: u64,
-    pub tag_size: usize,
-    pub p_tag: *const core::ffi::c_void,
+    pub tag_name:      u64,
+    pub tag_size:      usize,
+    pub p_tag:         *const core::ffi::c_void,
 }
 
 pub trait ExtendsDebugUtilsObjectTagInfoEXT
@@ -7970,13 +7970,13 @@ impl Default for VkDebugUtilsObjectTagInfoEXT
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DEBUG_UTILS_OBJECT_TAG_INFO_EXT,
-            p_next: core::ptr::null(),
-            object_type: VkObjectType::default(),
+            s_type:        VkStructureType::DEBUG_UTILS_OBJECT_TAG_INFO_EXT,
+            p_next:        core::ptr::null(),
+            object_type:   VkObjectType::default(),
             object_handle: 0,
-            tag_name: 0,
-            tag_size: 0,
-            p_tag: core::ptr::null(),
+            tag_name:      0,
+            tag_size:      0,
+            p_tag:         core::ptr::null(),
         }
     }
 }
@@ -8031,8 +8031,8 @@ impl Default for VkBaseOutStructure
 #[derive(Copy, Clone)]
 pub struct VkMemoryBarrier
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
+    pub s_type:          VkStructureType,
+    pub p_next:          *const core::ffi::c_void,
     pub src_access_mask: VkAccessFlags,
     pub dst_access_mask: VkAccessFlags,
 }
@@ -8046,8 +8046,8 @@ impl Default for VkMemoryBarrier
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::MEMORY_BARRIER,
-            p_next: core::ptr::null(),
+            s_type:          VkStructureType::MEMORY_BARRIER,
+            p_next:          core::ptr::null(),
             src_access_mask: VkAccessFlags::default(),
             dst_access_mask: VkAccessFlags::default(),
         }
@@ -8058,16 +8058,16 @@ impl Default for VkMemoryBarrier
 #[derive(Copy, Clone)]
 pub struct VkImageMemoryBarrier
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub src_access_mask: VkAccessFlags,
-    pub dst_access_mask: VkAccessFlags,
-    pub old_layout: VkImageLayout,
-    pub new_layout: VkImageLayout,
+    pub s_type:                 VkStructureType,
+    pub p_next:                 *const core::ffi::c_void,
+    pub src_access_mask:        VkAccessFlags,
+    pub dst_access_mask:        VkAccessFlags,
+    pub old_layout:             VkImageLayout,
+    pub new_layout:             VkImageLayout,
     pub src_queue_family_index: u32,
     pub dst_queue_family_index: u32,
-    pub image: VkImage,
-    pub subresource_range: VkImageSubresourceRange,
+    pub image:                  VkImage,
+    pub subresource_range:      VkImageSubresourceRange,
 }
 
 pub trait ExtendsImageMemoryBarrier
@@ -8079,16 +8079,16 @@ impl Default for VkImageMemoryBarrier
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::IMAGE_MEMORY_BARRIER,
-            p_next: core::ptr::null(),
-            src_access_mask: VkAccessFlags::default(),
-            dst_access_mask: VkAccessFlags::default(),
-            old_layout: VkImageLayout::default(),
-            new_layout: VkImageLayout::default(),
+            s_type:                 VkStructureType::IMAGE_MEMORY_BARRIER,
+            p_next:                 core::ptr::null(),
+            src_access_mask:        VkAccessFlags::default(),
+            dst_access_mask:        VkAccessFlags::default(),
+            old_layout:             VkImageLayout::default(),
+            new_layout:             VkImageLayout::default(),
             src_queue_family_index: 0,
             dst_queue_family_index: 0,
-            image: VkImage::default(),
-            subresource_range: VkImageSubresourceRange::default(),
+            image:                  VkImage::default(),
+            subresource_range:      VkImageSubresourceRange::default(),
         }
     }
 }
@@ -8097,11 +8097,11 @@ impl Default for VkImageMemoryBarrier
 #[derive(Copy, Clone)]
 pub struct VkImageSubresourceRange
 {
-    pub aspect_mask: VkImageAspectFlags,
-    pub base_mip_level: u32,
-    pub level_count: u32,
+    pub aspect_mask:      VkImageAspectFlags,
+    pub base_mip_level:   u32,
+    pub level_count:      u32,
     pub base_array_layer: u32,
-    pub layer_count: u32,
+    pub layer_count:      u32,
 }
 
 pub trait ExtendsImageSubresourceRange
@@ -8113,11 +8113,11 @@ impl Default for VkImageSubresourceRange
     fn default() -> Self
     {
         Self {
-            aspect_mask: VkImageAspectFlags::default(),
-            base_mip_level: 0,
-            level_count: 0,
+            aspect_mask:      VkImageAspectFlags::default(),
+            base_mip_level:   0,
+            level_count:      0,
             base_array_layer: 0,
-            layer_count: 0,
+            layer_count:      0,
         }
     }
 }
@@ -8126,9 +8126,9 @@ impl Default for VkImageSubresourceRange
 #[derive(Copy, Clone)]
 pub struct VkDrawIndirectCommand
 {
-    pub vertex_count: u32,
+    pub vertex_count:   u32,
     pub instance_count: u32,
-    pub first_vertex: u32,
+    pub first_vertex:   u32,
     pub first_instance: u32,
 }
 
@@ -8141,9 +8141,9 @@ impl Default for VkDrawIndirectCommand
     fn default() -> Self
     {
         Self {
-            vertex_count: 0,
+            vertex_count:   0,
             instance_count: 0,
-            first_vertex: 0,
+            first_vertex:   0,
             first_instance: 0,
         }
     }
@@ -8153,10 +8153,10 @@ impl Default for VkDrawIndirectCommand
 #[derive(Copy, Clone)]
 pub struct VkDrawIndexedIndirectCommand
 {
-    pub index_count: u32,
+    pub index_count:    u32,
     pub instance_count: u32,
-    pub first_index: u32,
-    pub vertex_offset: i32,
+    pub first_index:    u32,
+    pub vertex_offset:  i32,
     pub first_instance: u32,
 }
 
@@ -8169,10 +8169,10 @@ impl Default for VkDrawIndexedIndirectCommand
     fn default() -> Self
     {
         Self {
-            index_count: 0,
+            index_count:    0,
             instance_count: 0,
-            first_index: 0,
-            vertex_offset: 0,
+            first_index:    0,
+            vertex_offset:  0,
             first_instance: 0,
         }
     }
@@ -8203,15 +8203,15 @@ impl Default for VkDispatchIndirectCommand
 #[derive(Copy, Clone)]
 pub struct VkBufferMemoryBarrier
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub src_access_mask: VkAccessFlags,
-    pub dst_access_mask: VkAccessFlags,
+    pub s_type:                 VkStructureType,
+    pub p_next:                 *const core::ffi::c_void,
+    pub src_access_mask:        VkAccessFlags,
+    pub dst_access_mask:        VkAccessFlags,
     pub src_queue_family_index: u32,
     pub dst_queue_family_index: u32,
-    pub buffer: VkBuffer,
-    pub offset: VkDeviceSize,
-    pub size: VkDeviceSize,
+    pub buffer:                 VkBuffer,
+    pub offset:                 VkDeviceSize,
+    pub size:                   VkDeviceSize,
 }
 
 pub trait ExtendsBufferMemoryBarrier
@@ -8223,15 +8223,15 @@ impl Default for VkBufferMemoryBarrier
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::BUFFER_MEMORY_BARRIER,
-            p_next: core::ptr::null(),
-            src_access_mask: VkAccessFlags::default(),
-            dst_access_mask: VkAccessFlags::default(),
+            s_type:                 VkStructureType::BUFFER_MEMORY_BARRIER,
+            p_next:                 core::ptr::null(),
+            src_access_mask:        VkAccessFlags::default(),
+            dst_access_mask:        VkAccessFlags::default(),
             src_queue_family_index: 0,
             dst_queue_family_index: 0,
-            buffer: VkBuffer::default(),
-            offset: VkDeviceSize::default(),
-            size: VkDeviceSize::default(),
+            buffer:                 VkBuffer::default(),
+            offset:                 VkDeviceSize::default(),
+            size:                   VkDeviceSize::default(),
         }
     }
 }
@@ -8240,13 +8240,13 @@ impl Default for VkBufferMemoryBarrier
 #[derive(Copy, Clone)]
 pub struct VkRenderPassBeginInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub render_pass: VkRenderPass,
-    pub framebuffer: VkFramebuffer,
-    pub render_area: VkRect2D,
+    pub s_type:            VkStructureType,
+    pub p_next:            *const core::ffi::c_void,
+    pub render_pass:       VkRenderPass,
+    pub framebuffer:       VkFramebuffer,
+    pub render_area:       VkRect2D,
     pub clear_value_count: u32,
-    pub p_clear_values: *const VkClearValue,
+    pub p_clear_values:    *const VkClearValue,
 }
 
 pub trait ExtendsRenderPassBeginInfo
@@ -8258,13 +8258,13 @@ impl Default for VkRenderPassBeginInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::RENDER_PASS_BEGIN_INFO,
-            p_next: core::ptr::null(),
-            render_pass: VkRenderPass::default(),
-            framebuffer: VkFramebuffer::default(),
-            render_area: VkRect2D::default(),
+            s_type:            VkStructureType::RENDER_PASS_BEGIN_INFO,
+            p_next:            core::ptr::null(),
+            render_pass:       VkRenderPass::default(),
+            framebuffer:       VkFramebuffer::default(),
+            render_area:       VkRect2D::default(),
             clear_value_count: 0,
-            p_clear_values: core::ptr::null(),
+            p_clear_values:    core::ptr::null(),
         }
     }
 }
@@ -8273,7 +8273,7 @@ impl Default for VkRenderPassBeginInfo
 #[derive(Copy, Clone)]
 pub struct VkClearDepthStencilValue
 {
-    pub depth: f32,
+    pub depth:   f32,
     pub stencil: u32,
 }
 
@@ -8286,7 +8286,7 @@ impl Default for VkClearDepthStencilValue
     fn default() -> Self
     {
         Self {
-            depth: 0.0,
+            depth:   0.0,
             stencil: 0,
         }
     }
@@ -8340,10 +8340,10 @@ impl Default for VkOffset2D
 pub struct VkImageResolve
 {
     pub src_subresource: VkImageSubresourceLayers,
-    pub src_offset: VkOffset3D,
+    pub src_offset:      VkOffset3D,
     pub dst_subresource: VkImageSubresourceLayers,
-    pub dst_offset: VkOffset3D,
-    pub extent: VkExtent3D,
+    pub dst_offset:      VkOffset3D,
+    pub extent:          VkExtent3D,
 }
 
 pub trait ExtendsImageResolve
@@ -8356,10 +8356,10 @@ impl Default for VkImageResolve
     {
         Self {
             src_subresource: VkImageSubresourceLayers::default(),
-            src_offset: VkOffset3D::default(),
+            src_offset:      VkOffset3D::default(),
             dst_subresource: VkImageSubresourceLayers::default(),
-            dst_offset: VkOffset3D::default(),
-            extent: VkExtent3D::default(),
+            dst_offset:      VkOffset3D::default(),
+            extent:          VkExtent3D::default(),
         }
     }
 }
@@ -8368,9 +8368,9 @@ impl Default for VkImageResolve
 #[derive(Copy, Clone)]
 pub struct VkExtent3D
 {
-    pub width: u32,
+    pub width:  u32,
     pub height: u32,
-    pub depth: u32,
+    pub depth:  u32,
 }
 
 pub trait ExtendsExtent3D
@@ -8382,9 +8382,9 @@ impl Default for VkExtent3D
     fn default() -> Self
     {
         Self {
-            width: 0,
+            width:  0,
             height: 0,
-            depth: 0,
+            depth:  0,
         }
     }
 }
@@ -8414,10 +8414,10 @@ impl Default for VkOffset3D
 #[derive(Copy, Clone)]
 pub struct VkImageSubresourceLayers
 {
-    pub aspect_mask: VkImageAspectFlags,
-    pub mip_level: u32,
+    pub aspect_mask:      VkImageAspectFlags,
+    pub mip_level:        u32,
     pub base_array_layer: u32,
-    pub layer_count: u32,
+    pub layer_count:      u32,
 }
 
 pub trait ExtendsImageSubresourceLayers
@@ -8429,10 +8429,10 @@ impl Default for VkImageSubresourceLayers
     fn default() -> Self
     {
         Self {
-            aspect_mask: VkImageAspectFlags::default(),
-            mip_level: 0,
+            aspect_mask:      VkImageAspectFlags::default(),
+            mip_level:        0,
             base_array_layer: 0,
-            layer_count: 0,
+            layer_count:      0,
         }
     }
 }
@@ -8441,9 +8441,9 @@ impl Default for VkImageSubresourceLayers
 #[derive(Copy, Clone)]
 pub struct VkClearRect
 {
-    pub rect: VkRect2D,
+    pub rect:             VkRect2D,
     pub base_array_layer: u32,
-    pub layer_count: u32,
+    pub layer_count:      u32,
 }
 
 pub trait ExtendsClearRect
@@ -8455,9 +8455,9 @@ impl Default for VkClearRect
     fn default() -> Self
     {
         Self {
-            rect: VkRect2D::default(),
+            rect:             VkRect2D::default(),
             base_array_layer: 0,
-            layer_count: 0,
+            layer_count:      0,
         }
     }
 }
@@ -8466,9 +8466,9 @@ impl Default for VkClearRect
 #[derive(Copy, Clone)]
 pub struct VkClearAttachment
 {
-    pub aspect_mask: VkImageAspectFlags,
+    pub aspect_mask:      VkImageAspectFlags,
     pub color_attachment: u32,
-    pub clear_value: VkClearValue,
+    pub clear_value:      VkClearValue,
 }
 
 pub trait ExtendsClearAttachment
@@ -8480,9 +8480,9 @@ impl Default for VkClearAttachment
     fn default() -> Self
     {
         Self {
-            aspect_mask: VkImageAspectFlags::default(),
+            aspect_mask:      VkImageAspectFlags::default(),
             color_attachment: 0,
-            clear_value: VkClearValue::default(),
+            clear_value:      VkClearValue::default(),
         }
     }
 }
@@ -8491,12 +8491,12 @@ impl Default for VkClearAttachment
 #[derive(Copy, Clone)]
 pub struct VkBufferImageCopy
 {
-    pub buffer_offset: VkDeviceSize,
-    pub buffer_row_length: u32,
+    pub buffer_offset:       VkDeviceSize,
+    pub buffer_row_length:   u32,
     pub buffer_image_height: u32,
-    pub image_subresource: VkImageSubresourceLayers,
-    pub image_offset: VkOffset3D,
-    pub image_extent: VkExtent3D,
+    pub image_subresource:   VkImageSubresourceLayers,
+    pub image_offset:        VkOffset3D,
+    pub image_extent:        VkExtent3D,
 }
 
 pub trait ExtendsBufferImageCopy
@@ -8508,12 +8508,12 @@ impl Default for VkBufferImageCopy
     fn default() -> Self
     {
         Self {
-            buffer_offset: VkDeviceSize::default(),
-            buffer_row_length: 0,
+            buffer_offset:       VkDeviceSize::default(),
+            buffer_row_length:   0,
             buffer_image_height: 0,
-            image_subresource: VkImageSubresourceLayers::default(),
-            image_offset: VkOffset3D::default(),
-            image_extent: VkExtent3D::default(),
+            image_subresource:   VkImageSubresourceLayers::default(),
+            image_offset:        VkOffset3D::default(),
+            image_extent:        VkExtent3D::default(),
         }
     }
 }
@@ -8523,9 +8523,9 @@ impl Default for VkBufferImageCopy
 pub struct VkImageBlit
 {
     pub src_subresource: VkImageSubresourceLayers,
-    pub src_offsets: [VkOffset3D; 2],
+    pub src_offsets:     [VkOffset3D; 2],
     pub dst_subresource: VkImageSubresourceLayers,
-    pub dst_offsets: [VkOffset3D; 2],
+    pub dst_offsets:     [VkOffset3D; 2],
 }
 
 pub trait ExtendsImageBlit
@@ -8538,9 +8538,9 @@ impl Default for VkImageBlit
     {
         Self {
             src_subresource: VkImageSubresourceLayers::default(),
-            src_offsets: [VkOffset3D::default(), VkOffset3D::default()],
+            src_offsets:     [VkOffset3D::default(), VkOffset3D::default()],
             dst_subresource: VkImageSubresourceLayers::default(),
-            dst_offsets: [VkOffset3D::default(), VkOffset3D::default()],
+            dst_offsets:     [VkOffset3D::default(), VkOffset3D::default()],
         }
     }
 }
@@ -8550,10 +8550,10 @@ impl Default for VkImageBlit
 pub struct VkImageCopy
 {
     pub src_subresource: VkImageSubresourceLayers,
-    pub src_offset: VkOffset3D,
+    pub src_offset:      VkOffset3D,
     pub dst_subresource: VkImageSubresourceLayers,
-    pub dst_offset: VkOffset3D,
-    pub extent: VkExtent3D,
+    pub dst_offset:      VkOffset3D,
+    pub extent:          VkExtent3D,
 }
 
 pub trait ExtendsImageCopy
@@ -8566,10 +8566,10 @@ impl Default for VkImageCopy
     {
         Self {
             src_subresource: VkImageSubresourceLayers::default(),
-            src_offset: VkOffset3D::default(),
+            src_offset:      VkOffset3D::default(),
             dst_subresource: VkImageSubresourceLayers::default(),
-            dst_offset: VkOffset3D::default(),
-            extent: VkExtent3D::default(),
+            dst_offset:      VkOffset3D::default(),
+            extent:          VkExtent3D::default(),
         }
     }
 }
@@ -8580,7 +8580,7 @@ pub struct VkBufferCopy
 {
     pub src_offset: VkDeviceSize,
     pub dst_offset: VkDeviceSize,
-    pub size: VkDeviceSize,
+    pub size:       VkDeviceSize,
 }
 
 pub trait ExtendsBufferCopy
@@ -8594,7 +8594,7 @@ impl Default for VkBufferCopy
         Self {
             src_offset: VkDeviceSize::default(),
             dst_offset: VkDeviceSize::default(),
-            size: VkDeviceSize::default(),
+            size:       VkDeviceSize::default(),
         }
     }
 }
@@ -8603,10 +8603,10 @@ impl Default for VkBufferCopy
 #[derive(Copy, Clone)]
 pub struct VkViewport
 {
-    pub x: f32,
-    pub y: f32,
-    pub width: f32,
-    pub height: f32,
+    pub x:         f32,
+    pub y:         f32,
+    pub width:     f32,
+    pub height:    f32,
     pub min_depth: f32,
     pub max_depth: f32,
 }
@@ -8620,10 +8620,10 @@ impl Default for VkViewport
     fn default() -> Self
     {
         Self {
-            x: 0.0,
-            y: 0.0,
-            width: 0.0,
-            height: 0.0,
+            x:         0.0,
+            y:         0.0,
+            width:     0.0,
+            height:    0.0,
             min_depth: 0.0,
             max_depth: 0.0,
         }
@@ -8634,9 +8634,9 @@ impl Default for VkViewport
 #[derive(Copy, Clone)]
 pub struct VkCommandBufferBeginInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkCommandBufferUsageFlags,
+    pub s_type:             VkStructureType,
+    pub p_next:             *const core::ffi::c_void,
+    pub flags:              VkCommandBufferUsageFlags,
     pub p_inheritance_info: *const VkCommandBufferInheritanceInfo,
 }
 
@@ -8649,9 +8649,9 @@ impl Default for VkCommandBufferBeginInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::COMMAND_BUFFER_BEGIN_INFO,
-            p_next: core::ptr::null(),
-            flags: VkCommandBufferUsageFlags::default(),
+            s_type:             VkStructureType::COMMAND_BUFFER_BEGIN_INFO,
+            p_next:             core::ptr::null(),
+            flags:              VkCommandBufferUsageFlags::default(),
             p_inheritance_info: core::ptr::null(),
         }
     }
@@ -8661,14 +8661,14 @@ impl Default for VkCommandBufferBeginInfo
 #[derive(Copy, Clone)]
 pub struct VkCommandBufferInheritanceInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub render_pass: VkRenderPass,
-    pub subpass: u32,
-    pub framebuffer: VkFramebuffer,
+    pub s_type:                 VkStructureType,
+    pub p_next:                 *const core::ffi::c_void,
+    pub render_pass:            VkRenderPass,
+    pub subpass:                u32,
+    pub framebuffer:            VkFramebuffer,
     pub occlusion_query_enable: VkBool32,
-    pub query_flags: VkQueryControlFlags,
-    pub pipeline_statistics: VkQueryPipelineStatisticFlags,
+    pub query_flags:            VkQueryControlFlags,
+    pub pipeline_statistics:    VkQueryPipelineStatisticFlags,
 }
 
 pub trait ExtendsCommandBufferInheritanceInfo
@@ -8680,14 +8680,14 @@ impl Default for VkCommandBufferInheritanceInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::COMMAND_BUFFER_INHERITANCE_INFO,
-            p_next: core::ptr::null(),
-            render_pass: VkRenderPass::default(),
-            subpass: 0,
-            framebuffer: VkFramebuffer::default(),
+            s_type:                 VkStructureType::COMMAND_BUFFER_INHERITANCE_INFO,
+            p_next:                 core::ptr::null(),
+            render_pass:            VkRenderPass::default(),
+            subpass:                0,
+            framebuffer:            VkFramebuffer::default(),
             occlusion_query_enable: VkBool32::default(),
-            query_flags: VkQueryControlFlags::default(),
-            pipeline_statistics: VkQueryPipelineStatisticFlags::default(),
+            query_flags:            VkQueryControlFlags::default(),
+            pipeline_statistics:    VkQueryPipelineStatisticFlags::default(),
         }
     }
 }
@@ -8696,10 +8696,10 @@ impl Default for VkCommandBufferInheritanceInfo
 #[derive(Copy, Clone)]
 pub struct VkCommandBufferAllocateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub command_pool: VkCommandPool,
-    pub level: VkCommandBufferLevel,
+    pub s_type:               VkStructureType,
+    pub p_next:               *const core::ffi::c_void,
+    pub command_pool:         VkCommandPool,
+    pub level:                VkCommandBufferLevel,
     pub command_buffer_count: u32,
 }
 
@@ -8712,10 +8712,10 @@ impl Default for VkCommandBufferAllocateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::COMMAND_BUFFER_ALLOCATE_INFO,
-            p_next: core::ptr::null(),
-            command_pool: VkCommandPool::default(),
-            level: VkCommandBufferLevel::default(),
+            s_type:               VkStructureType::COMMAND_BUFFER_ALLOCATE_INFO,
+            p_next:               core::ptr::null(),
+            command_pool:         VkCommandPool::default(),
+            level:                VkCommandBufferLevel::default(),
             command_buffer_count: 0,
         }
     }
@@ -8725,9 +8725,9 @@ impl Default for VkCommandBufferAllocateInfo
 #[derive(Copy, Clone)]
 pub struct VkCommandPoolCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkCommandPoolCreateFlags,
+    pub s_type:             VkStructureType,
+    pub p_next:             *const core::ffi::c_void,
+    pub flags:              VkCommandPoolCreateFlags,
     pub queue_family_index: u32,
 }
 
@@ -8740,9 +8740,9 @@ impl Default for VkCommandPoolCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::COMMAND_POOL_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkCommandPoolCreateFlags::default(),
+            s_type:             VkStructureType::COMMAND_POOL_CREATE_INFO,
+            p_next:             core::ptr::null(),
+            flags:              VkCommandPoolCreateFlags::default(),
             queue_family_index: 0,
         }
     }
@@ -8752,15 +8752,15 @@ impl Default for VkCommandPoolCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkRenderPassCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkRenderPassCreateFlags,
+    pub s_type:           VkStructureType,
+    pub p_next:           *const core::ffi::c_void,
+    pub flags:            VkRenderPassCreateFlags,
     pub attachment_count: u32,
-    pub p_attachments: *const VkAttachmentDescription,
-    pub subpass_count: u32,
-    pub p_subpasses: *const VkSubpassDescription,
+    pub p_attachments:    *const VkAttachmentDescription,
+    pub subpass_count:    u32,
+    pub p_subpasses:      *const VkSubpassDescription,
     pub dependency_count: u32,
-    pub p_dependencies: *const VkSubpassDependency,
+    pub p_dependencies:   *const VkSubpassDependency,
 }
 
 pub trait ExtendsRenderPassCreateInfo
@@ -8772,15 +8772,15 @@ impl Default for VkRenderPassCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::RENDER_PASS_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkRenderPassCreateFlags::default(),
+            s_type:           VkStructureType::RENDER_PASS_CREATE_INFO,
+            p_next:           core::ptr::null(),
+            flags:            VkRenderPassCreateFlags::default(),
             attachment_count: 0,
-            p_attachments: core::ptr::null(),
-            subpass_count: 0,
-            p_subpasses: core::ptr::null(),
+            p_attachments:    core::ptr::null(),
+            subpass_count:    0,
+            p_subpasses:      core::ptr::null(),
             dependency_count: 0,
-            p_dependencies: core::ptr::null(),
+            p_dependencies:   core::ptr::null(),
         }
     }
 }
@@ -8789,12 +8789,12 @@ impl Default for VkRenderPassCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkSubpassDependency
 {
-    pub src_subpass: u32,
-    pub dst_subpass: u32,
-    pub src_stage_mask: VkPipelineStageFlags,
-    pub dst_stage_mask: VkPipelineStageFlags,
-    pub src_access_mask: VkAccessFlags,
-    pub dst_access_mask: VkAccessFlags,
+    pub src_subpass:      u32,
+    pub dst_subpass:      u32,
+    pub src_stage_mask:   VkPipelineStageFlags,
+    pub dst_stage_mask:   VkPipelineStageFlags,
+    pub src_access_mask:  VkAccessFlags,
+    pub dst_access_mask:  VkAccessFlags,
     pub dependency_flags: VkDependencyFlags,
 }
 
@@ -8807,12 +8807,12 @@ impl Default for VkSubpassDependency
     fn default() -> Self
     {
         Self {
-            src_subpass: 0,
-            dst_subpass: 0,
-            src_stage_mask: VkPipelineStageFlags::default(),
-            dst_stage_mask: VkPipelineStageFlags::default(),
-            src_access_mask: VkAccessFlags::default(),
-            dst_access_mask: VkAccessFlags::default(),
+            src_subpass:      0,
+            dst_subpass:      0,
+            src_stage_mask:   VkPipelineStageFlags::default(),
+            dst_stage_mask:   VkPipelineStageFlags::default(),
+            src_access_mask:  VkAccessFlags::default(),
+            dst_access_mask:  VkAccessFlags::default(),
             dependency_flags: VkDependencyFlags::default(),
         }
     }
@@ -8822,16 +8822,16 @@ impl Default for VkSubpassDependency
 #[derive(Copy, Clone)]
 pub struct VkSubpassDescription
 {
-    pub flags: VkSubpassDescriptionFlags,
-    pub pipeline_bind_point: VkPipelineBindPoint,
-    pub input_attachment_count: u32,
-    pub p_input_attachments: *const VkAttachmentReference,
-    pub color_attachment_count: u32,
-    pub p_color_attachments: *const VkAttachmentReference,
-    pub p_resolve_attachments: *const VkAttachmentReference,
+    pub flags:                      VkSubpassDescriptionFlags,
+    pub pipeline_bind_point:        VkPipelineBindPoint,
+    pub input_attachment_count:     u32,
+    pub p_input_attachments:        *const VkAttachmentReference,
+    pub color_attachment_count:     u32,
+    pub p_color_attachments:        *const VkAttachmentReference,
+    pub p_resolve_attachments:      *const VkAttachmentReference,
     pub p_depth_stencil_attachment: *const VkAttachmentReference,
-    pub preserve_attachment_count: u32,
-    pub p_preserve_attachments: *const u32,
+    pub preserve_attachment_count:  u32,
+    pub p_preserve_attachments:     *const u32,
 }
 
 pub trait ExtendsSubpassDescription
@@ -8843,16 +8843,16 @@ impl Default for VkSubpassDescription
     fn default() -> Self
     {
         Self {
-            flags: VkSubpassDescriptionFlags::default(),
-            pipeline_bind_point: VkPipelineBindPoint::default(),
-            input_attachment_count: 0,
-            p_input_attachments: core::ptr::null(),
-            color_attachment_count: 0,
-            p_color_attachments: core::ptr::null(),
-            p_resolve_attachments: core::ptr::null(),
+            flags:                      VkSubpassDescriptionFlags::default(),
+            pipeline_bind_point:        VkPipelineBindPoint::default(),
+            input_attachment_count:     0,
+            p_input_attachments:        core::ptr::null(),
+            color_attachment_count:     0,
+            p_color_attachments:        core::ptr::null(),
+            p_resolve_attachments:      core::ptr::null(),
             p_depth_stencil_attachment: core::ptr::null(),
-            preserve_attachment_count: 0,
-            p_preserve_attachments: core::ptr::null(),
+            preserve_attachment_count:  0,
+            p_preserve_attachments:     core::ptr::null(),
         }
     }
 }
@@ -8862,7 +8862,7 @@ impl Default for VkSubpassDescription
 pub struct VkAttachmentReference
 {
     pub attachment: u32,
-    pub layout: VkImageLayout,
+    pub layout:     VkImageLayout,
 }
 
 pub trait ExtendsAttachmentReference
@@ -8875,7 +8875,7 @@ impl Default for VkAttachmentReference
     {
         Self {
             attachment: 0,
-            layout: VkImageLayout::default(),
+            layout:     VkImageLayout::default(),
         }
     }
 }
@@ -8884,15 +8884,15 @@ impl Default for VkAttachmentReference
 #[derive(Copy, Clone)]
 pub struct VkAttachmentDescription
 {
-    pub flags: VkAttachmentDescriptionFlags,
-    pub format: VkFormat,
-    pub samples: VkSampleCountFlagBits,
-    pub load_op: VkAttachmentLoadOp,
-    pub store_op: VkAttachmentStoreOp,
-    pub stencil_load_op: VkAttachmentLoadOp,
+    pub flags:            VkAttachmentDescriptionFlags,
+    pub format:           VkFormat,
+    pub samples:          VkSampleCountFlagBits,
+    pub load_op:          VkAttachmentLoadOp,
+    pub store_op:         VkAttachmentStoreOp,
+    pub stencil_load_op:  VkAttachmentLoadOp,
     pub stencil_store_op: VkAttachmentStoreOp,
-    pub initial_layout: VkImageLayout,
-    pub final_layout: VkImageLayout,
+    pub initial_layout:   VkImageLayout,
+    pub final_layout:     VkImageLayout,
 }
 
 pub trait ExtendsAttachmentDescription
@@ -8904,15 +8904,15 @@ impl Default for VkAttachmentDescription
     fn default() -> Self
     {
         Self {
-            flags: VkAttachmentDescriptionFlags::default(),
-            format: VkFormat::default(),
-            samples: VkSampleCountFlagBits::default(),
-            load_op: VkAttachmentLoadOp::default(),
-            store_op: VkAttachmentStoreOp::default(),
-            stencil_load_op: VkAttachmentLoadOp::default(),
+            flags:            VkAttachmentDescriptionFlags::default(),
+            format:           VkFormat::default(),
+            samples:          VkSampleCountFlagBits::default(),
+            load_op:          VkAttachmentLoadOp::default(),
+            store_op:         VkAttachmentStoreOp::default(),
+            stencil_load_op:  VkAttachmentLoadOp::default(),
             stencil_store_op: VkAttachmentStoreOp::default(),
-            initial_layout: VkImageLayout::default(),
-            final_layout: VkImageLayout::default(),
+            initial_layout:   VkImageLayout::default(),
+            final_layout:     VkImageLayout::default(),
         }
     }
 }
@@ -8921,15 +8921,15 @@ impl Default for VkAttachmentDescription
 #[derive(Copy, Clone)]
 pub struct VkFramebufferCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkFramebufferCreateFlags,
-    pub render_pass: VkRenderPass,
+    pub s_type:           VkStructureType,
+    pub p_next:           *const core::ffi::c_void,
+    pub flags:            VkFramebufferCreateFlags,
+    pub render_pass:      VkRenderPass,
     pub attachment_count: u32,
-    pub p_attachments: *const VkImageView,
-    pub width: u32,
-    pub height: u32,
-    pub layers: u32,
+    pub p_attachments:    *const VkImageView,
+    pub width:            u32,
+    pub height:           u32,
+    pub layers:           u32,
 }
 
 pub trait ExtendsFramebufferCreateInfo
@@ -8941,15 +8941,15 @@ impl Default for VkFramebufferCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::FRAMEBUFFER_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkFramebufferCreateFlags::default(),
-            render_pass: VkRenderPass::default(),
+            s_type:           VkStructureType::FRAMEBUFFER_CREATE_INFO,
+            p_next:           core::ptr::null(),
+            flags:            VkFramebufferCreateFlags::default(),
+            render_pass:      VkRenderPass::default(),
             attachment_count: 0,
-            p_attachments: core::ptr::null(),
-            width: 0,
-            height: 0,
-            layers: 0,
+            p_attachments:    core::ptr::null(),
+            width:            0,
+            height:           0,
+            layers:           0,
         }
     }
 }
@@ -8958,15 +8958,15 @@ impl Default for VkFramebufferCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkCopyDescriptorSet
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub src_set: VkDescriptorSet,
-    pub src_binding: u32,
+    pub s_type:            VkStructureType,
+    pub p_next:            *const core::ffi::c_void,
+    pub src_set:           VkDescriptorSet,
+    pub src_binding:       u32,
     pub src_array_element: u32,
-    pub dst_set: VkDescriptorSet,
-    pub dst_binding: u32,
+    pub dst_set:           VkDescriptorSet,
+    pub dst_binding:       u32,
     pub dst_array_element: u32,
-    pub descriptor_count: u32,
+    pub descriptor_count:  u32,
 }
 
 pub trait ExtendsCopyDescriptorSet
@@ -8978,15 +8978,15 @@ impl Default for VkCopyDescriptorSet
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::COPY_DESCRIPTOR_SET,
-            p_next: core::ptr::null(),
-            src_set: VkDescriptorSet::default(),
-            src_binding: 0,
+            s_type:            VkStructureType::COPY_DESCRIPTOR_SET,
+            p_next:            core::ptr::null(),
+            src_set:           VkDescriptorSet::default(),
+            src_binding:       0,
             src_array_element: 0,
-            dst_set: VkDescriptorSet::default(),
-            dst_binding: 0,
+            dst_set:           VkDescriptorSet::default(),
+            dst_binding:       0,
             dst_array_element: 0,
-            descriptor_count: 0,
+            descriptor_count:  0,
         }
     }
 }
@@ -8995,15 +8995,15 @@ impl Default for VkCopyDescriptorSet
 #[derive(Copy, Clone)]
 pub struct VkWriteDescriptorSet
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub dst_set: VkDescriptorSet,
-    pub dst_binding: u32,
-    pub dst_array_element: u32,
-    pub descriptor_count: u32,
-    pub descriptor_type: VkDescriptorType,
-    pub p_image_info: *const VkDescriptorImageInfo,
-    pub p_buffer_info: *const VkDescriptorBufferInfo,
+    pub s_type:              VkStructureType,
+    pub p_next:              *const core::ffi::c_void,
+    pub dst_set:             VkDescriptorSet,
+    pub dst_binding:         u32,
+    pub dst_array_element:   u32,
+    pub descriptor_count:    u32,
+    pub descriptor_type:     VkDescriptorType,
+    pub p_image_info:        *const VkDescriptorImageInfo,
+    pub p_buffer_info:       *const VkDescriptorBufferInfo,
     pub p_texel_buffer_view: *const VkBufferView,
 }
 
@@ -9016,15 +9016,15 @@ impl Default for VkWriteDescriptorSet
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::WRITE_DESCRIPTOR_SET,
-            p_next: core::ptr::null(),
-            dst_set: VkDescriptorSet::default(),
-            dst_binding: 0,
-            dst_array_element: 0,
-            descriptor_count: 0,
-            descriptor_type: VkDescriptorType::default(),
-            p_image_info: core::ptr::null(),
-            p_buffer_info: core::ptr::null(),
+            s_type:              VkStructureType::WRITE_DESCRIPTOR_SET,
+            p_next:              core::ptr::null(),
+            dst_set:             VkDescriptorSet::default(),
+            dst_binding:         0,
+            dst_array_element:   0,
+            descriptor_count:    0,
+            descriptor_type:     VkDescriptorType::default(),
+            p_image_info:        core::ptr::null(),
+            p_buffer_info:       core::ptr::null(),
             p_texel_buffer_view: core::ptr::null(),
         }
     }
@@ -9036,7 +9036,7 @@ pub struct VkDescriptorBufferInfo
 {
     pub buffer: VkBuffer,
     pub offset: VkDeviceSize,
-    pub range: VkDeviceSize,
+    pub range:  VkDeviceSize,
 }
 
 pub trait ExtendsDescriptorBufferInfo
@@ -9050,7 +9050,7 @@ impl Default for VkDescriptorBufferInfo
         Self {
             buffer: VkBuffer::default(),
             offset: VkDeviceSize::default(),
-            range: VkDeviceSize::default(),
+            range:  VkDeviceSize::default(),
         }
     }
 }
@@ -9059,8 +9059,8 @@ impl Default for VkDescriptorBufferInfo
 #[derive(Copy, Clone)]
 pub struct VkDescriptorImageInfo
 {
-    pub sampler: VkSampler,
-    pub image_view: VkImageView,
+    pub sampler:      VkSampler,
+    pub image_view:   VkImageView,
     pub image_layout: VkImageLayout,
 }
 
@@ -9073,8 +9073,8 @@ impl Default for VkDescriptorImageInfo
     fn default() -> Self
     {
         Self {
-            sampler: VkSampler::default(),
-            image_view: VkImageView::default(),
+            sampler:      VkSampler::default(),
+            image_view:   VkImageView::default(),
             image_layout: VkImageLayout::default(),
         }
     }
@@ -9084,11 +9084,11 @@ impl Default for VkDescriptorImageInfo
 #[derive(Copy, Clone)]
 pub struct VkDescriptorSetAllocateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub descriptor_pool: VkDescriptorPool,
+    pub s_type:               VkStructureType,
+    pub p_next:               *const core::ffi::c_void,
+    pub descriptor_pool:      VkDescriptorPool,
     pub descriptor_set_count: u32,
-    pub p_set_layouts: *const VkDescriptorSetLayout,
+    pub p_set_layouts:        *const VkDescriptorSetLayout,
 }
 
 pub trait ExtendsDescriptorSetAllocateInfo
@@ -9100,11 +9100,11 @@ impl Default for VkDescriptorSetAllocateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DESCRIPTOR_SET_ALLOCATE_INFO,
-            p_next: core::ptr::null(),
-            descriptor_pool: VkDescriptorPool::default(),
+            s_type:               VkStructureType::DESCRIPTOR_SET_ALLOCATE_INFO,
+            p_next:               core::ptr::null(),
+            descriptor_pool:      VkDescriptorPool::default(),
             descriptor_set_count: 0,
-            p_set_layouts: core::ptr::null(),
+            p_set_layouts:        core::ptr::null(),
         }
     }
 }
@@ -9113,12 +9113,12 @@ impl Default for VkDescriptorSetAllocateInfo
 #[derive(Copy, Clone)]
 pub struct VkDescriptorPoolCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkDescriptorPoolCreateFlags,
-    pub max_sets: u32,
+    pub s_type:          VkStructureType,
+    pub p_next:          *const core::ffi::c_void,
+    pub flags:           VkDescriptorPoolCreateFlags,
+    pub max_sets:        u32,
     pub pool_size_count: u32,
-    pub p_pool_sizes: *const VkDescriptorPoolSize,
+    pub p_pool_sizes:    *const VkDescriptorPoolSize,
 }
 
 pub trait ExtendsDescriptorPoolCreateInfo
@@ -9130,12 +9130,12 @@ impl Default for VkDescriptorPoolCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DESCRIPTOR_POOL_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkDescriptorPoolCreateFlags::default(),
-            max_sets: 0,
+            s_type:          VkStructureType::DESCRIPTOR_POOL_CREATE_INFO,
+            p_next:          core::ptr::null(),
+            flags:           VkDescriptorPoolCreateFlags::default(),
+            max_sets:        0,
             pool_size_count: 0,
-            p_pool_sizes: core::ptr::null(),
+            p_pool_sizes:    core::ptr::null(),
         }
     }
 }
@@ -9144,7 +9144,7 @@ impl Default for VkDescriptorPoolCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkDescriptorPoolSize
 {
-    pub kind: VkDescriptorType,
+    pub kind:             VkDescriptorType,
     pub descriptor_count: u32,
 }
 
@@ -9157,7 +9157,7 @@ impl Default for VkDescriptorPoolSize
     fn default() -> Self
     {
         Self {
-            kind: VkDescriptorType::default(),
+            kind:             VkDescriptorType::default(),
             descriptor_count: 0,
         }
     }
@@ -9167,11 +9167,11 @@ impl Default for VkDescriptorPoolSize
 #[derive(Copy, Clone)]
 pub struct VkDescriptorSetLayoutCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkDescriptorSetLayoutCreateFlags,
+    pub s_type:        VkStructureType,
+    pub p_next:        *const core::ffi::c_void,
+    pub flags:         VkDescriptorSetLayoutCreateFlags,
     pub binding_count: u32,
-    pub p_bindings: *const VkDescriptorSetLayoutBinding,
+    pub p_bindings:    *const VkDescriptorSetLayoutBinding,
 }
 
 pub trait ExtendsDescriptorSetLayoutCreateInfo
@@ -9183,11 +9183,11 @@ impl Default for VkDescriptorSetLayoutCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkDescriptorSetLayoutCreateFlags::default(),
+            s_type:        VkStructureType::DESCRIPTOR_SET_LAYOUT_CREATE_INFO,
+            p_next:        core::ptr::null(),
+            flags:         VkDescriptorSetLayoutCreateFlags::default(),
             binding_count: 0,
-            p_bindings: core::ptr::null(),
+            p_bindings:    core::ptr::null(),
         }
     }
 }
@@ -9196,10 +9196,10 @@ impl Default for VkDescriptorSetLayoutCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkDescriptorSetLayoutBinding
 {
-    pub binding: u32,
-    pub descriptor_type: VkDescriptorType,
-    pub descriptor_count: u32,
-    pub stage_flags: VkShaderStageFlags,
+    pub binding:              u32,
+    pub descriptor_type:      VkDescriptorType,
+    pub descriptor_count:     u32,
+    pub stage_flags:          VkShaderStageFlags,
     pub p_immutable_samplers: *const VkSampler,
 }
 
@@ -9212,10 +9212,10 @@ impl Default for VkDescriptorSetLayoutBinding
     fn default() -> Self
     {
         Self {
-            binding: 0,
-            descriptor_type: VkDescriptorType::default(),
-            descriptor_count: 0,
-            stage_flags: VkShaderStageFlags::default(),
+            binding:              0,
+            descriptor_type:      VkDescriptorType::default(),
+            descriptor_count:     0,
+            stage_flags:          VkShaderStageFlags::default(),
             p_immutable_samplers: core::ptr::null(),
         }
     }
@@ -9225,23 +9225,23 @@ impl Default for VkDescriptorSetLayoutBinding
 #[derive(Copy, Clone)]
 pub struct VkSamplerCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkSamplerCreateFlags,
-    pub mag_filter: VkFilter,
-    pub min_filter: VkFilter,
-    pub mipmap_mode: VkSamplerMipmapMode,
-    pub address_mode_u: VkSamplerAddressMode,
-    pub address_mode_v: VkSamplerAddressMode,
-    pub address_mode_w: VkSamplerAddressMode,
-    pub mip_lod_bias: f32,
-    pub anisotropy_enable: VkBool32,
-    pub max_anisotropy: f32,
-    pub compare_enable: VkBool32,
-    pub compare_op: VkCompareOp,
-    pub min_lod: f32,
-    pub max_lod: f32,
-    pub border_color: VkBorderColor,
+    pub s_type:                   VkStructureType,
+    pub p_next:                   *const core::ffi::c_void,
+    pub flags:                    VkSamplerCreateFlags,
+    pub mag_filter:               VkFilter,
+    pub min_filter:               VkFilter,
+    pub mipmap_mode:              VkSamplerMipmapMode,
+    pub address_mode_u:           VkSamplerAddressMode,
+    pub address_mode_v:           VkSamplerAddressMode,
+    pub address_mode_w:           VkSamplerAddressMode,
+    pub mip_lod_bias:             f32,
+    pub anisotropy_enable:        VkBool32,
+    pub max_anisotropy:           f32,
+    pub compare_enable:           VkBool32,
+    pub compare_op:               VkCompareOp,
+    pub min_lod:                  f32,
+    pub max_lod:                  f32,
+    pub border_color:             VkBorderColor,
     pub unnormalized_coordinates: VkBool32,
 }
 
@@ -9254,23 +9254,23 @@ impl Default for VkSamplerCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::SAMPLER_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkSamplerCreateFlags::default(),
-            mag_filter: VkFilter::default(),
-            min_filter: VkFilter::default(),
-            mipmap_mode: VkSamplerMipmapMode::default(),
-            address_mode_u: VkSamplerAddressMode::default(),
-            address_mode_v: VkSamplerAddressMode::default(),
-            address_mode_w: VkSamplerAddressMode::default(),
-            mip_lod_bias: 0.0,
-            anisotropy_enable: VkBool32::default(),
-            max_anisotropy: 0.0,
-            compare_enable: VkBool32::default(),
-            compare_op: VkCompareOp::default(),
-            min_lod: 0.0,
-            max_lod: 0.0,
-            border_color: VkBorderColor::default(),
+            s_type:                   VkStructureType::SAMPLER_CREATE_INFO,
+            p_next:                   core::ptr::null(),
+            flags:                    VkSamplerCreateFlags::default(),
+            mag_filter:               VkFilter::default(),
+            min_filter:               VkFilter::default(),
+            mipmap_mode:              VkSamplerMipmapMode::default(),
+            address_mode_u:           VkSamplerAddressMode::default(),
+            address_mode_v:           VkSamplerAddressMode::default(),
+            address_mode_w:           VkSamplerAddressMode::default(),
+            mip_lod_bias:             0.0,
+            anisotropy_enable:        VkBool32::default(),
+            max_anisotropy:           0.0,
+            compare_enable:           VkBool32::default(),
+            compare_op:               VkCompareOp::default(),
+            min_lod:                  0.0,
+            max_lod:                  0.0,
+            border_color:             VkBorderColor::default(),
             unnormalized_coordinates: VkBool32::default(),
         }
     }
@@ -9280,13 +9280,13 @@ impl Default for VkSamplerCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineLayoutCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineLayoutCreateFlags,
-    pub set_layout_count: u32,
-    pub p_set_layouts: *const VkDescriptorSetLayout,
+    pub s_type:                    VkStructureType,
+    pub p_next:                    *const core::ffi::c_void,
+    pub flags:                     VkPipelineLayoutCreateFlags,
+    pub set_layout_count:          u32,
+    pub p_set_layouts:             *const VkDescriptorSetLayout,
     pub push_constant_range_count: u32,
-    pub p_push_constant_ranges: *const VkPushConstantRange,
+    pub p_push_constant_ranges:    *const VkPushConstantRange,
 }
 
 pub trait ExtendsPipelineLayoutCreateInfo
@@ -9298,13 +9298,13 @@ impl Default for VkPipelineLayoutCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_LAYOUT_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineLayoutCreateFlags::default(),
-            set_layout_count: 0,
-            p_set_layouts: core::ptr::null(),
+            s_type:                    VkStructureType::PIPELINE_LAYOUT_CREATE_INFO,
+            p_next:                    core::ptr::null(),
+            flags:                     VkPipelineLayoutCreateFlags::default(),
+            set_layout_count:          0,
+            p_set_layouts:             core::ptr::null(),
             push_constant_range_count: 0,
-            p_push_constant_ranges: core::ptr::null(),
+            p_push_constant_ranges:    core::ptr::null(),
         }
     }
 }
@@ -9314,8 +9314,8 @@ impl Default for VkPipelineLayoutCreateInfo
 pub struct VkPushConstantRange
 {
     pub stage_flags: VkShaderStageFlags,
-    pub offset: u32,
-    pub size: u32,
+    pub offset:      u32,
+    pub size:        u32,
 }
 
 pub trait ExtendsPushConstantRange
@@ -9328,8 +9328,8 @@ impl Default for VkPushConstantRange
     {
         Self {
             stage_flags: VkShaderStageFlags::default(),
-            offset: 0,
-            size: 0,
+            offset:      0,
+            size:        0,
         }
     }
 }
@@ -9338,13 +9338,13 @@ impl Default for VkPushConstantRange
 #[derive(Copy, Clone)]
 pub struct VkComputePipelineCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineCreateFlags,
-    pub stage: VkPipelineShaderStageCreateInfo,
-    pub layout: VkPipelineLayout,
+    pub s_type:               VkStructureType,
+    pub p_next:               *const core::ffi::c_void,
+    pub flags:                VkPipelineCreateFlags,
+    pub stage:                VkPipelineShaderStageCreateInfo,
+    pub layout:               VkPipelineLayout,
     pub base_pipeline_handle: VkPipeline,
-    pub base_pipeline_index: i32,
+    pub base_pipeline_index:  i32,
 }
 
 pub trait ExtendsComputePipelineCreateInfo
@@ -9356,13 +9356,13 @@ impl Default for VkComputePipelineCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::COMPUTE_PIPELINE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineCreateFlags::default(),
-            stage: VkPipelineShaderStageCreateInfo::default(),
-            layout: VkPipelineLayout::default(),
+            s_type:               VkStructureType::COMPUTE_PIPELINE_CREATE_INFO,
+            p_next:               core::ptr::null(),
+            flags:                VkPipelineCreateFlags::default(),
+            stage:                VkPipelineShaderStageCreateInfo::default(),
+            layout:               VkPipelineLayout::default(),
             base_pipeline_handle: VkPipeline::default(),
-            base_pipeline_index: 0,
+            base_pipeline_index:  0,
         }
     }
 }
@@ -9371,12 +9371,12 @@ impl Default for VkComputePipelineCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineShaderStageCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineShaderStageCreateFlags,
-    pub stage: VkShaderStageFlagBits,
-    pub module: VkShaderModule,
-    pub p_name: *const u8,
+    pub s_type:                VkStructureType,
+    pub p_next:                *const core::ffi::c_void,
+    pub flags:                 VkPipelineShaderStageCreateFlags,
+    pub stage:                 VkShaderStageFlagBits,
+    pub module:                VkShaderModule,
+    pub p_name:                *const u8,
     pub p_specialization_info: *const VkSpecializationInfo,
 }
 
@@ -9389,12 +9389,12 @@ impl Default for VkPipelineShaderStageCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_SHADER_STAGE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineShaderStageCreateFlags::default(),
-            stage: VkShaderStageFlagBits::default(),
-            module: VkShaderModule::default(),
-            p_name: core::ptr::null(),
+            s_type:                VkStructureType::PIPELINE_SHADER_STAGE_CREATE_INFO,
+            p_next:                core::ptr::null(),
+            flags:                 VkPipelineShaderStageCreateFlags::default(),
+            stage:                 VkShaderStageFlagBits::default(),
+            module:                VkShaderModule::default(),
+            p_name:                core::ptr::null(),
             p_specialization_info: core::ptr::null(),
         }
     }
@@ -9405,9 +9405,9 @@ impl Default for VkPipelineShaderStageCreateInfo
 pub struct VkSpecializationInfo
 {
     pub map_entry_count: u32,
-    pub p_map_entries: *const VkSpecializationMapEntry,
-    pub data_size: usize,
-    pub p_data: *const core::ffi::c_void,
+    pub p_map_entries:   *const VkSpecializationMapEntry,
+    pub data_size:       usize,
+    pub p_data:          *const core::ffi::c_void,
 }
 
 pub trait ExtendsSpecializationInfo
@@ -9420,9 +9420,9 @@ impl Default for VkSpecializationInfo
     {
         Self {
             map_entry_count: 0,
-            p_map_entries: core::ptr::null(),
-            data_size: 0,
-            p_data: core::ptr::null(),
+            p_map_entries:   core::ptr::null(),
+            data_size:       0,
+            p_data:          core::ptr::null(),
         }
     }
 }
@@ -9433,7 +9433,7 @@ pub struct VkSpecializationMapEntry
 {
     pub ant_id: u32,
     pub offset: u32,
-    pub size: usize,
+    pub size:   usize,
 }
 
 pub trait ExtendsSpecializationMapEntry
@@ -9447,7 +9447,7 @@ impl Default for VkSpecializationMapEntry
         Self {
             ant_id: 0,
             offset: 0,
-            size: 0,
+            size:   0,
         }
     }
 }
@@ -9456,25 +9456,25 @@ impl Default for VkSpecializationMapEntry
 #[derive(Copy, Clone)]
 pub struct VkGraphicsPipelineCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineCreateFlags,
-    pub stage_count: u32,
-    pub p_stages: *const VkPipelineShaderStageCreateInfo,
-    pub p_vertex_input_state: *const VkPipelineVertexInputStateCreateInfo,
+    pub s_type:                 VkStructureType,
+    pub p_next:                 *const core::ffi::c_void,
+    pub flags:                  VkPipelineCreateFlags,
+    pub stage_count:            u32,
+    pub p_stages:               *const VkPipelineShaderStageCreateInfo,
+    pub p_vertex_input_state:   *const VkPipelineVertexInputStateCreateInfo,
     pub p_input_assembly_state: *const VkPipelineInputAssemblyStateCreateInfo,
-    pub p_tessellation_state: *const VkPipelineTessellationStateCreateInfo,
-    pub p_viewport_state: *const VkPipelineViewportStateCreateInfo,
-    pub p_rasterization_state: *const VkPipelineRasterizationStateCreateInfo,
-    pub p_multisample_state: *const VkPipelineMultisampleStateCreateInfo,
-    pub p_depth_stencil_state: *const VkPipelineDepthStencilStateCreateInfo,
-    pub p_color_blend_state: *const VkPipelineColorBlendStateCreateInfo,
-    pub p_dynamic_state: *const VkPipelineDynamicStateCreateInfo,
-    pub layout: VkPipelineLayout,
-    pub render_pass: VkRenderPass,
-    pub subpass: u32,
-    pub base_pipeline_handle: VkPipeline,
-    pub base_pipeline_index: i32,
+    pub p_tessellation_state:   *const VkPipelineTessellationStateCreateInfo,
+    pub p_viewport_state:       *const VkPipelineViewportStateCreateInfo,
+    pub p_rasterization_state:  *const VkPipelineRasterizationStateCreateInfo,
+    pub p_multisample_state:    *const VkPipelineMultisampleStateCreateInfo,
+    pub p_depth_stencil_state:  *const VkPipelineDepthStencilStateCreateInfo,
+    pub p_color_blend_state:    *const VkPipelineColorBlendStateCreateInfo,
+    pub p_dynamic_state:        *const VkPipelineDynamicStateCreateInfo,
+    pub layout:                 VkPipelineLayout,
+    pub render_pass:            VkRenderPass,
+    pub subpass:                u32,
+    pub base_pipeline_handle:   VkPipeline,
+    pub base_pipeline_index:    i32,
 }
 
 pub trait ExtendsGraphicsPipelineCreateInfo
@@ -9486,25 +9486,25 @@ impl Default for VkGraphicsPipelineCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::GRAPHICS_PIPELINE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineCreateFlags::default(),
-            stage_count: 0,
-            p_stages: core::ptr::null(),
-            p_vertex_input_state: core::ptr::null(),
+            s_type:                 VkStructureType::GRAPHICS_PIPELINE_CREATE_INFO,
+            p_next:                 core::ptr::null(),
+            flags:                  VkPipelineCreateFlags::default(),
+            stage_count:            0,
+            p_stages:               core::ptr::null(),
+            p_vertex_input_state:   core::ptr::null(),
             p_input_assembly_state: core::ptr::null(),
-            p_tessellation_state: core::ptr::null(),
-            p_viewport_state: core::ptr::null(),
-            p_rasterization_state: core::ptr::null(),
-            p_multisample_state: core::ptr::null(),
-            p_depth_stencil_state: core::ptr::null(),
-            p_color_blend_state: core::ptr::null(),
-            p_dynamic_state: core::ptr::null(),
-            layout: VkPipelineLayout::default(),
-            render_pass: VkRenderPass::default(),
-            subpass: 0,
-            base_pipeline_handle: VkPipeline::default(),
-            base_pipeline_index: 0,
+            p_tessellation_state:   core::ptr::null(),
+            p_viewport_state:       core::ptr::null(),
+            p_rasterization_state:  core::ptr::null(),
+            p_multisample_state:    core::ptr::null(),
+            p_depth_stencil_state:  core::ptr::null(),
+            p_color_blend_state:    core::ptr::null(),
+            p_dynamic_state:        core::ptr::null(),
+            layout:                 VkPipelineLayout::default(),
+            render_pass:            VkRenderPass::default(),
+            subpass:                0,
+            base_pipeline_handle:   VkPipeline::default(),
+            base_pipeline_index:    0,
         }
     }
 }
@@ -9513,11 +9513,11 @@ impl Default for VkGraphicsPipelineCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineDynamicStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineDynamicStateCreateFlags,
+    pub s_type:              VkStructureType,
+    pub p_next:              *const core::ffi::c_void,
+    pub flags:               VkPipelineDynamicStateCreateFlags,
     pub dynamic_state_count: u32,
-    pub p_dynamic_states: *const VkDynamicState,
+    pub p_dynamic_states:    *const VkDynamicState,
 }
 
 pub trait ExtendsPipelineDynamicStateCreateInfo
@@ -9529,11 +9529,11 @@ impl Default for VkPipelineDynamicStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_DYNAMIC_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineDynamicStateCreateFlags::default(),
+            s_type:              VkStructureType::PIPELINE_DYNAMIC_STATE_CREATE_INFO,
+            p_next:              core::ptr::null(),
+            flags:               VkPipelineDynamicStateCreateFlags::default(),
             dynamic_state_count: 0,
-            p_dynamic_states: core::ptr::null(),
+            p_dynamic_states:    core::ptr::null(),
         }
     }
 }
@@ -9542,14 +9542,14 @@ impl Default for VkPipelineDynamicStateCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineColorBlendStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineColorBlendStateCreateFlags,
-    pub logic_op_enable: VkBool32,
-    pub logic_op: VkLogicOp,
+    pub s_type:           VkStructureType,
+    pub p_next:           *const core::ffi::c_void,
+    pub flags:            VkPipelineColorBlendStateCreateFlags,
+    pub logic_op_enable:  VkBool32,
+    pub logic_op:         VkLogicOp,
     pub attachment_count: u32,
-    pub p_attachments: *const VkPipelineColorBlendAttachmentState,
-    pub blend_constants: [f32; 4],
+    pub p_attachments:    *const VkPipelineColorBlendAttachmentState,
+    pub blend_constants:  [f32; 4],
 }
 
 pub trait ExtendsPipelineColorBlendStateCreateInfo
@@ -9561,14 +9561,14 @@ impl Default for VkPipelineColorBlendStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineColorBlendStateCreateFlags::default(),
-            logic_op_enable: VkBool32::default(),
-            logic_op: VkLogicOp::default(),
+            s_type:           VkStructureType::PIPELINE_COLOR_BLEND_STATE_CREATE_INFO,
+            p_next:           core::ptr::null(),
+            flags:            VkPipelineColorBlendStateCreateFlags::default(),
+            logic_op_enable:  VkBool32::default(),
+            logic_op:         VkLogicOp::default(),
             attachment_count: 0,
-            p_attachments: core::ptr::null(),
-            blend_constants: [0.0, 0.0, 0.0, 0.0],
+            p_attachments:    core::ptr::null(),
+            blend_constants:  [0.0, 0.0, 0.0, 0.0],
         }
     }
 }
@@ -9577,14 +9577,14 @@ impl Default for VkPipelineColorBlendStateCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineColorBlendAttachmentState
 {
-    pub blend_enable: VkBool32,
+    pub blend_enable:           VkBool32,
     pub src_color_blend_factor: VkBlendFactor,
     pub dst_color_blend_factor: VkBlendFactor,
-    pub color_blend_op: VkBlendOp,
+    pub color_blend_op:         VkBlendOp,
     pub src_alpha_blend_factor: VkBlendFactor,
     pub dst_alpha_blend_factor: VkBlendFactor,
-    pub alpha_blend_op: VkBlendOp,
-    pub color_write_mask: VkColorComponentFlags,
+    pub alpha_blend_op:         VkBlendOp,
+    pub color_write_mask:       VkColorComponentFlags,
 }
 
 pub trait ExtendsPipelineColorBlendAttachmentState
@@ -9596,14 +9596,14 @@ impl Default for VkPipelineColorBlendAttachmentState
     fn default() -> Self
     {
         Self {
-            blend_enable: VkBool32::default(),
+            blend_enable:           VkBool32::default(),
             src_color_blend_factor: VkBlendFactor::default(),
             dst_color_blend_factor: VkBlendFactor::default(),
-            color_blend_op: VkBlendOp::default(),
+            color_blend_op:         VkBlendOp::default(),
             src_alpha_blend_factor: VkBlendFactor::default(),
             dst_alpha_blend_factor: VkBlendFactor::default(),
-            alpha_blend_op: VkBlendOp::default(),
-            color_write_mask: VkColorComponentFlags::default(),
+            alpha_blend_op:         VkBlendOp::default(),
+            color_write_mask:       VkColorComponentFlags::default(),
         }
     }
 }
@@ -9612,18 +9612,18 @@ impl Default for VkPipelineColorBlendAttachmentState
 #[derive(Copy, Clone)]
 pub struct VkPipelineDepthStencilStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineDepthStencilStateCreateFlags,
-    pub depth_test_enable: VkBool32,
-    pub depth_write_enable: VkBool32,
-    pub depth_compare_op: VkCompareOp,
+    pub s_type:                   VkStructureType,
+    pub p_next:                   *const core::ffi::c_void,
+    pub flags:                    VkPipelineDepthStencilStateCreateFlags,
+    pub depth_test_enable:        VkBool32,
+    pub depth_write_enable:       VkBool32,
+    pub depth_compare_op:         VkCompareOp,
     pub depth_bounds_test_enable: VkBool32,
-    pub stencil_test_enable: VkBool32,
-    pub front: VkStencilOpState,
-    pub back: VkStencilOpState,
-    pub min_depth_bounds: f32,
-    pub max_depth_bounds: f32,
+    pub stencil_test_enable:      VkBool32,
+    pub front:                    VkStencilOpState,
+    pub back:                     VkStencilOpState,
+    pub min_depth_bounds:         f32,
+    pub max_depth_bounds:         f32,
 }
 
 pub trait ExtendsPipelineDepthStencilStateCreateInfo
@@ -9635,18 +9635,18 @@ impl Default for VkPipelineDepthStencilStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineDepthStencilStateCreateFlags::default(),
-            depth_test_enable: VkBool32::default(),
-            depth_write_enable: VkBool32::default(),
-            depth_compare_op: VkCompareOp::default(),
+            s_type:                   VkStructureType::PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO,
+            p_next:                   core::ptr::null(),
+            flags:                    VkPipelineDepthStencilStateCreateFlags::default(),
+            depth_test_enable:        VkBool32::default(),
+            depth_write_enable:       VkBool32::default(),
+            depth_compare_op:         VkCompareOp::default(),
             depth_bounds_test_enable: VkBool32::default(),
-            stencil_test_enable: VkBool32::default(),
-            front: VkStencilOpState::default(),
-            back: VkStencilOpState::default(),
-            min_depth_bounds: 0.0,
-            max_depth_bounds: 0.0,
+            stencil_test_enable:      VkBool32::default(),
+            front:                    VkStencilOpState::default(),
+            back:                     VkStencilOpState::default(),
+            min_depth_bounds:         0.0,
+            max_depth_bounds:         0.0,
         }
     }
 }
@@ -9655,13 +9655,13 @@ impl Default for VkPipelineDepthStencilStateCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkStencilOpState
 {
-    pub fail_op: VkStencilOp,
-    pub pass_op: VkStencilOp,
+    pub fail_op:       VkStencilOp,
+    pub pass_op:       VkStencilOp,
     pub depth_fail_op: VkStencilOp,
-    pub compare_op: VkCompareOp,
-    pub compare_mask: u32,
-    pub write_mask: u32,
-    pub reference: u32,
+    pub compare_op:    VkCompareOp,
+    pub compare_mask:  u32,
+    pub write_mask:    u32,
+    pub reference:     u32,
 }
 
 pub trait ExtendsStencilOpState
@@ -9673,13 +9673,13 @@ impl Default for VkStencilOpState
     fn default() -> Self
     {
         Self {
-            fail_op: VkStencilOp::default(),
-            pass_op: VkStencilOp::default(),
+            fail_op:       VkStencilOp::default(),
+            pass_op:       VkStencilOp::default(),
             depth_fail_op: VkStencilOp::default(),
-            compare_op: VkCompareOp::default(),
-            compare_mask: 0,
-            write_mask: 0,
-            reference: 0,
+            compare_op:    VkCompareOp::default(),
+            compare_mask:  0,
+            write_mask:    0,
+            reference:     0,
         }
     }
 }
@@ -9688,15 +9688,15 @@ impl Default for VkStencilOpState
 #[derive(Copy, Clone)]
 pub struct VkPipelineMultisampleStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineMultisampleStateCreateFlags,
-    pub rasterization_samples: VkSampleCountFlagBits,
-    pub sample_shading_enable: VkBool32,
-    pub min_sample_shading: f32,
-    pub p_sample_mask: *const VkSampleMask,
+    pub s_type:                   VkStructureType,
+    pub p_next:                   *const core::ffi::c_void,
+    pub flags:                    VkPipelineMultisampleStateCreateFlags,
+    pub rasterization_samples:    VkSampleCountFlagBits,
+    pub sample_shading_enable:    VkBool32,
+    pub min_sample_shading:       f32,
+    pub p_sample_mask:            *const VkSampleMask,
     pub alpha_to_coverage_enable: VkBool32,
-    pub alpha_to_one_enable: VkBool32,
+    pub alpha_to_one_enable:      VkBool32,
 }
 
 pub trait ExtendsPipelineMultisampleStateCreateInfo
@@ -9708,15 +9708,15 @@ impl Default for VkPipelineMultisampleStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineMultisampleStateCreateFlags::default(),
-            rasterization_samples: VkSampleCountFlagBits::default(),
-            sample_shading_enable: VkBool32::default(),
-            min_sample_shading: 0.0,
-            p_sample_mask: core::ptr::null(),
+            s_type:                   VkStructureType::PIPELINE_MULTISAMPLE_STATE_CREATE_INFO,
+            p_next:                   core::ptr::null(),
+            flags:                    VkPipelineMultisampleStateCreateFlags::default(),
+            rasterization_samples:    VkSampleCountFlagBits::default(),
+            sample_shading_enable:    VkBool32::default(),
+            min_sample_shading:       0.0,
+            p_sample_mask:            core::ptr::null(),
             alpha_to_coverage_enable: VkBool32::default(),
-            alpha_to_one_enable: VkBool32::default(),
+            alpha_to_one_enable:      VkBool32::default(),
         }
     }
 }
@@ -9725,19 +9725,19 @@ impl Default for VkPipelineMultisampleStateCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineRasterizationStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineRasterizationStateCreateFlags,
-    pub depth_clamp_enable: VkBool32,
-    pub rasterizer_discard_enable: VkBool32,
-    pub polygon_mode: VkPolygonMode,
-    pub cull_mode: VkCullModeFlags,
-    pub front_face: VkFrontFace,
-    pub depth_bias_enable: VkBool32,
+    pub s_type:                     VkStructureType,
+    pub p_next:                     *const core::ffi::c_void,
+    pub flags:                      VkPipelineRasterizationStateCreateFlags,
+    pub depth_clamp_enable:         VkBool32,
+    pub rasterizer_discard_enable:  VkBool32,
+    pub polygon_mode:               VkPolygonMode,
+    pub cull_mode:                  VkCullModeFlags,
+    pub front_face:                 VkFrontFace,
+    pub depth_bias_enable:          VkBool32,
     pub depth_bias_constant_factor: f32,
-    pub depth_bias_clamp: f32,
-    pub depth_bias_slope_factor: f32,
-    pub line_width: f32,
+    pub depth_bias_clamp:           f32,
+    pub depth_bias_slope_factor:    f32,
+    pub line_width:                 f32,
 }
 
 pub trait ExtendsPipelineRasterizationStateCreateInfo
@@ -9749,19 +9749,19 @@ impl Default for VkPipelineRasterizationStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineRasterizationStateCreateFlags::default(),
-            depth_clamp_enable: VkBool32::default(),
-            rasterizer_discard_enable: VkBool32::default(),
-            polygon_mode: VkPolygonMode::default(),
-            cull_mode: VkCullModeFlags::default(),
-            front_face: VkFrontFace::default(),
-            depth_bias_enable: VkBool32::default(),
+            s_type:                     VkStructureType::PIPELINE_RASTERIZATION_STATE_CREATE_INFO,
+            p_next:                     core::ptr::null(),
+            flags:                      VkPipelineRasterizationStateCreateFlags::default(),
+            depth_clamp_enable:         VkBool32::default(),
+            rasterizer_discard_enable:  VkBool32::default(),
+            polygon_mode:               VkPolygonMode::default(),
+            cull_mode:                  VkCullModeFlags::default(),
+            front_face:                 VkFrontFace::default(),
+            depth_bias_enable:          VkBool32::default(),
             depth_bias_constant_factor: 0.0,
-            depth_bias_clamp: 0.0,
-            depth_bias_slope_factor: 0.0,
-            line_width: 0.0,
+            depth_bias_clamp:           0.0,
+            depth_bias_slope_factor:    0.0,
+            line_width:                 0.0,
         }
     }
 }
@@ -9770,13 +9770,13 @@ impl Default for VkPipelineRasterizationStateCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineViewportStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineViewportStateCreateFlags,
+    pub s_type:         VkStructureType,
+    pub p_next:         *const core::ffi::c_void,
+    pub flags:          VkPipelineViewportStateCreateFlags,
     pub viewport_count: u32,
-    pub p_viewports: *const VkViewport,
-    pub scissor_count: u32,
-    pub p_scissors: *const VkRect2D,
+    pub p_viewports:    *const VkViewport,
+    pub scissor_count:  u32,
+    pub p_scissors:     *const VkRect2D,
 }
 
 pub trait ExtendsPipelineViewportStateCreateInfo
@@ -9788,13 +9788,13 @@ impl Default for VkPipelineViewportStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_VIEWPORT_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineViewportStateCreateFlags::default(),
+            s_type:         VkStructureType::PIPELINE_VIEWPORT_STATE_CREATE_INFO,
+            p_next:         core::ptr::null(),
+            flags:          VkPipelineViewportStateCreateFlags::default(),
             viewport_count: 0,
-            p_viewports: core::ptr::null(),
-            scissor_count: 0,
-            p_scissors: core::ptr::null(),
+            p_viewports:    core::ptr::null(),
+            scissor_count:  0,
+            p_scissors:     core::ptr::null(),
         }
     }
 }
@@ -9803,9 +9803,9 @@ impl Default for VkPipelineViewportStateCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineTessellationStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineTessellationStateCreateFlags,
+    pub s_type:               VkStructureType,
+    pub p_next:               *const core::ffi::c_void,
+    pub flags:                VkPipelineTessellationStateCreateFlags,
     pub patch_control_points: u32,
 }
 
@@ -9818,9 +9818,9 @@ impl Default for VkPipelineTessellationStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_TESSELLATION_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineTessellationStateCreateFlags::default(),
+            s_type:               VkStructureType::PIPELINE_TESSELLATION_STATE_CREATE_INFO,
+            p_next:               core::ptr::null(),
+            flags:                VkPipelineTessellationStateCreateFlags::default(),
             patch_control_points: 0,
         }
     }
@@ -9830,10 +9830,10 @@ impl Default for VkPipelineTessellationStateCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineInputAssemblyStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineInputAssemblyStateCreateFlags,
-    pub topology: VkPrimitiveTopology,
+    pub s_type:                   VkStructureType,
+    pub p_next:                   *const core::ffi::c_void,
+    pub flags:                    VkPipelineInputAssemblyStateCreateFlags,
+    pub topology:                 VkPrimitiveTopology,
     pub primitive_restart_enable: VkBool32,
 }
 
@@ -9846,10 +9846,10 @@ impl Default for VkPipelineInputAssemblyStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineInputAssemblyStateCreateFlags::default(),
-            topology: VkPrimitiveTopology::default(),
+            s_type:                   VkStructureType::PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO,
+            p_next:                   core::ptr::null(),
+            flags:                    VkPipelineInputAssemblyStateCreateFlags::default(),
+            topology:                 VkPrimitiveTopology::default(),
             primitive_restart_enable: VkBool32::default(),
         }
     }
@@ -9859,13 +9859,13 @@ impl Default for VkPipelineInputAssemblyStateCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkPipelineVertexInputStateCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineVertexInputStateCreateFlags,
-    pub vertex_binding_description_count: u32,
-    pub p_vertex_binding_descriptions: *const VkVertexInputBindingDescription,
+    pub s_type:                             VkStructureType,
+    pub p_next:                             *const core::ffi::c_void,
+    pub flags:                              VkPipelineVertexInputStateCreateFlags,
+    pub vertex_binding_description_count:   u32,
+    pub p_vertex_binding_descriptions:      *const VkVertexInputBindingDescription,
     pub vertex_attribute_description_count: u32,
-    pub p_vertex_attribute_descriptions: *const VkVertexInputAttributeDescription,
+    pub p_vertex_attribute_descriptions:    *const VkVertexInputAttributeDescription,
 }
 
 pub trait ExtendsPipelineVertexInputStateCreateInfo
@@ -9877,13 +9877,14 @@ impl Default for VkPipelineVertexInputStateCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineVertexInputStateCreateFlags::default(),
-            vertex_binding_description_count: 0,
-            p_vertex_binding_descriptions: core::ptr::null(),
+            s_type:
+                VkStructureType::PIPELINE_VERTEX_INPUT_STATE_CREATE_INFO,
+            p_next:                             core::ptr::null(),
+            flags:                              VkPipelineVertexInputStateCreateFlags::default(),
+            vertex_binding_description_count:   0,
+            p_vertex_binding_descriptions:      core::ptr::null(),
             vertex_attribute_description_count: 0,
-            p_vertex_attribute_descriptions: core::ptr::null(),
+            p_vertex_attribute_descriptions:    core::ptr::null(),
         }
     }
 }
@@ -9893,9 +9894,9 @@ impl Default for VkPipelineVertexInputStateCreateInfo
 pub struct VkVertexInputAttributeDescription
 {
     pub location: u32,
-    pub binding: u32,
-    pub format: VkFormat,
-    pub offset: u32,
+    pub binding:  u32,
+    pub format:   VkFormat,
+    pub offset:   u32,
 }
 
 pub trait ExtendsVertexInputAttributeDescription
@@ -9908,9 +9909,9 @@ impl Default for VkVertexInputAttributeDescription
     {
         Self {
             location: 0,
-            binding: 0,
-            format: VkFormat::default(),
-            offset: 0,
+            binding:  0,
+            format:   VkFormat::default(),
+            offset:   0,
         }
     }
 }
@@ -9919,8 +9920,8 @@ impl Default for VkVertexInputAttributeDescription
 #[derive(Copy, Clone)]
 pub struct VkVertexInputBindingDescription
 {
-    pub binding: u32,
-    pub stride: u32,
+    pub binding:    u32,
+    pub stride:     u32,
     pub input_rate: VkVertexInputRate,
 }
 
@@ -9933,8 +9934,8 @@ impl Default for VkVertexInputBindingDescription
     fn default() -> Self
     {
         Self {
-            binding: 0,
-            stride: 0,
+            binding:    0,
+            stride:     0,
             input_rate: VkVertexInputRate::default(),
         }
     }
@@ -9944,11 +9945,11 @@ impl Default for VkVertexInputBindingDescription
 #[derive(Copy, Clone)]
 pub struct VkPipelineCacheCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkPipelineCacheCreateFlags,
+    pub s_type:            VkStructureType,
+    pub p_next:            *const core::ffi::c_void,
+    pub flags:             VkPipelineCacheCreateFlags,
     pub initial_data_size: usize,
-    pub p_initial_data: *const core::ffi::c_void,
+    pub p_initial_data:    *const core::ffi::c_void,
 }
 
 pub trait ExtendsPipelineCacheCreateInfo
@@ -9960,11 +9961,11 @@ impl Default for VkPipelineCacheCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::PIPELINE_CACHE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkPipelineCacheCreateFlags::default(),
+            s_type:            VkStructureType::PIPELINE_CACHE_CREATE_INFO,
+            p_next:            core::ptr::null(),
+            flags:             VkPipelineCacheCreateFlags::default(),
             initial_data_size: 0,
-            p_initial_data: core::ptr::null(),
+            p_initial_data:    core::ptr::null(),
         }
     }
 }
@@ -9973,11 +9974,11 @@ impl Default for VkPipelineCacheCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkShaderModuleCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkShaderModuleCreateFlags,
+    pub s_type:    VkStructureType,
+    pub p_next:    *const core::ffi::c_void,
+    pub flags:     VkShaderModuleCreateFlags,
     pub code_size: usize,
-    pub p_code: *const u32,
+    pub p_code:    *const u32,
 }
 
 pub trait ExtendsShaderModuleCreateInfo
@@ -9989,11 +9990,11 @@ impl Default for VkShaderModuleCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::SHADER_MODULE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkShaderModuleCreateFlags::default(),
+            s_type:    VkStructureType::SHADER_MODULE_CREATE_INFO,
+            p_next:    core::ptr::null(),
+            flags:     VkShaderModuleCreateFlags::default(),
             code_size: 0,
-            p_code: core::ptr::null(),
+            p_code:    core::ptr::null(),
         }
     }
 }
@@ -10002,13 +10003,13 @@ impl Default for VkShaderModuleCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkImageViewCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkImageViewCreateFlags,
-    pub image: VkImage,
-    pub view_type: VkImageViewType,
-    pub format: VkFormat,
-    pub components: VkComponentMapping,
+    pub s_type:            VkStructureType,
+    pub p_next:            *const core::ffi::c_void,
+    pub flags:             VkImageViewCreateFlags,
+    pub image:             VkImage,
+    pub view_type:         VkImageViewType,
+    pub format:            VkFormat,
+    pub components:        VkComponentMapping,
     pub subresource_range: VkImageSubresourceRange,
 }
 
@@ -10021,13 +10022,13 @@ impl Default for VkImageViewCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::IMAGE_VIEW_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkImageViewCreateFlags::default(),
-            image: VkImage::default(),
-            view_type: VkImageViewType::default(),
-            format: VkFormat::default(),
-            components: VkComponentMapping::default(),
+            s_type:            VkStructureType::IMAGE_VIEW_CREATE_INFO,
+            p_next:            core::ptr::null(),
+            flags:             VkImageViewCreateFlags::default(),
+            image:             VkImage::default(),
+            view_type:         VkImageViewType::default(),
+            format:            VkFormat::default(),
+            components:        VkComponentMapping::default(),
             subresource_range: VkImageSubresourceRange::default(),
         }
     }
@@ -10064,9 +10065,9 @@ impl Default for VkComponentMapping
 #[derive(Copy, Clone)]
 pub struct VkSubresourceLayout
 {
-    pub offset: VkDeviceSize,
-    pub size: VkDeviceSize,
-    pub row_pitch: VkDeviceSize,
+    pub offset:      VkDeviceSize,
+    pub size:        VkDeviceSize,
+    pub row_pitch:   VkDeviceSize,
     pub array_pitch: VkDeviceSize,
     pub depth_pitch: VkDeviceSize,
 }
@@ -10080,9 +10081,9 @@ impl Default for VkSubresourceLayout
     fn default() -> Self
     {
         Self {
-            offset: VkDeviceSize::default(),
-            size: VkDeviceSize::default(),
-            row_pitch: VkDeviceSize::default(),
+            offset:      VkDeviceSize::default(),
+            size:        VkDeviceSize::default(),
+            row_pitch:   VkDeviceSize::default(),
             array_pitch: VkDeviceSize::default(),
             depth_pitch: VkDeviceSize::default(),
         }
@@ -10094,7 +10095,7 @@ impl Default for VkSubresourceLayout
 pub struct VkImageSubresource
 {
     pub aspect_mask: VkImageAspectFlags,
-    pub mip_level: u32,
+    pub mip_level:   u32,
     pub array_layer: u32,
 }
 
@@ -10108,7 +10109,7 @@ impl Default for VkImageSubresource
     {
         Self {
             aspect_mask: VkImageAspectFlags::default(),
-            mip_level: 0,
+            mip_level:   0,
             array_layer: 0,
         }
     }
@@ -10118,21 +10119,21 @@ impl Default for VkImageSubresource
 #[derive(Copy, Clone)]
 pub struct VkImageCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkImageCreateFlags,
-    pub image_type: VkImageType,
-    pub format: VkFormat,
-    pub extent: VkExtent3D,
-    pub mip_levels: u32,
-    pub array_layers: u32,
-    pub samples: VkSampleCountFlagBits,
-    pub tiling: VkImageTiling,
-    pub usage: VkImageUsageFlags,
-    pub sharing_mode: VkSharingMode,
+    pub s_type:                   VkStructureType,
+    pub p_next:                   *const core::ffi::c_void,
+    pub flags:                    VkImageCreateFlags,
+    pub image_type:               VkImageType,
+    pub format:                   VkFormat,
+    pub extent:                   VkExtent3D,
+    pub mip_levels:               u32,
+    pub array_layers:             u32,
+    pub samples:                  VkSampleCountFlagBits,
+    pub tiling:                   VkImageTiling,
+    pub usage:                    VkImageUsageFlags,
+    pub sharing_mode:             VkSharingMode,
     pub queue_family_index_count: u32,
-    pub p_queue_family_indices: *const u32,
-    pub initial_layout: VkImageLayout,
+    pub p_queue_family_indices:   *const u32,
+    pub initial_layout:           VkImageLayout,
 }
 
 pub trait ExtendsImageCreateInfo
@@ -10144,21 +10145,21 @@ impl Default for VkImageCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::IMAGE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkImageCreateFlags::default(),
-            image_type: VkImageType::default(),
-            format: VkFormat::default(),
-            extent: VkExtent3D::default(),
-            mip_levels: 0,
-            array_layers: 0,
-            samples: VkSampleCountFlagBits::default(),
-            tiling: VkImageTiling::default(),
-            usage: VkImageUsageFlags::default(),
-            sharing_mode: VkSharingMode::default(),
+            s_type:                   VkStructureType::IMAGE_CREATE_INFO,
+            p_next:                   core::ptr::null(),
+            flags:                    VkImageCreateFlags::default(),
+            image_type:               VkImageType::default(),
+            format:                   VkFormat::default(),
+            extent:                   VkExtent3D::default(),
+            mip_levels:               0,
+            array_layers:             0,
+            samples:                  VkSampleCountFlagBits::default(),
+            tiling:                   VkImageTiling::default(),
+            usage:                    VkImageUsageFlags::default(),
+            sharing_mode:             VkSharingMode::default(),
             queue_family_index_count: 0,
-            p_queue_family_indices: core::ptr::null(),
-            initial_layout: VkImageLayout::default(),
+            p_queue_family_indices:   core::ptr::null(),
+            initial_layout:           VkImageLayout::default(),
         }
     }
 }
@@ -10169,11 +10170,11 @@ pub struct VkBufferViewCreateInfo
 {
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
-    pub flags: VkBufferViewCreateFlags,
+    pub flags:  VkBufferViewCreateFlags,
     pub buffer: VkBuffer,
     pub format: VkFormat,
     pub offset: VkDeviceSize,
-    pub range: VkDeviceSize,
+    pub range:  VkDeviceSize,
 }
 
 pub trait ExtendsBufferViewCreateInfo
@@ -10187,11 +10188,11 @@ impl Default for VkBufferViewCreateInfo
         Self {
             s_type: VkStructureType::BUFFER_VIEW_CREATE_INFO,
             p_next: core::ptr::null(),
-            flags: VkBufferViewCreateFlags::default(),
+            flags:  VkBufferViewCreateFlags::default(),
             buffer: VkBuffer::default(),
             format: VkFormat::default(),
             offset: VkDeviceSize::default(),
-            range: VkDeviceSize::default(),
+            range:  VkDeviceSize::default(),
         }
     }
 }
@@ -10200,14 +10201,14 @@ impl Default for VkBufferViewCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkBufferCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkBufferCreateFlags,
-    pub size: VkDeviceSize,
-    pub usage: VkBufferUsageFlags,
-    pub sharing_mode: VkSharingMode,
+    pub s_type:                   VkStructureType,
+    pub p_next:                   *const core::ffi::c_void,
+    pub flags:                    VkBufferCreateFlags,
+    pub size:                     VkDeviceSize,
+    pub usage:                    VkBufferUsageFlags,
+    pub sharing_mode:             VkSharingMode,
     pub queue_family_index_count: u32,
-    pub p_queue_family_indices: *const u32,
+    pub p_queue_family_indices:   *const u32,
 }
 
 pub trait ExtendsBufferCreateInfo
@@ -10219,14 +10220,14 @@ impl Default for VkBufferCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::BUFFER_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkBufferCreateFlags::default(),
-            size: VkDeviceSize::default(),
-            usage: VkBufferUsageFlags::default(),
-            sharing_mode: VkSharingMode::default(),
+            s_type:                   VkStructureType::BUFFER_CREATE_INFO,
+            p_next:                   core::ptr::null(),
+            flags:                    VkBufferCreateFlags::default(),
+            size:                     VkDeviceSize::default(),
+            usage:                    VkBufferUsageFlags::default(),
+            sharing_mode:             VkSharingMode::default(),
             queue_family_index_count: 0,
-            p_queue_family_indices: core::ptr::null(),
+            p_queue_family_indices:   core::ptr::null(),
         }
     }
 }
@@ -10235,11 +10236,11 @@ impl Default for VkBufferCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkQueryPoolCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkQueryPoolCreateFlags,
-    pub query_type: VkQueryType,
-    pub query_count: u32,
+    pub s_type:              VkStructureType,
+    pub p_next:              *const core::ffi::c_void,
+    pub flags:               VkQueryPoolCreateFlags,
+    pub query_type:          VkQueryType,
+    pub query_count:         u32,
     pub pipeline_statistics: VkQueryPipelineStatisticFlags,
 }
 
@@ -10252,11 +10253,11 @@ impl Default for VkQueryPoolCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::QUERY_POOL_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkQueryPoolCreateFlags::default(),
-            query_type: VkQueryType::default(),
-            query_count: 0,
+            s_type:              VkStructureType::QUERY_POOL_CREATE_INFO,
+            p_next:              core::ptr::null(),
+            flags:               VkQueryPoolCreateFlags::default(),
+            query_type:          VkQueryType::default(),
+            query_count:         0,
             pipeline_statistics: VkQueryPipelineStatisticFlags::default(),
         }
     }
@@ -10268,7 +10269,7 @@ pub struct VkEventCreateInfo
 {
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
-    pub flags: VkEventCreateFlags,
+    pub flags:  VkEventCreateFlags,
 }
 
 pub trait ExtendsEventCreateInfo
@@ -10282,7 +10283,7 @@ impl Default for VkEventCreateInfo
         Self {
             s_type: VkStructureType::EVENT_CREATE_INFO,
             p_next: core::ptr::null(),
-            flags: VkEventCreateFlags::default(),
+            flags:  VkEventCreateFlags::default(),
         }
     }
 }
@@ -10293,7 +10294,7 @@ pub struct VkSemaphoreCreateInfo
 {
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
-    pub flags: VkSemaphoreCreateFlags,
+    pub flags:  VkSemaphoreCreateFlags,
 }
 
 pub trait ExtendsSemaphoreCreateInfo
@@ -10307,7 +10308,7 @@ impl Default for VkSemaphoreCreateInfo
         Self {
             s_type: VkStructureType::SEMAPHORE_CREATE_INFO,
             p_next: core::ptr::null(),
-            flags: VkSemaphoreCreateFlags::default(),
+            flags:  VkSemaphoreCreateFlags::default(),
         }
     }
 }
@@ -10318,7 +10319,7 @@ pub struct VkFenceCreateInfo
 {
     pub s_type: VkStructureType,
     pub p_next: *const core::ffi::c_void,
-    pub flags: VkFenceCreateFlags,
+    pub flags:  VkFenceCreateFlags,
 }
 
 pub trait ExtendsFenceCreateInfo
@@ -10332,7 +10333,7 @@ impl Default for VkFenceCreateInfo
         Self {
             s_type: VkStructureType::FENCE_CREATE_INFO,
             p_next: core::ptr::null(),
-            flags: VkFenceCreateFlags::default(),
+            flags:  VkFenceCreateFlags::default(),
         }
     }
 }
@@ -10341,18 +10342,18 @@ impl Default for VkFenceCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkBindSparseInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub wait_semaphore_count: u32,
-    pub p_wait_semaphores: *const VkSemaphore,
-    pub buffer_bind_count: u32,
-    pub p_buffer_binds: *const VkSparseBufferMemoryBindInfo,
+    pub s_type:                  VkStructureType,
+    pub p_next:                  *const core::ffi::c_void,
+    pub wait_semaphore_count:    u32,
+    pub p_wait_semaphores:       *const VkSemaphore,
+    pub buffer_bind_count:       u32,
+    pub p_buffer_binds:          *const VkSparseBufferMemoryBindInfo,
     pub image_opaque_bind_count: u32,
-    pub p_image_opaque_binds: *const VkSparseImageOpaqueMemoryBindInfo,
-    pub image_bind_count: u32,
-    pub p_image_binds: *const VkSparseImageMemoryBindInfo,
-    pub signal_semaphore_count: u32,
-    pub p_signal_semaphores: *const VkSemaphore,
+    pub p_image_opaque_binds:    *const VkSparseImageOpaqueMemoryBindInfo,
+    pub image_bind_count:        u32,
+    pub p_image_binds:           *const VkSparseImageMemoryBindInfo,
+    pub signal_semaphore_count:  u32,
+    pub p_signal_semaphores:     *const VkSemaphore,
 }
 
 pub trait ExtendsBindSparseInfo
@@ -10364,18 +10365,18 @@ impl Default for VkBindSparseInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::BIND_SPARSE_INFO,
-            p_next: core::ptr::null(),
-            wait_semaphore_count: 0,
-            p_wait_semaphores: core::ptr::null(),
-            buffer_bind_count: 0,
-            p_buffer_binds: core::ptr::null(),
+            s_type:                  VkStructureType::BIND_SPARSE_INFO,
+            p_next:                  core::ptr::null(),
+            wait_semaphore_count:    0,
+            p_wait_semaphores:       core::ptr::null(),
+            buffer_bind_count:       0,
+            p_buffer_binds:          core::ptr::null(),
             image_opaque_bind_count: 0,
-            p_image_opaque_binds: core::ptr::null(),
-            image_bind_count: 0,
-            p_image_binds: core::ptr::null(),
-            signal_semaphore_count: 0,
-            p_signal_semaphores: core::ptr::null(),
+            p_image_opaque_binds:    core::ptr::null(),
+            image_bind_count:        0,
+            p_image_binds:           core::ptr::null(),
+            signal_semaphore_count:  0,
+            p_signal_semaphores:     core::ptr::null(),
         }
     }
 }
@@ -10384,9 +10385,9 @@ impl Default for VkBindSparseInfo
 #[derive(Copy, Clone)]
 pub struct VkSparseImageMemoryBindInfo
 {
-    pub image: VkImage,
+    pub image:      VkImage,
     pub bind_count: u32,
-    pub p_binds: *const VkSparseImageMemoryBind,
+    pub p_binds:    *const VkSparseImageMemoryBind,
 }
 
 pub trait ExtendsSparseImageMemoryBindInfo
@@ -10398,9 +10399,9 @@ impl Default for VkSparseImageMemoryBindInfo
     fn default() -> Self
     {
         Self {
-            image: VkImage::default(),
+            image:      VkImage::default(),
             bind_count: 0,
-            p_binds: core::ptr::null(),
+            p_binds:    core::ptr::null(),
         }
     }
 }
@@ -10409,12 +10410,12 @@ impl Default for VkSparseImageMemoryBindInfo
 #[derive(Copy, Clone)]
 pub struct VkSparseImageMemoryBind
 {
-    pub subresource: VkImageSubresource,
-    pub offset: VkOffset3D,
-    pub extent: VkExtent3D,
-    pub memory: VkDeviceMemory,
+    pub subresource:   VkImageSubresource,
+    pub offset:        VkOffset3D,
+    pub extent:        VkExtent3D,
+    pub memory:        VkDeviceMemory,
     pub memory_offset: VkDeviceSize,
-    pub flags: VkSparseMemoryBindFlags,
+    pub flags:         VkSparseMemoryBindFlags,
 }
 
 pub trait ExtendsSparseImageMemoryBind
@@ -10426,12 +10427,12 @@ impl Default for VkSparseImageMemoryBind
     fn default() -> Self
     {
         Self {
-            subresource: VkImageSubresource::default(),
-            offset: VkOffset3D::default(),
-            extent: VkExtent3D::default(),
-            memory: VkDeviceMemory::default(),
+            subresource:   VkImageSubresource::default(),
+            offset:        VkOffset3D::default(),
+            extent:        VkExtent3D::default(),
+            memory:        VkDeviceMemory::default(),
             memory_offset: VkDeviceSize::default(),
-            flags: VkSparseMemoryBindFlags::default(),
+            flags:         VkSparseMemoryBindFlags::default(),
         }
     }
 }
@@ -10440,9 +10441,9 @@ impl Default for VkSparseImageMemoryBind
 #[derive(Copy, Clone)]
 pub struct VkSparseImageOpaqueMemoryBindInfo
 {
-    pub image: VkImage,
+    pub image:      VkImage,
     pub bind_count: u32,
-    pub p_binds: *const VkSparseMemoryBind,
+    pub p_binds:    *const VkSparseMemoryBind,
 }
 
 pub trait ExtendsSparseImageOpaqueMemoryBindInfo
@@ -10454,9 +10455,9 @@ impl Default for VkSparseImageOpaqueMemoryBindInfo
     fn default() -> Self
     {
         Self {
-            image: VkImage::default(),
+            image:      VkImage::default(),
             bind_count: 0,
-            p_binds: core::ptr::null(),
+            p_binds:    core::ptr::null(),
         }
     }
 }
@@ -10466,10 +10467,10 @@ impl Default for VkSparseImageOpaqueMemoryBindInfo
 pub struct VkSparseMemoryBind
 {
     pub resource_offset: VkDeviceSize,
-    pub size: VkDeviceSize,
-    pub memory: VkDeviceMemory,
-    pub memory_offset: VkDeviceSize,
-    pub flags: VkSparseMemoryBindFlags,
+    pub size:            VkDeviceSize,
+    pub memory:          VkDeviceMemory,
+    pub memory_offset:   VkDeviceSize,
+    pub flags:           VkSparseMemoryBindFlags,
 }
 
 pub trait ExtendsSparseMemoryBind
@@ -10482,10 +10483,10 @@ impl Default for VkSparseMemoryBind
     {
         Self {
             resource_offset: VkDeviceSize::default(),
-            size: VkDeviceSize::default(),
-            memory: VkDeviceMemory::default(),
-            memory_offset: VkDeviceSize::default(),
-            flags: VkSparseMemoryBindFlags::default(),
+            size:            VkDeviceSize::default(),
+            memory:          VkDeviceMemory::default(),
+            memory_offset:   VkDeviceSize::default(),
+            flags:           VkSparseMemoryBindFlags::default(),
         }
     }
 }
@@ -10494,9 +10495,9 @@ impl Default for VkSparseMemoryBind
 #[derive(Copy, Clone)]
 pub struct VkSparseBufferMemoryBindInfo
 {
-    pub buffer: VkBuffer,
+    pub buffer:     VkBuffer,
     pub bind_count: u32,
-    pub p_binds: *const VkSparseMemoryBind,
+    pub p_binds:    *const VkSparseMemoryBind,
 }
 
 pub trait ExtendsSparseBufferMemoryBindInfo
@@ -10508,9 +10509,9 @@ impl Default for VkSparseBufferMemoryBindInfo
     fn default() -> Self
     {
         Self {
-            buffer: VkBuffer::default(),
+            buffer:     VkBuffer::default(),
             bind_count: 0,
-            p_binds: core::ptr::null(),
+            p_binds:    core::ptr::null(),
         }
     }
 }
@@ -10519,9 +10520,9 @@ impl Default for VkSparseBufferMemoryBindInfo
 #[derive(Copy, Clone)]
 pub struct VkSparseImageFormatProperties
 {
-    pub aspect_mask: VkImageAspectFlags,
+    pub aspect_mask:       VkImageAspectFlags,
     pub image_granularity: VkExtent3D,
-    pub flags: VkSparseImageFormatFlags,
+    pub flags:             VkSparseImageFormatFlags,
 }
 
 pub trait ExtendsSparseImageFormatProperties
@@ -10533,9 +10534,9 @@ impl Default for VkSparseImageFormatProperties
     fn default() -> Self
     {
         Self {
-            aspect_mask: VkImageAspectFlags::default(),
+            aspect_mask:       VkImageAspectFlags::default(),
             image_granularity: VkExtent3D::default(),
-            flags: VkSparseImageFormatFlags::default(),
+            flags:             VkSparseImageFormatFlags::default(),
         }
     }
 }
@@ -10544,11 +10545,11 @@ impl Default for VkSparseImageFormatProperties
 #[derive(Copy, Clone)]
 pub struct VkSparseImageMemoryRequirements
 {
-    pub format_properties: VkSparseImageFormatProperties,
+    pub format_properties:        VkSparseImageFormatProperties,
     pub image_mip_tail_first_lod: u32,
-    pub image_mip_tail_size: VkDeviceSize,
-    pub image_mip_tail_offset: VkDeviceSize,
-    pub image_mip_tail_stride: VkDeviceSize,
+    pub image_mip_tail_size:      VkDeviceSize,
+    pub image_mip_tail_offset:    VkDeviceSize,
+    pub image_mip_tail_stride:    VkDeviceSize,
 }
 
 pub trait ExtendsSparseImageMemoryRequirements
@@ -10560,11 +10561,11 @@ impl Default for VkSparseImageMemoryRequirements
     fn default() -> Self
     {
         Self {
-            format_properties: VkSparseImageFormatProperties::default(),
+            format_properties:        VkSparseImageFormatProperties::default(),
             image_mip_tail_first_lod: 0,
-            image_mip_tail_size: VkDeviceSize::default(),
-            image_mip_tail_offset: VkDeviceSize::default(),
-            image_mip_tail_stride: VkDeviceSize::default(),
+            image_mip_tail_size:      VkDeviceSize::default(),
+            image_mip_tail_offset:    VkDeviceSize::default(),
+            image_mip_tail_stride:    VkDeviceSize::default(),
         }
     }
 }
@@ -10573,8 +10574,8 @@ impl Default for VkSparseImageMemoryRequirements
 #[derive(Copy, Clone)]
 pub struct VkMemoryRequirements
 {
-    pub size: VkDeviceSize,
-    pub alignment: VkDeviceSize,
+    pub size:             VkDeviceSize,
+    pub alignment:        VkDeviceSize,
     pub memory_type_bits: u32,
 }
 
@@ -10587,8 +10588,8 @@ impl Default for VkMemoryRequirements
     fn default() -> Self
     {
         Self {
-            size: VkDeviceSize::default(),
-            alignment: VkDeviceSize::default(),
+            size:             VkDeviceSize::default(),
+            alignment:        VkDeviceSize::default(),
             memory_type_bits: 0,
         }
     }
@@ -10602,7 +10603,7 @@ pub struct VkMappedMemoryRange
     pub p_next: *const core::ffi::c_void,
     pub memory: VkDeviceMemory,
     pub offset: VkDeviceSize,
-    pub size: VkDeviceSize,
+    pub size:   VkDeviceSize,
 }
 
 pub trait ExtendsMappedMemoryRange
@@ -10618,7 +10619,7 @@ impl Default for VkMappedMemoryRange
             p_next: core::ptr::null(),
             memory: VkDeviceMemory::default(),
             offset: VkDeviceSize::default(),
-            size: VkDeviceSize::default(),
+            size:   VkDeviceSize::default(),
         }
     }
 }
@@ -10627,9 +10628,9 @@ impl Default for VkMappedMemoryRange
 #[derive(Copy, Clone)]
 pub struct VkMemoryAllocateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub allocation_size: VkDeviceSize,
+    pub s_type:            VkStructureType,
+    pub p_next:            *const core::ffi::c_void,
+    pub allocation_size:   VkDeviceSize,
     pub memory_type_index: u32,
 }
 
@@ -10642,9 +10643,9 @@ impl Default for VkMemoryAllocateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::MEMORY_ALLOCATE_INFO,
-            p_next: core::ptr::null(),
-            allocation_size: VkDeviceSize::default(),
+            s_type:            VkStructureType::MEMORY_ALLOCATE_INFO,
+            p_next:            core::ptr::null(),
+            allocation_size:   VkDeviceSize::default(),
             memory_type_index: 0,
         }
     }
@@ -10654,15 +10655,15 @@ impl Default for VkMemoryAllocateInfo
 #[derive(Copy, Clone)]
 pub struct VkSubmitInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub wait_semaphore_count: u32,
-    pub p_wait_semaphores: *const VkSemaphore,
-    pub p_wait_dst_stage_mask: *const VkPipelineStageFlags,
-    pub command_buffer_count: u32,
-    pub p_command_buffers: *const VkCommandBuffer,
+    pub s_type:                 VkStructureType,
+    pub p_next:                 *const core::ffi::c_void,
+    pub wait_semaphore_count:   u32,
+    pub p_wait_semaphores:      *const VkSemaphore,
+    pub p_wait_dst_stage_mask:  *const VkPipelineStageFlags,
+    pub command_buffer_count:   u32,
+    pub p_command_buffers:      *const VkCommandBuffer,
     pub signal_semaphore_count: u32,
-    pub p_signal_semaphores: *const VkSemaphore,
+    pub p_signal_semaphores:    *const VkSemaphore,
 }
 
 pub trait ExtendsSubmitInfo
@@ -10674,15 +10675,15 @@ impl Default for VkSubmitInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::SUBMIT_INFO,
-            p_next: core::ptr::null(),
-            wait_semaphore_count: 0,
-            p_wait_semaphores: core::ptr::null(),
-            p_wait_dst_stage_mask: core::ptr::null(),
-            command_buffer_count: 0,
-            p_command_buffers: core::ptr::null(),
+            s_type:                 VkStructureType::SUBMIT_INFO,
+            p_next:                 core::ptr::null(),
+            wait_semaphore_count:   0,
+            p_wait_semaphores:      core::ptr::null(),
+            p_wait_dst_stage_mask:  core::ptr::null(),
+            command_buffer_count:   0,
+            p_command_buffers:      core::ptr::null(),
             signal_semaphore_count: 0,
-            p_signal_semaphores: core::ptr::null(),
+            p_signal_semaphores:    core::ptr::null(),
         }
     }
 }
@@ -10691,10 +10692,10 @@ impl Default for VkSubmitInfo
 #[derive(Copy, Clone)]
 pub struct VkLayerProperties
 {
-    pub layer_name: [u8; 256],
-    pub spec_version: u32,
+    pub layer_name:             [u8; 256],
+    pub spec_version:           u32,
     pub implementation_version: u32,
-    pub description: [u8; 256],
+    pub description:            [u8; 256],
 }
 
 pub trait ExtendsLayerProperties
@@ -10706,7 +10707,7 @@ impl Default for VkLayerProperties
     fn default() -> Self
     {
         Self {
-            layer_name: [
+            layer_name:             [
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -10718,9 +10719,9 @@ impl Default for VkLayerProperties
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0,
             ],
-            spec_version: 0,
+            spec_version:           0,
             implementation_version: 0,
-            description: [
+            description:            [
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -10741,7 +10742,7 @@ impl Default for VkLayerProperties
 pub struct VkExtensionProperties
 {
     pub extension_name: [u8; 256],
-    pub spec_version: u32,
+    pub spec_version:   u32,
 }
 
 pub trait ExtendsExtensionProperties
@@ -10765,7 +10766,7 @@ impl Default for VkExtensionProperties
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0,
             ],
-            spec_version: 0,
+            spec_version:   0,
         }
     }
 }
@@ -10774,16 +10775,16 @@ impl Default for VkExtensionProperties
 #[derive(Copy, Clone)]
 pub struct VkDeviceCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkDeviceCreateFlags,
-    pub queue_create_info_count: u32,
-    pub p_queue_create_infos: *const VkDeviceQueueCreateInfo,
-    pub enabled_layer_count: u32,
-    pub pp_enabled_layer_names: *const *const u8,
-    pub enabled_extension_count: u32,
+    pub s_type:                     VkStructureType,
+    pub p_next:                     *const core::ffi::c_void,
+    pub flags:                      VkDeviceCreateFlags,
+    pub queue_create_info_count:    u32,
+    pub p_queue_create_infos:       *const VkDeviceQueueCreateInfo,
+    pub enabled_layer_count:        u32,
+    pub pp_enabled_layer_names:     *const *const u8,
+    pub enabled_extension_count:    u32,
     pub pp_enabled_extension_names: *const *const u8,
-    pub p_enabled_features: *const VkPhysicalDeviceFeatures,
+    pub p_enabled_features:         *const VkPhysicalDeviceFeatures,
 }
 
 pub trait ExtendsDeviceCreateInfo
@@ -10795,16 +10796,16 @@ impl Default for VkDeviceCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DEVICE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkDeviceCreateFlags::default(),
-            queue_create_info_count: 0,
-            p_queue_create_infos: core::ptr::null(),
-            enabled_layer_count: 0,
-            pp_enabled_layer_names: core::ptr::null(),
-            enabled_extension_count: 0,
+            s_type:                     VkStructureType::DEVICE_CREATE_INFO,
+            p_next:                     core::ptr::null(),
+            flags:                      VkDeviceCreateFlags::default(),
+            queue_create_info_count:    0,
+            p_queue_create_infos:       core::ptr::null(),
+            enabled_layer_count:        0,
+            pp_enabled_layer_names:     core::ptr::null(),
+            enabled_extension_count:    0,
             pp_enabled_extension_names: core::ptr::null(),
-            p_enabled_features: core::ptr::null(),
+            p_enabled_features:         core::ptr::null(),
         }
     }
 }
@@ -10942,11 +10943,11 @@ impl Default for VkPhysicalDeviceFeatures
 #[derive(Copy, Clone)]
 pub struct VkDeviceQueueCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkDeviceQueueCreateFlags,
+    pub s_type:             VkStructureType,
+    pub p_next:             *const core::ffi::c_void,
+    pub flags:              VkDeviceQueueCreateFlags,
     pub queue_family_index: u32,
-    pub queue_count: u32,
+    pub queue_count:        u32,
     pub p_queue_priorities: *const f32,
 }
 
@@ -10959,11 +10960,11 @@ impl Default for VkDeviceQueueCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::DEVICE_QUEUE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkDeviceQueueCreateFlags::default(),
+            s_type:             VkStructureType::DEVICE_QUEUE_CREATE_INFO,
+            p_next:             core::ptr::null(),
+            flags:              VkDeviceQueueCreateFlags::default(),
             queue_family_index: 0,
-            queue_count: 0,
+            queue_count:        0,
             p_queue_priorities: core::ptr::null(),
         }
     }
@@ -10974,9 +10975,9 @@ impl Default for VkDeviceQueueCreateInfo
 pub struct VkPhysicalDeviceMemoryProperties
 {
     pub memory_type_count: u32,
-    pub memory_types: [VkMemoryType; 32],
+    pub memory_types:      [VkMemoryType; 32],
     pub memory_heap_count: u32,
-    pub memory_heaps: [VkMemoryHeap; 16],
+    pub memory_heaps:      [VkMemoryHeap; 16],
 }
 
 pub trait ExtendsPhysicalDeviceMemoryProperties
@@ -10989,7 +10990,7 @@ impl Default for VkPhysicalDeviceMemoryProperties
     {
         Self {
             memory_type_count: 0,
-            memory_types: [
+            memory_types:      [
                 VkMemoryType::default(),
                 VkMemoryType::default(),
                 VkMemoryType::default(),
@@ -11024,7 +11025,7 @@ impl Default for VkPhysicalDeviceMemoryProperties
                 VkMemoryType::default(),
             ],
             memory_heap_count: 0,
-            memory_heaps: [
+            memory_heaps:      [
                 VkMemoryHeap::default(),
                 VkMemoryHeap::default(),
                 VkMemoryHeap::default(),
@@ -11050,7 +11051,7 @@ impl Default for VkPhysicalDeviceMemoryProperties
 #[derive(Copy, Clone)]
 pub struct VkMemoryHeap
 {
-    pub size: VkDeviceSize,
+    pub size:  VkDeviceSize,
     pub flags: VkMemoryHeapFlags,
 }
 
@@ -11063,7 +11064,7 @@ impl Default for VkMemoryHeap
     fn default() -> Self
     {
         Self {
-            size: VkDeviceSize::default(),
+            size:  VkDeviceSize::default(),
             flags: VkMemoryHeapFlags::default(),
         }
     }
@@ -11074,7 +11075,7 @@ impl Default for VkMemoryHeap
 pub struct VkMemoryType
 {
     pub property_flags: VkMemoryPropertyFlags,
-    pub heap_index: u32,
+    pub heap_index:     u32,
 }
 
 pub trait ExtendsMemoryType
@@ -11087,7 +11088,7 @@ impl Default for VkMemoryType
     {
         Self {
             property_flags: VkMemoryPropertyFlags::default(),
-            heap_index: 0,
+            heap_index:     0,
         }
     }
 }
@@ -11096,9 +11097,9 @@ impl Default for VkMemoryType
 #[derive(Copy, Clone)]
 pub struct VkQueueFamilyProperties
 {
-    pub queue_flags: VkQueueFlags,
-    pub queue_count: u32,
-    pub timestamp_valid_bits: u32,
+    pub queue_flags:                    VkQueueFlags,
+    pub queue_count:                    u32,
+    pub timestamp_valid_bits:           u32,
     pub min_image_transfer_granularity: VkExtent3D,
 }
 
@@ -11111,9 +11112,9 @@ impl Default for VkQueueFamilyProperties
     fn default() -> Self
     {
         Self {
-            queue_flags: VkQueueFlags::default(),
-            queue_count: 0,
-            timestamp_valid_bits: 0,
+            queue_flags:                    VkQueueFlags::default(),
+            queue_count:                    0,
+            timestamp_valid_bits:           0,
             min_image_transfer_granularity: VkExtent3D::default(),
         }
     }
@@ -11123,15 +11124,15 @@ impl Default for VkQueueFamilyProperties
 #[derive(Copy, Clone)]
 pub struct VkPhysicalDeviceProperties
 {
-    pub api_version: u32,
-    pub driver_version: u32,
-    pub vendor_id: u32,
-    pub device_id: u32,
-    pub device_type: VkPhysicalDeviceType,
-    pub device_name: [u8; 256],
+    pub api_version:         u32,
+    pub driver_version:      u32,
+    pub vendor_id:           u32,
+    pub device_id:           u32,
+    pub device_type:         VkPhysicalDeviceType,
+    pub device_name:         [u8; 256],
     pub pipeline_cache_uuid: [u8; 16],
-    pub limits: VkPhysicalDeviceLimits,
-    pub sparse_properties: VkPhysicalDeviceSparseProperties,
+    pub limits:              VkPhysicalDeviceLimits,
+    pub sparse_properties:   VkPhysicalDeviceSparseProperties,
 }
 
 pub trait ExtendsPhysicalDeviceProperties
@@ -11143,12 +11144,12 @@ impl Default for VkPhysicalDeviceProperties
     fn default() -> Self
     {
         Self {
-            api_version: 0,
-            driver_version: 0,
-            vendor_id: 0,
-            device_id: 0,
-            device_type: VkPhysicalDeviceType::default(),
-            device_name: [
+            api_version:         0,
+            driver_version:      0,
+            vendor_id:           0,
+            device_id:           0,
+            device_type:         VkPhysicalDeviceType::default(),
+            device_name:         [
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -11161,8 +11162,8 @@ impl Default for VkPhysicalDeviceProperties
                 0, 0, 0, 0,
             ],
             pipeline_cache_uuid: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-            limits: VkPhysicalDeviceLimits::default(),
-            sparse_properties: VkPhysicalDeviceSparseProperties::default(),
+            limits:              VkPhysicalDeviceLimits::default(),
+            sparse_properties:   VkPhysicalDeviceSparseProperties::default(),
         }
     }
 }
@@ -11171,11 +11172,11 @@ impl Default for VkPhysicalDeviceProperties
 #[derive(Copy, Clone)]
 pub struct VkPhysicalDeviceSparseProperties
 {
-    pub residency_standard_2_d_block_shape: VkBool32,
+    pub residency_standard_2_d_block_shape:             VkBool32,
     pub residency_standard_2_d_multisample_block_shape: VkBool32,
-    pub residency_standard_3_d_block_shape: VkBool32,
-    pub residency_aligned_mip_size: VkBool32,
-    pub residency_non_resident_strict: VkBool32,
+    pub residency_standard_3_d_block_shape:             VkBool32,
+    pub residency_aligned_mip_size:                     VkBool32,
+    pub residency_non_resident_strict:                  VkBool32,
 }
 
 pub trait ExtendsPhysicalDeviceSparseProperties
@@ -11187,11 +11188,11 @@ impl Default for VkPhysicalDeviceSparseProperties
     fn default() -> Self
     {
         Self {
-            residency_standard_2_d_block_shape: VkBool32::default(),
+            residency_standard_2_d_block_shape:             VkBool32::default(),
             residency_standard_2_d_multisample_block_shape: VkBool32::default(),
-            residency_standard_3_d_block_shape: VkBool32::default(),
-            residency_aligned_mip_size: VkBool32::default(),
-            residency_non_resident_strict: VkBool32::default(),
+            residency_standard_3_d_block_shape:             VkBool32::default(),
+            residency_aligned_mip_size:                     VkBool32::default(),
+            residency_non_resident_strict:                  VkBool32::default(),
         }
     }
 }
@@ -11431,10 +11432,10 @@ impl Default for VkPhysicalDeviceLimits
 #[derive(Copy, Clone)]
 pub struct VkImageFormatProperties
 {
-    pub max_extent: VkExtent3D,
-    pub max_mip_levels: u32,
-    pub max_array_layers: u32,
-    pub sample_counts: VkSampleCountFlags,
+    pub max_extent:        VkExtent3D,
+    pub max_mip_levels:    u32,
+    pub max_array_layers:  u32,
+    pub sample_counts:     VkSampleCountFlags,
     pub max_resource_size: VkDeviceSize,
 }
 
@@ -11447,10 +11448,10 @@ impl Default for VkImageFormatProperties
     fn default() -> Self
     {
         Self {
-            max_extent: VkExtent3D::default(),
-            max_mip_levels: 0,
-            max_array_layers: 0,
-            sample_counts: VkSampleCountFlags::default(),
+            max_extent:        VkExtent3D::default(),
+            max_mip_levels:    0,
+            max_array_layers:  0,
+            sample_counts:     VkSampleCountFlags::default(),
             max_resource_size: VkDeviceSize::default(),
         }
     }
@@ -11460,9 +11461,9 @@ impl Default for VkImageFormatProperties
 #[derive(Copy, Clone)]
 pub struct VkFormatProperties
 {
-    pub linear_tiling_features: VkFormatFeatureFlags,
+    pub linear_tiling_features:  VkFormatFeatureFlags,
     pub optimal_tiling_features: VkFormatFeatureFlags,
-    pub buffer_features: VkFormatFeatureFlags,
+    pub buffer_features:         VkFormatFeatureFlags,
 }
 
 pub trait ExtendsFormatProperties
@@ -11474,9 +11475,9 @@ impl Default for VkFormatProperties
     fn default() -> Self
     {
         Self {
-            linear_tiling_features: VkFormatFeatureFlags::default(),
+            linear_tiling_features:  VkFormatFeatureFlags::default(),
             optimal_tiling_features: VkFormatFeatureFlags::default(),
-            buffer_features: VkFormatFeatureFlags::default(),
+            buffer_features:         VkFormatFeatureFlags::default(),
         }
     }
 }
@@ -11485,13 +11486,13 @@ impl Default for VkFormatProperties
 #[derive(Copy, Clone)]
 pub struct VkInstanceCreateInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub flags: VkInstanceCreateFlags,
-    pub p_application_info: *const VkApplicationInfo,
-    pub enabled_layer_count: u32,
-    pub pp_enabled_layer_names: *const *const u8,
-    pub enabled_extension_count: u32,
+    pub s_type:                     VkStructureType,
+    pub p_next:                     *const core::ffi::c_void,
+    pub flags:                      VkInstanceCreateFlags,
+    pub p_application_info:         *const VkApplicationInfo,
+    pub enabled_layer_count:        u32,
+    pub pp_enabled_layer_names:     *const *const u8,
+    pub enabled_extension_count:    u32,
     pub pp_enabled_extension_names: *const *const u8,
 }
 
@@ -11504,13 +11505,13 @@ impl Default for VkInstanceCreateInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::INSTANCE_CREATE_INFO,
-            p_next: core::ptr::null(),
-            flags: VkInstanceCreateFlags::default(),
-            p_application_info: core::ptr::null(),
-            enabled_layer_count: 0,
-            pp_enabled_layer_names: core::ptr::null(),
-            enabled_extension_count: 0,
+            s_type:                     VkStructureType::INSTANCE_CREATE_INFO,
+            p_next:                     core::ptr::null(),
+            flags:                      VkInstanceCreateFlags::default(),
+            p_application_info:         core::ptr::null(),
+            enabled_layer_count:        0,
+            pp_enabled_layer_names:     core::ptr::null(),
+            enabled_extension_count:    0,
             pp_enabled_extension_names: core::ptr::null(),
         }
     }
@@ -11520,13 +11521,13 @@ impl Default for VkInstanceCreateInfo
 #[derive(Copy, Clone)]
 pub struct VkApplicationInfo
 {
-    pub s_type: VkStructureType,
-    pub p_next: *const core::ffi::c_void,
-    pub p_application_name: *const u8,
+    pub s_type:              VkStructureType,
+    pub p_next:              *const core::ffi::c_void,
+    pub p_application_name:  *const u8,
     pub application_version: u32,
-    pub p_engine_name: *const u8,
-    pub engine_version: u32,
-    pub api_version: u32,
+    pub p_engine_name:       *const u8,
+    pub engine_version:      u32,
+    pub api_version:         u32,
 }
 
 pub trait ExtendsApplicationInfo
@@ -11538,13 +11539,13 @@ impl Default for VkApplicationInfo
     fn default() -> Self
     {
         Self {
-            s_type: VkStructureType::APPLICATION_INFO,
-            p_next: core::ptr::null(),
-            p_application_name: core::ptr::null(),
+            s_type:              VkStructureType::APPLICATION_INFO,
+            p_next:              core::ptr::null(),
+            p_application_name:  core::ptr::null(),
             application_version: 0,
-            p_engine_name: core::ptr::null(),
-            engine_version: 0,
-            api_version: 0,
+            p_engine_name:       core::ptr::null(),
+            engine_version:      0,
+            api_version:         0,
         }
     }
 }
@@ -11553,7 +11554,7 @@ impl Default for VkApplicationInfo
 #[derive(Copy, Clone)]
 pub union VkClearValue
 {
-    pub color: VkClearColorValue,
+    pub color:         VkClearColorValue,
     pub depth_stencil: VkClearDepthStencilValue,
 }
 
@@ -11570,8 +11571,8 @@ impl Default for VkClearValue
 pub union VkClearColorValue
 {
     pub float_32: [f32; 4],
-    pub int_32: [i32; 4],
-    pub uint_32: [u32; 4],
+    pub int_32:   [i32; 4],
+    pub uint_32:  [u32; 4],
 }
 
 impl Default for VkClearColorValue

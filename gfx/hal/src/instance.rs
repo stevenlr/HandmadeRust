@@ -36,8 +36,8 @@ pub enum GpuType
 
 pub struct Gpu<B: Backend, A: Allocator = GlobalAllocator>
 {
-    pub name: String,
-    pub gpu_type: GpuType,
+    pub name:            String,
+    pub gpu_type:        GpuType,
     pub physical_device: B::PhysicalDevice,
-    pub queue_families: SmallArray8<B::QueueFamilyGroup, A>,
+    pub queue_families:  SmallArray8<B::QueueFamilyGroup, A>,
 }

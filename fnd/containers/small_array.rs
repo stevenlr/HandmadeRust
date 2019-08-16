@@ -34,7 +34,7 @@ where
     A: Allocator,
 {
     alloc: Option<A>,
-    data: SmallArrayData<S, A>,
+    data:  SmallArrayData<S, A>,
 }
 
 impl<S, A> SmallArray<S, A>
@@ -89,7 +89,7 @@ where
     {
         Self {
             alloc: Some(alloc),
-            data: SmallArrayData::Stack(0, unsafe { MaybeUninit::uninit().assume_init() }),
+            data:  SmallArrayData::Stack(0, unsafe { MaybeUninit::uninit().assume_init() }),
         }
     }
 

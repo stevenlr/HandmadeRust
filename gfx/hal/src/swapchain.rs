@@ -12,8 +12,8 @@ pub enum PresentMode
 pub struct SwapchainConfig<'a, B: Backend>
 {
     pub queue_family: &'a B::QueueFamilyGroup,
-    pub image_count: usize,
-    pub format: Format,
+    pub image_count:  usize,
+    pub format:       Format,
     pub present_mode: PresentMode,
 }
 

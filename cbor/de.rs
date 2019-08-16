@@ -486,7 +486,7 @@ impl<'de, R: Read> Deserializer<'de> for &mut CborDeserializer<R>
         let array_len = self.read_array_length()?;
 
         let accessor = CborDeserializerCompoundAccessor {
-            de: self,
+            de:   self,
             size: array_len,
         };
 
@@ -499,7 +499,7 @@ impl<'de, R: Read> Deserializer<'de> for &mut CborDeserializer<R>
         let map_len = self.read_map_length()?;
 
         let accessor = CborDeserializerCompoundAccessor {
-            de: self,
+            de:   self,
             size: map_len,
         };
 
@@ -510,7 +510,7 @@ impl<'de, R: Read> Deserializer<'de> for &mut CborDeserializer<R>
 
 pub struct CborDeserializerCompoundAccessor<'a, R>
 {
-    de: &'a mut CborDeserializer<R>,
+    de:   &'a mut CborDeserializer<R>,
     size: Option<usize>,
 }
 

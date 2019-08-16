@@ -31,9 +31,9 @@ impl StaticCommands
 #[derive(Clone)]
 pub struct EntryCommands
 {
-    pfn_enumerate_instance_layer_properties: PfnVkEnumerateInstanceLayerProperties,
+    pfn_enumerate_instance_layer_properties:     PfnVkEnumerateInstanceLayerProperties,
     pfn_enumerate_instance_extension_properties: PfnVkEnumerateInstanceExtensionProperties,
-    pfn_create_instance: PfnVkCreateInstance,
+    pfn_create_instance:                         PfnVkCreateInstance,
 }
 
 impl EntryCommands
@@ -41,13 +41,15 @@ impl EntryCommands
     pub fn load(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self
     {
         EntryCommands {
-            pfn_enumerate_instance_layer_properties: unsafe {
+            pfn_enumerate_instance_layer_properties:     unsafe {
                 core::mem::transmute(load_fn(b"vkEnumerateInstanceLayerProperties\0"))
             },
             pfn_enumerate_instance_extension_properties: unsafe {
                 core::mem::transmute(load_fn(b"vkEnumerateInstanceExtensionProperties\0"))
             },
-            pfn_create_instance: unsafe { core::mem::transmute(load_fn(b"vkCreateInstance\0")) },
+            pfn_create_instance:                         unsafe {
+                core::mem::transmute(load_fn(b"vkCreateInstance\0"))
+            },
         }
     }
 
@@ -629,131 +631,131 @@ impl InstanceCommands
 #[derive(Clone)]
 pub struct DeviceCommands
 {
-    pfn_queue_present_khr: PfnVkQueuePresentKHR,
-    pfn_acquire_next_image_khr: PfnVkAcquireNextImageKHR,
-    pfn_get_swapchain_images_khr: PfnVkGetSwapchainImagesKHR,
-    pfn_destroy_swapchain_khr: PfnVkDestroySwapchainKHR,
-    pfn_create_swapchain_khr: PfnVkCreateSwapchainKHR,
-    pfn_cmd_execute_commands: PfnVkCmdExecuteCommands,
-    pfn_cmd_end_render_pass: PfnVkCmdEndRenderPass,
-    pfn_cmd_next_subpass: PfnVkCmdNextSubpass,
-    pfn_cmd_begin_render_pass: PfnVkCmdBeginRenderPass,
-    pfn_cmd_push_constants: PfnVkCmdPushConstants,
-    pfn_cmd_copy_query_pool_results: PfnVkCmdCopyQueryPoolResults,
-    pfn_cmd_write_timestamp: PfnVkCmdWriteTimestamp,
-    pfn_cmd_reset_query_pool: PfnVkCmdResetQueryPool,
-    pfn_cmd_end_query: PfnVkCmdEndQuery,
-    pfn_cmd_begin_query: PfnVkCmdBeginQuery,
-    pfn_cmd_pipeline_barrier: PfnVkCmdPipelineBarrier,
-    pfn_cmd_wait_events: PfnVkCmdWaitEvents,
-    pfn_cmd_reset_event: PfnVkCmdResetEvent,
-    pfn_cmd_set_event: PfnVkCmdSetEvent,
-    pfn_cmd_resolve_image: PfnVkCmdResolveImage,
-    pfn_cmd_clear_attachments: PfnVkCmdClearAttachments,
-    pfn_cmd_clear_depth_stencil_image: PfnVkCmdClearDepthStencilImage,
-    pfn_cmd_clear_color_image: PfnVkCmdClearColorImage,
-    pfn_cmd_fill_buffer: PfnVkCmdFillBuffer,
-    pfn_cmd_update_buffer: PfnVkCmdUpdateBuffer,
-    pfn_cmd_copy_image_to_buffer: PfnVkCmdCopyImageToBuffer,
-    pfn_cmd_copy_buffer_to_image: PfnVkCmdCopyBufferToImage,
-    pfn_cmd_blit_image: PfnVkCmdBlitImage,
-    pfn_cmd_copy_image: PfnVkCmdCopyImage,
-    pfn_cmd_copy_buffer: PfnVkCmdCopyBuffer,
-    pfn_cmd_dispatch_indirect: PfnVkCmdDispatchIndirect,
-    pfn_cmd_dispatch: PfnVkCmdDispatch,
-    pfn_cmd_draw_indexed_indirect: PfnVkCmdDrawIndexedIndirect,
-    pfn_cmd_draw_indirect: PfnVkCmdDrawIndirect,
-    pfn_cmd_draw_indexed: PfnVkCmdDrawIndexed,
-    pfn_cmd_draw: PfnVkCmdDraw,
-    pfn_cmd_bind_vertex_buffers: PfnVkCmdBindVertexBuffers,
-    pfn_cmd_bind_index_buffer: PfnVkCmdBindIndexBuffer,
-    pfn_cmd_bind_descriptor_sets: PfnVkCmdBindDescriptorSets,
-    pfn_cmd_set_stencil_reference: PfnVkCmdSetStencilReference,
-    pfn_cmd_set_stencil_write_mask: PfnVkCmdSetStencilWriteMask,
-    pfn_cmd_set_stencil_compare_mask: PfnVkCmdSetStencilCompareMask,
-    pfn_cmd_set_depth_bounds: PfnVkCmdSetDepthBounds,
-    pfn_cmd_set_blend_constants: PfnVkCmdSetBlendConstants,
-    pfn_cmd_set_depth_bias: PfnVkCmdSetDepthBias,
-    pfn_cmd_set_line_width: PfnVkCmdSetLineWidth,
-    pfn_cmd_set_scissor: PfnVkCmdSetScissor,
-    pfn_cmd_set_viewport: PfnVkCmdSetViewport,
-    pfn_cmd_bind_pipeline: PfnVkCmdBindPipeline,
-    pfn_reset_command_buffer: PfnVkResetCommandBuffer,
-    pfn_end_command_buffer: PfnVkEndCommandBuffer,
-    pfn_begin_command_buffer: PfnVkBeginCommandBuffer,
-    pfn_free_command_buffers: PfnVkFreeCommandBuffers,
-    pfn_allocate_command_buffers: PfnVkAllocateCommandBuffers,
-    pfn_reset_command_pool: PfnVkResetCommandPool,
-    pfn_destroy_command_pool: PfnVkDestroyCommandPool,
-    pfn_create_command_pool: PfnVkCreateCommandPool,
-    pfn_get_render_area_granularity: PfnVkGetRenderAreaGranularity,
-    pfn_destroy_render_pass: PfnVkDestroyRenderPass,
-    pfn_create_render_pass: PfnVkCreateRenderPass,
-    pfn_destroy_framebuffer: PfnVkDestroyFramebuffer,
-    pfn_create_framebuffer: PfnVkCreateFramebuffer,
-    pfn_update_descriptor_sets: PfnVkUpdateDescriptorSets,
-    pfn_free_descriptor_sets: PfnVkFreeDescriptorSets,
-    pfn_allocate_descriptor_sets: PfnVkAllocateDescriptorSets,
-    pfn_reset_descriptor_pool: PfnVkResetDescriptorPool,
-    pfn_destroy_descriptor_pool: PfnVkDestroyDescriptorPool,
-    pfn_create_descriptor_pool: PfnVkCreateDescriptorPool,
-    pfn_destroy_descriptor_set_layout: PfnVkDestroyDescriptorSetLayout,
-    pfn_create_descriptor_set_layout: PfnVkCreateDescriptorSetLayout,
-    pfn_destroy_sampler: PfnVkDestroySampler,
-    pfn_create_sampler: PfnVkCreateSampler,
-    pfn_destroy_pipeline_layout: PfnVkDestroyPipelineLayout,
-    pfn_create_pipeline_layout: PfnVkCreatePipelineLayout,
-    pfn_destroy_pipeline: PfnVkDestroyPipeline,
-    pfn_create_compute_pipelines: PfnVkCreateComputePipelines,
-    pfn_create_graphics_pipelines: PfnVkCreateGraphicsPipelines,
-    pfn_merge_pipeline_caches: PfnVkMergePipelineCaches,
-    pfn_get_pipeline_cache_data: PfnVkGetPipelineCacheData,
-    pfn_destroy_pipeline_cache: PfnVkDestroyPipelineCache,
-    pfn_create_pipeline_cache: PfnVkCreatePipelineCache,
-    pfn_destroy_shader_module: PfnVkDestroyShaderModule,
-    pfn_create_shader_module: PfnVkCreateShaderModule,
-    pfn_destroy_image_view: PfnVkDestroyImageView,
-    pfn_create_image_view: PfnVkCreateImageView,
-    pfn_get_image_subresource_layout: PfnVkGetImageSubresourceLayout,
-    pfn_destroy_image: PfnVkDestroyImage,
-    pfn_create_image: PfnVkCreateImage,
-    pfn_destroy_buffer_view: PfnVkDestroyBufferView,
-    pfn_create_buffer_view: PfnVkCreateBufferView,
-    pfn_destroy_buffer: PfnVkDestroyBuffer,
-    pfn_create_buffer: PfnVkCreateBuffer,
-    pfn_get_query_pool_results: PfnVkGetQueryPoolResults,
-    pfn_destroy_query_pool: PfnVkDestroyQueryPool,
-    pfn_create_query_pool: PfnVkCreateQueryPool,
-    pfn_reset_event: PfnVkResetEvent,
-    pfn_set_event: PfnVkSetEvent,
-    pfn_get_event_status: PfnVkGetEventStatus,
-    pfn_destroy_event: PfnVkDestroyEvent,
-    pfn_create_event: PfnVkCreateEvent,
-    pfn_destroy_semaphore: PfnVkDestroySemaphore,
-    pfn_create_semaphore: PfnVkCreateSemaphore,
-    pfn_wait_for_fences: PfnVkWaitForFences,
-    pfn_get_fence_status: PfnVkGetFenceStatus,
-    pfn_reset_fences: PfnVkResetFences,
-    pfn_destroy_fence: PfnVkDestroyFence,
-    pfn_create_fence: PfnVkCreateFence,
-    pfn_queue_bind_sparse: PfnVkQueueBindSparse,
+    pfn_queue_present_khr:                    PfnVkQueuePresentKHR,
+    pfn_acquire_next_image_khr:               PfnVkAcquireNextImageKHR,
+    pfn_get_swapchain_images_khr:             PfnVkGetSwapchainImagesKHR,
+    pfn_destroy_swapchain_khr:                PfnVkDestroySwapchainKHR,
+    pfn_create_swapchain_khr:                 PfnVkCreateSwapchainKHR,
+    pfn_cmd_execute_commands:                 PfnVkCmdExecuteCommands,
+    pfn_cmd_end_render_pass:                  PfnVkCmdEndRenderPass,
+    pfn_cmd_next_subpass:                     PfnVkCmdNextSubpass,
+    pfn_cmd_begin_render_pass:                PfnVkCmdBeginRenderPass,
+    pfn_cmd_push_constants:                   PfnVkCmdPushConstants,
+    pfn_cmd_copy_query_pool_results:          PfnVkCmdCopyQueryPoolResults,
+    pfn_cmd_write_timestamp:                  PfnVkCmdWriteTimestamp,
+    pfn_cmd_reset_query_pool:                 PfnVkCmdResetQueryPool,
+    pfn_cmd_end_query:                        PfnVkCmdEndQuery,
+    pfn_cmd_begin_query:                      PfnVkCmdBeginQuery,
+    pfn_cmd_pipeline_barrier:                 PfnVkCmdPipelineBarrier,
+    pfn_cmd_wait_events:                      PfnVkCmdWaitEvents,
+    pfn_cmd_reset_event:                      PfnVkCmdResetEvent,
+    pfn_cmd_set_event:                        PfnVkCmdSetEvent,
+    pfn_cmd_resolve_image:                    PfnVkCmdResolveImage,
+    pfn_cmd_clear_attachments:                PfnVkCmdClearAttachments,
+    pfn_cmd_clear_depth_stencil_image:        PfnVkCmdClearDepthStencilImage,
+    pfn_cmd_clear_color_image:                PfnVkCmdClearColorImage,
+    pfn_cmd_fill_buffer:                      PfnVkCmdFillBuffer,
+    pfn_cmd_update_buffer:                    PfnVkCmdUpdateBuffer,
+    pfn_cmd_copy_image_to_buffer:             PfnVkCmdCopyImageToBuffer,
+    pfn_cmd_copy_buffer_to_image:             PfnVkCmdCopyBufferToImage,
+    pfn_cmd_blit_image:                       PfnVkCmdBlitImage,
+    pfn_cmd_copy_image:                       PfnVkCmdCopyImage,
+    pfn_cmd_copy_buffer:                      PfnVkCmdCopyBuffer,
+    pfn_cmd_dispatch_indirect:                PfnVkCmdDispatchIndirect,
+    pfn_cmd_dispatch:                         PfnVkCmdDispatch,
+    pfn_cmd_draw_indexed_indirect:            PfnVkCmdDrawIndexedIndirect,
+    pfn_cmd_draw_indirect:                    PfnVkCmdDrawIndirect,
+    pfn_cmd_draw_indexed:                     PfnVkCmdDrawIndexed,
+    pfn_cmd_draw:                             PfnVkCmdDraw,
+    pfn_cmd_bind_vertex_buffers:              PfnVkCmdBindVertexBuffers,
+    pfn_cmd_bind_index_buffer:                PfnVkCmdBindIndexBuffer,
+    pfn_cmd_bind_descriptor_sets:             PfnVkCmdBindDescriptorSets,
+    pfn_cmd_set_stencil_reference:            PfnVkCmdSetStencilReference,
+    pfn_cmd_set_stencil_write_mask:           PfnVkCmdSetStencilWriteMask,
+    pfn_cmd_set_stencil_compare_mask:         PfnVkCmdSetStencilCompareMask,
+    pfn_cmd_set_depth_bounds:                 PfnVkCmdSetDepthBounds,
+    pfn_cmd_set_blend_constants:              PfnVkCmdSetBlendConstants,
+    pfn_cmd_set_depth_bias:                   PfnVkCmdSetDepthBias,
+    pfn_cmd_set_line_width:                   PfnVkCmdSetLineWidth,
+    pfn_cmd_set_scissor:                      PfnVkCmdSetScissor,
+    pfn_cmd_set_viewport:                     PfnVkCmdSetViewport,
+    pfn_cmd_bind_pipeline:                    PfnVkCmdBindPipeline,
+    pfn_reset_command_buffer:                 PfnVkResetCommandBuffer,
+    pfn_end_command_buffer:                   PfnVkEndCommandBuffer,
+    pfn_begin_command_buffer:                 PfnVkBeginCommandBuffer,
+    pfn_free_command_buffers:                 PfnVkFreeCommandBuffers,
+    pfn_allocate_command_buffers:             PfnVkAllocateCommandBuffers,
+    pfn_reset_command_pool:                   PfnVkResetCommandPool,
+    pfn_destroy_command_pool:                 PfnVkDestroyCommandPool,
+    pfn_create_command_pool:                  PfnVkCreateCommandPool,
+    pfn_get_render_area_granularity:          PfnVkGetRenderAreaGranularity,
+    pfn_destroy_render_pass:                  PfnVkDestroyRenderPass,
+    pfn_create_render_pass:                   PfnVkCreateRenderPass,
+    pfn_destroy_framebuffer:                  PfnVkDestroyFramebuffer,
+    pfn_create_framebuffer:                   PfnVkCreateFramebuffer,
+    pfn_update_descriptor_sets:               PfnVkUpdateDescriptorSets,
+    pfn_free_descriptor_sets:                 PfnVkFreeDescriptorSets,
+    pfn_allocate_descriptor_sets:             PfnVkAllocateDescriptorSets,
+    pfn_reset_descriptor_pool:                PfnVkResetDescriptorPool,
+    pfn_destroy_descriptor_pool:              PfnVkDestroyDescriptorPool,
+    pfn_create_descriptor_pool:               PfnVkCreateDescriptorPool,
+    pfn_destroy_descriptor_set_layout:        PfnVkDestroyDescriptorSetLayout,
+    pfn_create_descriptor_set_layout:         PfnVkCreateDescriptorSetLayout,
+    pfn_destroy_sampler:                      PfnVkDestroySampler,
+    pfn_create_sampler:                       PfnVkCreateSampler,
+    pfn_destroy_pipeline_layout:              PfnVkDestroyPipelineLayout,
+    pfn_create_pipeline_layout:               PfnVkCreatePipelineLayout,
+    pfn_destroy_pipeline:                     PfnVkDestroyPipeline,
+    pfn_create_compute_pipelines:             PfnVkCreateComputePipelines,
+    pfn_create_graphics_pipelines:            PfnVkCreateGraphicsPipelines,
+    pfn_merge_pipeline_caches:                PfnVkMergePipelineCaches,
+    pfn_get_pipeline_cache_data:              PfnVkGetPipelineCacheData,
+    pfn_destroy_pipeline_cache:               PfnVkDestroyPipelineCache,
+    pfn_create_pipeline_cache:                PfnVkCreatePipelineCache,
+    pfn_destroy_shader_module:                PfnVkDestroyShaderModule,
+    pfn_create_shader_module:                 PfnVkCreateShaderModule,
+    pfn_destroy_image_view:                   PfnVkDestroyImageView,
+    pfn_create_image_view:                    PfnVkCreateImageView,
+    pfn_get_image_subresource_layout:         PfnVkGetImageSubresourceLayout,
+    pfn_destroy_image:                        PfnVkDestroyImage,
+    pfn_create_image:                         PfnVkCreateImage,
+    pfn_destroy_buffer_view:                  PfnVkDestroyBufferView,
+    pfn_create_buffer_view:                   PfnVkCreateBufferView,
+    pfn_destroy_buffer:                       PfnVkDestroyBuffer,
+    pfn_create_buffer:                        PfnVkCreateBuffer,
+    pfn_get_query_pool_results:               PfnVkGetQueryPoolResults,
+    pfn_destroy_query_pool:                   PfnVkDestroyQueryPool,
+    pfn_create_query_pool:                    PfnVkCreateQueryPool,
+    pfn_reset_event:                          PfnVkResetEvent,
+    pfn_set_event:                            PfnVkSetEvent,
+    pfn_get_event_status:                     PfnVkGetEventStatus,
+    pfn_destroy_event:                        PfnVkDestroyEvent,
+    pfn_create_event:                         PfnVkCreateEvent,
+    pfn_destroy_semaphore:                    PfnVkDestroySemaphore,
+    pfn_create_semaphore:                     PfnVkCreateSemaphore,
+    pfn_wait_for_fences:                      PfnVkWaitForFences,
+    pfn_get_fence_status:                     PfnVkGetFenceStatus,
+    pfn_reset_fences:                         PfnVkResetFences,
+    pfn_destroy_fence:                        PfnVkDestroyFence,
+    pfn_create_fence:                         PfnVkCreateFence,
+    pfn_queue_bind_sparse:                    PfnVkQueueBindSparse,
     pfn_get_image_sparse_memory_requirements: PfnVkGetImageSparseMemoryRequirements,
-    pfn_get_image_memory_requirements: PfnVkGetImageMemoryRequirements,
-    pfn_get_buffer_memory_requirements: PfnVkGetBufferMemoryRequirements,
-    pfn_bind_image_memory: PfnVkBindImageMemory,
-    pfn_bind_buffer_memory: PfnVkBindBufferMemory,
-    pfn_get_device_memory_commitment: PfnVkGetDeviceMemoryCommitment,
-    pfn_invalidate_mapped_memory_ranges: PfnVkInvalidateMappedMemoryRanges,
-    pfn_flush_mapped_memory_ranges: PfnVkFlushMappedMemoryRanges,
-    pfn_unmap_memory: PfnVkUnmapMemory,
-    pfn_map_memory: PfnVkMapMemory,
-    pfn_free_memory: PfnVkFreeMemory,
-    pfn_allocate_memory: PfnVkAllocateMemory,
-    pfn_device_wait_idle: PfnVkDeviceWaitIdle,
-    pfn_queue_wait_idle: PfnVkQueueWaitIdle,
-    pfn_queue_submit: PfnVkQueueSubmit,
-    pfn_get_device_queue: PfnVkGetDeviceQueue,
-    pfn_destroy_device: PfnVkDestroyDevice,
+    pfn_get_image_memory_requirements:        PfnVkGetImageMemoryRequirements,
+    pfn_get_buffer_memory_requirements:       PfnVkGetBufferMemoryRequirements,
+    pfn_bind_image_memory:                    PfnVkBindImageMemory,
+    pfn_bind_buffer_memory:                   PfnVkBindBufferMemory,
+    pfn_get_device_memory_commitment:         PfnVkGetDeviceMemoryCommitment,
+    pfn_invalidate_mapped_memory_ranges:      PfnVkInvalidateMappedMemoryRanges,
+    pfn_flush_mapped_memory_ranges:           PfnVkFlushMappedMemoryRanges,
+    pfn_unmap_memory:                         PfnVkUnmapMemory,
+    pfn_map_memory:                           PfnVkMapMemory,
+    pfn_free_memory:                          PfnVkFreeMemory,
+    pfn_allocate_memory:                      PfnVkAllocateMemory,
+    pfn_device_wait_idle:                     PfnVkDeviceWaitIdle,
+    pfn_queue_wait_idle:                      PfnVkQueueWaitIdle,
+    pfn_queue_submit:                         PfnVkQueueSubmit,
+    pfn_get_device_queue:                     PfnVkGetDeviceQueue,
+    pfn_destroy_device:                       PfnVkDestroyDevice,
 }
 
 impl DeviceCommands
@@ -761,279 +763,381 @@ impl DeviceCommands
     pub fn load(load_fn: impl Fn(&[u8]) -> Option<PfnVkVoidFunction>) -> Self
     {
         DeviceCommands {
-            pfn_queue_present_khr: unsafe { core::mem::transmute(load_fn(b"vkQueuePresentKHR\0")) },
-            pfn_acquire_next_image_khr: unsafe {
+            pfn_queue_present_khr:                    unsafe {
+                core::mem::transmute(load_fn(b"vkQueuePresentKHR\0"))
+            },
+            pfn_acquire_next_image_khr:               unsafe {
                 core::mem::transmute(load_fn(b"vkAcquireNextImageKHR\0"))
             },
-            pfn_get_swapchain_images_khr: unsafe {
+            pfn_get_swapchain_images_khr:             unsafe {
                 core::mem::transmute(load_fn(b"vkGetSwapchainImagesKHR\0"))
             },
-            pfn_destroy_swapchain_khr: unsafe {
+            pfn_destroy_swapchain_khr:                unsafe {
                 core::mem::transmute(load_fn(b"vkDestroySwapchainKHR\0"))
             },
-            pfn_create_swapchain_khr: unsafe {
+            pfn_create_swapchain_khr:                 unsafe {
                 core::mem::transmute(load_fn(b"vkCreateSwapchainKHR\0"))
             },
-            pfn_cmd_execute_commands: unsafe {
+            pfn_cmd_execute_commands:                 unsafe {
                 core::mem::transmute(load_fn(b"vkCmdExecuteCommands\0"))
             },
-            pfn_cmd_end_render_pass: unsafe {
+            pfn_cmd_end_render_pass:                  unsafe {
                 core::mem::transmute(load_fn(b"vkCmdEndRenderPass\0"))
             },
-            pfn_cmd_next_subpass: unsafe { core::mem::transmute(load_fn(b"vkCmdNextSubpass\0")) },
-            pfn_cmd_begin_render_pass: unsafe {
+            pfn_cmd_next_subpass:                     unsafe {
+                core::mem::transmute(load_fn(b"vkCmdNextSubpass\0"))
+            },
+            pfn_cmd_begin_render_pass:                unsafe {
                 core::mem::transmute(load_fn(b"vkCmdBeginRenderPass\0"))
             },
-            pfn_cmd_push_constants: unsafe {
+            pfn_cmd_push_constants:                   unsafe {
                 core::mem::transmute(load_fn(b"vkCmdPushConstants\0"))
             },
-            pfn_cmd_copy_query_pool_results: unsafe {
+            pfn_cmd_copy_query_pool_results:          unsafe {
                 core::mem::transmute(load_fn(b"vkCmdCopyQueryPoolResults\0"))
             },
-            pfn_cmd_write_timestamp: unsafe {
+            pfn_cmd_write_timestamp:                  unsafe {
                 core::mem::transmute(load_fn(b"vkCmdWriteTimestamp\0"))
             },
-            pfn_cmd_reset_query_pool: unsafe {
+            pfn_cmd_reset_query_pool:                 unsafe {
                 core::mem::transmute(load_fn(b"vkCmdResetQueryPool\0"))
             },
-            pfn_cmd_end_query: unsafe { core::mem::transmute(load_fn(b"vkCmdEndQuery\0")) },
-            pfn_cmd_begin_query: unsafe { core::mem::transmute(load_fn(b"vkCmdBeginQuery\0")) },
-            pfn_cmd_pipeline_barrier: unsafe {
+            pfn_cmd_end_query:                        unsafe {
+                core::mem::transmute(load_fn(b"vkCmdEndQuery\0"))
+            },
+            pfn_cmd_begin_query:                      unsafe {
+                core::mem::transmute(load_fn(b"vkCmdBeginQuery\0"))
+            },
+            pfn_cmd_pipeline_barrier:                 unsafe {
                 core::mem::transmute(load_fn(b"vkCmdPipelineBarrier\0"))
             },
-            pfn_cmd_wait_events: unsafe { core::mem::transmute(load_fn(b"vkCmdWaitEvents\0")) },
-            pfn_cmd_reset_event: unsafe { core::mem::transmute(load_fn(b"vkCmdResetEvent\0")) },
-            pfn_cmd_set_event: unsafe { core::mem::transmute(load_fn(b"vkCmdSetEvent\0")) },
-            pfn_cmd_resolve_image: unsafe { core::mem::transmute(load_fn(b"vkCmdResolveImage\0")) },
-            pfn_cmd_clear_attachments: unsafe {
+            pfn_cmd_wait_events:                      unsafe {
+                core::mem::transmute(load_fn(b"vkCmdWaitEvents\0"))
+            },
+            pfn_cmd_reset_event:                      unsafe {
+                core::mem::transmute(load_fn(b"vkCmdResetEvent\0"))
+            },
+            pfn_cmd_set_event:                        unsafe {
+                core::mem::transmute(load_fn(b"vkCmdSetEvent\0"))
+            },
+            pfn_cmd_resolve_image:                    unsafe {
+                core::mem::transmute(load_fn(b"vkCmdResolveImage\0"))
+            },
+            pfn_cmd_clear_attachments:                unsafe {
                 core::mem::transmute(load_fn(b"vkCmdClearAttachments\0"))
             },
-            pfn_cmd_clear_depth_stencil_image: unsafe {
+            pfn_cmd_clear_depth_stencil_image:        unsafe {
                 core::mem::transmute(load_fn(b"vkCmdClearDepthStencilImage\0"))
             },
-            pfn_cmd_clear_color_image: unsafe {
+            pfn_cmd_clear_color_image:                unsafe {
                 core::mem::transmute(load_fn(b"vkCmdClearColorImage\0"))
             },
-            pfn_cmd_fill_buffer: unsafe { core::mem::transmute(load_fn(b"vkCmdFillBuffer\0")) },
-            pfn_cmd_update_buffer: unsafe { core::mem::transmute(load_fn(b"vkCmdUpdateBuffer\0")) },
-            pfn_cmd_copy_image_to_buffer: unsafe {
+            pfn_cmd_fill_buffer:                      unsafe {
+                core::mem::transmute(load_fn(b"vkCmdFillBuffer\0"))
+            },
+            pfn_cmd_update_buffer:                    unsafe {
+                core::mem::transmute(load_fn(b"vkCmdUpdateBuffer\0"))
+            },
+            pfn_cmd_copy_image_to_buffer:             unsafe {
                 core::mem::transmute(load_fn(b"vkCmdCopyImageToBuffer\0"))
             },
-            pfn_cmd_copy_buffer_to_image: unsafe {
+            pfn_cmd_copy_buffer_to_image:             unsafe {
                 core::mem::transmute(load_fn(b"vkCmdCopyBufferToImage\0"))
             },
-            pfn_cmd_blit_image: unsafe { core::mem::transmute(load_fn(b"vkCmdBlitImage\0")) },
-            pfn_cmd_copy_image: unsafe { core::mem::transmute(load_fn(b"vkCmdCopyImage\0")) },
-            pfn_cmd_copy_buffer: unsafe { core::mem::transmute(load_fn(b"vkCmdCopyBuffer\0")) },
-            pfn_cmd_dispatch_indirect: unsafe {
+            pfn_cmd_blit_image:                       unsafe {
+                core::mem::transmute(load_fn(b"vkCmdBlitImage\0"))
+            },
+            pfn_cmd_copy_image:                       unsafe {
+                core::mem::transmute(load_fn(b"vkCmdCopyImage\0"))
+            },
+            pfn_cmd_copy_buffer:                      unsafe {
+                core::mem::transmute(load_fn(b"vkCmdCopyBuffer\0"))
+            },
+            pfn_cmd_dispatch_indirect:                unsafe {
                 core::mem::transmute(load_fn(b"vkCmdDispatchIndirect\0"))
             },
-            pfn_cmd_dispatch: unsafe { core::mem::transmute(load_fn(b"vkCmdDispatch\0")) },
-            pfn_cmd_draw_indexed_indirect: unsafe {
+            pfn_cmd_dispatch:                         unsafe {
+                core::mem::transmute(load_fn(b"vkCmdDispatch\0"))
+            },
+            pfn_cmd_draw_indexed_indirect:            unsafe {
                 core::mem::transmute(load_fn(b"vkCmdDrawIndexedIndirect\0"))
             },
-            pfn_cmd_draw_indirect: unsafe { core::mem::transmute(load_fn(b"vkCmdDrawIndirect\0")) },
-            pfn_cmd_draw_indexed: unsafe { core::mem::transmute(load_fn(b"vkCmdDrawIndexed\0")) },
-            pfn_cmd_draw: unsafe { core::mem::transmute(load_fn(b"vkCmdDraw\0")) },
-            pfn_cmd_bind_vertex_buffers: unsafe {
+            pfn_cmd_draw_indirect:                    unsafe {
+                core::mem::transmute(load_fn(b"vkCmdDrawIndirect\0"))
+            },
+            pfn_cmd_draw_indexed:                     unsafe {
+                core::mem::transmute(load_fn(b"vkCmdDrawIndexed\0"))
+            },
+            pfn_cmd_draw:                             unsafe {
+                core::mem::transmute(load_fn(b"vkCmdDraw\0"))
+            },
+            pfn_cmd_bind_vertex_buffers:              unsafe {
                 core::mem::transmute(load_fn(b"vkCmdBindVertexBuffers\0"))
             },
-            pfn_cmd_bind_index_buffer: unsafe {
+            pfn_cmd_bind_index_buffer:                unsafe {
                 core::mem::transmute(load_fn(b"vkCmdBindIndexBuffer\0"))
             },
-            pfn_cmd_bind_descriptor_sets: unsafe {
+            pfn_cmd_bind_descriptor_sets:             unsafe {
                 core::mem::transmute(load_fn(b"vkCmdBindDescriptorSets\0"))
             },
-            pfn_cmd_set_stencil_reference: unsafe {
+            pfn_cmd_set_stencil_reference:            unsafe {
                 core::mem::transmute(load_fn(b"vkCmdSetStencilReference\0"))
             },
-            pfn_cmd_set_stencil_write_mask: unsafe {
+            pfn_cmd_set_stencil_write_mask:           unsafe {
                 core::mem::transmute(load_fn(b"vkCmdSetStencilWriteMask\0"))
             },
-            pfn_cmd_set_stencil_compare_mask: unsafe {
+            pfn_cmd_set_stencil_compare_mask:         unsafe {
                 core::mem::transmute(load_fn(b"vkCmdSetStencilCompareMask\0"))
             },
-            pfn_cmd_set_depth_bounds: unsafe {
+            pfn_cmd_set_depth_bounds:                 unsafe {
                 core::mem::transmute(load_fn(b"vkCmdSetDepthBounds\0"))
             },
-            pfn_cmd_set_blend_constants: unsafe {
+            pfn_cmd_set_blend_constants:              unsafe {
                 core::mem::transmute(load_fn(b"vkCmdSetBlendConstants\0"))
             },
-            pfn_cmd_set_depth_bias: unsafe {
+            pfn_cmd_set_depth_bias:                   unsafe {
                 core::mem::transmute(load_fn(b"vkCmdSetDepthBias\0"))
             },
-            pfn_cmd_set_line_width: unsafe {
+            pfn_cmd_set_line_width:                   unsafe {
                 core::mem::transmute(load_fn(b"vkCmdSetLineWidth\0"))
             },
-            pfn_cmd_set_scissor: unsafe { core::mem::transmute(load_fn(b"vkCmdSetScissor\0")) },
-            pfn_cmd_set_viewport: unsafe { core::mem::transmute(load_fn(b"vkCmdSetViewport\0")) },
-            pfn_cmd_bind_pipeline: unsafe { core::mem::transmute(load_fn(b"vkCmdBindPipeline\0")) },
-            pfn_reset_command_buffer: unsafe {
+            pfn_cmd_set_scissor:                      unsafe {
+                core::mem::transmute(load_fn(b"vkCmdSetScissor\0"))
+            },
+            pfn_cmd_set_viewport:                     unsafe {
+                core::mem::transmute(load_fn(b"vkCmdSetViewport\0"))
+            },
+            pfn_cmd_bind_pipeline:                    unsafe {
+                core::mem::transmute(load_fn(b"vkCmdBindPipeline\0"))
+            },
+            pfn_reset_command_buffer:                 unsafe {
                 core::mem::transmute(load_fn(b"vkResetCommandBuffer\0"))
             },
-            pfn_end_command_buffer: unsafe {
+            pfn_end_command_buffer:                   unsafe {
                 core::mem::transmute(load_fn(b"vkEndCommandBuffer\0"))
             },
-            pfn_begin_command_buffer: unsafe {
+            pfn_begin_command_buffer:                 unsafe {
                 core::mem::transmute(load_fn(b"vkBeginCommandBuffer\0"))
             },
-            pfn_free_command_buffers: unsafe {
+            pfn_free_command_buffers:                 unsafe {
                 core::mem::transmute(load_fn(b"vkFreeCommandBuffers\0"))
             },
-            pfn_allocate_command_buffers: unsafe {
+            pfn_allocate_command_buffers:             unsafe {
                 core::mem::transmute(load_fn(b"vkAllocateCommandBuffers\0"))
             },
-            pfn_reset_command_pool: unsafe {
+            pfn_reset_command_pool:                   unsafe {
                 core::mem::transmute(load_fn(b"vkResetCommandPool\0"))
             },
-            pfn_destroy_command_pool: unsafe {
+            pfn_destroy_command_pool:                 unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyCommandPool\0"))
             },
-            pfn_create_command_pool: unsafe {
+            pfn_create_command_pool:                  unsafe {
                 core::mem::transmute(load_fn(b"vkCreateCommandPool\0"))
             },
-            pfn_get_render_area_granularity: unsafe {
+            pfn_get_render_area_granularity:          unsafe {
                 core::mem::transmute(load_fn(b"vkGetRenderAreaGranularity\0"))
             },
-            pfn_destroy_render_pass: unsafe {
+            pfn_destroy_render_pass:                  unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyRenderPass\0"))
             },
-            pfn_create_render_pass: unsafe {
+            pfn_create_render_pass:                   unsafe {
                 core::mem::transmute(load_fn(b"vkCreateRenderPass\0"))
             },
-            pfn_destroy_framebuffer: unsafe {
+            pfn_destroy_framebuffer:                  unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyFramebuffer\0"))
             },
-            pfn_create_framebuffer: unsafe {
+            pfn_create_framebuffer:                   unsafe {
                 core::mem::transmute(load_fn(b"vkCreateFramebuffer\0"))
             },
-            pfn_update_descriptor_sets: unsafe {
+            pfn_update_descriptor_sets:               unsafe {
                 core::mem::transmute(load_fn(b"vkUpdateDescriptorSets\0"))
             },
-            pfn_free_descriptor_sets: unsafe {
+            pfn_free_descriptor_sets:                 unsafe {
                 core::mem::transmute(load_fn(b"vkFreeDescriptorSets\0"))
             },
-            pfn_allocate_descriptor_sets: unsafe {
+            pfn_allocate_descriptor_sets:             unsafe {
                 core::mem::transmute(load_fn(b"vkAllocateDescriptorSets\0"))
             },
-            pfn_reset_descriptor_pool: unsafe {
+            pfn_reset_descriptor_pool:                unsafe {
                 core::mem::transmute(load_fn(b"vkResetDescriptorPool\0"))
             },
-            pfn_destroy_descriptor_pool: unsafe {
+            pfn_destroy_descriptor_pool:              unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyDescriptorPool\0"))
             },
-            pfn_create_descriptor_pool: unsafe {
+            pfn_create_descriptor_pool:               unsafe {
                 core::mem::transmute(load_fn(b"vkCreateDescriptorPool\0"))
             },
-            pfn_destroy_descriptor_set_layout: unsafe {
+            pfn_destroy_descriptor_set_layout:        unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyDescriptorSetLayout\0"))
             },
-            pfn_create_descriptor_set_layout: unsafe {
+            pfn_create_descriptor_set_layout:         unsafe {
                 core::mem::transmute(load_fn(b"vkCreateDescriptorSetLayout\0"))
             },
-            pfn_destroy_sampler: unsafe { core::mem::transmute(load_fn(b"vkDestroySampler\0")) },
-            pfn_create_sampler: unsafe { core::mem::transmute(load_fn(b"vkCreateSampler\0")) },
-            pfn_destroy_pipeline_layout: unsafe {
+            pfn_destroy_sampler:                      unsafe {
+                core::mem::transmute(load_fn(b"vkDestroySampler\0"))
+            },
+            pfn_create_sampler:                       unsafe {
+                core::mem::transmute(load_fn(b"vkCreateSampler\0"))
+            },
+            pfn_destroy_pipeline_layout:              unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyPipelineLayout\0"))
             },
-            pfn_create_pipeline_layout: unsafe {
+            pfn_create_pipeline_layout:               unsafe {
                 core::mem::transmute(load_fn(b"vkCreatePipelineLayout\0"))
             },
-            pfn_destroy_pipeline: unsafe { core::mem::transmute(load_fn(b"vkDestroyPipeline\0")) },
-            pfn_create_compute_pipelines: unsafe {
+            pfn_destroy_pipeline:                     unsafe {
+                core::mem::transmute(load_fn(b"vkDestroyPipeline\0"))
+            },
+            pfn_create_compute_pipelines:             unsafe {
                 core::mem::transmute(load_fn(b"vkCreateComputePipelines\0"))
             },
-            pfn_create_graphics_pipelines: unsafe {
+            pfn_create_graphics_pipelines:            unsafe {
                 core::mem::transmute(load_fn(b"vkCreateGraphicsPipelines\0"))
             },
-            pfn_merge_pipeline_caches: unsafe {
+            pfn_merge_pipeline_caches:                unsafe {
                 core::mem::transmute(load_fn(b"vkMergePipelineCaches\0"))
             },
-            pfn_get_pipeline_cache_data: unsafe {
+            pfn_get_pipeline_cache_data:              unsafe {
                 core::mem::transmute(load_fn(b"vkGetPipelineCacheData\0"))
             },
-            pfn_destroy_pipeline_cache: unsafe {
+            pfn_destroy_pipeline_cache:               unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyPipelineCache\0"))
             },
-            pfn_create_pipeline_cache: unsafe {
+            pfn_create_pipeline_cache:                unsafe {
                 core::mem::transmute(load_fn(b"vkCreatePipelineCache\0"))
             },
-            pfn_destroy_shader_module: unsafe {
+            pfn_destroy_shader_module:                unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyShaderModule\0"))
             },
-            pfn_create_shader_module: unsafe {
+            pfn_create_shader_module:                 unsafe {
                 core::mem::transmute(load_fn(b"vkCreateShaderModule\0"))
             },
-            pfn_destroy_image_view: unsafe {
+            pfn_destroy_image_view:                   unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyImageView\0"))
             },
-            pfn_create_image_view: unsafe { core::mem::transmute(load_fn(b"vkCreateImageView\0")) },
-            pfn_get_image_subresource_layout: unsafe {
+            pfn_create_image_view:                    unsafe {
+                core::mem::transmute(load_fn(b"vkCreateImageView\0"))
+            },
+            pfn_get_image_subresource_layout:         unsafe {
                 core::mem::transmute(load_fn(b"vkGetImageSubresourceLayout\0"))
             },
-            pfn_destroy_image: unsafe { core::mem::transmute(load_fn(b"vkDestroyImage\0")) },
-            pfn_create_image: unsafe { core::mem::transmute(load_fn(b"vkCreateImage\0")) },
-            pfn_destroy_buffer_view: unsafe {
+            pfn_destroy_image:                        unsafe {
+                core::mem::transmute(load_fn(b"vkDestroyImage\0"))
+            },
+            pfn_create_image:                         unsafe {
+                core::mem::transmute(load_fn(b"vkCreateImage\0"))
+            },
+            pfn_destroy_buffer_view:                  unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyBufferView\0"))
             },
-            pfn_create_buffer_view: unsafe {
+            pfn_create_buffer_view:                   unsafe {
                 core::mem::transmute(load_fn(b"vkCreateBufferView\0"))
             },
-            pfn_destroy_buffer: unsafe { core::mem::transmute(load_fn(b"vkDestroyBuffer\0")) },
-            pfn_create_buffer: unsafe { core::mem::transmute(load_fn(b"vkCreateBuffer\0")) },
-            pfn_get_query_pool_results: unsafe {
+            pfn_destroy_buffer:                       unsafe {
+                core::mem::transmute(load_fn(b"vkDestroyBuffer\0"))
+            },
+            pfn_create_buffer:                        unsafe {
+                core::mem::transmute(load_fn(b"vkCreateBuffer\0"))
+            },
+            pfn_get_query_pool_results:               unsafe {
                 core::mem::transmute(load_fn(b"vkGetQueryPoolResults\0"))
             },
-            pfn_destroy_query_pool: unsafe {
+            pfn_destroy_query_pool:                   unsafe {
                 core::mem::transmute(load_fn(b"vkDestroyQueryPool\0"))
             },
-            pfn_create_query_pool: unsafe { core::mem::transmute(load_fn(b"vkCreateQueryPool\0")) },
-            pfn_reset_event: unsafe { core::mem::transmute(load_fn(b"vkResetEvent\0")) },
-            pfn_set_event: unsafe { core::mem::transmute(load_fn(b"vkSetEvent\0")) },
-            pfn_get_event_status: unsafe { core::mem::transmute(load_fn(b"vkGetEventStatus\0")) },
-            pfn_destroy_event: unsafe { core::mem::transmute(load_fn(b"vkDestroyEvent\0")) },
-            pfn_create_event: unsafe { core::mem::transmute(load_fn(b"vkCreateEvent\0")) },
-            pfn_destroy_semaphore: unsafe {
+            pfn_create_query_pool:                    unsafe {
+                core::mem::transmute(load_fn(b"vkCreateQueryPool\0"))
+            },
+            pfn_reset_event:                          unsafe {
+                core::mem::transmute(load_fn(b"vkResetEvent\0"))
+            },
+            pfn_set_event:                            unsafe {
+                core::mem::transmute(load_fn(b"vkSetEvent\0"))
+            },
+            pfn_get_event_status:                     unsafe {
+                core::mem::transmute(load_fn(b"vkGetEventStatus\0"))
+            },
+            pfn_destroy_event:                        unsafe {
+                core::mem::transmute(load_fn(b"vkDestroyEvent\0"))
+            },
+            pfn_create_event:                         unsafe {
+                core::mem::transmute(load_fn(b"vkCreateEvent\0"))
+            },
+            pfn_destroy_semaphore:                    unsafe {
                 core::mem::transmute(load_fn(b"vkDestroySemaphore\0"))
             },
-            pfn_create_semaphore: unsafe { core::mem::transmute(load_fn(b"vkCreateSemaphore\0")) },
-            pfn_wait_for_fences: unsafe { core::mem::transmute(load_fn(b"vkWaitForFences\0")) },
-            pfn_get_fence_status: unsafe { core::mem::transmute(load_fn(b"vkGetFenceStatus\0")) },
-            pfn_reset_fences: unsafe { core::mem::transmute(load_fn(b"vkResetFences\0")) },
-            pfn_destroy_fence: unsafe { core::mem::transmute(load_fn(b"vkDestroyFence\0")) },
-            pfn_create_fence: unsafe { core::mem::transmute(load_fn(b"vkCreateFence\0")) },
-            pfn_queue_bind_sparse: unsafe { core::mem::transmute(load_fn(b"vkQueueBindSparse\0")) },
+            pfn_create_semaphore:                     unsafe {
+                core::mem::transmute(load_fn(b"vkCreateSemaphore\0"))
+            },
+            pfn_wait_for_fences:                      unsafe {
+                core::mem::transmute(load_fn(b"vkWaitForFences\0"))
+            },
+            pfn_get_fence_status:                     unsafe {
+                core::mem::transmute(load_fn(b"vkGetFenceStatus\0"))
+            },
+            pfn_reset_fences:                         unsafe {
+                core::mem::transmute(load_fn(b"vkResetFences\0"))
+            },
+            pfn_destroy_fence:                        unsafe {
+                core::mem::transmute(load_fn(b"vkDestroyFence\0"))
+            },
+            pfn_create_fence:                         unsafe {
+                core::mem::transmute(load_fn(b"vkCreateFence\0"))
+            },
+            pfn_queue_bind_sparse:                    unsafe {
+                core::mem::transmute(load_fn(b"vkQueueBindSparse\0"))
+            },
             pfn_get_image_sparse_memory_requirements: unsafe {
                 core::mem::transmute(load_fn(b"vkGetImageSparseMemoryRequirements\0"))
             },
-            pfn_get_image_memory_requirements: unsafe {
+            pfn_get_image_memory_requirements:        unsafe {
                 core::mem::transmute(load_fn(b"vkGetImageMemoryRequirements\0"))
             },
-            pfn_get_buffer_memory_requirements: unsafe {
+            pfn_get_buffer_memory_requirements:       unsafe {
                 core::mem::transmute(load_fn(b"vkGetBufferMemoryRequirements\0"))
             },
-            pfn_bind_image_memory: unsafe { core::mem::transmute(load_fn(b"vkBindImageMemory\0")) },
-            pfn_bind_buffer_memory: unsafe {
+            pfn_bind_image_memory:                    unsafe {
+                core::mem::transmute(load_fn(b"vkBindImageMemory\0"))
+            },
+            pfn_bind_buffer_memory:                   unsafe {
                 core::mem::transmute(load_fn(b"vkBindBufferMemory\0"))
             },
-            pfn_get_device_memory_commitment: unsafe {
+            pfn_get_device_memory_commitment:         unsafe {
                 core::mem::transmute(load_fn(b"vkGetDeviceMemoryCommitment\0"))
             },
-            pfn_invalidate_mapped_memory_ranges: unsafe {
+            pfn_invalidate_mapped_memory_ranges:      unsafe {
                 core::mem::transmute(load_fn(b"vkInvalidateMappedMemoryRanges\0"))
             },
-            pfn_flush_mapped_memory_ranges: unsafe {
+            pfn_flush_mapped_memory_ranges:           unsafe {
                 core::mem::transmute(load_fn(b"vkFlushMappedMemoryRanges\0"))
             },
-            pfn_unmap_memory: unsafe { core::mem::transmute(load_fn(b"vkUnmapMemory\0")) },
-            pfn_map_memory: unsafe { core::mem::transmute(load_fn(b"vkMapMemory\0")) },
-            pfn_free_memory: unsafe { core::mem::transmute(load_fn(b"vkFreeMemory\0")) },
-            pfn_allocate_memory: unsafe { core::mem::transmute(load_fn(b"vkAllocateMemory\0")) },
-            pfn_device_wait_idle: unsafe { core::mem::transmute(load_fn(b"vkDeviceWaitIdle\0")) },
-            pfn_queue_wait_idle: unsafe { core::mem::transmute(load_fn(b"vkQueueWaitIdle\0")) },
-            pfn_queue_submit: unsafe { core::mem::transmute(load_fn(b"vkQueueSubmit\0")) },
-            pfn_get_device_queue: unsafe { core::mem::transmute(load_fn(b"vkGetDeviceQueue\0")) },
-            pfn_destroy_device: unsafe { core::mem::transmute(load_fn(b"vkDestroyDevice\0")) },
+            pfn_unmap_memory:                         unsafe {
+                core::mem::transmute(load_fn(b"vkUnmapMemory\0"))
+            },
+            pfn_map_memory:                           unsafe {
+                core::mem::transmute(load_fn(b"vkMapMemory\0"))
+            },
+            pfn_free_memory:                          unsafe {
+                core::mem::transmute(load_fn(b"vkFreeMemory\0"))
+            },
+            pfn_allocate_memory:                      unsafe {
+                core::mem::transmute(load_fn(b"vkAllocateMemory\0"))
+            },
+            pfn_device_wait_idle:                     unsafe {
+                core::mem::transmute(load_fn(b"vkDeviceWaitIdle\0"))
+            },
+            pfn_queue_wait_idle:                      unsafe {
+                core::mem::transmute(load_fn(b"vkQueueWaitIdle\0"))
+            },
+            pfn_queue_submit:                         unsafe {
+                core::mem::transmute(load_fn(b"vkQueueSubmit\0"))
+            },
+            pfn_get_device_queue:                     unsafe {
+                core::mem::transmute(load_fn(b"vkGetDeviceQueue\0"))
+            },
+            pfn_destroy_device:                       unsafe {
+                core::mem::transmute(load_fn(b"vkDestroyDevice\0"))
+            },
         }
     }
 

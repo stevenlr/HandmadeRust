@@ -102,9 +102,9 @@ bitflags! {
 
 pub struct ImageSubresourceRange
 {
-    pub aspects: ImageAspectMask,
+    pub aspects:    ImageAspectMask,
     pub mip_levels: Range<u32>,
-    pub layers: Range<u32>,
+    pub layers:     Range<u32>,
 }
 
 // @Todo Add buffer barriers when we have buffers.
@@ -116,8 +116,8 @@ pub enum Barrier<'a, B: Backend>
         access: Range<AccessMask>,
         layout: Range<ImageLayout>,
         queues: Option<Range<u32>>,
-        image: &'a B::Image,
-        range: ImageSubresourceRange,
+        image:  &'a B::Image,
+        range:  ImageSubresourceRange,
     },
 }
 
