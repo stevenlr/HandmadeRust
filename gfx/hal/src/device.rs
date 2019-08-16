@@ -88,6 +88,7 @@ pub trait Device<B: Backend>
     fn create_fence(&self) -> Result<B::Fence, B::Error>;
     fn destroy_fence(&self, fence: B::Fence);
     fn get_fence_status(&self, fence: B::Fence) -> Result<bool, B::Error>;
+    fn reset_fence(&self, fence: B::Fence);
 
     fn create_semaphore(&self) -> Result<B::Semaphore, B::Error>;
     fn destroy_semaphore(&self, sem: B::Semaphore);

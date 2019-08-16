@@ -306,6 +306,11 @@ impl hal::Device<Backend> for Device
             .map_err(|e| Error::VulkanError(e))
     }
 
+    fn reset_fence(&self, fence: VkFence)
+    {
+        drop(self.raw.device.reset_fences(&[fence]));
+    }
+
     fn create_semaphore(&self) -> Result<VkSemaphore, Error>
     {
         let create_info = VkSemaphoreCreateInfoBuilder::new();

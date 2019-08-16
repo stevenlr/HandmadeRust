@@ -8,7 +8,11 @@ use gfx_hal as hal;
 use gfx_hal::{self, Device, Instance, QueueFamily, Surface, Swapchain};
 use gfx_vulkan_backend as gfx_vk;
 
-use fnd::{containers::Queue, sync::Mutex, *};
+use fnd::{
+    containers::{Array, Queue},
+    sync::Mutex,
+    *,
+};
 
 use tlsf::Tlsf;
 
@@ -47,6 +51,101 @@ struct ToRelease<B: hal::Backend>
     fence:  B::Fence,
     pool:   hal::CommandPool<B, hal::capabilities::General>,
     buffer: hal::CommandBuffer<B, hal::capabilities::General, hal::capabilities::Primary>,
+}
+
+struct ResourceTracker<B: hal::Backend>
+{
+    to_release: Queue<ToRelease<B>>,
+    fences:     Array<B::Fence>,
+    pools:      Array<hal::CommandPool<B, hal::capabilities::General>>,
+}
+
+impl<B: hal::Backend> ResourceTracker<B>
+{
+    fn new() -> Self
+    {
+        Self {
+            to_release: Queue::new(),
+            fences:     Array::new(),
+            pools:      Array::new(),
+        }
+    }
+
+    fn acquire_pool(
+        &mut self,
+        device: &B::Device,
+        queue: &hal::Queue<B, hal::capabilities::General>,
+    ) -> hal::CommandPool<B, hal::capabilities::General>
+    {
+        self.pools.pop().unwrap_or_else(|| {
+            device
+                .create_command_pool(queue, hal::CommandPoolFlags::default())
+                .unwrap()
+        })
+    }
+
+    fn acquire_fence(&mut self, device: &B::Device) -> B::Fence
+    {
+        self.fences
+            .pop()
+            .unwrap_or_else(|| device.create_fence().unwrap())
+    }
+
+    fn push(
+        &mut self,
+        fence: B::Fence,
+        pool: hal::CommandPool<B, hal::capabilities::General>,
+        buffer: hal::CommandBuffer<B, hal::capabilities::General, hal::capabilities::Primary>,
+    )
+    {
+        self.to_release.push(ToRelease {
+            fence,
+            pool,
+            buffer,
+        });
+    }
+
+    fn recycle(&mut self, device: &B::Device)
+    {
+        while let Some(to_release_ref) = self.to_release.peek()
+        {
+            let status = device.get_fence_status(to_release_ref.fence).unwrap();
+            if !status
+            {
+                break;
+            }
+
+            let ToRelease {
+                fence,
+                mut pool,
+                buffer,
+            } = self.to_release.pop().unwrap();
+
+            pool.free_command_buffer(buffer);
+            device.reset_fence(fence);
+            pool.reset(true);
+
+            self.fences.push(fence);
+            self.pools.push(pool);
+        }
+    }
+
+    fn cleanup(mut self, device: &B::Device)
+    {
+        device.wait_idle();
+
+        self.recycle(device);
+
+        for fence in self.fences
+        {
+            device.destroy_fence(fence);
+        }
+
+        for pool in self.pools
+        {
+            device.destroy_command_pool(pool);
+        }
+    }
 }
 
 fn main()
@@ -101,7 +200,8 @@ fn main()
         )
         .unwrap();
 
-    let mut to_release = Queue::new();
+    let mut resource_tracker = ResourceTracker::new();
+
     let sem_acquire = device.create_semaphore().unwrap();
     let sem_present = device.create_semaphore().unwrap();
     let mut t = 0.0;
@@ -112,9 +212,7 @@ fn main()
             wsi::Event::DestroyWindow => false,
         },
         || {
-            let mut command_pool = device
-                .create_command_pool(&queue, hal::CommandPoolFlags::default())
-                .unwrap();
+            let mut command_pool = resource_tracker.acquire_pool(&device, &queue);
 
             let img_index = swapchain.acquire_image(None, Some(sem_acquire)).unwrap();
             let img = swapchain.get_image(img_index).unwrap();
@@ -167,7 +265,7 @@ fn main()
 
             cmd_buffer.end().unwrap();
 
-            let fence = device.create_fence().unwrap();
+            let fence = resource_tracker.acquire_fence(&device);
 
             queue
                 .submit(
@@ -182,36 +280,17 @@ fn main()
                 .present(&queue, img_index, &[sem_present])
                 .unwrap();
 
-            to_release.push(ToRelease {
-                fence,
-                pool:   command_pool,
-                buffer: cmd_buffer,
-            });
-
-            while let Some(to_release_ref) = to_release.peek()
-            {
-                let status = device.get_fence_status(to_release_ref.fence).unwrap();
-                if !status
-                {
-                    break;
-                }
-
-                let ToRelease {
-                    fence,
-                    mut pool,
-                    buffer,
-                } = to_release.pop().unwrap();
-
-                pool.free_command_buffer(buffer);
-                device.destroy_command_pool(pool);
-                device.destroy_fence(fence);
-            }
+            resource_tracker.push(fence, command_pool, cmd_buffer);
+            resource_tracker.recycle(&device);
 
             t += 0.0003;
         },
     );
 
     device.wait_idle();
+
+    resource_tracker.cleanup(&device);
+
     device.destroy_semaphore(sem_acquire);
     device.destroy_semaphore(sem_present);
     device.destroy_swapchain(swapchain);
