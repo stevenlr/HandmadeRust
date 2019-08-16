@@ -4,3 +4,4 @@ target
 *.swo
 .mypy_cache
 __pycache__
+rusty-tags.vi

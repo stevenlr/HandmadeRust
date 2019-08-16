@@ -5,10 +5,6 @@ pub trait Capability
     fn supported_by(queue_type: QueueType) -> bool;
 }
 
-pub trait Supports<T: Capability>
-{
-}
-
 pub struct Compute;
 pub struct Graphics;
 pub struct Transfer;
@@ -70,11 +66,23 @@ impl Capability for General
     }
 }
 
-impl<T: Capability> Supports<T> for T {}
+pub trait Supports<T>
+{
+}
 
-impl Supports<Transfer> for General {}
-impl Supports<Compute> for General {}
-impl Supports<Graphics> for General {}
-
-impl Supports<Transfer> for Graphics {}
+impl<C: Capability> Supports<C> for C {}
 impl Supports<Transfer> for Compute {}
+impl Supports<Transfer> for Graphics {}
+impl Supports<Transfer> for General {}
+impl Supports<Graphics> for General {}
+impl Supports<Compute> for General {}
+
+pub struct Primary;
+pub struct Secondary;
+
+pub trait Level
+{
+}
+
+impl Level for Primary {}
+impl Level for Secondary {}

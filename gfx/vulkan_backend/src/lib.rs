@@ -1,5 +1,6 @@
 #![no_std]
 
+mod command_buffer;
 mod command_pool;
 mod conv;
 mod device;
@@ -10,6 +11,7 @@ mod swapchain;
 
 use gfx_hal as hal;
 
+pub use command_buffer::*;
 pub use command_pool::*;
 pub use device::*;
 pub use instance::*;
@@ -32,6 +34,7 @@ impl hal::Backend for Backend
     type Device = Device;
     type Swapchain = Swapchain;
     type InnerCommandPool = CommandPool;
+    type InnerCommandBuffer = CommandBuffer;
 }
 
 #[derive(Debug)]

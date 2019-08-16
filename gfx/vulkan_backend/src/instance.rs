@@ -5,6 +5,7 @@ use fnd::{
     alloc::Allocator,
     containers::{SmallArray8, String},
     dl::DynamicLibrary,
+    println,
     str::CStr,
     Shared,
 };
@@ -47,9 +48,10 @@ extern "system" fn messenger_cb(
         let callback_data: &VkDebugUtilsMessengerCallbackDataEXT = &*p_callback_data;
         match CStr::from_bytes_null_terminated_unchecked(callback_data.p_message).as_str()
         {
-            // @Todo Do stdout!
-            Ok(_s) =>
-            {} // println!("{}", s),
+            Ok(s) =>
+            {
+                println!("{}", s);
+            }
             _ =>
             {}
         }

@@ -31,31 +31,48 @@ pub(crate) fn vk_to_hal_queue_type(vk_flags: VkQueueFlags) -> hal::QueueType
 
 pub(crate) fn hal_to_vk_format(format: hal::Format) -> VkFormat
 {
+    use hal::Format::*;
+
     match format
     {
-        hal::Format::Rgb8Unorm => VkFormat::R8G8B8_UNORM,
-        hal::Format::Rgb8Snorm => VkFormat::R8G8B8_SNORM,
-        hal::Format::Rgb8Srgb => VkFormat::R8G8B8_SRGB,
-        hal::Format::Bgr8Unorm => VkFormat::B8G8R8_UNORM,
-        hal::Format::Bgr8Snorm => VkFormat::B8G8R8_SNORM,
-        hal::Format::Bgr8Srgb => VkFormat::B8G8R8_SRGB,
-        hal::Format::Rgba8Unorm => VkFormat::R8G8B8A8_UNORM,
-        hal::Format::Rgba8Snorm => VkFormat::R8G8B8A8_SNORM,
-        hal::Format::Rgba8Srgb => VkFormat::R8G8B8A8_SRGB,
-        hal::Format::Bgra8Unorm => VkFormat::B8G8R8A8_UNORM,
-        hal::Format::Bgra8Snorm => VkFormat::B8G8R8A8_SNORM,
-        hal::Format::Bgra8Srgb => VkFormat::B8G8R8A8_SRGB,
+        Rgb8Unorm => VkFormat::R8G8B8_UNORM,
+        Rgb8Snorm => VkFormat::R8G8B8_SNORM,
+        Rgb8Srgb => VkFormat::R8G8B8_SRGB,
+        Bgr8Unorm => VkFormat::B8G8R8_UNORM,
+        Bgr8Snorm => VkFormat::B8G8R8_SNORM,
+        Bgr8Srgb => VkFormat::B8G8R8_SRGB,
+        Rgba8Unorm => VkFormat::R8G8B8A8_UNORM,
+        Rgba8Snorm => VkFormat::R8G8B8A8_SNORM,
+        Rgba8Srgb => VkFormat::R8G8B8A8_SRGB,
+        Bgra8Unorm => VkFormat::B8G8R8A8_UNORM,
+        Bgra8Snorm => VkFormat::B8G8R8A8_SNORM,
+        Bgra8Srgb => VkFormat::B8G8R8A8_SRGB,
     }
 }
 
 pub(crate) fn hal_to_vk_present_mode(present_mode: hal::PresentMode) -> VkPresentModeKHR
 {
+    use hal::PresentMode::*;
+
     match present_mode
     {
-        hal::PresentMode::Fifo => VkPresentModeKHR::FIFO_KHR,
-        hal::PresentMode::Immediate => VkPresentModeKHR::IMMEDIATE_KHR,
-        hal::PresentMode::Mailbox => VkPresentModeKHR::MAILBOX_KHR,
-        hal::PresentMode::Relaxed => VkPresentModeKHR::FIFO_RELAXED_KHR,
+        Fifo => VkPresentModeKHR::FIFO_KHR,
+        Immediate => VkPresentModeKHR::IMMEDIATE_KHR,
+        Mailbox => VkPresentModeKHR::MAILBOX_KHR,
+        Relaxed => VkPresentModeKHR::FIFO_RELAXED_KHR,
+    }
+}
+
+pub(crate) fn hal_to_vk_command_buffer_level(
+    level: hal::InnerCommandBufferLevel,
+) -> VkCommandBufferLevel
+{
+    use hal::InnerCommandBufferLevel::*;
+
+    match level
+    {
+        Primary => VkCommandBufferLevel::PRIMARY,
+        Secondary => VkCommandBufferLevel::SECONDARY,
     }
 }
 

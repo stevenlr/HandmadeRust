@@ -79,9 +79,11 @@ fn main()
         )
         .unwrap();
 
-    let command_pool = device
+    let mut command_pool = device
         .create_command_pool(&queue, hal::CommandPoolFlags::default())
         .unwrap();
+
+    let mut cmd_buffer = command_pool.alloc_primary_command_buffer().unwrap();
 
     window.events_loop(|event| match *event
     {
@@ -89,6 +91,7 @@ fn main()
     });
 
     device.wait_idle();
+    command_pool.free_command_buffer(cmd_buffer);
     device.destroy_command_pool(command_pool);
     device.destroy_swapchain(swapchain);
 }

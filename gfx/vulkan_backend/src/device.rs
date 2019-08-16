@@ -265,6 +265,8 @@ impl hal::Device<Backend> for Device
     }
 
     fn destroy_command_pool<C>(&self, pool: hal::CommandPool<Backend, C>)
+    where
+        C: hal::capabilities::Capability,
     {
         self.raw
             .device

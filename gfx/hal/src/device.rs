@@ -83,7 +83,7 @@ pub trait Device<B: Backend>
         flags: CommandPoolFlags,
     ) -> Result<CommandPool<B, C>, B::Error>;
 
-    fn destroy_command_pool<C>(&self, pool: CommandPool<B, C>);
+    fn destroy_command_pool<C: capabilities::Capability>(&self, pool: CommandPool<B, C>);
 
     fn wait_idle(&self);
 }
