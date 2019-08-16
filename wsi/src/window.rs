@@ -136,7 +136,7 @@ impl Window
     }
 
     #[inline]
-    pub fn events_loop(&self, mut f: impl FnMut(&Event) -> bool)
+    pub fn events_loop(&self, mut f: impl FnMut(&Event) -> bool, mut g: impl FnMut())
     {
         'outer_loop: loop
         {
@@ -149,6 +149,8 @@ impl Window
                     break 'outer_loop;
                 }
             }
+
+            g();
         }
     }
 }

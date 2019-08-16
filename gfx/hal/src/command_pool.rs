@@ -26,7 +26,7 @@ pub struct CommandPool<B: Backend, C>
 
 impl<B: Backend, C> CommandPool<B, C>
 where
-    C: capabilities::Capability,
+    C: capabilities::QueueType,
 {
     pub fn new(inner: B::InnerCommandPool) -> Self
     {

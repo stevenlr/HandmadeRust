@@ -1,4 +1,4 @@
-use crate::{capabilities::Capability, Backend};
+use crate::{capabilities, *};
 
 use core::marker::PhantomData;
 
@@ -51,21 +51,36 @@ pub trait QueueFamilyGroup: QueueFamily
     fn count(&self) -> usize;
 }
 
-pub struct Queue<B: Backend, C: Capability>
+pub struct Queue<B: Backend, C>
 {
     pub(crate) inner: B::InnerQueue,
     pub(crate) _capability: PhantomData<C>,
 }
 
-impl<B: Backend, C: Capability> Queue<B, C>
+impl<B: Backend, C: capabilities::QueueType> Queue<B, C>
 {
     pub fn inner(&self) -> &B::InnerQueue
     {
         &self.inner
     }
+
+    pub fn submit<C2>(
+        &mut self,
+        to_wait: &[(B::Semaphore, PipelineStageMask)],
+        cmd_buffers: &[&CommandBuffer<B, C2, capabilities::Primary>],
+        to_signal_sem: &[B::Semaphore],
+        to_signal_fence: Option<B::Fence>,
+    ) -> Result<(), B::Error>
+    where
+        C2: capabilities::QueueType,
+        C: capabilities::Supports<C2>,
+    {
+        self.inner
+            .submit(to_wait, cmd_buffers, to_signal_sem, to_signal_fence)
+    }
 }
 
-impl<B: Backend, C: Capability> QueueFamily for Queue<B, C>
+impl<B: Backend, C: capabilities::QueueType> QueueFamily for Queue<B, C>
 {
     #[inline]
     fn queue_type(&self) -> QueueType
@@ -78,4 +93,17 @@ impl<B: Backend, C: Capability> QueueFamily for Queue<B, C>
     {
         self.inner.id()
     }
+}
+
+pub trait InnerQueue<B: Backend>: QueueFamily
+{
+    fn submit<C>(
+        &mut self,
+        to_wait: &[(B::Semaphore, PipelineStageMask)],
+        cmd_buffers: &[&CommandBuffer<B, C, capabilities::Primary>],
+        to_signal_sem: &[B::Semaphore],
+        to_signal_fence: Option<B::Fence>,
+    ) -> Result<(), B::Error>
+    where
+        C: capabilities::QueueType;
 }

@@ -40,7 +40,7 @@ impl hal::Swapchain<Backend> for Swapchain
         wait_sems: &[VkSemaphore],
     ) -> Result<(), Error>
     where
-        C: hal::capabilities::Capability,
+        C: hal::capabilities::QueueType,
     {
         let swapchains = [self.raw; 1];
         let indices = [index; 1];
@@ -55,5 +55,17 @@ impl hal::Swapchain<Backend> for Swapchain
             .queue_present_khr(queue.inner().queue, &present_info)
             .map(|_| ())
             .map_err(|e| Error::Swapchain(e))
+    }
+
+    fn get_image(&self, index: u32) -> Option<&VkImage>
+    {
+        if (index as usize) < self.images.len()
+        {
+            Some(&self.images[index as usize])
+        }
+        else
+        {
+            None
+        }
     }
 }

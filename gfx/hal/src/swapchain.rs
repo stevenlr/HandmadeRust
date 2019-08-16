@@ -32,5 +32,7 @@ pub trait Swapchain<B: Backend>
         wait_sems: &[B::Semaphore],
     ) -> Result<(), B::Error>
     where
-        C: capabilities::Capability;
+        C: capabilities::QueueType;
+
+    fn get_image(&self, index: u32) -> Option<&B::Image>;
 }

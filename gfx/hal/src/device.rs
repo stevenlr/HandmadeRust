@@ -28,7 +28,7 @@ impl<B: Backend> CreatedDevice<B>
 
     pub fn retrieve_queue<C>(&mut self, index: usize) -> Result<Queue<B, C>, QueueRetrievalError>
     where
-        C: capabilities::Capability,
+        C: capabilities::QueueType,
     {
         if index >= self.queues.len()
         {
@@ -77,13 +77,13 @@ pub trait Device<B: Backend>
 
     fn destroy_swapchain(&self, swapchain: B::Swapchain);
 
-    fn create_command_pool<C: capabilities::Capability>(
+    fn create_command_pool<C: capabilities::QueueType>(
         &self,
         queue: &Queue<B, C>,
         flags: CommandPoolFlags,
     ) -> Result<CommandPool<B, C>, B::Error>;
 
-    fn destroy_command_pool<C: capabilities::Capability>(&self, pool: CommandPool<B, C>);
+    fn destroy_command_pool<C: capabilities::QueueType>(&self, pool: CommandPool<B, C>);
 
     fn create_fence(&self) -> Result<B::Fence, B::Error>;
     fn destroy_fence(&self, fence: B::Fence);

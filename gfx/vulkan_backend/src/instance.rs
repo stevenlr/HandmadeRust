@@ -283,13 +283,18 @@ impl hal::Instance<Backend> for Instance
 
         let mut created_queues = SmallArray8::new();
 
+        let device = Shared::new(RawDevice { device: vk_device });
+
         for (family, priorities) in queues
         {
             for index in 0..priorities.len()
             {
-                let queue = vk_device.get_device_queue(family.id as u32, index as u32);
+                let queue = device
+                    .device
+                    .get_device_queue(family.id as u32, index as u32);
 
                 created_queues.push(Some(Queue {
+                    device: device.clone(),
                     family_index: family.id,
                     queue_type: family.queue_type,
                     queue: queue,
@@ -298,7 +303,7 @@ impl hal::Instance<Backend> for Instance
         }
 
         let device = Device {
-            raw: Shared::new(RawDevice { device: vk_device }),
+            raw: device,
             gpu: gpu.physical_device,
             instance: self.raw.clone(),
         };

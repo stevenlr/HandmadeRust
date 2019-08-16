@@ -37,6 +37,7 @@ impl hal::Backend for Backend
     type Swapchain = Swapchain;
     type InnerCommandPool = CommandPool;
     type InnerCommandBuffer = CommandBuffer;
+    type Image = VkImage;
 }
 
 #[derive(Debug)]

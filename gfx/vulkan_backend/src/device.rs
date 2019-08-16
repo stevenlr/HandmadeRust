@@ -155,7 +155,9 @@ impl hal::Device<Backend> for Device
             .image_color_space(color_space)
             .image_extent(extent)
             .image_array_layers(1)
-            .image_usage(VkImageUsageFlagBits::COLOR_ATTACHMENT_BIT)
+            .image_usage(
+                VkImageUsageFlagBits::COLOR_ATTACHMENT_BIT | VkImageUsageFlagBits::TRANSFER_DST_BIT,
+            )
             .image_sharing_mode(VkSharingMode::EXCLUSIVE)
             .p_queue_family_indices(queue_families)
             .pre_transform(VkSurfaceTransformFlagBitsKHR::IDENTITY_BIT_KHR)
@@ -245,7 +247,7 @@ impl hal::Device<Backend> for Device
         flags: hal::CommandPoolFlags,
     ) -> Result<hal::CommandPool<Backend, C>, Error>
     where
-        C: hal::capabilities::Capability,
+        C: hal::capabilities::QueueType,
     {
         let flags = hal_to_vk_command_pool_flags(flags);
 
@@ -267,7 +269,7 @@ impl hal::Device<Backend> for Device
 
     fn destroy_command_pool<C>(&self, pool: hal::CommandPool<Backend, C>)
     where
-        C: hal::capabilities::Capability,
+        C: hal::capabilities::QueueType,
     {
         self.raw
             .device
