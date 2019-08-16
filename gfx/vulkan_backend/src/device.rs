@@ -297,6 +297,15 @@ impl hal::Device<Backend> for Device
         self.raw.device.destroy_fence(fence, None);
     }
 
+    fn get_fence_status(&self, fence: VkFence) -> Result<bool, Error>
+    {
+        self.raw
+            .device
+            .get_fence_status(fence)
+            .map(|e| e == VkResult::SUCCESS)
+            .map_err(|e| Error::VulkanError(e))
+    }
+
     fn create_semaphore(&self) -> Result<VkSemaphore, Error>
     {
         let create_info = VkSemaphoreCreateInfoBuilder::new();

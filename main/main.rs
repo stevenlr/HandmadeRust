@@ -8,7 +8,7 @@ use gfx_hal as hal;
 use gfx_hal::{self, Device, Instance, QueueFamily, Surface, Swapchain};
 use gfx_vulkan_backend as gfx_vk;
 
-use fnd::{sync::Mutex, *};
+use fnd::{containers::Queue, sync::Mutex, *};
 
 use tlsf::Tlsf;
 
@@ -40,6 +40,13 @@ fn color(f: f32) -> (f32, f32, f32)
     let g = 0.5 + 0.5 * cos_f32(2.0 * 3.1415 * (1.0 * f + 0.33));
     let b = 0.5 + 0.5 * cos_f32(2.0 * 3.1415 * (1.0 * f + 0.67));
     return (r, g, b);
+}
+
+struct ToRelease<B: hal::Backend>
+{
+    fence:  B::Fence,
+    pool:   hal::CommandPool<B, hal::capabilities::General>,
+    buffer: hal::CommandBuffer<B, hal::capabilities::General, hal::capabilities::Primary>,
 }
 
 fn main()
@@ -79,7 +86,7 @@ fn main()
 
     let device = created_device.retrieve_device().unwrap();
     let mut queue = created_device
-        .retrieve_queue::<gfx_hal::capabilities::General>(0)
+        .retrieve_queue::<hal::capabilities::General>(0)
         .unwrap();
 
     let mut swapchain = device
@@ -94,10 +101,7 @@ fn main()
         )
         .unwrap();
 
-    let mut command_pool = device
-        .create_command_pool(&queue, hal::CommandPoolFlags::default())
-        .unwrap();
-
+    let mut to_release = Queue::new();
     let sem_acquire = device.create_semaphore().unwrap();
     let sem_present = device.create_semaphore().unwrap();
     let mut t = 0.0;
@@ -108,6 +112,10 @@ fn main()
             wsi::Event::DestroyWindow => false,
         },
         || {
+            let mut command_pool = device
+                .create_command_pool(&queue, hal::CommandPoolFlags::default())
+                .unwrap();
+
             let img_index = swapchain.acquire_image(None, Some(sem_acquire)).unwrap();
             let img = swapchain.get_image(img_index).unwrap();
 
@@ -159,12 +167,14 @@ fn main()
 
             cmd_buffer.end().unwrap();
 
+            let fence = device.create_fence().unwrap();
+
             queue
                 .submit(
                     &[(sem_acquire, hal::PipelineStageMask::TOP_OF_PIPE)],
                     &[&cmd_buffer],
                     &[sem_present],
-                    None,
+                    Some(fence),
                 )
                 .unwrap();
 
@@ -172,17 +182,37 @@ fn main()
                 .present(&queue, img_index, &[sem_present])
                 .unwrap();
 
-            device.wait_idle(); // Ugh
-            command_pool.free_command_buffer(cmd_buffer);
+            to_release.push(ToRelease {
+                fence,
+                pool:   command_pool,
+                buffer: cmd_buffer,
+            });
+
+            while let Some(to_release_ref) = to_release.peek()
+            {
+                let status = device.get_fence_status(to_release_ref.fence).unwrap();
+                if !status
+                {
+                    break;
+                }
+
+                let ToRelease {
+                    fence,
+                    mut pool,
+                    buffer,
+                } = to_release.pop().unwrap();
+
+                pool.free_command_buffer(buffer);
+                device.destroy_command_pool(pool);
+                device.destroy_fence(fence);
+            }
 
             t += 0.0003;
         },
     );
 
+    device.wait_idle();
     device.destroy_semaphore(sem_acquire);
     device.destroy_semaphore(sem_present);
-
-    device.wait_idle();
-    device.destroy_command_pool(command_pool);
     device.destroy_swapchain(swapchain);
 }
