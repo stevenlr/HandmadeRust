@@ -84,6 +84,8 @@ fn main()
         .unwrap();
 
     let mut cmd_buffer = command_pool.alloc_primary_command_buffer().unwrap();
+    cmd_buffer.begin().unwrap();
+    cmd_buffer.end().unwrap();
 
     window.events_loop(|event| match *event
     {

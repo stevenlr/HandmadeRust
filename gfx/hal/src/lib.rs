@@ -28,7 +28,7 @@ pub trait Backend: Sized
     type Device: Device<Self>;
     type Swapchain;
     type InnerCommandPool: InnerCommandPool<Self>;
-    type InnerCommandBuffer: InnerCommandBuffer;
+    type InnerCommandBuffer: InnerCommandBuffer<Self>;
 }
 
 #[derive(Copy, Clone)]
