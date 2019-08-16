@@ -5,6 +5,13 @@ This is a project to create a Vulkan rendering engine using only the Rust `core`
 
 Right now it only targets Windows. This may change in this future.
 
+Latest screenshot
+---------------------
+
+*Clear an image and present it every frame.*
+
+![](media/screenshot.png)
+
 Crates
 ----------------
 
