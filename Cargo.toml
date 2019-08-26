@@ -7,7 +7,6 @@ members = [
     "vk",
     "win32",
     "wsi",
-    "gfx/hal",
-    "gfx/vulkan_backend",
+    "gfx",
     "cbor",
 ]

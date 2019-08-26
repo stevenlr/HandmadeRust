@@ -1,9 +1,8 @@
 use fnd::Shared;
-use gfx_hal as hal;
 use vk::{builders::*, types::*};
 use wsi;
 
-use super::{Backend, Error, QueueFamilyGroup, RawInstance};
+use super::{Error, QueueFamily, RawInstance};
 
 pub(crate) struct RawSurface
 {
@@ -31,7 +30,7 @@ impl Surface
             .instance
             .create_win_32_surface_khr(&create_info, None)
             .map(|p| p.1)
-            .map_err(|e| Error::Surface(e))?;
+            .map_err(|e| Error::Vulkan(e))?;
 
         Ok(Self {
             raw: Shared::new(RawSurface {
@@ -40,11 +39,8 @@ impl Surface
             }),
         })
     }
-}
 
-impl hal::Surface<Backend> for Surface
-{
-    fn supports_queue_family(&self, queue_family: &QueueFamilyGroup) -> bool
+    pub fn supports_queue_family(&self, queue_family: &QueueFamily) -> bool
     {
         self.raw
             .raw_instance

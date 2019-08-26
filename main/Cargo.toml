@@ -10,7 +10,6 @@ path = "main.rs"
 
 [dependencies]
 fnd = { path = "../fnd" }
-gfx_hal = { path = "../gfx/hal" }
-gfx_vulkan_backend = { path = "../gfx/vulkan_backend" }
+gfx = { path = "../gfx" }
 tlsf = { path = "../tlsf" }
 wsi = { path = "../wsi" }

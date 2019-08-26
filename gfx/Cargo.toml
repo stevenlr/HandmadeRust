@@ -1,8 +1,10 @@
 [package]
-name = "gfx_hal"
+name = "gfx"
 version = "0.1.0"
 authors = ["Steven Le Rouzic <steven.lerouzic@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-fnd = { path = "../../fnd" }
+vk = { path = "../vk" }
+fnd = { path = "../fnd" }
+wsi = { path = "../wsi" }

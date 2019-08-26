@@ -15,18 +15,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "gfx_hal"
+name = "gfx"
 version = "0.1.0"
 dependencies = [
  "fnd 0.1.0",
-]
-
-[[package]]
-name = "gfx_vulkan_backend"
-version = "0.1.0"
-dependencies = [
- "fnd 0.1.0",
- "gfx_hal 0.1.0",
  "vk 0.1.0",
  "wsi 0.1.0",
 ]
@@ -43,8 +35,7 @@ name = "main"
 version = "0.1.0"
 dependencies = [
  "fnd 0.1.0",
- "gfx_hal 0.1.0",
- "gfx_vulkan_backend 0.1.0",
+ "gfx 0.1.0",
  "tlsf 0.1.0",
  "wsi 0.1.0",
 ]

@@ -17,8 +17,7 @@ Crates
 
  - [`cbor`](cbor): Implements [CBOR](https://cbor.io/) serialization and deserialization.
  - [`fnd`](fnd): A standard library replacement with allocator-aware containers.
- - [`gfx_hal`](gfx/hal): Hardware abstraction layer. Inspired by [`gfx-rs`](https://github.com/gfx-rs/gfx).
- - [`gfx_vulkan_backend`](gfx/vulkan_backend): Vulkan implementation of `gfx_hal`.
+ - [`gfx`](gfx): An abstraction over Vulkan to make use of Rust features for type safety and convenience.
  - [`hash_macro`](hash_macro): Compile-time string literal hashing. Requires `proc_macro_hygiene` at the moment.
  - [`main`](main): The main application.
  - [`tlsf`](tlsf): A [TLSF](http://www.gii.upv.es/tlsf/) allocator implementation.

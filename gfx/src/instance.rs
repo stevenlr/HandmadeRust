@@ -1,8 +1,6 @@
-use super::hal;
-
 use core::{ffi::c_void, mem::transmute};
 use fnd::{
-    alloc::Allocator,
+    alloc::{Allocator, GlobalAllocator},
     containers::{SmallArray8, String},
     dl::DynamicLibrary,
     println,
@@ -14,6 +12,24 @@ use wsi;
 
 use super::*;
 use crate::conv::*;
+
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub enum GpuType
+{
+    DiscreteGpu,
+    IntegratedGpu,
+    VirtualGpu,
+    Cpu,
+    Unknown,
+}
+
+pub struct Gpu<A: Allocator = GlobalAllocator>
+{
+    pub name:           String,
+    pub gpu_type:       GpuType,
+    physical_device:    VkPhysicalDevice,
+    pub queue_families: SmallArray8<QueueFamily, A>,
+}
 
 pub(crate) struct RawInstance
 {
@@ -93,7 +109,7 @@ impl Instance
         vk_instance
             .create_debug_utils_messenger_ext(&create_info, None)
             .map(|(_, handle)| handle)
-            .map_err(|e| Error::VulkanError(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
     #[inline]
@@ -170,20 +186,22 @@ impl Instance
     {
         Surface::create(self.raw.clone(), window)
     }
-}
 
-impl hal::Instance<Backend> for Instance
-{
-    fn enumerate_gpus_with<A: Allocator + Clone>(
+    pub fn enumerate_gpus(&self) -> Result<SmallArray8<Gpu>, Error>
+    {
+        self.enumerate_gpus_with(GlobalAllocator)
+    }
+
+    pub fn enumerate_gpus_with<A: Allocator + Clone>(
         &self,
         a: A,
-    ) -> Result<SmallArray8<hal::Gpu<Backend, A>, A>, Error>
+    ) -> Result<SmallArray8<Gpu<A>, A>, Error>
     {
         let gpu_count = self
             .raw
             .instance
             .enumerate_physical_devices_count()
-            .map_err(|e| Error::VulkanError(e))?
+            .map_err(|e| Error::Vulkan(e))?
             .1;
 
         let mut gpus = SmallArray8::new();
@@ -192,7 +210,7 @@ impl hal::Instance<Backend> for Instance
         self.raw
             .instance
             .enumerate_physical_devices(&mut gpus)
-            .map_err(|e| Error::VulkanError(e))?;
+            .map_err(|e| Error::Vulkan(e))?;
 
         let mut result_gpus = SmallArray8::new_with(a.clone());
         result_gpus.reserve(gpu_count);
@@ -223,14 +241,14 @@ impl hal::Instance<Backend> for Instance
 
             let mut queue_families = SmallArray8::new_with(a.clone());
             queue_families.reserve(queue_count);
-            queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamilyGroup {
+            queue_families.extend(queues.iter().enumerate().map(|(id, q)| QueueFamily {
                 physical_device: *gpu,
                 queue_type: vk_to_hal_queue_type(q.queue_flags),
                 id,
                 count: q.queue_count as usize,
             }));
 
-            let gpu_desc = hal::Gpu {
+            let gpu_desc = Gpu {
                 name,
                 gpu_type,
                 physical_device: *gpu,
@@ -243,11 +261,11 @@ impl hal::Instance<Backend> for Instance
         return Ok(result_gpus);
     }
 
-    fn create_device<A: Allocator>(
+    pub fn create_device<A: Allocator>(
         &self,
-        gpu: &hal::Gpu<Backend, A>,
-        queues: &[(&QueueFamilyGroup, &[f32])],
-    ) -> Result<hal::CreatedDevice<Backend>, Error>
+        gpu: &Gpu<A>,
+        queues: &[(&QueueFamily, &[f32])],
+    ) -> Result<CreatedDevice, Error>
     {
         let mut queue_create_infos = SmallArray8::new();
         queue_create_infos.reserve(queues.len());
@@ -293,7 +311,7 @@ impl hal::Instance<Backend> for Instance
                     .device
                     .get_device_queue(family.id as u32, index as u32);
 
-                created_queues.push(Some(Queue {
+                created_queues.push(Some(InnerQueue {
                     device: device.clone(),
                     family_index: family.id,
                     queue_type: family.queue_type,
@@ -308,7 +326,7 @@ impl hal::Instance<Backend> for Instance
             instance: self.raw.clone(),
         };
 
-        Ok(hal::CreatedDevice {
+        Ok(CreatedDevice {
             device: Some(device),
             queues: created_queues,
         })

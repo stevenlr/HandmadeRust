@@ -4,9 +4,7 @@
 #[cfg(target_env = "msvc")]
 mod msvc;
 
-use gfx_hal as hal;
-use gfx_hal::{self, Device, Instance, QueueFamily, Surface, Swapchain};
-use gfx_vulkan_backend as gfx_vk;
+use gfx;
 
 use fnd::{
     containers::{Array, Queue},
@@ -46,21 +44,21 @@ fn color(f: f32) -> (f32, f32, f32)
     return (r, g, b);
 }
 
-struct ToRelease<B: hal::Backend>
+struct ToRelease
 {
-    fence:  B::Fence,
-    pool:   hal::CommandPool<B, hal::capabilities::General>,
-    buffer: hal::CommandBuffer<B, hal::capabilities::General, hal::capabilities::Primary>,
+    fence:  gfx::Fence,
+    pool:   gfx::CommandPool<gfx::capabilities::General>,
+    buffer: gfx::CommandBuffer<gfx::capabilities::General, gfx::capabilities::Primary>,
 }
 
-struct ResourceTracker<B: hal::Backend>
+struct ResourceTracker
 {
-    to_release: Queue<ToRelease<B>>,
-    fences:     Array<B::Fence>,
-    pools:      Array<hal::CommandPool<B, hal::capabilities::General>>,
+    to_release: Queue<ToRelease>,
+    fences:     Array<gfx::Fence>,
+    pools:      Array<gfx::CommandPool<gfx::capabilities::General>>,
 }
 
-impl<B: hal::Backend> ResourceTracker<B>
+impl ResourceTracker
 {
     fn new() -> Self
     {
@@ -73,18 +71,18 @@ impl<B: hal::Backend> ResourceTracker<B>
 
     fn acquire_pool(
         &mut self,
-        device: &B::Device,
-        queue: &hal::Queue<B, hal::capabilities::General>,
-    ) -> hal::CommandPool<B, hal::capabilities::General>
+        device: &gfx::Device,
+        queue: &gfx::Queue<gfx::capabilities::General>,
+    ) -> gfx::CommandPool<gfx::capabilities::General>
     {
         self.pools.pop().unwrap_or_else(|| {
             device
-                .create_command_pool(queue, hal::CommandPoolFlags::default())
+                .create_command_pool(queue, gfx::CommandPoolFlags::default())
                 .unwrap()
         })
     }
 
-    fn acquire_fence(&mut self, device: &B::Device) -> B::Fence
+    fn acquire_fence(&mut self, device: &gfx::Device) -> gfx::Fence
     {
         self.fences
             .pop()
@@ -93,9 +91,9 @@ impl<B: hal::Backend> ResourceTracker<B>
 
     fn push(
         &mut self,
-        fence: B::Fence,
-        pool: hal::CommandPool<B, hal::capabilities::General>,
-        buffer: hal::CommandBuffer<B, hal::capabilities::General, hal::capabilities::Primary>,
+        fence: gfx::Fence,
+        pool: gfx::CommandPool<gfx::capabilities::General>,
+        buffer: gfx::CommandBuffer<gfx::capabilities::General, gfx::capabilities::Primary>,
     )
     {
         self.to_release.push(ToRelease {
@@ -105,7 +103,7 @@ impl<B: hal::Backend> ResourceTracker<B>
         });
     }
 
-    fn recycle(&mut self, device: &B::Device)
+    fn recycle(&mut self, device: &gfx::Device)
     {
         while let Some(to_release_ref) = self.to_release.peek()
         {
@@ -130,7 +128,7 @@ impl<B: hal::Backend> ResourceTracker<B>
         }
     }
 
-    fn cleanup(mut self, device: &B::Device)
+    fn cleanup(mut self, device: &gfx::Device)
     {
         device.wait_idle();
 
@@ -156,7 +154,7 @@ fn main()
 
     let window = wsi::Window::new(1280, 720, "Handmade Rust").expect("Window creation");
 
-    let instance = gfx_vk::Instance::create().unwrap();
+    let instance = gfx::Instance::create().unwrap();
     let surface = instance.create_surface(&window).expect("Surface creation");
 
     let gpus = instance.enumerate_gpus().unwrap();
@@ -167,7 +165,7 @@ fn main()
 
     let (gpu, queue_family) = gpus
         .iter()
-        .filter(|gpu| gpu.gpu_type == hal::GpuType::DiscreteGpu)
+        .filter(|gpu| gpu.gpu_type == gfx::GpuType::DiscreteGpu)
         .filter_map(|gpu| {
             gpu.queue_families
                 .iter()
@@ -185,16 +183,16 @@ fn main()
 
     let device = created_device.retrieve_device().unwrap();
     let mut queue = created_device
-        .retrieve_queue::<hal::capabilities::General>(0)
+        .retrieve_queue::<gfx::capabilities::General>(0)
         .unwrap();
 
     let mut swapchain = device
         .create_swapchain(
             &surface,
-            &hal::SwapchainConfig {
-                format: hal::Format::Bgr8Unorm,
+            &gfx::SwapchainConfig {
+                format: gfx::Format::Bgr8Unorm,
                 image_count: 3,
-                present_mode: hal::PresentMode::Mailbox,
+                present_mode: gfx::PresentMode::Mailbox,
                 queue_family,
             },
         )
@@ -221,14 +219,14 @@ fn main()
             cmd_buffer.begin().unwrap();
 
             cmd_buffer.cmd_pipeline_barrier(
-                hal::PipelineStageMask::TOP_OF_PIPE..hal::PipelineStageMask::TRANSFER,
-                &[hal::Barrier::Image {
-                    access: hal::AccessMask::default()..hal::AccessMask::TRANSFER_WRITE,
-                    layout: hal::ImageLayout::Undefined..hal::ImageLayout::General,
+                gfx::PipelineStageMask::TOP_OF_PIPE..gfx::PipelineStageMask::TRANSFER,
+                &[gfx::Barrier::Image {
+                    access: gfx::AccessMask::default()..gfx::AccessMask::TRANSFER_WRITE,
+                    layout: gfx::ImageLayout::Undefined..gfx::ImageLayout::General,
                     queues: None,
                     image:  img,
-                    range:  hal::ImageSubresourceRange {
-                        aspects:    hal::ImageAspectMask::COLOR,
+                    range:  gfx::ImageSubresourceRange {
+                        aspects:    gfx::ImageAspectMask::COLOR,
                         mip_levels: 0..0,
                         layers:     0..0,
                     },
@@ -239,24 +237,24 @@ fn main()
 
             cmd_buffer.cmd_clear_color_image(
                 img,
-                hal::ImageLayout::General,
-                hal::ClearColor::Float([r, g, b, 1.0]),
-                hal::ImageSubresourceRange {
-                    aspects:    hal::ImageAspectMask::COLOR,
+                gfx::ImageLayout::General,
+                gfx::ClearColor::Float([r, g, b, 1.0]),
+                gfx::ImageSubresourceRange {
+                    aspects:    gfx::ImageAspectMask::COLOR,
                     mip_levels: 0..0,
                     layers:     0..0,
                 },
             );
 
             cmd_buffer.cmd_pipeline_barrier(
-                hal::PipelineStageMask::TRANSFER..hal::PipelineStageMask::BOTTOM_OF_PIPE,
-                &[hal::Barrier::Image {
-                    access: hal::AccessMask::TRANSFER_WRITE..hal::AccessMask::MEMORY_READ,
-                    layout: hal::ImageLayout::General..hal::ImageLayout::PresentSrc,
+                gfx::PipelineStageMask::TRANSFER..gfx::PipelineStageMask::BOTTOM_OF_PIPE,
+                &[gfx::Barrier::Image {
+                    access: gfx::AccessMask::TRANSFER_WRITE..gfx::AccessMask::MEMORY_READ,
+                    layout: gfx::ImageLayout::General..gfx::ImageLayout::PresentSrc,
                     queues: None,
                     image:  img,
-                    range:  hal::ImageSubresourceRange {
-                        aspects:    hal::ImageAspectMask::COLOR,
+                    range:  gfx::ImageSubresourceRange {
+                        aspects:    gfx::ImageAspectMask::COLOR,
                         mip_levels: 0..0,
                         layers:     0..0,
                     },
@@ -269,7 +267,7 @@ fn main()
 
             queue
                 .submit(
-                    &[(sem_acquire, hal::PipelineStageMask::TOP_OF_PIPE)],
+                    &[(sem_acquire, gfx::PipelineStageMask::TOP_OF_PIPE)],
                     &[&cmd_buffer],
                     &[sem_present],
                     Some(fence),

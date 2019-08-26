@@ -1,17 +1,16 @@
-use core::ops::Range;
+use core::{marker::PhantomData, ops::Range};
 use fnd::{containers::SmallArray8, Shared};
-use gfx_hal as hal;
 use vk::{builders::*, types::*};
 
-use super::{conv::*, Backend, Error, RawDevice};
+use super::{capabilities, conv::*, *};
 
-pub struct CommandBuffer
+pub(crate) struct InnerCommandBuffer
 {
     pub(crate) device: Shared<RawDevice>,
     pub(crate) raw:    VkCommandBuffer,
 }
 
-impl hal::InnerCommandBuffer<Backend> for CommandBuffer
+impl InnerCommandBuffer
 {
     fn reset(&mut self, release_resources: bool) -> Result<(), Error>
     {
@@ -28,7 +27,7 @@ impl hal::InnerCommandBuffer<Backend> for CommandBuffer
             .device
             .reset_command_buffer(self.raw, flags)
             .map(|_| ())
-            .map_err(|e| Error::VulkanError(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
     fn begin(&mut self) -> Result<(), Error>
@@ -38,7 +37,7 @@ impl hal::InnerCommandBuffer<Backend> for CommandBuffer
             .device
             .begin_command_buffer(self.raw, &begin_info)
             .map(|_| ())
-            .map_err(|e| Error::VulkanError(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
     fn end(&mut self) -> Result<(), Error>
@@ -47,14 +46,10 @@ impl hal::InnerCommandBuffer<Backend> for CommandBuffer
             .device
             .end_command_buffer(self.raw)
             .map(|_| ())
-            .map_err(|e| Error::VulkanError(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
-    fn cmd_pipeline_barrier<'a>(
-        &mut self,
-        stage: Range<hal::PipelineStageMask>,
-        barriers: &[hal::Barrier<'a, Backend>],
-    )
+    fn cmd_pipeline_barrier(&mut self, stage: Range<PipelineStageMask>, barriers: &[Barrier])
     {
         let src_stage_mask = hal_to_vk_pipeline_stage_flags(stage.start);
         let dst_stage_mask = hal_to_vk_pipeline_stage_flags(stage.end);
@@ -66,7 +61,7 @@ impl hal::InnerCommandBuffer<Backend> for CommandBuffer
         {
             match barrier
             {
-                hal::Barrier::Global(range) =>
+                Barrier::Global(range) =>
                 {
                     global_barriers.push(
                         VkMemoryBarrierBuilder::new()
@@ -75,7 +70,7 @@ impl hal::InnerCommandBuffer<Backend> for CommandBuffer
                             .build(),
                     );
                 }
-                hal::Barrier::Image {
+                Barrier::Image {
                     access,
                     layout,
                     queues,
@@ -93,7 +88,7 @@ impl hal::InnerCommandBuffer<Backend> for CommandBuffer
                             .new_layout(hal_to_vk_image_layout(layout.end))
                             .src_queue_family_index(queues.start)
                             .dst_queue_family_index(queues.end)
-                            .image(**image)
+                            .image(*image)
                             .subresource_range(hal_to_vk_image_subresource_range(range))
                             .build(),
                     );
@@ -114,10 +109,10 @@ impl hal::InnerCommandBuffer<Backend> for CommandBuffer
 
     fn cmd_clear_color_image(
         &mut self,
-        image: &VkImage,
-        layout: hal::ImageLayout,
-        color: hal::ClearColor,
-        range: hal::ImageSubresourceRange,
+        image: Image,
+        layout: ImageLayout,
+        color: ClearColor,
+        range: ImageSubresourceRange,
     )
     {
         let range = hal_to_vk_image_subresource_range(&range);
@@ -126,6 +121,67 @@ impl hal::InnerCommandBuffer<Backend> for CommandBuffer
 
         self.device
             .device
-            .cmd_clear_color_image(self.raw, *image, layout, &color, &[range]);
+            .cmd_clear_color_image(self.raw, image, layout, &color, &[range]);
+    }
+}
+
+// @Todo Do we want to encode resettability in the type too?
+pub struct CommandBuffer<C, L>
+where
+    C: capabilities::QueueType,
+    L: capabilities::Level,
+{
+    pub(crate) inner:    InnerCommandBuffer,
+    pub(crate) _phantom: PhantomData<(C, L)>,
+}
+
+impl<C, L> CommandBuffer<C, L>
+where
+    C: capabilities::QueueType,
+    L: capabilities::Level,
+{
+    pub fn reset(&mut self, release_resources: bool) -> Result<(), Error>
+    {
+        self.inner.reset(release_resources)
+    }
+
+    pub fn end(&mut self) -> Result<(), Error>
+    {
+        self.inner.end()
+    }
+
+    pub fn cmd_pipeline_barrier(&mut self, stage: Range<PipelineStageMask>, barriers: &[Barrier])
+    {
+        self.inner.cmd_pipeline_barrier(stage, barriers);
+    }
+}
+
+// @Todo Begin secondary command buffer
+
+impl<C> CommandBuffer<C, capabilities::Primary>
+where
+    C: capabilities::QueueType,
+{
+    pub fn begin(&mut self) -> Result<(), Error>
+    {
+        self.inner.begin()
+    }
+}
+
+impl<C, L> CommandBuffer<C, L>
+where
+    C: capabilities::QueueType + capabilities::Supports<capabilities::GraphicsOrCompute>,
+    L: capabilities::Level,
+{
+    pub fn cmd_clear_color_image(
+        &mut self,
+        image: Image,
+        layout: ImageLayout,
+        color: ClearColor,
+        range: ImageSubresourceRange,
+    )
+    {
+        self.inner
+            .cmd_clear_color_image(image, layout, color, range);
     }
 }

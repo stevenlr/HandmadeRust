@@ -1,10 +1,72 @@
-use super::{conv::*, Backend, CommandPool, Error, RawInstance, Surface, Swapchain};
+use super::{capabilities, conv::*, *};
 
-use fnd::{containers::SmallArray8, Shared};
-use gfx_hal as hal;
+use core::marker::PhantomData;
+use fnd::{bitflags, containers::SmallArray8, Shared};
 use vk::{self, builders::*, types::*};
 
-use hal::QueueFamily;
+bitflags! {
+    pub enum CommandPoolFlags: u8 {
+        TRANSIENT = 1,
+        RESET_COMMAND_BUFFER = 2,
+    }
+}
+
+pub struct CreatedDevice
+{
+    pub device: Option<Device>,
+    pub queues: SmallArray8<Option<InnerQueue>>,
+}
+
+impl CreatedDevice
+{
+    pub fn retrieve_device(&mut self) -> Result<Device, QueueRetrievalError>
+    {
+        self.device
+            .take()
+            .ok_or(QueueRetrievalError::AlreadyRetrieved)
+    }
+
+    pub fn retrieve_queue<C>(&mut self, index: usize) -> Result<Queue<C>, QueueRetrievalError>
+    where
+        C: capabilities::QueueType,
+    {
+        if index >= self.queues.len()
+        {
+            return Err(QueueRetrievalError::QueueIndexOutOfBounds);
+        }
+
+        let queue_slot = &mut self.queues[index];
+        if queue_slot.is_some()
+        {
+            if C::supported_by(queue_slot.as_ref().unwrap().queue_type)
+            {
+                queue_slot
+                    .take()
+                    .map(|q| Queue {
+                        inner:       q,
+                        _capability: PhantomData,
+                    })
+                    .ok_or(QueueRetrievalError::AlreadyRetrieved)
+            }
+            else
+            {
+                Err(QueueRetrievalError::IncompatibleCapabilities)
+            }
+        }
+        else
+        {
+            Err(QueueRetrievalError::AlreadyRetrieved)
+        }
+    }
+}
+
+#[derive(Debug)]
+pub enum QueueRetrievalError
+{
+    QueueIndexOutOfBounds,
+    AlreadyRetrieved,
+    IncompatibleCapabilities,
+}
 
 pub(crate) struct RawDevice
 {
@@ -109,21 +171,18 @@ impl Device
             .nth(0)
             .unwrap_or(VkPresentModeKHR::FIFO_KHR));
     }
-}
 
-impl hal::Device<Backend> for Device
-{
-    fn create_swapchain(
+    pub fn create_swapchain(
         &self,
         surface: &Surface,
-        config: &hal::SwapchainConfig<Backend>,
+        config: &SwapchainConfig,
     ) -> Result<Swapchain, Error>
     {
-        let queue_families = &[config.queue_family.id() as u32];
+        let queue_families = &[config.queue_family.id as u32];
 
         let image_count = self
             .find_best_image_count(surface.raw.surface, config.image_count as u32)
-            .map_err(|e| Error::Swapchain(e))?;
+            .map_err(|e| Error::Vulkan(e))?;
 
         let (format, color_space) = self
             .find_best_surface_format(
@@ -131,20 +190,20 @@ impl hal::Device<Backend> for Device
                 hal_to_vk_format(config.format),
                 VkColorSpaceKHR::SRGB_NONLINEAR_KHR,
             )
-            .map_err(|e| Error::Swapchain(e))?;
+            .map_err(|e| Error::Vulkan(e))?;
 
         let present_mode = self
             .find_best_present_mode(
                 surface.raw.surface,
                 hal_to_vk_present_mode(config.present_mode),
             )
-            .map_err(|e| Error::Swapchain(e))?;
+            .map_err(|e| Error::Vulkan(e))?;
 
         let extent = self
             .instance
             .instance
             .get_physical_device_surface_capabilities_khr(self.gpu, surface.raw.surface)
-            .map_err(|e| Error::Swapchain(e))?
+            .map_err(|e| Error::Vulkan(e))?
             .1
             .current_extent;
 
@@ -170,14 +229,14 @@ impl hal::Device<Backend> for Device
             .raw
             .device
             .create_swapchain_khr(&create_info, None)
-            .map_err(|e| Error::Swapchain(e))?
+            .map_err(|e| Error::Vulkan(e))?
             .1;
 
         let image_count = self
             .raw
             .device
             .get_swapchain_images_khr_count(swapchain)
-            .map_err(|e| Error::Swapchain(e))?
+            .map_err(|e| Error::Vulkan(e))?
             .1;
 
         let mut images = SmallArray8::new();
@@ -186,7 +245,7 @@ impl hal::Device<Backend> for Device
         self.raw
             .device
             .get_swapchain_images_khr(swapchain, &mut images)
-            .map_err(|e| Error::Swapchain(e))?;
+            .map_err(|e| Error::Vulkan(e))?;
 
         let create_info = VkImageViewCreateInfoBuilder::new()
             .view_type(VkImageViewType::K_2D)
@@ -217,7 +276,7 @@ impl hal::Device<Backend> for Device
                 .raw
                 .device
                 .create_image_view(&create_info, None)
-                .map_err(|e| Error::Swapchain(e))?
+                .map_err(|e| Error::Vulkan(e))?
                 .1;
             image_views.push(view);
         }
@@ -231,7 +290,7 @@ impl hal::Device<Backend> for Device
         })
     }
 
-    fn destroy_swapchain(&self, swapchain: Swapchain)
+    pub fn destroy_swapchain(&self, swapchain: Swapchain)
     {
         for view in swapchain.image_views.iter()
         {
@@ -241,47 +300,45 @@ impl hal::Device<Backend> for Device
         self.raw.device.destroy_swapchain_khr(swapchain.raw, None);
     }
 
-    fn create_command_pool<C>(
+    pub fn create_command_pool<C>(
         &self,
-        queue: &hal::Queue<Backend, C>,
-        flags: hal::CommandPoolFlags,
-    ) -> Result<hal::CommandPool<Backend, C>, Error>
+        queue: &Queue<C>,
+        flags: CommandPoolFlags,
+    ) -> Result<CommandPool<C>, Error>
     where
-        C: hal::capabilities::QueueType,
+        C: capabilities::QueueType,
     {
         let flags = hal_to_vk_command_pool_flags(flags);
 
         let create_info = VkCommandPoolCreateInfoBuilder::new()
             .flags(flags)
-            .queue_family_index(queue.id() as u32);
+            .queue_family_index(queue.inner.family_index as u32);
 
         self.raw
             .device
             .create_command_pool(&create_info, None)
-            .map_err(|r| Error::CommandPool(r))
+            .map_err(|r| Error::Vulkan(r))
             .map(|(_, p)| {
-                hal::CommandPool::new(CommandPool {
+                CommandPool::new(InnerCommandPool {
                     raw:    p,
                     device: self.raw.clone(),
                 })
             })
     }
 
-    fn destroy_command_pool<C>(&self, pool: hal::CommandPool<Backend, C>)
+    pub fn destroy_command_pool<C>(&self, pool: CommandPool<C>)
     where
-        C: hal::capabilities::QueueType,
+        C: capabilities::QueueType,
     {
-        self.raw
-            .device
-            .destroy_command_pool(pool.into_inner().raw, None);
+        self.raw.device.destroy_command_pool(pool.inner.raw, None);
     }
 
-    fn wait_idle(&self)
+    pub fn wait_idle(&self)
     {
         drop(self.raw.device.device_wait_idle());
     }
 
-    fn create_fence(&self) -> Result<VkFence, Error>
+    pub fn create_fence(&self) -> Result<Fence, Error>
     {
         let create_info = VkFenceCreateInfoBuilder::new();
 
@@ -289,29 +346,29 @@ impl hal::Device<Backend> for Device
             .device
             .create_fence(&create_info, None)
             .map(|(_, f)| f)
-            .map_err(|e| Error::VulkanError(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
-    fn destroy_fence(&self, fence: VkFence)
+    pub fn destroy_fence(&self, fence: Fence)
     {
         self.raw.device.destroy_fence(fence, None);
     }
 
-    fn get_fence_status(&self, fence: VkFence) -> Result<bool, Error>
+    pub fn get_fence_status(&self, fence: Fence) -> Result<bool, Error>
     {
         self.raw
             .device
             .get_fence_status(fence)
             .map(|e| e == VkResult::SUCCESS)
-            .map_err(|e| Error::VulkanError(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
-    fn reset_fence(&self, fence: VkFence)
+    pub fn reset_fence(&self, fence: Fence)
     {
         drop(self.raw.device.reset_fences(&[fence]));
     }
 
-    fn create_semaphore(&self) -> Result<VkSemaphore, Error>
+    pub fn create_semaphore(&self) -> Result<Semaphore, Error>
     {
         let create_info = VkSemaphoreCreateInfoBuilder::new();
 
@@ -319,10 +376,10 @@ impl hal::Device<Backend> for Device
             .device
             .create_semaphore(&create_info, None)
             .map(|(_, f)| f)
-            .map_err(|e| Error::VulkanError(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
-    fn destroy_semaphore(&self, sem: VkSemaphore)
+    pub fn destroy_semaphore(&self, sem: Semaphore)
     {
         self.raw.device.destroy_semaphore(sem, None);
     }

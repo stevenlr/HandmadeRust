@@ -1,19 +1,19 @@
-use gfx_hal as hal;
+use crate::*;
 use vk::types::*;
 
-pub(crate) fn vk_to_hal_gpu_type(vk_type: VkPhysicalDeviceType) -> hal::GpuType
+pub(crate) fn vk_to_hal_gpu_type(vk_type: VkPhysicalDeviceType) -> GpuType
 {
     match vk_type
     {
-        VkPhysicalDeviceType::CPU => hal::GpuType::Cpu,
-        VkPhysicalDeviceType::DISCRETE_GPU => hal::GpuType::DiscreteGpu,
-        VkPhysicalDeviceType::INTEGRATED_GPU => hal::GpuType::IntegratedGpu,
-        VkPhysicalDeviceType::VIRTUAL_GPU => hal::GpuType::VirtualGpu,
-        _ => hal::GpuType::Unknown,
+        VkPhysicalDeviceType::CPU => GpuType::Cpu,
+        VkPhysicalDeviceType::DISCRETE_GPU => GpuType::DiscreteGpu,
+        VkPhysicalDeviceType::INTEGRATED_GPU => GpuType::IntegratedGpu,
+        VkPhysicalDeviceType::VIRTUAL_GPU => GpuType::VirtualGpu,
+        _ => GpuType::Unknown,
     }
 }
 
-pub(crate) fn vk_to_hal_queue_type(vk_flags: VkQueueFlags) -> hal::QueueType
+pub(crate) fn vk_to_hal_queue_type(vk_flags: VkQueueFlags) -> QueueType
 {
     let has_graphics = vk_flags.contains(VkQueueFlags::GRAPHICS_BIT);
     let has_compute = vk_flags.contains(VkQueueFlags::COMPUTE_BIT);
@@ -21,17 +21,17 @@ pub(crate) fn vk_to_hal_queue_type(vk_flags: VkQueueFlags) -> hal::QueueType
 
     match (has_graphics, has_compute, has_transfer)
     {
-        (true, true, _) => hal::QueueType::General,
-        (true, false, _) => hal::QueueType::Graphics,
-        (false, true, _) => hal::QueueType::Compute,
-        (false, false, true) => hal::QueueType::Transfer,
+        (true, true, _) => QueueType::General,
+        (true, false, _) => QueueType::Graphics,
+        (false, true, _) => QueueType::Compute,
+        (false, false, true) => QueueType::Transfer,
         _ => unreachable!(),
     }
 }
 
-pub(crate) fn hal_to_vk_format(format: hal::Format) -> VkFormat
+pub(crate) fn hal_to_vk_format(format: Format) -> VkFormat
 {
-    use hal::Format::*;
+    use Format::*;
 
     match format
     {
@@ -50,9 +50,9 @@ pub(crate) fn hal_to_vk_format(format: hal::Format) -> VkFormat
     }
 }
 
-pub(crate) fn hal_to_vk_present_mode(present_mode: hal::PresentMode) -> VkPresentModeKHR
+pub(crate) fn hal_to_vk_present_mode(present_mode: PresentMode) -> VkPresentModeKHR
 {
-    use hal::PresentMode::*;
+    use PresentMode::*;
 
     match present_mode
     {
@@ -63,22 +63,9 @@ pub(crate) fn hal_to_vk_present_mode(present_mode: hal::PresentMode) -> VkPresen
     }
 }
 
-pub(crate) fn hal_to_vk_command_buffer_level(
-    level: hal::InnerCommandBufferLevel,
-) -> VkCommandBufferLevel
+pub(crate) fn hal_to_vk_image_layout(layout: ImageLayout) -> VkImageLayout
 {
-    use hal::InnerCommandBufferLevel::*;
-
-    match level
-    {
-        Primary => VkCommandBufferLevel::PRIMARY,
-        Secondary => VkCommandBufferLevel::SECONDARY,
-    }
-}
-
-pub(crate) fn hal_to_vk_image_layout(layout: hal::ImageLayout) -> VkImageLayout
-{
-    use hal::ImageLayout::*;
+    use ImageLayout::*;
 
     match layout
     {
@@ -95,18 +82,18 @@ pub(crate) fn hal_to_vk_image_layout(layout: hal::ImageLayout) -> VkImageLayout
     }
 }
 
-pub(crate) fn hal_to_vk_clear_color(color: &hal::ClearColor) -> VkClearColorValue
+pub(crate) fn hal_to_vk_clear_color(color: &ClearColor) -> VkClearColorValue
 {
     match color
     {
-        hal::ClearColor::Float(c) => VkClearColorValue { float_32: *c },
-        hal::ClearColor::Int32(c) => VkClearColorValue { int_32: *c },
-        hal::ClearColor::UInt32(c) => VkClearColorValue { uint_32: *c },
+        ClearColor::Float(c) => VkClearColorValue { float_32: *c },
+        ClearColor::Int32(c) => VkClearColorValue { int_32: *c },
+        ClearColor::UInt32(c) => VkClearColorValue { uint_32: *c },
     }
 }
 
 pub(crate) fn hal_to_vk_image_subresource_range(
-    range: &hal::ImageSubresourceRange,
+    range: &ImageSubresourceRange,
 ) -> VkImageSubresourceRange
 {
     VkImageSubresourceRange {
@@ -138,12 +125,12 @@ macro_rules! hal_to_vk_flags {
 }
 
 #[rustfmt::skip]
-hal_to_vk_flags!(hal_to_vk_command_pool_flags, hal::CommandPoolFlags, VkCommandPoolCreateFlags, 
+hal_to_vk_flags!(hal_to_vk_command_pool_flags, CommandPoolFlags, VkCommandPoolCreateFlags,
     TRANSIENT => TRANSIENT_BIT,
     RESET_COMMAND_BUFFER => RESET_COMMAND_BUFFER_BIT,
 );
 
-hal_to_vk_flags!(hal_to_vk_pipeline_stage_flags, hal::PipelineStageMask, VkPipelineStageFlags,
+hal_to_vk_flags!(hal_to_vk_pipeline_stage_flags, PipelineStageMask, VkPipelineStageFlags,
     TOP_OF_PIPE => TOP_OF_PIPE_BIT,
     DRAW_INDIRECT => DRAW_INDIRECT_BIT,
     VERTEX_INPUT => VERTEX_INPUT_BIT,
@@ -163,7 +150,7 @@ hal_to_vk_flags!(hal_to_vk_pipeline_stage_flags, hal::PipelineStageMask, VkPipel
     ALL_COMMANDS => ALL_COMMANDS_BIT,
 );
 
-hal_to_vk_flags!(hal_to_vk_access_mask_flags, hal::AccessMask, VkAccessFlags,
+hal_to_vk_flags!(hal_to_vk_access_mask_flags, AccessMask, VkAccessFlags,
     INDIRECT_COMMAND_READ => INDIRECT_COMMAND_READ_BIT,
     INDEX_READ => INDEX_READ_BIT,
     VERTEX_ATTRIBUTE_READ => VERTEX_ATTRIBUTE_READ_BIT,
@@ -183,7 +170,7 @@ hal_to_vk_flags!(hal_to_vk_access_mask_flags, hal::AccessMask, VkAccessFlags,
     MEMORY_WRITE => MEMORY_WRITE_BIT,
 );
 
-hal_to_vk_flags!(hal_to_vk_image_aspect_flags, hal::ImageAspectMask, VkImageAspectFlags,
+hal_to_vk_flags!(hal_to_vk_image_aspect_flags, ImageAspectMask, VkImageAspectFlags,
     COLOR => COLOR_BIT,
     DEPTH => DEPTH_BIT,
     STENCIL => STENCIL_BIT,

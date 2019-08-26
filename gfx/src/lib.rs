@@ -1,12 +1,12 @@
 #![no_std]
 
 use core::ops::Range;
-
 use fnd::bitflags;
 
 pub mod capabilities;
 mod command_buffer;
 mod command_pool;
+mod conv;
 mod device;
 mod instance;
 mod queue;
@@ -21,21 +21,17 @@ pub use queue::*;
 pub use surface::*;
 pub use swapchain::*;
 
-pub trait Backend: Sized
+use vk::types::*;
+
+pub type Image = VkImage;
+pub type Fence = VkFence;
+pub type Semaphore = VkSemaphore;
+
+#[derive(Debug)]
+pub enum Error
 {
-    type Error: core::fmt::Debug;
-    type Instance: Instance<Self>;
-    type Surface: Surface<Self>;
-    type PhysicalDevice;
-    type QueueFamilyGroup: QueueFamilyGroup;
-    type InnerQueue: InnerQueue<Self>;
-    type Device: Device<Self>;
-    type Semaphore: Copy;
-    type Fence: Copy;
-    type Swapchain: Swapchain<Self>;
-    type InnerCommandPool: InnerCommandPool<Self>;
-    type InnerCommandBuffer: InnerCommandBuffer<Self>;
-    type Image;
+    Instance(InstanceError),
+    Vulkan(VkResult),
 }
 
 #[derive(Copy, Clone)]
@@ -108,7 +104,7 @@ pub struct ImageSubresourceRange
 }
 
 // @Todo Add buffer barriers when we have buffers.
-pub enum Barrier<'a, B: Backend>
+pub enum Barrier
 {
     Global(Range<AccessMask>),
     Image
@@ -116,7 +112,7 @@ pub enum Barrier<'a, B: Backend>
         access: Range<AccessMask>,
         layout: Range<ImageLayout>,
         queues: Option<Range<u32>>,
-        image:  &'a B::Image,
+        image:  Image,
         range:  ImageSubresourceRange,
     },
 }

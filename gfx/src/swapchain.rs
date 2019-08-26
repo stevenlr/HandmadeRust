@@ -1,8 +1,24 @@
-use crate::{Backend, Error, RawDevice};
+use crate::{capabilities, Error, Fence, Format, Image, Queue, QueueFamily, RawDevice, Semaphore};
 
 use fnd::{containers::SmallArray8, Shared};
-use gfx_hal as hal;
 use vk::{builders::*, types::*};
+
+#[derive(Copy, Clone)]
+pub enum PresentMode
+{
+    Immediate,
+    Mailbox,
+    Fifo,
+    Relaxed,
+}
+
+pub struct SwapchainConfig<'a>
+{
+    pub queue_family: &'a QueueFamily,
+    pub image_count:  usize,
+    pub format:       Format,
+    pub present_mode: PresentMode,
+}
 
 pub struct Swapchain
 {
@@ -13,12 +29,12 @@ pub struct Swapchain
     pub(crate) format:      VkFormat,
 }
 
-impl hal::Swapchain<Backend> for Swapchain
+impl Swapchain
 {
-    fn acquire_image(
+    pub fn acquire_image(
         &mut self,
-        fence: Option<VkFence>,
-        sem: Option<VkSemaphore>,
+        fence: Option<Fence>,
+        sem: Option<Semaphore>,
     ) -> Result<u32, Error>
     {
         self.device
@@ -30,17 +46,17 @@ impl hal::Swapchain<Backend> for Swapchain
                 fence.unwrap_or(VkFence::null()),
             )
             .map(|(_, i)| i)
-            .map_err(|e| Error::Swapchain(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
-    fn present<C>(
+    pub fn present<C>(
         &mut self,
-        queue: &hal::Queue<Backend, C>,
+        queue: &Queue<C>,
         index: u32,
-        wait_sems: &[VkSemaphore],
+        wait_sems: &[Semaphore],
     ) -> Result<(), Error>
     where
-        C: hal::capabilities::QueueType,
+        C: capabilities::QueueType,
     {
         let swapchains = [self.raw; 1];
         let indices = [index; 1];
@@ -52,16 +68,16 @@ impl hal::Swapchain<Backend> for Swapchain
 
         self.device
             .device
-            .queue_present_khr(queue.inner().queue, &present_info)
+            .queue_present_khr(queue.raw(), &present_info)
             .map(|_| ())
-            .map_err(|e| Error::Swapchain(e))
+            .map_err(|e| Error::Vulkan(e))
     }
 
-    fn get_image(&self, index: u32) -> Option<&VkImage>
+    pub fn get_image(&self, index: u32) -> Option<Image>
     {
         if (index as usize) < self.images.len()
         {
-            Some(&self.images[index as usize])
+            Some(self.images[index as usize])
         }
         else
         {
